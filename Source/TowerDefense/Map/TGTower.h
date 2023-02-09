@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "TGBuild.generated.h"
+#include "TGTower.generated.h"
 
 UCLASS()
-class TOWERDEFENSE_API ATGBuild : public AActor
+class TOWERDEFENSE_API ATGTower : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ATGBuild();
+	ATGTower();
 
 protected:
 	// Called when the game starts or when spawned
