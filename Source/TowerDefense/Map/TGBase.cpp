@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "TGBuild.h"
+#include "TGBase.h"
 
 // Sets default values
-ATGBuild::ATGBuild()
+ATGBase::ATGBase()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -12,14 +12,14 @@ ATGBuild::ATGBuild()
 }
 
 // Called when the game starts or when spawned
-void ATGBuild::BeginPlay()
+void ATGBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void ATGBuild::Tick(float DeltaTime)
+void ATGBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
