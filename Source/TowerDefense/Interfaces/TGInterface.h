@@ -22,4 +22,21 @@ class TOWERDEFENSE_API ITGInterface
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
+
+
+	//Este se puede implementar en BP y en C++
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+         int TGGApplyEffect();
+
+
+
+	//Este solo se puede implementar en BP
+//     UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+//         const bool TGGApplyEffect2() const;
+
+
+
+
+
+
 };

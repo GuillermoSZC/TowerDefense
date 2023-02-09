@@ -3,3 +3,7 @@
 
 #include "TGTowerAttributeSet.h"
 
+UTGTowerAttributeSet::UTGTowerAttributeSet()
+{
+
+}

@@ -24,3 +24,8 @@ void ATGTower::Tick(float DeltaTime)
 
 }
 
+ int ATGTower::TGGApplyEffect_Implementation() 
+{
+	return 0;
+}
+

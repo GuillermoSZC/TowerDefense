@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Interfaces/TGInterface.h"
 #include "TGTower.generated.h"
 
 UCLASS()
-class TOWERDEFENSE_API ATGTower : public AActor
+class TOWERDEFENSE_API ATGTower : public AActor, public ITGInterface
 {
 	GENERATED_BODY()
 	
@@ -22,5 +23,8 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UFUNCTION()
+	 int TGGApplyEffect_Implementation() ;
 
 };
