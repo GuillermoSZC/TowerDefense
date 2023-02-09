@@ -4,17 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Interfaces/TGInterface.h"
-#include "TGTower.generated.h"
+#include "TDBase.generated.h"
 
 UCLASS()
-class TOWERDEFENSE_API ATGTower : public AActor, public ITGInterface
+class TOWERDEFENSE_API ATDBase : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ATGTower();
+	ATDBase();
 
 protected:
 	// Called when the game starts or when spawned
@@ -23,8 +22,5 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	UFUNCTION()
-	 int TGGApplyEffect_Implementation() ;
 
 };

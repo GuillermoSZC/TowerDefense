@@ -4,21 +4,21 @@
 
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
-#include "../GameLogic/TGAttributeSet.h"
-#include "TGTowerAttributeSet.generated.h"
+#include "../GameLogic/TDAttributeSet.h"
+#include "TDTowerAttributeSet.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class TOWERDEFENSE_API UTGTowerAttributeSet : public UTGAttributeSet
+class TOWERDEFENSE_API UTDTowerAttributeSet : public UTDAttributeSet
 {
 	GENERATED_BODY()
 
 
 public:
 
-    UTGTowerAttributeSet();
+    UTDTowerAttributeSet();
 
 public:
 

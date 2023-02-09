@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "TGTowerAttributeSet.h"
+#include "TDTowerAttributeSet.h"
 
-UTGTowerAttributeSet::UTGTowerAttributeSet()
+UTDTowerAttributeSet::UTDTowerAttributeSet()
 {
 
 }

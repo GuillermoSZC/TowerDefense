@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "TGItem.generated.h"
+#include "TDItem.generated.h"
 
 UCLASS()
-class TOWERDEFENSE_API ATGItem : public AActor
+class TOWERDEFENSE_API ATDItem : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ATGItem();
+	ATDItem();
 
 protected:
 	// Called when the game starts or when spawned

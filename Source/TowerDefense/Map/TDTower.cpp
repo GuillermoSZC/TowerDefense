@@ -1,10 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
-#include "TGBase.h"
+#include "TDTower.h"
 
 // Sets default values
-ATGBase::ATGBase()
+ATDTower::ATDTower()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -12,16 +11,21 @@ ATGBase::ATGBase()
 }
 
 // Called when the game starts or when spawned
-void ATGBase::BeginPlay()
+void ATDTower::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void ATGBase::Tick(float DeltaTime)
+void ATDTower::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+ int ATDTower::TGGApplyEffect_Implementation() 
+{
+	return 0;
 }
 

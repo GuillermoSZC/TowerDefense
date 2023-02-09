@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "TGItem.h"
+#include "TDItem.h"
 
 // Sets default values
-ATGItem::ATGItem()
+ATDItem::ATDItem()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -12,14 +12,14 @@ ATGItem::ATGItem()
 }
 
 // Called when the game starts or when spawned
-void ATGItem::BeginPlay()
+void ATDItem::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void ATGItem::Tick(float DeltaTime)
+void ATDItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 

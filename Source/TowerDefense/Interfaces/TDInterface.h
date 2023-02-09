@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
-#include "TGInterface.generated.h"
+#include "TDInterface.generated.h"
 
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI, Blueprintable)
-class UTGInterface : public UInterface
+class UTDInterface : public UInterface
 {
 	GENERATED_BODY()
 };
@@ -16,7 +16,7 @@ class UTGInterface : public UInterface
 /**
  * 
  */
-class TOWERDEFENSE_API ITGInterface
+class TOWERDEFENSE_API ITDInterface
 {
 	GENERATED_BODY()
 
