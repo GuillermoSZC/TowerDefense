@@ -4,14 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
-#include "GameLogic/TGAttributeSet.h"
-#include "TGCharacterAttributeSet.generated.h"
+#include "GameLogic/TDAttributeSet.h"
+#include "TDCharacterAttributeSet.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class TOWERDEFENSE_API UTGCharacterAttributeSet : public UTGAttributeSet
+class TOWERDEFENSE_API UTDCharacterAttributeSet : public UTDAttributeSet
 {
 	GENERATED_BODY()
 	

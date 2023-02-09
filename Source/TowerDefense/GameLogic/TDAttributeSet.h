@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
 #include "AbilitySystemComponent.h"
-#include "TGAttributeSet.generated.h"
+#include "TDAttributeSet.generated.h"
 
 #define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
 	GAMEPLAYATTRIBUTE_PROPERTY_GETTER(ClassName, PropertyName) \
@@ -21,7 +21,7 @@
  * 
  */
 UCLASS()
-class TOWERDEFENSE_API UTGAttributeSet : public UAttributeSet
+class TOWERDEFENSE_API UTDAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()
 	

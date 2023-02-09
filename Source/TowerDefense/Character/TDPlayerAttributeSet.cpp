@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "TGPlayerAttributeSet.h"
+#include "TDPlayerAttributeSet.h"
 
 // void UTGPlayerAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
 // {
@@ -18,7 +18,7 @@
 // 
 // }
 
-UTGPlayerAttributeSet::UTGPlayerAttributeSet()
+UTDPlayerAttributeSet::UTDPlayerAttributeSet()
 {
 
 }

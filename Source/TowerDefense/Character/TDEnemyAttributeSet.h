@@ -2,16 +2,17 @@
 
 #pragma once
 
+
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
-#include "TGCharacterAttributeSet.h"
-#include "TGEnemyAttributeSet.generated.h"
+#include "TDCharacterAttributeSet.h"
+#include "TDEnemyAttributeSet.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class TOWERDEFENSE_API UTGEnemyAttributeSet : public UTGCharacterAttributeSet
+class TOWERDEFENSE_API UTDEnemyAttributeSet : public UTDCharacterAttributeSet
 {
 	GENERATED_BODY()
 	

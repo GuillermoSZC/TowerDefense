@@ -5,21 +5,21 @@
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
 #include "AbilitySystemComponent.h"
-#include "TGCharacterAttributeSet.h"
-#include "TGPlayerAttributeSet.generated.h"
+#include "TDCharacterAttributeSet.h"
+#include "TDPlayerAttributeSet.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class TOWERDEFENSE_API UTGPlayerAttributeSet : public UTGCharacterAttributeSet
+class TOWERDEFENSE_API UTDPlayerAttributeSet : public UTDCharacterAttributeSet
 {
 	GENERATED_BODY()
 	
 
 public:
 
-    UTGPlayerAttributeSet();
+    UTDPlayerAttributeSet();
 
 public:
 

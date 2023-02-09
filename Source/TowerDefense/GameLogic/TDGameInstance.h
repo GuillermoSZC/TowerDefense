@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/GameModeBase.h"
-#include "TGGameMode.generated.h"
+#include "Engine/GameInstance.h"
+#include "TDGameInstance.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class TOWERDEFENSE_API ATGGameMode : public AGameModeBase
+class TOWERDEFENSE_API UTDGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 	

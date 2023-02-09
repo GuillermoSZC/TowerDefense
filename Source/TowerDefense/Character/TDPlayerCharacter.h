@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "TGPlayerCharacter.generated.h"
+#include "TDPlayerCharacter.generated.h"
 
 UCLASS()
-class TOWERDEFENSE_API ATGPlayerCharacter : public ACharacter
+class TOWERDEFENSE_API ATDPlayerCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
-	ATGPlayerCharacter();
+	ATDPlayerCharacter();
 
 protected:
 	// Called when the game starts or when spawned

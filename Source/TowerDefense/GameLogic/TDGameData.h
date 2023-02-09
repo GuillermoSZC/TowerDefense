@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Engine/GameInstance.h"
-#include "TGGameInstance.generated.h"
+#include "UObject/NoExportTypes.h"
+#include "TDGameData.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class TOWERDEFENSE_API UTGGameInstance : public UGameInstance
+class TOWERDEFENSE_API UTDGameData : public UObject
 {
 	GENERATED_BODY()
 	
