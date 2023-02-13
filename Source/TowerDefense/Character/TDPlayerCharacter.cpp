@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "TGPlayerCharacter.h"
+#include "TDPlayerCharacter.h"
 
 // Sets default values
 ATDPlayerCharacter::ATDPlayerCharacter()

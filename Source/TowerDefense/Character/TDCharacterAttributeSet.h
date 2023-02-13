@@ -44,6 +44,12 @@ private:
 
 public:
 
+    ATTRIBUTE_ACCESSORS(UTDCharacterAttributeSet, maxHealth)
+        ATTRIBUTE_ACCESSORS(UTDCharacterAttributeSet, health)
+        ATTRIBUTE_ACCESSORS(UTDCharacterAttributeSet, damage)
+        ATTRIBUTE_ACCESSORS(UTDCharacterAttributeSet, speed)
+        ATTRIBUTE_ACCESSORS(UTDCharacterAttributeSet, attackSpeed)
+
 
 protected:
 

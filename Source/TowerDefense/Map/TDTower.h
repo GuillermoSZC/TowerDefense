@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Interfaces/TGInterface.h"
+#include "Interfaces/TDInterface.h"
 #include "TDTower.generated.h"
 
 UCLASS()
-class TOWERDEFENSE_API ATDTower : public AActor, public ITGInterface
+class TOWERDEFENSE_API ATDTower : public AActor, public ITDInterface
 {
     GENERATED_BODY()
 

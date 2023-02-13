@@ -39,9 +39,9 @@ private:
 
 public:
 
-        ATTRIBUTE_ACCESSORS(UTGTowerAttributeSet, damage)
-        ATTRIBUTE_ACCESSORS(UTGTowerAttributeSet, range)
-        ATTRIBUTE_ACCESSORS(UTGTowerAttributeSet, attackSpeed)
+        ATTRIBUTE_ACCESSORS(UTDTowerAttributeSet, damage)
+        ATTRIBUTE_ACCESSORS(UTDTowerAttributeSet, range)
+        ATTRIBUTE_ACCESSORS(UTDTowerAttributeSet, attackSpeed)
 
 
         //     virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
