@@ -1,6 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TDTower.h"
+#include "TDTowerAttributeSet.h"
+#include "GameplayEffectTypes.h"
+
+
 
 // Sets default values
 ATDTower::ATDTower()
@@ -8,13 +12,44 @@ ATDTower::ATDTower()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	//TowerAttributes = CreateDefaultSubobject<UTDTowerAttributeSet>(TEXT("Attributes"));
+
+	timer = 0.f;
+
+
+	abilitySystem = CreateDefaultSubobject<UAbilitySystemComponent>("AbilityComponent");
+
 }
 
 // Called when the game starts or when spawned
 void ATDTower::BeginPlay()
 {
 	Super::BeginPlay();
+
+	TDInitialize();
 	
+}
+
+void ATDTower::TDInitialize()
+{
+
+	const UAttributeSet* attributesInit = abilitySystem->InitStats(UTDTowerAttributeSet::StaticClass(), statsDatatable);
+	TowerAttributes = Cast<UTDTowerAttributeSet>(attributesInit);
+	periodAttack = TowerAttributes->GetattackSpeed();
+
+    for (size_t i = 0; i < abiliyList.Num(); ++i)
+    {
+        FGameplayAbilitySpecHandle specHandle = abilitySystem->GiveAbility(FGameplayAbilitySpec(abiliyList[i].GetDefaultObject(), 1, 0));
+    }
+
+	TDActivateDelegates();
+
+}
+
+
+UAbilitySystemComponent* ATDTower::GetAbilitySystemComponent() const
+{
+	return abilitySystem;
 }
 
 // Called every frame
@@ -22,10 +57,54 @@ void ATDTower::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+
+	timer += DeltaTime;
+
+	if (timer >= periodAttack)
+	{
+		
+		ITDInterface::Execute_TGGApplyEffect(this);
+
+
+		timer -= periodAttack;
+	}
+
+
 }
 
  int ATDTower::TGGApplyEffect_Implementation() 
 {
+
+
+	 GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Funca"));
+
 	return 0;
 }
 
+
+
+
+
+ void ATDTower::TDActivateDelegates()
+ {
+	 TowerDamageChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetdamageAttribute()).AddUObject(this, &ATDTower::TDDamageChanged);
+	 TowerRangeChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetrangeAttribute()).AddUObject(this, &ATDTower::TDRangeChanged);
+	 TowerPeriodAttackChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetattackSpeedAttribute()).AddUObject(this, &ATDTower::TDPeriodAttackChanged);
+ }
+
+
+
+ void ATDTower::TDDamageChanged(const FOnAttributeChangeData& Data)
+ {
+
+ }
+
+ void ATDTower::TDRangeChanged(const FOnAttributeChangeData& Data)
+ {
+
+ }
+
+ void ATDTower::TDPeriodAttackChanged(const FOnAttributeChangeData& Data)
+ {
+	 periodAttack = Data.NewValue;
+ }
