@@ -2,4 +2,17 @@
 
 
 #include "TDGameMode.h"
+#include "TDGameData.h"
+#include "TDObjectPooler.h"
 
+void ATDGameMode::StartPlay()
+{
+    Super::StartPlay();
+  
+
+    UWorld* world = GetWorld();
+    UTDGameData::TDSetWorld(world);
+
+   ATDObjectPooler* punteroprueba = ATDObjectPooler::TDGetObjectPooler();
+
+}
