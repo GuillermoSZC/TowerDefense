@@ -46,10 +46,9 @@ SourceArt/**/*.tga
 
 # Binary Files
 Binaries/*/*
-!Binaries/Win64/UE4Editor-HowlOfIron.dll
-!Binaries/Win64/UE4Editor-HowlOfIronEditor.dll
-!Binaries/Win64/HowlOfIronEditor.target
-!Binaries/Win64/UE4Editor.modules
+!Binaries/Win64/UnrealEditor-TowerDefense.dll
+!Binaries/Win64/UnrealEditor-TowerDefense-Win64-DebugGame.dll
+!Binaries/Win64/UnrealEditor.modules
 Plugins/*/Binaries/*
 
 # Builds
