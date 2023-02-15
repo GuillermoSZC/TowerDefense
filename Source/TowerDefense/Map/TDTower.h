@@ -79,6 +79,9 @@ public:
         int TGGApplyEffect_Implementation();
 
 
+    UFUNCTION(BlueprintCallable)
+    ATDEnemy* TDGetEnemyInRange();
+
 
 protected:
     // Called when the game starts or when spawned

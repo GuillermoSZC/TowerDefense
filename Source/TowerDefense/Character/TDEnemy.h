@@ -19,16 +19,29 @@ public:
 
 private:
 
+    float refreshPathTime;
+    float tickCounterTime;
+    float pathDsitance;
 
 public:
     // Called every frame
     virtual void Tick(float DeltaTime) override;
+
+
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+        float TDCalculatePathDistance();
+
+    UFUNCTION(BlueprintCallable)
+        float TDGetPathDistance();
+
 
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
 
 private:
+
+
 
 
 };
