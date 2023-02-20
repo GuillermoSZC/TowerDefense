@@ -2,6 +2,7 @@
 
 
 #include "TDGameData.h"
+#include "Kismet/GameplayStatics.h"
 
 UWorld* UTDGameData::gameWorld = nullptr;
 UTDGameplayEventData* UTDGameData::abilityData = nullptr;
