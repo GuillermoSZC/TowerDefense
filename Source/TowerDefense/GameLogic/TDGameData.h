@@ -12,7 +12,6 @@ class UTDGameplayEventData;
 
 
 
-
 /**
  * 
  */
@@ -23,7 +22,10 @@ class TOWERDEFENSE_API UTDGameData : public UBlueprintFunctionLibrary
 
 public:
 
-	static UFUNCTION() void TDResetGameData();
+
+
+	UFUNCTION()
+	static void TDResetGameData();
 
 
 
@@ -49,10 +51,10 @@ public:
     static TArray<ATDEnemy*> TDGetEnemiesArray();
 
 	UFUNCTION(BlueprintCallable)
-    static  void TDAddEnmemyToArray(ATDEnemy* _ActualEnemy);
+    static void TDAddEnmemyToArray(ATDEnemy* _ActualEnemy);
 
-	UFUNCTION(BlueprintCallable)
-    static UTDGameplayEventData* TDGetAbilityStrcut();
+	UFUNCTION(BlueprintPure)
+    static UTDGameplayEventData* const TDGetAbilityStrcut();
 
 	UFUNCTION(BlueprintCallable)
     static void TDSetAbilityStruct(UTDGameplayEventData* _NewAbilityData);

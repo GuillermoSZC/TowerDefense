@@ -24,7 +24,6 @@ void UTDGameData::TDResetGameData()
 {
     gameWorld = nullptr;
     enemiesArray.Empty();
-    abilityData->BeginDestroy();
     abilityData = nullptr;
 }
 
@@ -51,7 +50,11 @@ void UTDGameData::TDAddEnmemyToArray(ATDEnemy* _ActualEnemy)
     }
 }
 
-UTDGameplayEventData* UTDGameData::TDGetAbilityStrcut()
+
+
+
+
+UTDGameplayEventData* const UTDGameData::TDGetAbilityStrcut()
 {
     return abilityData;
 }
