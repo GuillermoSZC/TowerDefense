@@ -3,10 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
-#include "Character/TDEnemy.h"
-#include "Gas/TDGameplayEventData.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "TDGameData.generated.h"
+
+class UWorld;
+class ATDEnemy;
+class UTDGameplayEventData;
 
 
 
@@ -14,12 +16,17 @@
 /**
  * 
  */
-UCLASS(BlueprintType, Blueprintable)
-class TOWERDEFENSE_API UTDGameData : public UObject
+UCLASS()
+class TOWERDEFENSE_API UTDGameData : public UBlueprintFunctionLibrary
 {
-	GENERATED_BODY()
+    GENERATED_UCLASS_BODY()
 
-private:
+public:
+
+	static UFUNCTION() void TDResetGameData();
+
+
+
 
 
 	static UPROPERTY(Transient) UWorld* gameWorld;
@@ -27,22 +34,28 @@ private:
 	static UPROPERTY(Transient) UTDGameplayEventData* abilityData;
 
 
-public:
 
 
-	static UFUNCTION() void TDResetGameData();
 
 
-	static UFUNCTION(BlueprintCallable) UWorld* TDGetWorld();
-	static UFUNCTION(BlueprintCallable) void TDSetWorld(UWorld* _ActualMap);
 
+	UFUNCTION(BlueprintCallable)
+	static UWorld* TDGetWorld();
 
-    static UFUNCTION(BlueprintCallable)  TArray<ATDEnemy*> TDGetEnemiesArray();
-    static UFUNCTION(BlueprintCallable) void TDAddEnmemyToArray(ATDEnemy* _ActualEnemy);
+	UFUNCTION(BlueprintCallable)
+	static void TDSetWorld(UWorld* _ActualMap);
 
+	UFUNCTION(BlueprintCallable)
+    static TArray<ATDEnemy*> TDGetEnemiesArray();
 
-    static UFUNCTION(BlueprintCallable) UTDGameplayEventData* TDGetAbilityStrcut();
-    static UFUNCTION(BlueprintCallable) void TDSetAbilityStruct(UTDGameplayEventData* _NewAbilityData);
+	UFUNCTION(BlueprintCallable)
+    static  void TDAddEnmemyToArray(ATDEnemy* _ActualEnemy);
+
+	UFUNCTION(BlueprintCallable)
+    static UTDGameplayEventData* TDGetAbilityStrcut();
+
+	UFUNCTION(BlueprintCallable)
+    static void TDSetAbilityStruct(UTDGameplayEventData* _NewAbilityData);
 
 	
 };

@@ -2,11 +2,23 @@
 
 
 #include "TDGameData.h"
-#include "Kismet/GameplayStatics.h"
+#include "Engine/World.h"
+#include "Gas/TDGameplayEventData.h"
+#include "Character/TDEnemy.h"
+
 
 UWorld* UTDGameData::gameWorld = nullptr;
 UTDGameplayEventData* UTDGameData::abilityData = nullptr;
 TArray<ATDEnemy*> UTDGameData::enemiesArray;
+
+
+UTDGameData::UTDGameData(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+{
+
+}
+
+
+
 
 void UTDGameData::TDResetGameData()
 {

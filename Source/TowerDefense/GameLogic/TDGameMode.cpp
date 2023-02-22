@@ -4,6 +4,7 @@
 #include "TDGameMode.h"
 #include "TDGameData.h"
 #include "TDObjectPooler.h"
+#include "Gas/TDGameplayEventData.h"
 
 void ATDGameMode::StartPlay()
 {
