@@ -1,28 +1,40 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Interfaces/TDInterface.h"
+#include "AbilitySystemInterface.h"
 #include "TDBase.generated.h"
 
+class UTDBaseAttributeSet;
+class UDataTable;
+struct FOnAttributeChangeData;
+
 UCLASS()
-class TOWERDEFENSE_API ATDBase : public AActor
+class TOWERDEFENSE_API ATDBase : public AActor, public ITDInterface, public IAbilitySystemInterface
 {
     GENERATED_BODY()
 
 public:
-    // Sets default values for this actor's properties
     ATDBase(const FObjectInitializer& ObjectInitializer);
 
 public:
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
+        UDataTable* statsDatatable;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
+        TArray<TSubclassOf<class UGameplayAbility>> abiliyList;
 
 protected:
-    // Called when the game starts or when spawned
-    virtual void BeginPlay() override;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true")) 
+        UAbilitySystemComponent* abilitySystem;
+
+#pragma region DELEGATES
+    FDelegateHandle BaseHealthChangedDelegateHandle;
+#pragma endregion
 
 private:
+#pragma region COMPONENTS_TREE
     UPROPERTY(Category = "BaseBuild", VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
         class UBoxComponent* BoxCollision;
 
@@ -32,15 +44,31 @@ private:
     static FName BoxComponentName;
 
     static FName StaticMeshName;
+#pragma endregion
+
+    UPROPERTY(Transient)
+        const UTDBaseAttributeSet* BaseAttributes;
 
 public:
+    // Called when the game starts or when spawned
+    virtual void BeginPlay() override;
+
     // Called every frame
     virtual void Tick(float DeltaTime) override;
+
+    UFUNCTION(BlueprintCallable)
+        UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+    UFUNCTION()
+        int TGGApplyEffect_Implementation();
 
 protected:
 
 
 private:
+    void TDInitialize();
 
+    void TDActivateDelegates();
 
+    void TDHealthChanged(const FOnAttributeChangeData& Data);
 };
