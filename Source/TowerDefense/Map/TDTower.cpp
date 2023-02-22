@@ -3,6 +3,8 @@
 #include "TDTower.h"
 #include "TDTowerAttributeSet.h"
 #include "GameplayEffectTypes.h"
+#include "GameLogic/TDGameData.h"
+#include "Character/TDEnemy.h"
 
 
 
@@ -72,7 +74,44 @@ void ATDTower::Tick(float DeltaTime)
 
 }
 
- int ATDTower::TGGApplyEffect_Implementation() 
+ATDEnemy* ATDTower::TDGetEnemyInRange()
+{
+
+	TArray<ATDEnemy*> enemiesArray = UTDGameData::TDGetEnemiesArray();
+
+	FVector ownerLocation = GetActorLocation();
+	float TowerRadius = TowerAttributes->Getrange();
+	ATDEnemy* minorDistanceToBase = nullptr;
+
+
+	for (ATDEnemy* enemyIT : enemiesArray)
+	{
+
+		float distancetoEnemy = FVector::DistSquared(ownerLocation, enemyIT->GetActorLocation());
+
+		if (distancetoEnemy <= TowerRadius)
+		{
+			if (minorDistanceToBase)
+			{
+				if (enemyIT->TDGetPathDistance() < minorDistanceToBase->TDGetPathDistance())
+				{
+					minorDistanceToBase = enemyIT;
+				}
+			}
+			else
+			{
+				minorDistanceToBase = enemyIT;
+			}
+
+		}
+
+	}
+
+	return minorDistanceToBase;
+}
+
+
+int ATDTower::TGGApplyEffect_Implementation()
 {
 
 

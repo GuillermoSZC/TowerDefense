@@ -4,6 +4,7 @@
 #include "TDGameMode.h"
 #include "TDGameData.h"
 #include "TDObjectPooler.h"
+#include "Gas/TDGameplayEventData.h"
 
 void ATDGameMode::StartPlay()
 {
@@ -13,6 +14,22 @@ void ATDGameMode::StartPlay()
     UWorld* world = GetWorld();
     UTDGameData::TDSetWorld(world);
 
-   ATDObjectPooler* punteroprueba = ATDObjectPooler::TDGetObjectPooler();
+    UTDGameData::TDSetAbilityStruct(NewObject<UTDGameplayEventData>(UTDGameplayEventData::StaticClass()));
+
+   ATDObjectPooler* objectPooler = ATDObjectPooler::TDGetObjectPooler();
+
+}
+
+void ATDGameMode::StartToLeaveMap()
+{
+    Super::StartToLeaveMap();
+
+    UTDGameData::TDResetGameData();
+
+}
+
+void ATDGameMode::Reset()
+{
+    Super::Reset();
 
 }

@@ -17,4 +17,10 @@ class TOWERDEFENSE_API ATDGameMode : public AGameModeBase
 public:
 	void StartPlay() override;
 
+
+	void StartToLeaveMap() override;
+
+
+	void Reset() override;
+
 };

@@ -3,27 +3,59 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "TDGameData.generated.h"
+
+class UWorld;
+class ATDEnemy;
+class UTDGameplayEventData;
+
+
+
 
 /**
  * 
  */
 UCLASS()
-class TOWERDEFENSE_API UTDGameData : public UObject
+class TOWERDEFENSE_API UTDGameData : public UBlueprintFunctionLibrary
 {
-	GENERATED_BODY()
-
-private:
-
-
-	static UPROPERTY(Transient) UWorld* gameWorld;
-
-
+    GENERATED_UCLASS_BODY()
 
 public:
 
-	static UFUNCTION(BlueprintCallable) UWorld* TDGetWorld();
-	static UFUNCTION(BlueprintCallable) void TDSetWorld(UWorld* _ActualMap);
+	static UFUNCTION() void TDResetGameData();
+
+
+
+
+
+	static UPROPERTY(Transient) UWorld* gameWorld;
+	static UPROPERTY(Transient) TArray<ATDEnemy*> enemiesArray;
+	static UPROPERTY(Transient) UTDGameplayEventData* abilityData;
+
+
+
+
+
+
+
+	UFUNCTION(BlueprintCallable)
+	static UWorld* TDGetWorld();
+
+	UFUNCTION(BlueprintCallable)
+	static void TDSetWorld(UWorld* _ActualMap);
+
+	UFUNCTION(BlueprintCallable)
+    static TArray<ATDEnemy*> TDGetEnemiesArray();
+
+	UFUNCTION(BlueprintCallable)
+    static  void TDAddEnmemyToArray(ATDEnemy* _ActualEnemy);
+
+	UFUNCTION(BlueprintCallable)
+    static UTDGameplayEventData* TDGetAbilityStrcut();
+
+	UFUNCTION(BlueprintCallable)
+    static void TDSetAbilityStruct(UTDGameplayEventData* _NewAbilityData);
+
 	
 };
