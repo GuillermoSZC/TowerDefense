@@ -2,26 +2,38 @@
 
 
 #include "TDBase.h"
+#include "Components/BoxComponent.h"
+#include "Components/StaticMeshComponent.h"
 
-// Sets default values
-ATDBase::ATDBase()
+FName ATDBase::BoxComponentName(TEXT("BoxComponentName"));
+FName ATDBase::StaticMeshName(TEXT("BaseMesh"));
+
+ATDBase::ATDBase(const FObjectInitializer& ObjectInitializer)
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+    PrimaryActorTick.bCanEverTick = true;
+
+    BoxCollision = CreateDefaultSubobject<UBoxComponent>(ATDBase::BoxComponentName);
+    BoxCollision->SetBoxExtent(FVector(32.f, 32.f, 32.f));
+
+    RootComponent = BoxCollision;
+
+    BaseStaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(ATDBase::StaticMeshName);
+    BaseStaticMesh->AttachToComponent(BoxCollision, FAttachmentTransformRules::KeepRelativeTransform);
+    
 
 }
 
 // Called when the game starts or when spawned
 void ATDBase::BeginPlay()
 {
-	Super::BeginPlay();
-	
+    Super::BeginPlay();
+
 }
 
 // Called every frame
 void ATDBase::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);
+    Super::Tick(DeltaTime);
 
 }
 
