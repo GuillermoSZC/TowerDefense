@@ -54,10 +54,14 @@ public:
     static void TDAddEnmemyToArray(ATDEnemy* _ActualEnemy);
 
 	UFUNCTION(BlueprintPure)
-    static UTDGameplayEventData* const TDGetAbilityStrcut();
+    static UTDGameplayEventData* TDGetAbilityStrcut();
 
 	UFUNCTION(BlueprintCallable)
     static void TDSetAbilityStruct(UTDGameplayEventData* _NewAbilityData);
 
+
+
+    UFUNCTION(BlueprintPure)
+    static ATDEnemy* TDGetNearEnemyToBase();
 	
 };

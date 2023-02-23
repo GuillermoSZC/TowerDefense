@@ -36,7 +36,7 @@ public:
 protected:
 
 
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true")) // @TODO: No aparece el inspector
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
         UAbilitySystemComponent* abilitySystem;
 
 
@@ -83,6 +83,12 @@ public:
     ATDEnemy* TDGetEnemyInRange();
 
 
+
+    UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+        void TDActivateAction();
+
+
+
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
@@ -101,6 +107,7 @@ private:
     void TDRangeChanged(const FOnAttributeChangeData& Data);
 
     void TDPeriodAttackChanged(const FOnAttributeChangeData& Data);
+
 
 
 };

@@ -3,3 +3,7 @@
 
 #include "TDEnemyAttributeSet.h"
 
+UTDEnemyAttributeSet::UTDEnemyAttributeSet()
+{
+
+}

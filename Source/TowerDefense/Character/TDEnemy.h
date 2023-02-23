@@ -2,7 +2,14 @@
 
 #include "CoreMinimal.h"
 #include "Character/TDPlayerCharacter.h"
+#include "GameplayEffectTypes.h"
+
 #include "TDEnemy.generated.h"
+
+class UAbilitySystemComponent;
+class UGameplayAbility;
+class UDataTable;
+class UTDEnemyAttributeSet;
 
 UCLASS()
 class TOWERDEFENSE_API ATDEnemy : public ATDPlayerCharacter
@@ -11,10 +18,34 @@ class TOWERDEFENSE_API ATDEnemy : public ATDPlayerCharacter
 public:
     ATDEnemy();
 
+public:
+
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
+        UDataTable* statsDatatable;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
+        TArray<TSubclassOf<UGameplayAbility>> abiliyList;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
+        UAbilitySystemComponent* abilitySystem;
+
+
+ 
+
 protected:
 
 
-public:
+#pragma region DELEGATES
+
+    FDelegateHandle EnemyHealthChangedDelegateHandle;
+    FDelegateHandle EnemyAttackDamageChangedDelegateHandle;
+    FDelegateHandle EnemyAttackRangeChangedDelegateHandle;
+    FDelegateHandle EnemyAttackSpeedChangedDelegateHandle;
+    FDelegateHandle EnemyMovementSpeedChangedDelegateHandle;
+
+
+#pragma endregion
 
 
 private:
@@ -22,6 +53,11 @@ private:
     float refreshPathTime;
     float tickCounterTime;
     float pathDsitance;
+
+
+    UPROPERTY(Transient)
+    const UTDEnemyAttributeSet* EnemyAttributes;
+
 
 public:
     // Called every frame
@@ -40,6 +76,17 @@ protected:
     virtual void BeginPlay() override;
 
 private:
+
+
+    void TDInitialize();
+    void TDActivateDelegates();
+
+    void TDmaxHealthChanged(const FOnAttributeChangeData& Data);
+    void TDHealthChanged(const FOnAttributeChangeData& Data);
+    void TDAttackDamageChanged(const FOnAttributeChangeData& Data);
+    void TDAttackRangeChanged(const FOnAttributeChangeData& Data);
+    void TDAttackSpeedChanged(const FOnAttributeChangeData& Data);
+    void TDMovementSpeedChanged(const FOnAttributeChangeData& Data);
 
 
 

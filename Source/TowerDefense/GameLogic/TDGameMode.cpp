@@ -6,10 +6,16 @@
 #include "TDObjectPooler.h"
 #include "Gas/TDGameplayEventData.h"
 
+ATDGameMode::ATDGameMode()
+{
+    UTDGameData::TDResetGameData();
+}
+
 void ATDGameMode::StartPlay()
 {
     Super::StartPlay();
   
+
 
     UWorld* world = GetWorld();
     UTDGameData::TDSetWorld(world);
