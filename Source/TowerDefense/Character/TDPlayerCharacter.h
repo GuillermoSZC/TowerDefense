@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interfaces/TDInterface.h"
 #include "TDPlayerCharacter.generated.h"
 
 UCLASS()
-class TOWERDEFENSE_API ATDPlayerCharacter : public ACharacter
+class TOWERDEFENSE_API ATDPlayerCharacter : public ACharacter, public ITDInterface
 {
 	GENERATED_BODY()
 

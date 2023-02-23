@@ -23,6 +23,11 @@ ATDTower::ATDTower()
 
 }
 
+void ATDTower::TDResetAttackTimer_Implementation()
+{
+	timer = periodAttack;
+}
+
 // Called when the game starts or when spawned
 void ATDTower::BeginPlay()
 {
@@ -64,14 +69,17 @@ void ATDTower::Tick(float DeltaTime)
 
 	timer += DeltaTime;
 
+    //GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::SanitizeFloat(timer));
+
 	if (timer >= periodAttack)
 	{
-		
+		timer -= periodAttack;
+
 		ITDInterface::Execute_TGGApplyEffect(this);
 		//UAbilitySystemBlueprintLibrary::
 
 
-		timer -= periodAttack;
+		
 	}
 
 

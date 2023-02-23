@@ -22,7 +22,7 @@ class TOWERDEFENSE_API ATDTower : public AActor, public ITDInterface, public IAb
 
 public:
     // Sets default values for this actor's properties
-    ATDTower();
+    ATDTower();  
 
 public:
 
@@ -87,6 +87,8 @@ public:
     UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
         void TDActivateAction();
 
+    UFUNCTION()
+    void TDResetAttackTimer_Implementation() override;
 
 
 protected:

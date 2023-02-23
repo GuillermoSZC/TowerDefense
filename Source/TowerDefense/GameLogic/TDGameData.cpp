@@ -64,6 +64,11 @@ void UTDGameData::TDSetAbilityStruct(UTDGameplayEventData* _NewAbilityData)
     abilityData = _NewAbilityData;
 }
 
+UTDGameplayEventData* UTDGameData::TDGetAbilityStruct()
+{
+    return abilityData;
+}
+
 ATDEnemy* UTDGameData::TDGetNearEnemyToBase()
 {
     float minValue = FLT_MAX;
@@ -81,6 +86,31 @@ ATDEnemy* UTDGameData::TDGetNearEnemyToBase()
         }
     }
     return nearEnemy;
+
+
+}
+
+ATDEnemy* UTDGameData::TDGetNearEnemyFromArrayToBase(TArray<AActor*> _enemies)
+{
+
+    float minValue = FLT_MAX;
+    ATDEnemy* nearEnemy = nullptr;
+
+
+    for (AActor* it : _enemies)
+    {
+        ATDEnemy* tempEnemy = Cast<ATDEnemy>(it);
+
+        float x = tempEnemy->TDGetPathDistance();
+
+        if (x < minValue)
+        {
+            minValue = x;
+            nearEnemy = tempEnemy;
+        }
+    }
+    return nearEnemy;
+
 
 
 }

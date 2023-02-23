@@ -28,7 +28,8 @@ public:
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
          int TGGApplyEffect();
 
-
+	UFUNCTION(BlueprintNativeEvent,BlueprintCallable)
+	void TDResetAttackTimer();
 
 	//Este solo se puede implementar en BP
 //     UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)

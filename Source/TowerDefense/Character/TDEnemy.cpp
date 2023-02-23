@@ -87,12 +87,9 @@ void ATDEnemy::TDHealthChanged(const FOnAttributeChangeData& Data)
 {
 	if (Data.NewValue <= 0.f)
     {
-        FGameplayEventData DataEvent;
-
-		
+        FGameplayEventData DataEvent;		
 
 		UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(this, GET_GAMEPLAY_TAG(DEATH_TRIGGER_TAG) , DataEvent);
-
 	}
 }
 

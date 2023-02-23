@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable,BlueprintType)
 class TOWERDEFENSE_API UTDGameplayEventData : public UObject
 {
 	GENERATED_BODY()

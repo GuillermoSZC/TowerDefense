@@ -59,9 +59,13 @@ public:
 	UFUNCTION(BlueprintCallable)
     static void TDSetAbilityStruct(UTDGameplayEventData* _NewAbilityData);
 
-
+    UFUNCTION(BlueprintPure)
+        static UTDGameplayEventData* TDGetAbilityStruct();
 
     UFUNCTION(BlueprintPure)
     static ATDEnemy* TDGetNearEnemyToBase();
+
+    UFUNCTION(BlueprintPure)
+	static ATDEnemy* TDGetNearEnemyFromArrayToBase(TArray<AActor*> _enemies);
 	
 };
