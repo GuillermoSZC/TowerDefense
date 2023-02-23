@@ -3,10 +3,8 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "GameLogic/TDGameData.h"
 #include "TDEnemyAttributeSet.h"
-
+#include "GameplayTagContainer.h"
 #include "TDMacros.h"
-#include "GameplayEffectTypes.h"
-#include "GameplayTagsManager.h"
 
 
 ATDEnemy::ATDEnemy()
@@ -15,6 +13,9 @@ ATDEnemy::ATDEnemy()
 
 	refreshPathTime = 0.2f;
 	tickCounterTime = 0.f;
+
+    abilitySystem = CreateDefaultSubobject<UAbilitySystemComponent>("AbilityComponent");
+
 
 }
 
@@ -44,7 +45,6 @@ void ATDEnemy::BeginPlay()
 	Super::BeginPlay();
 
 	TDInitialize();
-
 }
 
 void ATDEnemy::TDInitialize()
@@ -88,14 +88,10 @@ void ATDEnemy::TDHealthChanged(const FOnAttributeChangeData& Data)
 	if (Data.NewValue <= 0.f)
     {
         FGameplayEventData DataEvent;
-		//FGameplayTag tagjump = FGameplayTag::RequestGameplayTag(FName(TEXT("ability.trigger")));
-		//FGameplayTag tagjump;
-	
-		//UGameplayTagsManager::Get().RequestGameplayTag(FName(TEXT("ability.trigger")));
-		
+
 		
 
-		//UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(this, FGameplayTag::RequestGameplayTag(FName(TEXT("Ability.Trigger.Death"))) , DataEvent);
+		UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(this, GET_GAMEPLAY_TAG(DEATH_TRIGGER_TAG) , DataEvent);
 
 	}
 }

@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "Character/TDPlayerCharacter.h"
 #include "GameplayEffectTypes.h"
-#include "GameplayTagContainer.h"
+
 #include "TDEnemy.generated.h"
 
 class UAbilitySystemComponent;
@@ -31,7 +31,7 @@ public:
         UAbilitySystemComponent* abilitySystem;
 
 
-    FGameplayTag tag;
+ 
 
 protected:
 
