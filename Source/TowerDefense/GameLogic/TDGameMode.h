@@ -15,6 +15,12 @@ class TOWERDEFENSE_API ATDGameMode : public AGameModeBase
 	GENERATED_BODY()
 	
 public:
+	
+	ATDGameMode();
+
+
+public:
+
 	void StartPlay() override;
 
 

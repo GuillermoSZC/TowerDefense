@@ -46,6 +46,8 @@ void ATDTower::TDInitialize()
 
 	TDActivateDelegates();
 
+	timer = 0.f;
+
 }
 
 
@@ -66,6 +68,7 @@ void ATDTower::Tick(float DeltaTime)
 	{
 		
 		ITDInterface::Execute_TGGApplyEffect(this);
+		//UAbilitySystemBlueprintLibrary::
 
 
 		timer -= periodAttack;

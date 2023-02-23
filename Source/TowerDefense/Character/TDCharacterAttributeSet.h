@@ -28,13 +28,16 @@ public:
         FGameplayAttributeData health;
 
     UPROPERTY(Category = "Ability System | Attributes", VisibleAnywhere, BlueprintReadOnly)
-        FGameplayAttributeData damage;
+        FGameplayAttributeData attackDamage;
 
     UPROPERTY(Category = "Ability System | Attributes", VisibleAnywhere, BlueprintReadOnly)
-        FGameplayAttributeData speed;
+        FGameplayAttributeData movementSpeed;
 
     UPROPERTY(Category = "Ability System | Attributes", VisibleAnywhere, BlueprintReadOnly)
         FGameplayAttributeData attackSpeed;
+
+    UPROPERTY(Category = "Ability System | Attributes", VisibleAnywhere, BlueprintReadOnly)
+        FGameplayAttributeData attackRange;
 
 protected:
 
@@ -46,9 +49,10 @@ public:
 
     ATTRIBUTE_ACCESSORS(UTDCharacterAttributeSet, maxHealth)
         ATTRIBUTE_ACCESSORS(UTDCharacterAttributeSet, health)
-        ATTRIBUTE_ACCESSORS(UTDCharacterAttributeSet, damage)
-        ATTRIBUTE_ACCESSORS(UTDCharacterAttributeSet, speed)
+        ATTRIBUTE_ACCESSORS(UTDCharacterAttributeSet, attackDamage)
+        ATTRIBUTE_ACCESSORS(UTDCharacterAttributeSet, movementSpeed)
         ATTRIBUTE_ACCESSORS(UTDCharacterAttributeSet, attackSpeed)
+        ATTRIBUTE_ACCESSORS(UTDCharacterAttributeSet, attackRange)
 
 
 protected:
