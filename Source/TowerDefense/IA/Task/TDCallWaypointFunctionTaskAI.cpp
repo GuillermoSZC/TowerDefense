@@ -1,16 +1,39 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "IA/Task/TDCallWaypointFunctionTaskAI.h"
+#include "AIModule/Classes/BehaviorTree/BlackboardComponent.h"
+#include "GameLogic/TDPathPoint.h"
+#include "Character/TDEnemyController.h"
+#include "Character/TDEnemy.h"
 
 EBTNodeResult::Type UTDCallWaypointFunctionTaskAI::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
     Super::ExecuteTask(OwnerComp, NodeMemory);
-    throw std::logic_error("The method or operation is not implemented.");
+
+    ATDEnemyController* enemyController = Cast<ATDEnemyController>(OwnerComp.GetOwner());
+    ATDEnemy* enemy = enemyController->GetPawn<ATDEnemy>();
+    UBlackboardComponent* blackboard = OwnerComp.GetBlackboardComponent();
+
+    if (blackboard)
+    {
+        UObject* waypointObject;
+        ATDPathPoint* pathPoint;
+
+        waypointObject = blackboard->GetValueAsObject(FName(TEXT("WaypointActor")));
+        pathPoint = Cast<ATDPathPoint>(waypointObject);  
+        
+        if (pathPoint && enemy)
+        {
+            pathPoint->TDArrivedAction(enemy);
+
+            return EBTNodeResult::Succeeded;
+        }
+    }
+
+    return EBTNodeResult::Failed;
 }
 
 FString UTDCallWaypointFunctionTaskAI::GetStaticDescription() const
 {
     Super::GetStaticDescription();
-    throw std::logic_error("The method or operation is not implemented.");
+
+    return FString(TEXT("CallArrivedWaypoint"));
 }
