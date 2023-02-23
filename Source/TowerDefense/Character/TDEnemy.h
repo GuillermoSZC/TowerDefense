@@ -31,7 +31,7 @@ public:
         UAbilitySystemComponent* abilitySystem;
 
 
-    
+    FGameplayTag tag;
 
 protected:
 
