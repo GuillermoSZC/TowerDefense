@@ -2,36 +2,36 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTTaskNode.h"
-#include "TDConvertActorToLocation_TaskAI.generated.h"
+#include "TDCallWaypointFunctionTaskAI.generated.h"
 
-/**
- *
- */
 UCLASS()
-class TOWERDEFENSE_API UTDConvertActorToLocation_TaskAI : public UBTTaskNode
+class TOWERDEFENSE_API UTDCallWaypointFunctionTaskAI : public UBTTaskNode
 {
     GENERATED_BODY()
+public:
+
 
 public:
 
-public:
 
 protected:
+
 
 private:
 
 
 
-
-    FString GetStaticDescription() const override;
 
 public:
     EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
-    void OnGameplayTaskActivated(UGameplayTask& Task) override;
+
+    FString GetStaticDescription() const override;
+
 
 protected:
 
 
 private:
+
 
 };
