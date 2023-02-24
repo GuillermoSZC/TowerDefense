@@ -20,14 +20,14 @@ public:
 
 public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
-        UDataTable* statsDatatable;
+        UDataTable* StatsDatatable;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
-        TArray<TSubclassOf<class UGameplayAbility>> abiliyList;
+        TArray<TSubclassOf<class UGameplayAbility>> AbiliyList;
 
 protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true")) 
-        UAbilitySystemComponent* abilitySystem;
+        UAbilitySystemComponent* AbilitySystem;
 
 #pragma region DELEGATES
     FDelegateHandle BaseHealthChangedDelegateHandle;
@@ -50,12 +50,6 @@ private:
         const UTDBaseAttributeSet* BaseAttributes;
 
 public:
-    // Called when the game starts or when spawned
-    virtual void BeginPlay() override;
-
-    // Called every frame
-    virtual void Tick(float DeltaTime) override;
-
     UFUNCTION(BlueprintCallable)
         UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
@@ -63,6 +57,11 @@ public:
         int TGGApplyEffect_Implementation();
 
 protected:
+    // Called when the game starts or when spawned
+    virtual void BeginPlay() override;
+
+    // Called every frame
+    virtual void Tick(float DeltaTime) override;
 
 
 private:

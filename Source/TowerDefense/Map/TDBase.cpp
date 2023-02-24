@@ -20,7 +20,7 @@ ATDBase::ATDBase(const FObjectInitializer& ObjectInitializer)
     BaseStaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(ATDBase::StaticMeshName);
     BaseStaticMesh->AttachToComponent(BoxCollision, FAttachmentTransformRules::KeepRelativeTransform);
 
-    abilitySystem = CreateDefaultSubobject<UAbilitySystemComponent>("AbilityComponent");
+    AbilitySystem = CreateDefaultSubobject<UAbilitySystemComponent>("AbilityComponent");
 }
 
 // Called when the game starts or when spawned
@@ -40,7 +40,7 @@ void ATDBase::Tick(float DeltaTime)
 
 UAbilitySystemComponent* ATDBase::GetAbilitySystemComponent() const
 {
-    return abilitySystem;
+    return AbilitySystem;
 }
 
 int ATDBase::TGGApplyEffect_Implementation()
@@ -53,12 +53,12 @@ int ATDBase::TGGApplyEffect_Implementation()
 void ATDBase::TDInitialize()
 {
 
-    const UAttributeSet* attributesInit = abilitySystem->InitStats(UTDBaseAttributeSet::StaticClass(), statsDatatable);
+    const UAttributeSet* attributesInit = AbilitySystem->InitStats(UTDBaseAttributeSet::StaticClass(), StatsDatatable);
     BaseAttributes = Cast<UTDBaseAttributeSet>(attributesInit);
 
-    for (size_t i = 0; i < abiliyList.Num(); ++i)
+    for (size_t i = 0; i < AbiliyList.Num(); ++i)
     {
-        FGameplayAbilitySpecHandle specHandle = abilitySystem->GiveAbility(FGameplayAbilitySpec(abiliyList[i].GetDefaultObject(), 1, 0));
+        FGameplayAbilitySpecHandle specHandle = AbilitySystem->GiveAbility(FGameplayAbilitySpec(AbiliyList[i].GetDefaultObject(), 1, 0));
     }
 
     TDActivateDelegates();
@@ -66,7 +66,7 @@ void ATDBase::TDInitialize()
 
 void ATDBase::TDActivateDelegates()
 {
-    BaseHealthChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(BaseAttributes->GethealthAttribute()).AddUObject(this, &ATDBase::TDHealthChanged);
+    BaseHealthChangedDelegateHandle = AbilitySystem->GetGameplayAttributeValueChangeDelegate(BaseAttributes->GethealthAttribute()).AddUObject(this, &ATDBase::TDHealthChanged);
 }
 
 void ATDBase::TDHealthChanged(const FOnAttributeChangeData& Data)
