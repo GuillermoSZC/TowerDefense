@@ -14,10 +14,10 @@ public:
     ATDPathPoint();
 
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(EditAnywhere, Category = "PathFollow")
         TArray<ATDPathPoint*> pathPointArray;
 
-    UPROPERTY()
+    UPROPERTY(EditAnywhere, Category = "PathFollow")
         bool isBase;
 
 protected:
@@ -28,7 +28,7 @@ private:
 
 public:
     UFUNCTION()
-        void TDArrivedAction(ATDEnemy* _enemy);
+        void TDArrivedAction(ATDEnemyController* _enemy);
 
 protected:
 

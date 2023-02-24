@@ -22,7 +22,7 @@ EBTNodeResult::Type UTDCallWaypointFunctionTaskAI::ExecuteTask(UBehaviorTreeComp
         
         if (pathPoint && enemy)
         {
-            pathPoint->TDArrivedAction(enemy);
+            pathPoint->TDArrivedAction(enemyController);
 
             return EBTNodeResult::Succeeded;
         }

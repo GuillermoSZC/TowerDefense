@@ -8,15 +8,31 @@ ATDPathPoint::ATDPathPoint()
     
 }
 
-void ATDPathPoint::TDArrivedAction(ATDEnemy* _enemy)
+void ATDPathPoint::TDArrivedAction(ATDEnemyController* _enemy)
 {
     if (!isBase)
     {
-        if (pathPointArray.Num() == 1)
+
+        int arraySize = pathPointArray.Num();
+        if (arraySize == 0)
         {
-            ATDEnemyController* enemyController = Cast<ATDEnemyController>(_enemy->GetController());
-            enemyController->GetBlackboardComponent()->SetValueAsObject(FName(TEXT("WaypointActor")), this);
-            enemyController->GetBlackboardComponent()->SetValueAsVector(FName(TEXT("WaypointPosition")), GetActorLocation());
+            return;
+        }
+
+        if (arraySize == 1)
+        {
+           
+            _enemy->GetBlackboardComponent()->SetValueAsObject(FName(TEXT("WaypointActor")), pathPointArray[0]);
+            _enemy->GetBlackboardComponent()->SetValueAsVector(FName(TEXT("WaypointPosition")), pathPointArray[0]->GetActorLocation());
+            return;
         }        
+
+        
+
+        int x = _enemy->TDGetRandomSpawnNunber() % arraySize;
+
+        _enemy->GetBlackboardComponent()->SetValueAsObject(FName(TEXT("WaypointActor")), pathPointArray[x]);
+        _enemy->GetBlackboardComponent()->SetValueAsVector(FName(TEXT("WaypointPosition")), pathPointArray[x]->GetActorLocation());
+
     }
 }

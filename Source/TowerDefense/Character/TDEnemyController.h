@@ -13,5 +13,30 @@ UCLASS()
 class TOWERDEFENSE_API ATDEnemyController : public AAIController
 {
 	GENERATED_BODY()
-	
+
+public:
+
+
+public:
+
+
+protected:
+
+
+
+	void BeginPlay() override;
+
+private:
+	int32 RandomSpawnNumber;
+
+public:
+
+	int32 TDGetRandomSpawnNunber();
+
+protected:
+
+
+private:
+
+
 };
