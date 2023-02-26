@@ -28,6 +28,8 @@ void ATDBase::BeginPlay()
 {
     Super::BeginPlay();
 
+    UTDGameData::TDSetBaseActor(this);
+
     TDInitialize();
 }
 

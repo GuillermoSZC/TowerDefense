@@ -10,6 +10,7 @@ class UAbilitySystemComponent;
 class UGameplayAbility;
 class UDataTable;
 class UTDEnemyAttributeSet;
+class ATDPathPoint;
 
 UCLASS()
 class TOWERDEFENSE_API ATDEnemy : public ATDPlayerCharacter
@@ -31,7 +32,16 @@ public:
         UAbilitySystemComponent* abilitySystem;
 
 
- 
+    UPROPERTY()
+        TArray<ATDPathPoint*> PathPointsArray;
+
+
+    UPROPERTY(EditAnywhere, Category = "Spawn Configuration")
+        float movementVariation = 100.f;
+
+    UPROPERTY(EditAnywhere, Category = "Spawn Configuration")
+        float unitWeight = 0.f;
+
 
 protected:
 
@@ -56,7 +66,9 @@ private:
 
 
     UPROPERTY(Transient)
-    const UTDEnemyAttributeSet* EnemyAttributes;
+        const UTDEnemyAttributeSet* EnemyAttributes;
+
+
 
 
 public:
@@ -64,11 +76,18 @@ public:
     virtual void Tick(float DeltaTime) override;
 
 
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    UFUNCTION(BlueprintCallable)
         float TDCalculatePathDistance();
 
     UFUNCTION(BlueprintCallable)
         float TDGetPathDistance();
+
+    UFUNCTION(BlueprintCallable)
+        void TDSetPath(ATDPathPoint* _pathPointRef);
+
+
+    UFUNCTION()
+        ATDPathPoint* TDGetNextPathPoint();
 
 
 protected:

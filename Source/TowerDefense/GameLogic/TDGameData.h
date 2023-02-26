@@ -34,6 +34,7 @@ public:
 	static UPROPERTY(Transient) UWorld* gameWorld;
 	static UPROPERTY(Transient) TArray<ATDEnemy*> enemiesArray;
 	static UPROPERTY(Transient) UTDGameplayEventData* abilityData;
+	static UPROPERTY(Transient) ATDBase* baseRef;
 
 
 
@@ -68,4 +69,10 @@ public:
     UFUNCTION(BlueprintPure)
 	static ATDEnemy* TDGetNearEnemyFromArrayToBase(TArray<AActor*> _enemies);
 	
+	UFUNCTION(BlueprintPure)
+	static ATDBase* TDGetBaseActor();
+
+    UFUNCTION()
+        static void TDSetBaseActor(ATDBase* _baseRef);
+
 };

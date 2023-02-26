@@ -6,6 +6,8 @@
 #include "GameLogic/TDPathPoint.h"
 #include "Character/TDEnemyController.h"
 #include "AIModule/Classes/BehaviorTree/BlackboardComponent.h"
+#include "Map/TDBase.h"
+#include "GameLogic/TDGameData.h"
 
 
 UTDGetNextWaypointBTService::UTDGetNextWaypointBTService()
@@ -41,9 +43,25 @@ void UTDGetNextWaypointBTService::TickNode(UBehaviorTreeComponent& OwnerComp, ui
             if (distanceBt <= ArriveDistance)
             {
 
-                pathPoint->TDArrivedAction(enemyController);
+               // pathPoint->TDArrivedAction(enemyController);
 
 
+                if (!pathPoint->TDGetIsBase())
+                {
+                    pathPoint = enemy->TDGetNextPathPoint();
+                    blackboard->SetValueAsObject(FName(TEXT("WaypointActor")), pathPoint);
+                    blackboard->SetValueAsVector(FName(TEXT("WaypointPosition")), pathPoint->GetActorLocation());
+                }
+                else
+                {
+                    ATDBase* baseRef = UTDGameData::TDGetBaseActor();
+                    blackboard->SetValueAsObject(FName(TEXT("BaseBuild")), baseRef);
+                    FVector basePos = baseRef->GetActorLocation();
+                    //basePos.X = 930.f;
+                    //basePos.Y = 210.f;
+                    basePos.Z = 0.f;
+                    blackboard->SetValueAsVector(FName(TEXT("BasePosition")), basePos);
+                }
 
             }
         }

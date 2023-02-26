@@ -10,6 +10,7 @@
 UWorld* UTDGameData::gameWorld = nullptr;
 UTDGameplayEventData* UTDGameData::abilityData = nullptr;
 TArray<ATDEnemy*> UTDGameData::enemiesArray;
+ATDBase* UTDGameData::baseRef = nullptr;
 
 
 UTDGameData::UTDGameData(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
@@ -113,4 +114,14 @@ ATDEnemy* UTDGameData::TDGetNearEnemyFromArrayToBase(TArray<AActor*> _enemies)
 
 
 
+}
+
+ATDBase* UTDGameData::TDGetBaseActor()
+{
+    return baseRef;
+}
+
+void UTDGameData::TDSetBaseActor(ATDBase* _baseRef)
+{
+    baseRef = _baseRef;
 }

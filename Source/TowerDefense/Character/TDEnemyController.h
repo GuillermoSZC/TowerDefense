@@ -27,7 +27,7 @@ protected:
 	void BeginPlay() override;
 
 private:
-	int32 RandomSpawnNumber;
+	
 
 public:
 

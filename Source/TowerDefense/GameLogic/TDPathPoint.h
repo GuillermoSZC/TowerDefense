@@ -23,12 +23,21 @@ public:
 protected:
 
 
+
+    void BeginPlay() override;
+
 private:
 
 
 public:
     UFUNCTION()
         void TDArrivedAction(ATDEnemyController* _enemy);
+
+    UFUNCTION()
+        bool TDGetIsBase();
+
+    UFUNCTION()
+        ATDPathPoint* TDGetNextPoint();
 
 protected:
 
