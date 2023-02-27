@@ -16,8 +16,11 @@ class TOWERDEFENSE_API ATDEnemyController : public AAIController
 
 public:
 
-
+	ATDEnemyController();
 public:
+
+    UPROPERTY(Transient)
+        AActor* waypointRef = nullptr;
 
 
 protected:
@@ -28,6 +31,8 @@ protected:
 
 private:
 	
+
+
 
 public:
 

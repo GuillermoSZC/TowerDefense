@@ -10,6 +10,8 @@
 UWorld* UTDGameData::gameWorld = nullptr;
 UTDGameplayEventData* UTDGameData::abilityData = nullptr;
 TArray<ATDEnemy*> UTDGameData::enemiesArray;
+TArray<ATDSpawner*> UTDGameData::spawnerArray;
+
 ATDBase* UTDGameData::baseRef = nullptr;
 
 
@@ -26,6 +28,8 @@ void UTDGameData::TDResetGameData()
     gameWorld = nullptr;
     enemiesArray.Empty();
     abilityData = nullptr;
+    baseRef = nullptr;
+    spawnerArray.Empty();
 }
 
 UWorld* UTDGameData::TDGetWorld()
@@ -125,3 +129,21 @@ void UTDGameData::TDSetBaseActor(ATDBase* _baseRef)
 {
     baseRef = _baseRef;
 }
+
+
+
+void UTDGameData::TDaddSpawnerActor(ATDSpawner* _spawnerRef)
+{
+    spawnerArray.Add(_spawnerRef);
+}
+
+ATDSpawner* UTDGameData::TDGetSpanwerActor()
+{
+
+    int x = FMath::Rand() % spawnerArray.Num();
+
+    return spawnerArray[x];
+
+
+}
+

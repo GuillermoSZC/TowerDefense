@@ -13,5 +13,28 @@ UCLASS()
 class TOWERDEFENSE_API UTDGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
+
+public:
+
+	UTDGameInstance();
 	
+public:
+
+
+
+protected:
+
+
+private:
+
+
+public:
+
+
+protected:
+
+
+private:
+
+
 };

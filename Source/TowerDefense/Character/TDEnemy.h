@@ -32,7 +32,7 @@ public:
         UAbilitySystemComponent* abilitySystem;
 
 
-    UPROPERTY()
+    UPROPERTY(VisibleAnywhere)
         TArray<ATDPathPoint*> PathPointsArray;
 
 
@@ -40,7 +40,7 @@ public:
         float movementVariation = 100.f;
 
     UPROPERTY(EditAnywhere, Category = "Spawn Configuration")
-        float unitWeight = 0.f;
+        int unitWeight = 1.f;
 
 
 protected:

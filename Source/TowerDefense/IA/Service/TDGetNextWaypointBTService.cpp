@@ -54,11 +54,10 @@ void UTDGetNextWaypointBTService::TickNode(UBehaviorTreeComponent& OwnerComp, ui
                 }
                 else
                 {
+                    pathPoint = enemy->TDGetNextPathPoint();
                     ATDBase* baseRef = UTDGameData::TDGetBaseActor();
                     blackboard->SetValueAsObject(FName(TEXT("BaseBuild")), baseRef);
                     FVector basePos = baseRef->GetActorLocation();
-                    //basePos.X = 930.f;
-                    //basePos.Y = 210.f;
                     basePos.Z = 0.f;
                     blackboard->SetValueAsVector(FName(TEXT("BasePosition")), basePos);
                 }

@@ -43,21 +43,32 @@ void ATDEnemy::Tick(float DeltaTime)
 float ATDEnemy::TDCalculatePathDistance()
 {
     float totalDistance = 0.f;
-    for (int i = 0; i <= PathPointsArray.Num() - 1; ++i)
+
+    if (PathPointsArray.Num() > 0)
     {
-        if (!PathPointsArray[i]->TDGetIsBase())
+        for (int i = 0; i <= PathPointsArray.Num() - 1; ++i)
         {
-           totalDistance += FVector::DistSquared2D(PathPointsArray[i]->GetActorLocation(), PathPointsArray[i + 1]->GetActorLocation());
+            if (!PathPointsArray[i]->TDGetIsBase())
+            {
+                totalDistance += FVector::DistSquared2D(PathPointsArray[i]->GetActorLocation(), PathPointsArray[i + 1]->GetActorLocation());
+            }
+            else
+            {
+                totalDistance += FVector::DistSquared2D(PathPointsArray[i]->GetActorLocation(), UTDGameData::TDGetBaseActor()->GetActorLocation());
+            }
+
         }
-        else
-        {
-            //sumar distance del ultimo waypoint a la base
-            totalDistance += FVector::DistSquared2D(PathPointsArray[i]->GetActorLocation(), UTDGameData::TDGetBaseActor()->GetActorLocation());
-        }
-       
+
+        totalDistance += FVector::DistSquared2D(PathPointsArray[0]->GetActorLocation(), GetActorLocation());
+    }
+    if (PathPointsArray.Num() == 0)
+    {
+        totalDistance += FVector::DistSquared2D(UTDGameData::TDGetBaseActor()->GetActorLocation(), GetActorLocation());
     }
 
-    totalDistance += FVector::DistSquared2D(PathPointsArray[0]->GetActorLocation(), GetActorLocation());
+
+
+
     return totalDistance;
 
 }
@@ -69,6 +80,8 @@ float ATDEnemy::TDGetPathDistance()
 
 void ATDEnemy::TDSetPath(ATDPathPoint* _pathPointRef)
 {
+    PathPointsArray.Empty();
+
     bool isBase = false;
     PathPointsArray.Add(_pathPointRef);
     isBase = _pathPointRef->TDGetIsBase();
@@ -90,9 +103,17 @@ void ATDEnemy::TDSetPath(ATDPathPoint* _pathPointRef)
 
 ATDPathPoint* ATDEnemy::TDGetNextPathPoint()
 {
-    PathPointsArray.RemoveAt(0);
 
-    return PathPointsArray[0];
+
+    if (!PathPointsArray.IsEmpty())
+    {
+        PathPointsArray.RemoveAt(0);
+        if (!PathPointsArray.IsEmpty())
+        {
+            return PathPointsArray[0];
+        }
+    }
+    return nullptr;
 }
 
 void ATDEnemy::BeginPlay()

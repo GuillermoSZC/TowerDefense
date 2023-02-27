@@ -33,6 +33,7 @@ public:
 
 	static UPROPERTY(Transient) UWorld* gameWorld;
 	static UPROPERTY(Transient) TArray<ATDEnemy*> enemiesArray;
+	static UPROPERTY(Transient) TArray<ATDSpawner*> spawnerArray;
 	static UPROPERTY(Transient) UTDGameplayEventData* abilityData;
 	static UPROPERTY(Transient) ATDBase* baseRef;
 
@@ -74,5 +75,13 @@ public:
 
     UFUNCTION()
         static void TDSetBaseActor(ATDBase* _baseRef);
+
+
+
+	UFUNCTION()
+	static void TDaddSpawnerActor(ATDSpawner* _spawnerRef);
+
+	UFUNCTION()
+	static ATDSpawner* TDGetSpanwerActor();
 
 };

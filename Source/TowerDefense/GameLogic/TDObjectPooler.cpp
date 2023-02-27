@@ -3,11 +3,11 @@
 
 #include "GameLogic/TDObjectPooler.h"
 #include "TDGameData.h"
-
+#include "Character/TDEnemy.h"
 
 ATDObjectPooler* ATDObjectPooler::OwnerPooler = nullptr;
 
-ATDObjectPooler* ATDObjectPooler::TDGetObjectPooler()
+ATDObjectPooler* ATDObjectPooler::TDGetObjectPooler(TSubclassOf<ATDObjectPooler> _classRef)
 {
 
 	if (OwnerPooler == nullptr)
@@ -15,7 +15,7 @@ ATDObjectPooler* ATDObjectPooler::TDGetObjectPooler()
 		UWorld* actualWorld = UTDGameData::TDGetWorld();
 		FActorSpawnParameters paramet;
 		//OwnerPooler = Cast<ATDObjectPooler>(actualWorld->SpawnActor(ATDObjectPooler::StaticClass()));
-		OwnerPooler = actualWorld->SpawnActor<ATDObjectPooler>(ATDObjectPooler::StaticClass());
+		OwnerPooler = actualWorld->SpawnActor<ATDObjectPooler>(_classRef);
 	}
 
 	return OwnerPooler;

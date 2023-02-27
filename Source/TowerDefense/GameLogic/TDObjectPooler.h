@@ -6,35 +6,54 @@
 #include "GameFramework/Actor.h"
 #include "TDObjectPooler.generated.h"
 
+class ATDEnemy;
+
 UCLASS()
 class TOWERDEFENSE_API ATDObjectPooler : public AActor
 {
-	GENERATED_BODY()
-	
-private:	
+    GENERATED_BODY()
 
-	ATDObjectPooler();
+private:
+
+    ATDObjectPooler();
+
+
+public:
+
+    UPROPERTY(EditAnywhere)
+        TArray<TSubclassOf<ATDEnemy>> enemiesClasses;
 
 
 protected:
 
 private:
 
-	static ATDObjectPooler* OwnerPooler;
+   
+        static  UPROPERTY(Transient) ATDObjectPooler* OwnerPooler;
+
+
+
+//     UPROPERTY(Transient)
+//         TArray<ATDEnemy*> activeEnemies;
+// 
+//     UPROPERTY(Transient)
+//         TArray<ATDEnemy*> deactivatedenemies;
 
 
 public:
 
 
-	static ATDObjectPooler* TDGetObjectPooler();
+    static ATDObjectPooler* TDGetObjectPooler(TSubclassOf<ATDObjectPooler> _classRef);
 
+
+
+
+protected:
+    // Called when the game starts or when spawned
+    virtual void BeginPlay() override;
 
     // Called every frame
     virtual void Tick(float DeltaTime) override;
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 
 private:
 

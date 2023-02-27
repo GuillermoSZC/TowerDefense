@@ -3,3 +3,7 @@
 
 #include "TDGameInstance.h"
 
+UTDGameInstance::UTDGameInstance()
+{
+
+}

@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "TDObjectPooler.h"
 #include "TDGameMode.generated.h"
+
+class ATDEnemy;
 
 /**
  * 
@@ -18,15 +21,38 @@ public:
 	
 	ATDGameMode();
 
+public:
+
+    UPROPERTY(EditDefaultsOnly)
+        TSubclassOf<ATDObjectPooler> objectPoolerClass;
+
+    UPROPERTY(EditDefaultsOnly)
+        TSubclassOf<ATDEnemy> EnemyClass;
+
+
+
+
+protected:
+	
+
+private:
+
 
 public:
 
-	void StartPlay() override;
+
+protected:
+
+    void StartPlay() override;
 
 
-	void StartToLeaveMap() override;
+    void StartToLeaveMap() override;
 
 
-	void Reset() override;
+    void Reset() override;
+
+
+private:
+
 
 };
