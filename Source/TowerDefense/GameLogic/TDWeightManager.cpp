@@ -5,6 +5,11 @@
 #include "TDGameData.h"
 #include "Map/TDSpawner.h"
 #include "Character/TDEnemy.h"
+#include "TDObjectPooler.h"
+#include "TDEnemiesDataTable.h"
+#include "Character/TDEnemyController.h"
+#include "AIModule/Classes/BehaviorTree/BehaviorTree.h"
+#include "Components/CapsuleComponent.h"
 
 
 UTDWeightManager* UTDWeightManager::weightManager = nullptr;
@@ -13,7 +18,7 @@ UTDWeightManager* UTDWeightManager::weightManager = nullptr;
 
 UTDWeightManager::UTDWeightManager()
 {
-
+    actualWegith = 0;
 }
 
 
@@ -34,22 +39,73 @@ UTDWeightManager* UTDWeightManager::TDGetWeightManager()
 
 
 
-void UTDWeightManager::StartSpawn(TSubclassOf<ATDEnemy> _enemyClass)
+void UTDWeightManager::TDStartSpawn()
 {
-    int actualWegith = 0;
-    while (actualWegith < WeightPerRound)
+    actualWegith = 0;
+
+    //while (actualWegith < WeightPerRound)
+    //{
+    UWorld* actualWorld = UTDGameData::TDGetWorld();
+
+    ATDEnemy* actualEnemy = ATDObjectPooler::TDGetObjectPooler()->TDGetEnemyFromPool();
+
+    //actualWegith += 1;
+    if (actualEnemy)
     {
-        UWorld* actualWorld = UTDGameData::TDGetWorld();
-
-        ATDEnemy* actualEnemy = actualWorld->SpawnActor<ATDEnemy>(_enemyClass);
-
-        actualWegith += actualEnemy->unitWeight;
-
+        TDSetEnemyValues(actualEnemy);
         ATDSpawner* spawnerRef = UTDGameData::TDGetSpanwerActor();
-
         spawnerRef->TDSpawnEnemy(actualEnemy);
-
     }
+    //}
 }
 
+void UTDWeightManager::TDSetDataTable(UDataTable* _ref)
+{
+    enemiesDatatable = _ref;
+}
+
+void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
+{
+
+    if (enemiesDatatable)
+    {
+        FString ContextString = TEXT("Data table context");
+        FTDEnemiesDataTable* Row = nullptr;
+        TArray<FName> RowNames = enemiesDatatable->GetRowNames();
+        bool loop = false;
+
+
+        while (!loop)
+        {
+            int32 x = FMath::Rand() % RowNames.Num();
+            FName selectedenemy = RowNames[x];
+
+            Row = enemiesDatatable->FindRow<FTDEnemiesDataTable>(selectedenemy, ContextString, true);
+            if (Row)
+            {
+                loop = ActualRound >= Row->firstPossibleApperance && WeightPerRound >= actualWegith + Row->weight;
+
+                if (loop)
+                {
+                    actualWegith += Row->weight;
+
+                    _enemyRef->GetMesh()->SetSkeletalMesh(Row->enemyMesh.LoadSynchronous());
+                    _enemyRef->GetMesh()->SetRelativeLocation(Row->MeshPosition);
+                    _enemyRef->GetMesh()->SetAnimInstanceClass(Row->animationBlueprint);
+                    _enemyRef->TDSetAnimMontaje(Row->animationMontaje.LoadSynchronous());
+                    _enemyRef->statsDatatable = Row->gasDataTable;
+                    _enemyRef->movementVariation = Row->movementVariation;
+                    _enemyRef->GetCapsuleComponent()->SetCapsuleRadius(Row->capsuleRadius);
+                    _enemyRef->GetCapsuleComponent()->SetCapsuleHalfHeight(Row->capsuleHeight);
+                    _enemyRef->abiliyList = Row->abiliyList;
+                    ATDEnemyController* enemyController = _enemyRef->GetController<ATDEnemyController>();
+                    enemyController->RunBehaviorTree(Row->behaviorTree.LoadSynchronous());
+
+                    _enemyRef->TDSetActive();
+
+                }
+            }
+        }
+    }
+}
 

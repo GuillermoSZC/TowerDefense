@@ -9,6 +9,7 @@
 class UWorld;
 class ATDEnemy;
 class UTDGameplayEventData;
+class UTDWeightManager;
 
 
 
@@ -36,6 +37,7 @@ public:
 	static UPROPERTY(Transient) TArray<ATDSpawner*> spawnerArray;
 	static UPROPERTY(Transient) UTDGameplayEventData* abilityData;
 	static UPROPERTY(Transient) ATDBase* baseRef;
+	static UPROPERTY(Transient) UTDWeightManager* weightManagerRef;
 
 
 
@@ -54,6 +56,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
     static void TDAddEnmemyToArray(ATDEnemy* _ActualEnemy);
+
+    UFUNCTION(BlueprintCallable)
+    static void TDRemoveEnmemyToArray(ATDEnemy* _ActualEnemy);
 
 	UFUNCTION(BlueprintPure)
     static UTDGameplayEventData* TDGetAbilityStrcut();
@@ -77,11 +82,23 @@ public:
         static void TDSetBaseActor(ATDBase* _baseRef);
 
 
+    UFUNCTION(BlueprintPure)
+        static UTDWeightManager* TDGetWeightManager();
+
+    UFUNCTION()
+        static void TDSetWeightManager(UTDWeightManager* _weightManagerRef);
+
+
 
 	UFUNCTION()
 	static void TDaddSpawnerActor(ATDSpawner* _spawnerRef);
 
 	UFUNCTION()
 	static ATDSpawner* TDGetSpanwerActor();
+
+	//Debug
+	UFUNCTION(BlueprintCallable)
+	static void TDSpawnEnemyDebug();
+
 
 };

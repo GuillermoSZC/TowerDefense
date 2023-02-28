@@ -31,6 +31,13 @@ public:
 	UFUNCTION(BlueprintNativeEvent,BlueprintCallable)
 	void TDResetAttackTimer();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	UAnimMontage* TDGetSketalMeshMontage();
+
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+        void TDCharacterDeath();
+
+
 	//Este solo se puede implementar en BP
 //     UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 //         const bool TGGApplyEffect2() const;

@@ -16,6 +16,7 @@ class TOWERDEFENSE_API ATDObjectPooler : public AActor
 private:
 
     ATDObjectPooler();
+    ~ATDObjectPooler();
 
 
 public:
@@ -23,21 +24,31 @@ public:
     UPROPERTY(EditAnywhere)
         TArray<TSubclassOf<ATDEnemy>> enemiesClasses;
 
+    UPROPERTY(EditAnywhere)
+    int32 InitialSpawn = 5;
+
 
 protected:
 
 private:
 
-   
-        static  UPROPERTY(Transient) ATDObjectPooler* OwnerPooler;
+
+    static  UPROPERTY(Transient) ATDObjectPooler* OwnerPooler;
 
 
 
-//     UPROPERTY(Transient)
-//         TArray<ATDEnemy*> activeEnemies;
-// 
-//     UPROPERTY(Transient)
-//         TArray<ATDEnemy*> deactivatedenemies;
+    UPROPERTY(Transient)
+        TArray<ATDEnemy*> disabledEnemies;
+
+    UPROPERTY(Transient)
+        TArray<ATDEnemy*> activeEnemies;
+
+
+    //     UPROPERTY(Transient)
+    //         TArray<ATDEnemy*> activeEnemies;
+    // 
+    //     UPROPERTY(Transient)
+    //         TArray<ATDEnemy*> deactivatedenemies;
 
 
 public:
@@ -45,7 +56,11 @@ public:
 
     static ATDObjectPooler* TDGetObjectPooler(TSubclassOf<ATDObjectPooler> _classRef);
 
+    static ATDObjectPooler* TDGetObjectPooler();
 
+    ATDEnemy* TDGetEnemyFromPool();
+
+    void TDAddEnemyToPool(ATDEnemy* _enemyRef);
 
 
 protected:

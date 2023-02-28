@@ -6,6 +6,8 @@
 #include "TDObjectPooler.h"
 #include "Gas/TDGameplayEventData.h"
 #include "TDWeightManager.h"
+#include "Engine/DataTable.h"
+
 
 ATDGameMode::ATDGameMode()
 {
@@ -25,9 +27,10 @@ void ATDGameMode::StartPlay()
     ATDObjectPooler* objectPooler = ATDObjectPooler::TDGetObjectPooler(objectPoolerClass);
 
     UTDWeightManager* weightManager = NewObject<UTDWeightManager>(UTDWeightManager::StaticClass());
-
-    weightManager->StartSpawn(EnemyClass);
-
+    UTDGameData::TDSetWeightManager(weightManager);
+    weightManager->TDSetDataTable(statsDatatable);
+    //weightManager->TDStartSpawn(EnemyClass);
+    
 
 }
 

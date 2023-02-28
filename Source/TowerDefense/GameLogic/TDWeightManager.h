@@ -23,7 +23,12 @@ private:
 public:
 
 	UPROPERTY(EditAnywhere)
-	int WeightPerRound = 1;
+	int32 WeightPerRound = 1;
+
+
+    UPROPERTY(EditAnywhere)
+        int32 ActualRound = 9;
+
 
 protected:
 
@@ -31,6 +36,12 @@ private:
 
 	static UPROPERTY(Transient) UTDWeightManager* weightManager;
 
+
+    UPROPERTY(Transient)
+        UDataTable* enemiesDatatable;
+
+	UPROPERTY()
+	int32 actualWegith = 0;
 public:
 
 	UFUNCTION()
@@ -38,7 +49,10 @@ public:
 
 
 	UFUNCTION()
-	void StartSpawn(TSubclassOf<ATDEnemy> _enemyClass);
+	void TDStartSpawn();
+
+	UFUNCTION()
+	void TDSetDataTable(UDataTable* _ref);
 
 
 protected:
@@ -46,6 +60,6 @@ protected:
 private:
 
 
-
+	void TDSetEnemyValues(ATDEnemy* _enemyRef);
 	
 };

@@ -5,15 +5,16 @@
 #include "Engine/World.h"
 #include "Gas/TDGameplayEventData.h"
 #include "Character/TDEnemy.h"
+#include "TDObjectPooler.h"
+#include "TDWeightManager.h"
 
 
 UWorld* UTDGameData::gameWorld = nullptr;
 UTDGameplayEventData* UTDGameData::abilityData = nullptr;
 TArray<ATDEnemy*> UTDGameData::enemiesArray;
 TArray<ATDSpawner*> UTDGameData::spawnerArray;
-
 ATDBase* UTDGameData::baseRef = nullptr;
-
+UTDWeightManager* UTDGameData::weightManagerRef = nullptr;
 
 UTDGameData::UTDGameData(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -57,6 +58,15 @@ void UTDGameData::TDAddEnmemyToArray(ATDEnemy* _ActualEnemy)
 
 
 
+
+
+void UTDGameData::TDRemoveEnmemyToArray(ATDEnemy* _ActualEnemy)
+{
+    if (enemiesArray.Contains(_ActualEnemy))
+    {
+        enemiesArray.Remove(_ActualEnemy);
+    }
+}
 
 
 UTDGameplayEventData* UTDGameData::TDGetAbilityStrcut()
@@ -132,6 +142,16 @@ void UTDGameData::TDSetBaseActor(ATDBase* _baseRef)
 
 
 
+UTDWeightManager* UTDGameData::TDGetWeightManager()
+{
+    return weightManagerRef;
+}
+
+void UTDGameData::TDSetWeightManager(UTDWeightManager* _weightManagerRef)
+{
+    weightManagerRef = _weightManagerRef;
+}
+
 void UTDGameData::TDaddSpawnerActor(ATDSpawner* _spawnerRef)
 {
     spawnerArray.Add(_spawnerRef);
@@ -145,5 +165,10 @@ ATDSpawner* UTDGameData::TDGetSpanwerActor()
     return spawnerArray[x];
 
 
+}
+
+void UTDGameData::TDSpawnEnemyDebug()
+{
+    weightManagerRef->TDStartSpawn();
 }
 

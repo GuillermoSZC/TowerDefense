@@ -8,6 +8,7 @@
 #include "TDGameMode.generated.h"
 
 class ATDEnemy;
+class UDataTable;
 
 /**
  * 
@@ -30,7 +31,8 @@ public:
         TSubclassOf<ATDEnemy> EnemyClass;
 
 
-
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+        UDataTable* statsDatatable;
 
 protected:
 	

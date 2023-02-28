@@ -19,6 +19,9 @@ class TOWERDEFENSE_API ATDEnemy : public ATDPlayerCharacter
 public:
     ATDEnemy();
 
+
+
+
 public:
 
 
@@ -68,7 +71,13 @@ private:
     UPROPERTY(Transient)
         const UTDEnemyAttributeSet* EnemyAttributes;
 
+    UPROPERTY()
+    bool isActive = false;
 
+
+
+    UPROPERTY(Transient)
+    UAnimMontage* montageRef = nullptr;
 
 
 public:
@@ -85,9 +94,23 @@ public:
     UFUNCTION(BlueprintCallable)
         void TDSetPath(ATDPathPoint* _pathPointRef);
 
-
     UFUNCTION()
         ATDPathPoint* TDGetNextPathPoint();
+
+
+    UFUNCTION()
+    void TDSetAnimMontaje(UAnimMontage* _montageRef);
+
+    virtual UAnimMontage* TDGetSketalMeshMontage_Implementation() override;
+
+
+    UFUNCTION()
+    void TDSetActive();
+
+    UFUNCTION()
+    void TDSetDisable();
+
+    virtual void TDCharacterDeath_Implementation() override;
 
 
 protected:

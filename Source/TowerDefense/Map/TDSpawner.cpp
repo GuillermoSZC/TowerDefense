@@ -7,6 +7,7 @@
 #include "Character/TDEnemy.h"
 #include "Character/TDEnemyController.h"
 #include "AIModule/Classes/BehaviorTree/BlackboardComponent.h"
+#include "Components/CapsuleComponent.h"
 
 
 
@@ -37,13 +38,8 @@ void ATDSpawner::Tick(float DeltaTime)
 void ATDSpawner::TDSpawnEnemy(ATDEnemy* _enemyRef)
 {
 
-	AController* cosa = _enemyRef->GetController();
 
 	ATDEnemyController* enemyController =_enemyRef->GetController<ATDEnemyController>();
-
-/*	enemyController->waypointRef = firstWaypoint;*/
-
-
     UBlackboardComponent* blackboard = enemyController->GetBlackboardComponent();
 
 
@@ -54,7 +50,10 @@ void ATDSpawner::TDSpawnEnemy(ATDEnemy* _enemyRef)
         _enemyRef->TDSetPath(firstWaypoint);
 	}
 
-	_enemyRef->SetActorLocation(GetActorLocation());
+
+	FVector spawnerPos = GetActorLocation();
+	spawnerPos.Z += _enemyRef->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+	_enemyRef->SetActorLocation(spawnerPos);
 	
 
    

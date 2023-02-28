@@ -8,6 +8,10 @@
 #include "GameLogic/TDPathPoint.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Map/TDBase.h"
+#include "Components/CapsuleComponent.h"
+#include "TDEnemyController.h"
+#include "AIModule/Classes/BrainComponent.h"
+#include "GameLogic/TDObjectPooler.h"
 
 
 ATDEnemy::ATDEnemy()
@@ -22,22 +26,28 @@ ATDEnemy::ATDEnemy()
 
 }
 
+void ATDEnemy::TDCharacterDeath_Implementation()
+{
+    ATDObjectPooler::TDGetObjectPooler()->TDAddEnemyToPool(this);
+}
+
+UAnimMontage* ATDEnemy::TDGetSketalMeshMontage_Implementation()
+{
+    return montageRef;
+}
+
 void ATDEnemy::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-
-    if (tickCounterTime >= refreshPathTime)
+    if (isActive)
     {
-        pathDsitance = TDCalculatePathDistance();
-
-        tickCounterTime -= refreshPathTime;
-
+        if (tickCounterTime >= refreshPathTime)
+        {
+            pathDsitance = TDCalculatePathDistance();
+            tickCounterTime -= refreshPathTime;
+        }
+        tickCounterTime += DeltaTime;
     }
-
-    GEngine->AddOnScreenDebugMessage(0, 0.f, FColor::Orange, FString::SanitizeFloat(pathDsitance));
-
-    tickCounterTime += DeltaTime;
-
 }
 
 float ATDEnemy::TDCalculatePathDistance()
@@ -95,16 +105,8 @@ void ATDEnemy::TDSetPath(ATDPathPoint* _pathPointRef)
     }
 }
 
-
-
-
-
-
-
 ATDPathPoint* ATDEnemy::TDGetNextPathPoint()
 {
-
-
     if (!PathPointsArray.IsEmpty())
     {
         PathPointsArray.RemoveAt(0);
@@ -116,45 +118,68 @@ ATDPathPoint* ATDEnemy::TDGetNextPathPoint()
     return nullptr;
 }
 
+
+
+void ATDEnemy::TDSetAnimMontaje(UAnimMontage* _montageRef)
+{
+    montageRef = _montageRef;
+}
+
+void ATDEnemy::TDSetActive()
+{
+    isActive = true;
+    TDInitialize();
+    UTDGameData::TDAddEnmemyToArray(this);
+    ATDEnemyController* controllerRef = GetController<ATDEnemyController>();
+    controllerRef->GetBrainComponent()->StartLogic();
+    GetMesh()->SetVisibility(true, true);
+    GetCapsuleComponent()->SetCollisionProfileName(FName(TEXT("EnemyPawn")));
+    GetCharacterMovement()->GravityScale = 1.f;
+}
+
+void ATDEnemy::TDSetDisable()
+{
+    isActive = false;
+    abilitySystem->ClearAllAbilities();
+    abilitySystem->RemoveAllSpawnedAttributes();
+    UTDGameData::TDRemoveEnmemyToArray(this);
+    ATDEnemyController* controllerRef = GetController<ATDEnemyController>();
+    controllerRef->GetBrainComponent()->StopLogic(FString::SanitizeFloat(5.f));    
+    GetMesh()->SetVisibility(false, true);
+    GetCapsuleComponent()->SetCollisionProfileName(FName(TEXT("NoCollision")));
+    GetCharacterMovement()->GravityScale = 0.f;
+    SetActorLocation(FVector(0.f,0.f,-10000.f));
+}
+
 void ATDEnemy::BeginPlay()
 {
     Super::BeginPlay();
 
-    TDInitialize();
+   
 }
 
 void ATDEnemy::TDInitialize()
-{
-
-    UTDGameData::TDAddEnmemyToArray(this);
-
-
+{  
     const UAttributeSet* attributesInit = abilitySystem->InitStats(UTDEnemyAttributeSet::StaticClass(), statsDatatable);
     EnemyAttributes = Cast<UTDEnemyAttributeSet>(attributesInit);
-
     for (size_t i = 0; i < abiliyList.Num(); ++i)
     {
         FGameplayAbilitySpecHandle specHandle = abilitySystem->GiveAbility(FGameplayAbilitySpec(abiliyList[i].GetDefaultObject(), 1, 0));
     }
-
     float randomValue = FMath::FRandRange(-movementVariation, movementVariation);
     GetCharacterMovement()->MaxWalkSpeed = EnemyAttributes->GetmovementSpeed() + randomValue;
-
 
     TDActivateDelegates();
 }
 
 void ATDEnemy::TDActivateDelegates()
 {
-
     abilitySystem->GetGameplayAttributeValueChangeDelegate(EnemyAttributes->GethealthAttribute()).AddUObject(this, &ATDEnemy::TDHealthChanged);
     abilitySystem->GetGameplayAttributeValueChangeDelegate(EnemyAttributes->GetmaxHealthAttribute()).AddUObject(this, &ATDEnemy::TDmaxHealthChanged);
     abilitySystem->GetGameplayAttributeValueChangeDelegate(EnemyAttributes->GetattackDamageAttribute()).AddUObject(this, &ATDEnemy::TDAttackDamageChanged);
     abilitySystem->GetGameplayAttributeValueChangeDelegate(EnemyAttributes->GetattackRangeAttribute()).AddUObject(this, &ATDEnemy::TDAttackRangeChanged);
     abilitySystem->GetGameplayAttributeValueChangeDelegate(EnemyAttributes->GetattackSpeedAttribute()).AddUObject(this, &ATDEnemy::TDAttackSpeedChanged);
     abilitySystem->GetGameplayAttributeValueChangeDelegate(EnemyAttributes->GetmovementSpeedAttribute()).AddUObject(this, &ATDEnemy::TDMovementSpeedChanged);
-
-
 }
 
 void ATDEnemy::TDmaxHealthChanged(const FOnAttributeChangeData& Data)
