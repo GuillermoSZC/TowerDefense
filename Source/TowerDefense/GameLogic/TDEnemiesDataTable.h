@@ -24,6 +24,9 @@ public:
         FVector MeshPosition = FVector::ZeroVector;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        FVector MeshScale = FVector(1.f);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     float capsuleHeight = 130.f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)

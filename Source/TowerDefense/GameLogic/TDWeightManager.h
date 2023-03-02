@@ -45,7 +45,7 @@ private:
 public:
 
 	UFUNCTION()
-	UTDWeightManager* TDGetWeightManager();
+	static UTDWeightManager* TDGetWeightManager();
 
 
 	UFUNCTION()

@@ -30,7 +30,9 @@ UTDWeightManager* UTDWeightManager::TDGetWeightManager()
     {
         UWorld* actualWorld = UTDGameData::TDGetWorld();
         FActorSpawnParameters paramet;
-        weightManager = actualWorld->SpawnActor<UTDWeightManager>();
+        //weightManager = actualWorld->SpawnActor<UTDWeightManager>();
+        
+        weightManager = NewObject<UTDWeightManager>(UTDWeightManager::StaticClass(), FName(TEXT("WeightManager")), EObjectFlags::RF_MarkAsRootSet);
     }
 
     return weightManager;
@@ -91,6 +93,7 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
 
                     _enemyRef->GetMesh()->SetSkeletalMesh(Row->enemyMesh.LoadSynchronous());
                     _enemyRef->GetMesh()->SetRelativeLocation(Row->MeshPosition);
+                    _enemyRef->GetMesh()->SetRelativeScale3D(Row->MeshScale);
                     _enemyRef->GetMesh()->SetAnimInstanceClass(Row->animationBlueprint);
                     _enemyRef->TDSetAnimMontaje(Row->animationMontaje.LoadSynchronous());
                     _enemyRef->statsDatatable = Row->gasDataTable;
