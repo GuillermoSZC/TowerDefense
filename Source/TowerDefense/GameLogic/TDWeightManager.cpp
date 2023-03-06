@@ -30,39 +30,56 @@ UTDWeightManager* UTDWeightManager::TDGetWeightManager()
     {
         UWorld* actualWorld = UTDGameData::TDGetWorld();
         FActorSpawnParameters paramet;
-        weightManager = actualWorld->SpawnActor<UTDWeightManager>();
+        //weightManager = actualWorld->SpawnActor<UTDWeightManager>();
+
+        weightManager = NewObject<UTDWeightManager>(UTDWeightManager::StaticClass(), FName(TEXT("WeightManager")), EObjectFlags::RF_MarkAsRootSet);
     }
 
     return weightManager;
 
 }
 
+void UTDWeightManager::TDSetActualRound(int32& _atualRound)
+{
+    ActualRound = _atualRound;
+    WeightPerRound = ActualRound * 10;
+    actualWegith = 0;
+    licheCounter = 0;
 
+}
 
 void UTDWeightManager::TDStartSpawn()
 {
-    actualWegith = 0;
+    if (actualWegith >= WeightPerRound)
+    {
+        ATDRoundManager::TDGetRoundManager()->TDStopRound();
+        GEngine->AddOnScreenDebugMessage(0, 5.f, FColor::Orange, FString::FromInt(actualWegith));
+        return;
+    }
 
-    //while (actualWegith < WeightPerRound)
-    //{
     UWorld* actualWorld = UTDGameData::TDGetWorld();
 
-    ATDEnemy* actualEnemy = ATDObjectPooler::TDGetObjectPooler()->TDGetEnemyFromPool();
 
-    //actualWegith += 1;
+    ATDObjectPooler* objectRef = ATDObjectPooler::TDGetObjectPooler();
+    ensure(objectRef);
+
+    ATDEnemy* actualEnemy = objectRef->TDGetEnemyFromPool();
+
     if (actualEnemy)
     {
         TDSetEnemyValues(actualEnemy);
         ATDSpawner* spawnerRef = UTDGameData::TDGetSpanwerActor();
         spawnerRef->TDSpawnEnemy(actualEnemy);
     }
-    //}
+
 }
 
 void UTDWeightManager::TDSetDataTable(UDataTable* _ref)
 {
     enemiesDatatable = _ref;
 }
+
+
 
 void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
 {
@@ -81,6 +98,19 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
             FName selectedenemy = RowNames[x];
 
             Row = enemiesDatatable->FindRow<FTDEnemiesDataTable>(selectedenemy, ContextString, true);
+
+            //provisional, cambiar a algo mas escalable 
+            if (licheCounter == 3)
+            {
+                return;
+            }
+
+            if (selectedenemy == FName(TEXT("Lich")) && licheCounter < 3)
+            {
+                ++licheCounter;
+            }
+
+
             if (Row)
             {
                 loop = ActualRound >= Row->firstPossibleApperance && WeightPerRound >= actualWegith + Row->weight;
@@ -91,6 +121,7 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
 
                     _enemyRef->GetMesh()->SetSkeletalMesh(Row->enemyMesh.LoadSynchronous());
                     _enemyRef->GetMesh()->SetRelativeLocation(Row->MeshPosition);
+                    _enemyRef->GetMesh()->SetRelativeScale3D(Row->MeshScale);
                     _enemyRef->GetMesh()->SetAnimInstanceClass(Row->animationBlueprint);
                     _enemyRef->TDSetAnimMontaje(Row->animationMontaje.LoadSynchronous());
                     _enemyRef->statsDatatable = Row->gasDataTable;

@@ -26,10 +26,13 @@ void ATDGameMode::StartPlay()
     UTDGameData::TDSetAbilityStruct(NewObject<UTDGameplayEventData>(UTDGameplayEventData::StaticClass()));
     ATDObjectPooler* objectPooler = ATDObjectPooler::TDGetObjectPooler(objectPoolerClass);
 
-    UTDWeightManager* weightManager = NewObject<UTDWeightManager>(UTDWeightManager::StaticClass());
+    UTDWeightManager* weightManager = UTDWeightManager::TDGetWeightManager();
     UTDGameData::TDSetWeightManager(weightManager);
     weightManager->TDSetDataTable(statsDatatable);
     //weightManager->TDStartSpawn(EnemyClass);
+
+    ATDRoundManager::TDGetRoundManager();
+
     
 
 }
