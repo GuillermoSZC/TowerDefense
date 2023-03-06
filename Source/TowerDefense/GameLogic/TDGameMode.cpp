@@ -30,6 +30,9 @@ void ATDGameMode::StartPlay()
     UTDGameData::TDSetWeightManager(weightManager);
     weightManager->TDSetDataTable(statsDatatable);
     //weightManager->TDStartSpawn(EnemyClass);
+
+    ATDRoundManager::TDGetRoundManager();
+
     
 
 }

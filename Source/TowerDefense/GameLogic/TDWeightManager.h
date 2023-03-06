@@ -42,6 +42,10 @@ private:
 
 	UPROPERTY()
 	int32 actualWegith = 0;
+
+	UPROPERTY()
+	int8 licheCounter;
+
 public:
 
 	UFUNCTION()
@@ -53,6 +57,10 @@ public:
 
 	UFUNCTION()
 	void TDSetDataTable(UDataTable* _ref);
+
+
+	UFUNCTION()
+	void TDSetActualRound(int32& _atualRound);
 
 
 protected:
