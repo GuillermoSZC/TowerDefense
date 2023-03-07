@@ -44,6 +44,8 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
         int32 firstPossibleApperance;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        int32 limitEnemiesPerRound;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
         UDataTable* gasDataTable;

@@ -29,6 +29,8 @@ public:
     UPROPERTY(EditAnywhere)
         int32 ActualRound = 9;
 
+	TMap<int8, int32> enemiesPerClass;
+
 
 protected:
 
@@ -60,7 +62,7 @@ public:
 
 
 	UFUNCTION()
-	void TDSetActualRound(int32& _atualRound);
+	int32 TDSetActualRound(int32& _atualRound);
 
 
 protected:

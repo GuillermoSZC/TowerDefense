@@ -39,13 +39,14 @@ UTDWeightManager* UTDWeightManager::TDGetWeightManager()
 
 }
 
-void UTDWeightManager::TDSetActualRound(int32& _atualRound)
+int32 UTDWeightManager::TDSetActualRound(int32& _atualRound)
 {
     ActualRound = _atualRound;
     WeightPerRound = ActualRound * 10;
     actualWegith = 0;
     licheCounter = 0;
-
+    enemiesPerClass.Empty();
+    return WeightPerRound;
 }
 
 void UTDWeightManager::TDStartSpawn()
@@ -99,24 +100,42 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
 
             Row = enemiesDatatable->FindRow<FTDEnemiesDataTable>(selectedenemy, ContextString, true);
 
-            //provisional, cambiar a algo mas escalable 
-            if (licheCounter == 3)
-            {
-                return;
-            }
-
-            if (selectedenemy == FName(TEXT("Lich")) && licheCounter < 3)
-            {
-                ++licheCounter;
-            }
+//             //provisional, cambiar a algo mas escalable 
+//             if (licheCounter == 3)
+//             {
+//                 return;
+//             }
+// 
+//             if (selectedenemy == FName(TEXT("Lich")) && licheCounter < 3)
+//             {
+//                 ++licheCounter;
+//             }
 
 
             if (Row)
             {
                 loop = ActualRound >= Row->firstPossibleApperance && WeightPerRound >= actualWegith + Row->weight;
 
+                if (Row->limitEnemiesPerRound >= 1)
+                {
+                    if (enemiesPerClass.Contains(x))
+                    {
+                        loop = Row->limitEnemiesPerRound > enemiesPerClass[x];
+                    }
+                }
+                
                 if (loop)
                 {
+                    if (enemiesPerClass.Contains(x))
+                    {
+                        enemiesPerClass[x] = enemiesPerClass[x] + 1;
+                    }
+                    else
+                    {
+                        enemiesPerClass.Add(x, 1);
+
+                    }
+
                     actualWegith += Row->weight;
 
                     _enemyRef->GetMesh()->SetSkeletalMesh(Row->enemyMesh.LoadSynchronous());
@@ -129,6 +148,7 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
                     _enemyRef->GetCapsuleComponent()->SetCapsuleRadius(Row->capsuleRadius);
                     _enemyRef->GetCapsuleComponent()->SetCapsuleHalfHeight(Row->capsuleHeight);
                     _enemyRef->abiliyList = Row->abiliyList;
+                    _enemyRef->unitWeight = Row->weight;
                     ATDEnemyController* enemyController = _enemyRef->GetController<ATDEnemyController>();
                     enemyController->RunBehaviorTree(Row->behaviorTree.LoadSynchronous());
 

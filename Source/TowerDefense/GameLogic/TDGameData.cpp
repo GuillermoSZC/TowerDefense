@@ -65,6 +65,8 @@ void UTDGameData::TDRemoveEnmemyToArray(ATDEnemy* _ActualEnemy)
     if (enemiesArray.Contains(_ActualEnemy))
     {
         enemiesArray.Remove(_ActualEnemy);
+
+        ATDRoundManager::TDGetRoundManager()->TDEnemyKillWeight(_ActualEnemy->unitWeight);
     }
 }
 

@@ -34,11 +34,15 @@ protected:
 
 private:
 
-	int32 actualRound = 20;
+	int32 killedWegith = 0;
+
+	int32 RoundWeight = 0;
+
+	int32 actualRound = 4;
 
 	float timeRound = 0;
 
-	float timeperSpawn = 0.5f;
+	float timeperSpawn = 0.7f;
 
 	static ATDRoundManager* managerRef;
 
@@ -54,6 +58,10 @@ public:
 	static ATDRoundManager* TDGetRoundManager();
 
 	virtual void Tick(float DeltaSeconds) override;
+
+
+	void TDEnemyKillWeight(int32& _weight);
+
 
 protected:
 

@@ -34,7 +34,8 @@ void ATDRoundManager::TDStartRound()
     ++actualRound;
     isSawning = true;
     timeRound = timeperSpawn;
-    UTDWeightManager::TDGetWeightManager()->TDSetActualRound(actualRound);
+    RoundWeight= UTDWeightManager::TDGetWeightManager()->TDSetActualRound(actualRound);
+    killedWegith = 0;
 }
 
 void ATDRoundManager::TDStopRound()
@@ -76,5 +77,19 @@ void ATDRoundManager::Tick(float DeltaSeconds)
 
     
 
+
+}
+
+void ATDRoundManager::TDEnemyKillWeight(int32& _weight)
+{
+
+    killedWegith += _weight;
+
+    if (killedWegith >= RoundWeight)
+    {
+
+        GEngine->AddOnScreenDebugMessage(0,5.f,FColor::Yellow,"Todos muertos");
+
+    }
 
 }
