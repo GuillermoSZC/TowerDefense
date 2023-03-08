@@ -22,6 +22,9 @@ public:
 
 
 
+
+   
+
 public:
 
 
@@ -100,6 +103,8 @@ public:
     UFUNCTION()
         ATDPathPoint* TDGetNextPathPoint();
 
+    UFUNCTION()
+    virtual UTDElementComponent* TDGetElementComponent_Implementation() override;
 
     UFUNCTION()
     void TDSetAnimMontaje(UAnimMontage* _montageRef);

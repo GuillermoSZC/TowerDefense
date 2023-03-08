@@ -38,6 +38,10 @@ public:
         void TDCharacterDeath();
 
 
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+        UTDElementComponent* TDGetElementComponent();
+
+
 	//Este solo se puede implementar en BP
 //     UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 //         const bool TGGApplyEffect2() const;

@@ -38,6 +38,7 @@ public:
 	static UPROPERTY(Transient) UTDGameplayEventData* abilityData;
 	static UPROPERTY(Transient) ATDBase* baseRef;
 	static UPROPERTY(Transient) UTDWeightManager* weightManagerRef;
+	static UPROPERTY(Transient) ATDGameMode* GameModeRef;
 
 
 
@@ -95,6 +96,13 @@ public:
 
 	UFUNCTION()
 	static ATDSpawner* TDGetSpanwerActor();
+
+	UFUNCTION()
+	static ATDGameMode* TDGetGameMode();
+
+    UFUNCTION()
+        static void TDSetGameMode(ATDGameMode* _gameModeRef);
+
 
 	//Debug
 	UFUNCTION(BlueprintCallable)

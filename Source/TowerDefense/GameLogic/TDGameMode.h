@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "TDObjectPooler.h"
 #include "ElementsEnum.h"
+#include "TDRoundManager.h"
 #include "TDGameMode.generated.h"
 
 class ATDEnemy;
@@ -27,6 +28,9 @@ public:
 
     UPROPERTY(EditDefaultsOnly)
         TSubclassOf<ATDObjectPooler> objectPoolerClass;
+
+    UPROPERTY(EditDefaultsOnly)
+        TSubclassOf<ATDRoundManager> RoundManagerClass;
 
     UPROPERTY(EditDefaultsOnly)
         TSubclassOf<ATDEnemy> EnemyClass;

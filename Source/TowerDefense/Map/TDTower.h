@@ -24,11 +24,16 @@ public:
     // Sets default values for this actor's properties
     ATDTower();  
 
+
+    virtual UTDElementComponent* TDGetElementComponent_Implementation() override;
+
 public:
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
         UDataTable* statsDatatable;
 
+
+    UTDElementComponent* elementComponent = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
         TArray<TSubclassOf<class UGameplayAbility>> abiliyList;

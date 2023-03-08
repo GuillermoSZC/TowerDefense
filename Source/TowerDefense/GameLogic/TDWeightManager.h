@@ -48,6 +48,8 @@ private:
 	UPROPERTY()
 	int8 licheCounter;
 
+	TArray<EElements> actualRoundElements;
+
 public:
 
 	UFUNCTION()
@@ -62,7 +64,7 @@ public:
 
 
 	UFUNCTION()
-	int32 TDSetActualRound(int32& _atualRound);
+	int32 TDSetActualRound(int32& _atualRound, TArray<EElements> _roundElement);
 
 
 protected:

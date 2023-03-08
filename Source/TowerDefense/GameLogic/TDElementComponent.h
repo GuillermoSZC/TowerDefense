@@ -27,14 +27,15 @@ protected:
 
 private:
 
+	UPROPERTY(VisibleAnywhere)
 	EElements ownerElement = EElements::None;
 
-    UPROPERTY(Transient)
-        UTDElement* SpawnedElementData;
+	UPROPERTY(VisibleAnywhere)        
+		UTDElement* SpawnedElementData;
 
 
-    UPROPERTY(Transient)
-        UTDElement* TemporalElementData;
+	UPROPERTY(VisibleAnywhere)        
+		UTDElement* TemporalElementData;
 
 
 public:	

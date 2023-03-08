@@ -20,7 +20,13 @@ ATDTower::ATDTower()
 
 
 	abilitySystem = CreateDefaultSubobject<UAbilitySystemComponent>("AbilityComponent");
+	elementComponent = CreateDefaultSubobject<UTDElementComponent>("ElementComponent");
 
+}
+
+UTDElementComponent* ATDTower::TDGetElementComponent_Implementation()
+{
+	return elementComponent;
 }
 
 void ATDTower::TDResetAttackTimer_Implementation()

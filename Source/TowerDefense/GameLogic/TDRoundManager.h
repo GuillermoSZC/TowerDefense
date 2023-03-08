@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "TDRoundManager.generated.h"
 
+class UTDRoundElementsType;
+
 /**
  * 
  */
@@ -23,7 +25,8 @@ private:
 
 public:
 
-
+	UPROPERTY(EditAnywhere, Instanced)
+	TArray<UTDRoundElementsType*> RoundElements;
 
 
 protected:
@@ -48,6 +51,9 @@ private:
 
 	bool isSawning = false;
 
+	TArray<EElements> actualRoundElements;
+
+
 public:
 	UFUNCTION(BlueprintCallable)
 	void TDStartRound();
@@ -56,6 +62,8 @@ public:
         void TDStopRound();
 
 	static ATDRoundManager* TDGetRoundManager();
+
+	static ATDRoundManager* TDGetRoundManager(TSubclassOf<ATDRoundManager> _classRef);
 
 	virtual void Tick(float DeltaSeconds) override;
 

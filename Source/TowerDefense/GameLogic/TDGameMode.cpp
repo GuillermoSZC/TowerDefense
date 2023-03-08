@@ -31,6 +31,7 @@ void ATDGameMode::StartPlay()
 {
     Super::StartPlay();
   
+    UTDGameData::TDSetGameMode(this);
 
 
     UWorld* world = GetWorld();
@@ -38,6 +39,10 @@ void ATDGameMode::StartPlay()
 
     UTDGameData::TDSetAbilityStruct(NewObject<UTDGameplayEventData>(UTDGameplayEventData::StaticClass()));
     ATDObjectPooler* objectPooler = ATDObjectPooler::TDGetObjectPooler(objectPoolerClass);
+
+
+    ATDRoundManager::TDGetRoundManager(RoundManagerClass);
+
 
     UTDWeightManager* weightManager = UTDWeightManager::TDGetWeightManager();
     UTDGameData::TDSetWeightManager(weightManager);

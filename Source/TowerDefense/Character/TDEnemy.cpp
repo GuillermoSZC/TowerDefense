@@ -27,6 +27,11 @@ ATDEnemy::ATDEnemy()
 
 }
 
+UTDElementComponent* ATDEnemy::TDGetElementComponent_Implementation()
+{
+    return elementComponent;
+}
+
 void ATDEnemy::TDCharacterDeath_Implementation()
 {
     ATDObjectPooler::TDGetObjectPooler()->TDAddEnemyToPool(this);

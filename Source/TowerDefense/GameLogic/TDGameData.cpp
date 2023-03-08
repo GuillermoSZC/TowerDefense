@@ -15,6 +15,7 @@ TArray<ATDEnemy*> UTDGameData::enemiesArray;
 TArray<ATDSpawner*> UTDGameData::spawnerArray;
 ATDBase* UTDGameData::baseRef = nullptr;
 UTDWeightManager* UTDGameData::weightManagerRef = nullptr;
+ATDGameMode* UTDGameData::GameModeRef = nullptr;
 
 UTDGameData::UTDGameData(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -167,6 +168,16 @@ ATDSpawner* UTDGameData::TDGetSpanwerActor()
     return spawnerArray[x];
 
 
+}
+
+ATDGameMode* UTDGameData::TDGetGameMode()
+{
+    return GameModeRef;
+}
+
+void UTDGameData::TDSetGameMode(ATDGameMode* _gameModeRef)
+{
+    GameModeRef = _gameModeRef;
 }
 
 void UTDGameData::TDSpawnEnemyDebug()

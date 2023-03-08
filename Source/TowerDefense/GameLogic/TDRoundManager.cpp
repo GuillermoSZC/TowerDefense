@@ -2,6 +2,7 @@
 
 
 #include "GameLogic/TDRoundManager.h"
+#include "TDRoundElementsType.h"
 
 
 
@@ -34,7 +35,24 @@ void ATDRoundManager::TDStartRound()
     ++actualRound;
     isSawning = true;
     timeRound = timeperSpawn;
-    RoundWeight= UTDWeightManager::TDGetWeightManager()->TDSetActualRound(actualRound);
+
+    actualRoundElements.Empty();
+
+    int x;
+
+    if (actualRound >= RoundElements.Num())
+    {
+         x = actualRound % RoundElements.Num();
+    }
+    else
+    {
+        x = actualRound - 1;
+    }
+
+    RoundElements[x]->TDGetRoundElements(actualRoundElements);
+
+
+    RoundWeight= UTDWeightManager::TDGetWeightManager()->TDSetActualRound(actualRound, actualRoundElements);
     killedWegith = 0;
 }
 
@@ -48,10 +66,18 @@ ATDRoundManager* ATDRoundManager::TDGetRoundManager()
 
     if (managerRef == nullptr)
     {
+        return nullptr;
+    }
+    return managerRef;
+}
+
+ATDRoundManager* ATDRoundManager::TDGetRoundManager(TSubclassOf<ATDRoundManager> _classRef)
+{
+    if (managerRef == nullptr)
+    {
         UWorld* actualWorld = UTDGameData::TDGetWorld();
         FActorSpawnParameters paramet;
-        //OwnerPooler = Cast<ATDObjectPooler>(actualWorld->SpawnActor(ATDObjectPooler::StaticClass()));
-        managerRef = actualWorld->SpawnActor<ATDRoundManager>();
+        managerRef = actualWorld->SpawnActor<ATDRoundManager>(_classRef);
     }
     return managerRef;
 }

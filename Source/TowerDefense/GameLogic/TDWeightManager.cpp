@@ -39,8 +39,10 @@ UTDWeightManager* UTDWeightManager::TDGetWeightManager()
 
 }
 
-int32 UTDWeightManager::TDSetActualRound(int32& _atualRound)
+int32 UTDWeightManager::TDSetActualRound(int32& _atualRound, TArray<EElements> _roundElement)
 {
+    actualRoundElements.Empty();
+    actualRoundElements = _roundElement;
     ActualRound = _atualRound;
     WeightPerRound = ActualRound * 10;
     actualWegith = 0;
@@ -151,6 +153,11 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
                     _enemyRef->unitWeight = Row->weight;
                     ATDEnemyController* enemyController = _enemyRef->GetController<ATDEnemyController>();
                     enemyController->RunBehaviorTree(Row->behaviorTree.LoadSynchronous());
+
+                    int y = FMath::Rand() % actualRoundElements.Num();
+                    UTDElementComponent* temp = ITDInterface::Execute_TDGetElementComponent(_enemyRef);
+
+                    temp->TDSetSpawnedElement(UTDGameData::TDGetGameMode()->TDGetDataAssetFromElement(actualRoundElements[y]));
 
                     _enemyRef->TDSetActive();
 
