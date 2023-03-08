@@ -22,6 +22,7 @@ ATDEnemy::ATDEnemy()
     tickCounterTime = 0.f;
 
     abilitySystem = CreateDefaultSubobject<UAbilitySystemComponent>("AbilityComponent");
+    elementComponent = CreateDefaultSubobject<UTDElementComponent>("ElementComponent");
 
 
 }

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
 #include "TDObjectPooler.h"
+#include "ElementsEnum.h"
 #include "TDGameMode.generated.h"
 
 class ATDEnemy;
@@ -34,6 +35,10 @@ public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
         UDataTable* statsDatatable;
 
+    UPROPERTY(EditDefaultsOnly)
+    TMap<EElements, UTDElement*> elementsDataAssets;
+
+
 protected:
 	
 
@@ -42,6 +47,7 @@ private:
 
 public:
 
+    UTDElement* TDGetDataAssetFromElement(EElements _keyElement);
 
 protected:
 

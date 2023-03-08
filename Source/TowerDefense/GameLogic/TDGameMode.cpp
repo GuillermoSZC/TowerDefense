@@ -12,6 +12,19 @@
 ATDGameMode::ATDGameMode()
 {
     UTDGameData::TDResetGameData();
+
+    elementsDataAssets.Empty();
+
+    elementsDataAssets.Add(EElements::None, nullptr);
+    elementsDataAssets.Add(EElements::Fire, nullptr);
+    elementsDataAssets.Add(EElements::Freeze, nullptr);
+    elementsDataAssets.Add(EElements::Plasma, nullptr);
+
+}
+
+UTDElement* ATDGameMode::TDGetDataAssetFromElement(EElements _keyElement)
+{
+    return elementsDataAssets[_keyElement];
 }
 
 void ATDGameMode::StartPlay()

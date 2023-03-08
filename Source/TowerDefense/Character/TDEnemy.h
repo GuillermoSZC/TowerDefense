@@ -79,6 +79,9 @@ private:
     UPROPERTY(Transient)
     UAnimMontage* montageRef = nullptr;
 
+    UPROPERTY(EditAnywhere)
+    UTDElementComponent* elementComponent = nullptr;
+
 
 public:
     // Called every frame
