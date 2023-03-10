@@ -16,7 +16,10 @@ void UTDText::NativePreConstruct()
 {
     Super::NativePreConstruct();
 
-    customRichText->SetText(useCustomText ? customText : FText::FromString(TEXT("Example Text")));
+    if (customRichText)
+    {
+        customRichText->SetText(useCustomText ? customText : FText::FromString(TEXT("Example Text")));
+    }
 
     if (useCustomTextStyleData)
     {
