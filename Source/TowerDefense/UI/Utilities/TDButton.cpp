@@ -10,6 +10,9 @@ bool UTDButton::Initialize()
 {
     Super::Initialize();
 
+    buttonSizeX = 1;
+    buttonSizeY = 1;
+
     return true;
 }
 
@@ -17,11 +20,10 @@ void UTDButton::NativePreConstruct()
 {
     Super::NativePreConstruct();
 
-//     if (ownerButton)
-//     {
-//         ownerButton->SetBackgroundColor(FLinearColor::FromSRGBColor(FColor::White));
-//         ownerButton->SetRenderOpacity(showButtonBackground ? 1 : 0);
-//     }
+    if (ownerButton)
+    {
+        ownerButton->SetRenderScale(FVector2D(buttonSizeX, buttonSizeY));
+    }
 
     if (textButton)
     {

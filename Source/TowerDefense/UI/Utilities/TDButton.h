@@ -7,12 +7,12 @@
 #include "TDButton.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class TOWERDEFENSE_API UTDButton : public UUserWidget
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
 public:
     virtual bool Initialize() override;
@@ -26,26 +26,27 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UTDText* textButton;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Row Settings|Visual", meta = (InlineEditConditionToggle))
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Button Settings|Visual", meta = (InlineEditConditionToggle))
         bool useCustomTextStyleData;
 
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Row Settings|Visual", meta = (ToolTip = "Edits text style data.", EditCondition = "useCustomTextStyleData"))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Button Settings|Visual", meta = (ToolTip = "Edits text style data.", EditCondition = "useCustomTextStyleData"))
         UDataTable* textStyleData;
 
-     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Row Settings|Visual", meta = (ToolTip = "Edits if background is shown."))
-         bool showButtonBackground;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Button Settings|Visual", meta = (ToolTip = "Edits if background is shown."))
+        bool showButtonBackground;
 
-//     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Row Settings|Visual", meta = (ToolTip = "Animation index when the button is selected.", ClampMin = 0))
-//         int selectionAnimationIndex;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Button Settings|Visual")
+        float buttonSizeX;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Row Settings|Data", meta = (InlineEditConditionToggle))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Button Settings|Visual")
+        float buttonSizeY;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Button Settings|Data", meta = (InlineEditConditionToggle))
         bool useButtonText;
 
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Row Settings|Data", meta = (ToolTip = "Edits button text.", EditCondition = "useButtonText"))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Button Settings|Data", meta = (ToolTip = "Edits button text.", EditCondition = "useButtonText"))
         FText buttonText;
 
-//     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Row Settings|Data", meta = (ToolTip = "Edits button index."))
-//         int buttonIndex;
 
 protected:
 

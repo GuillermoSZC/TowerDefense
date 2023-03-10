@@ -1,25 +1,25 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "UI/Utilities/TDRow.h"
+#include "UI/Utilities/TDRowBase.h"
 
-bool UTDRow::Initialize()
+bool UTDRowBase::Initialize()
 {
     Super::Initialize();
 
     return true;
 }
 
-void UTDRow::NativePreConstruct()
+void UTDRowBase::NativePreConstruct()
 {
     Super::NativePreConstruct();
 
 
 }
 
-void UTDRow::NativeConstruct()
+void UTDRowBase::NativeConstruct()
 {
-    Super::NativeConstruct();
+    Super::NativePreConstruct();
 
 
 }

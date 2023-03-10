@@ -36,6 +36,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Custom properties", meta = (ToolTip = "Edits text style data.", EditCondition = "useCustomTextStyleData"))
         class UDataTable* textStyleData;
 
+
 protected:
 
 

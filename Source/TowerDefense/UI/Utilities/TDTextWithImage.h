@@ -20,8 +20,8 @@ public:
     virtual void NativeConstruct() override;
 
 public:
-    UPROPERTY(BlueprintReadWrite)
-        class UTDText* textElement;
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        class UTDText* elementText;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UImage* ownerImage;
@@ -29,6 +29,20 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class USizeBox* elementBox;
 
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        class UHorizontalBox* settingBox;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Row Settings|Visual", meta = (InlineEditConditionToggle))
+        bool useOverridenWidth;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Row Settings|Visual", meta = (ToolTip = "Overrides row width.", EditCondition = "useOverridenWidth", ClampMin = 300, ClampMax = 1920, UIMin = 300, UIMax = 1920))
+        float overridenWidth;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Row Settings|Visual", meta = (InlineEditConditionToggle))
+        bool useOverridenHeight;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Row Settings|Visual", meta = (ToolTip = "Overrides row height.", EditCondition = "useOverridenHeight", ClampMin = 50, ClampMax = 1080, UIMin = 50, UIMax = 1080))
+        float overridenHeight;
 
 protected:
 
@@ -38,6 +52,12 @@ private:
 
     UPROPERTY()
         int32 quantity;
+
+    UPROPERTY()
+        int32 minWidth = 300;
+
+    UPROPERTY()
+        int32 minHeight = 50;
 
 public:
     UFUNCTION(BlueprintCallable)

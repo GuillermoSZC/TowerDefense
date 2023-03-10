@@ -2,6 +2,7 @@
 
 
 #include "UI/Utilities/TDTextWithImage.h"
+#include "UMG/Public/Components/SizeBox.h"
 
 bool UTDTextWithImage::Initialize()
 {
@@ -10,6 +11,16 @@ bool UTDTextWithImage::Initialize()
     quantity = 0;
     customText = FText::FromString(FString::FromInt(quantity));
 
+    if (overridenWidth < minWidth)
+    {
+        overridenWidth = minWidth;
+    }
+
+    if (overridenHeight < minHeight)
+    {
+        overridenHeight = minHeight;
+    }
+
     return true;
 }
 
@@ -17,17 +28,25 @@ void UTDTextWithImage::NativePreConstruct()
 {
     Super::NativePreConstruct();
 
+    if (elementText)
+    {
+        elementText->TDSetCustomText(customText);
+    }
 
+    if (elementBox)
+    {
+        elementBox->bOverride_MinDesiredWidth = true;
+        elementBox->SetMinDesiredWidth(useOverridenWidth ? overridenWidth : minWidth);
+        elementBox->bOverride_MinDesiredHeight = true;
+        elementBox->SetMinDesiredHeight(useOverridenHeight ? overridenHeight : minHeight);
+    }
 }
 
 void UTDTextWithImage::NativeConstruct()
 {
     Super::NativeConstruct();
 
-    if (textElement)
-    {
-        textElement->TDSetCustomText(customText);
-    }
+
 }
 
 void UTDTextWithImage::TDSetText(FText _text)

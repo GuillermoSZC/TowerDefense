@@ -16,19 +16,18 @@ void UTDText::NativePreConstruct()
 {
     Super::NativePreConstruct();
 
-
-}
-
-void UTDText::NativeConstruct()
-{
-    Super::NativeConstruct();
-
     customRichText->SetText(useCustomText ? customText : FText::FromString(TEXT("Example Text")));
 
     if (useCustomTextStyleData)
     {
         TDSetCustomTextStyle(textStyleData);
     }
+}
+
+void UTDText::NativeConstruct()
+{
+    Super::NativeConstruct();
+
 }
 
 void UTDText::TDSetCustomText(FText _newText)
