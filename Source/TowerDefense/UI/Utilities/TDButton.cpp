@@ -27,7 +27,7 @@ void UTDButton::NativePreConstruct()
 
     if (textButton)
     {
-        textButton->TDSetCustomText(useButtonText ? buttonText : FText::FromString(TEXT("Example <Title>Text</>")));
+        textButton->TDSetCustomText(useButtonText ? buttonText : FText::FromString(TEXT("Button <Title>Text</>")));
     }
 
     if (useCustomTextStyleData)

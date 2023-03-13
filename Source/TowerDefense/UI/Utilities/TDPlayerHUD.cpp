@@ -3,3 +3,23 @@
 
 #include "UI/Utilities/TDPlayerHUD.h"
 
+bool UTDPlayerHUD::Initialize()
+{
+    Super::Initialize();
+
+    return true;
+}
+
+void UTDPlayerHUD::NativePreConstruct()
+{
+    Super::NativePreConstruct();
+
+
+}
+
+void UTDPlayerHUD::NativeConstruct()
+{
+    Super::NativeConstruct();
+
+
+}
