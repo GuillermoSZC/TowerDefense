@@ -107,7 +107,7 @@ void ATDRoundManager::Tick(float DeltaSeconds)
     if (actualPhase == GamePhase::BuyPhase)
     {
 
-        if (timeRound >= timeBuyPhase)
+        if (timeRound <= 0.f)
         {
 
             TDStartRound();
@@ -115,7 +115,7 @@ void ATDRoundManager::Tick(float DeltaSeconds)
         }    
 
         GEngine->AddOnScreenDebugMessage(0, 0.f, FColor::Blue, FString::SanitizeFloat(timeRound));
-        timeRound += DeltaSeconds;
+        timeRound -= DeltaSeconds;
 
     }
 
@@ -132,7 +132,7 @@ void ATDRoundManager::TDEnemyKillWeight(int32& _weight)
 
         GEngine->AddOnScreenDebugMessage(0,5.f,FColor::Yellow,"Todos muertos");
 
-        timeRound = 0.f;
+        timeRound = timeBuyPhase;
 
         actualPhase = GamePhase::BuyPhase;
 
