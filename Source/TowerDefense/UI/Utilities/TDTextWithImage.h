@@ -26,6 +26,9 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UImage* ownerImage;
 
+    UPROPERTY(BlueprintReadWrite, EditAnywhere ,Category = "Appearance|Custom properties")
+        class UTexture2D* customTexture = nullptr;
+
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class USizeBox* elementBox;
 
@@ -71,6 +74,13 @@ public:
 
     UFUNCTION(BlueprintCallable)
         int32 TDGetQuantity();
+
+    UFUNCTION(BlueprintCallable)
+        void TDSetTexture(UTexture2D* _texture);
+
+    UFUNCTION(BlueprintCallable)
+        UTexture2D* TDGetTexture(UTexture2D* _texture);
+        
 
 protected:
 

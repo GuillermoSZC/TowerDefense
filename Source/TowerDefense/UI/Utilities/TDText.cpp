@@ -18,7 +18,7 @@ void UTDText::NativePreConstruct()
 
     if (customRichText)
     {
-        customRichText->SetText(useCustomText ? customText : FText::FromString(TEXT("Example Text")));
+        customRichText->SetText(useCustomText ? customText : FText::FromString(TEXT("Example <Title>Text</>")));
     }
 
     if (useCustomTextStyleData)

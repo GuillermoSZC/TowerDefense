@@ -20,9 +20,8 @@ public:
     virtual void NativeConstruct() override;
 
 public:
-    //  @TODO: PREGUNTAR DISEÑO
     //     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-    //         class NUMERO RONDAS
+    //         class NUMERO RONDAS - contador enemigos
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UImage* firstElement;
@@ -44,10 +43,8 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UTDText* phase;
 
-    // @TODO: BARRA DE VIDA - COMPONENTE NUEVO? - PREGUNTAR DISEÑO
     /**
     *
-    * Elementos de encima de la barra de vida??
     *
     * UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UImage* playerElement;
