@@ -26,6 +26,9 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UImage* ownerImage;
 
+    UPROPERTY(BlueprintReadWrite, EditAnywhere ,Category = "Appearance|Custom properties")
+        class UTexture2D* customTexture = nullptr;
+
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class USizeBox* elementBox;
 
@@ -35,7 +38,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Row Settings|Visual", meta = (InlineEditConditionToggle))
         bool useOverridenWidth;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Row Settings|Visual", meta = (ToolTip = "Overrides row width.", EditCondition = "useOverridenWidth", ClampMin = 300, ClampMax = 1920, UIMin = 300, UIMax = 1920))
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Row Settings|Visual", meta = (ToolTip = "Overrides row width.", EditCondition = "useOverridenWidth", ClampMin = 150, ClampMax = 1920, UIMin = 150, UIMax = 1920))
         float overridenWidth;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Row Settings|Visual", meta = (InlineEditConditionToggle))
@@ -54,7 +57,7 @@ private:
         int32 quantity;
 
     UPROPERTY()
-        int32 minWidth = 300;
+        int32 minWidth = 150;
 
     UPROPERTY()
         int32 minHeight = 50;
@@ -71,6 +74,13 @@ public:
 
     UFUNCTION(BlueprintCallable)
         int32 TDGetQuantity();
+
+    UFUNCTION(BlueprintCallable)
+        void TDSetTexture(UTexture2D* _texture);
+
+    UFUNCTION(BlueprintCallable)
+        UTexture2D* TDGetTexture(UTexture2D* _texture);
+        
 
 protected:
 

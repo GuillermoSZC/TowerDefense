@@ -27,11 +27,14 @@ void ATDRoundManager::BeginPlay()
 {
     Super::BeginPlay();
 
-
+    timeRound = 0.f;
+    actualPhase = GamePhase::BuyPhase;
 }
 
 void ATDRoundManager::TDStartRound()
 {
+
+    actualPhase = GamePhase::CombatPhase;
     ++actualRound;
     isSawning = true;
     timeRound = timeperSpawn;
@@ -87,7 +90,7 @@ void ATDRoundManager::Tick(float DeltaSeconds)
     Super::Tick(DeltaSeconds);
 
 
-    if (isSawning)
+    if (actualPhase == GamePhase::CombatPhase && isSawning)
     {
         if (timeRound >= timeperSpawn)
         {
@@ -101,7 +104,20 @@ void ATDRoundManager::Tick(float DeltaSeconds)
         timeRound += DeltaSeconds;
     }
 
-    
+    if (actualPhase == GamePhase::BuyPhase)
+    {
+
+        if (timeRound <= 0.f)
+        {
+
+            TDStartRound();
+
+        }    
+
+        GEngine->AddOnScreenDebugMessage(0, 0.f, FColor::Blue, FString::SanitizeFloat(timeRound));
+        timeRound -= DeltaSeconds;
+
+    }
 
 
 }
@@ -115,6 +131,10 @@ void ATDRoundManager::TDEnemyKillWeight(int32& _weight)
     {
 
         GEngine->AddOnScreenDebugMessage(0,5.f,FColor::Yellow,"Todos muertos");
+
+        timeRound = timeBuyPhase;
+
+        actualPhase = GamePhase::BuyPhase;
 
     }
 

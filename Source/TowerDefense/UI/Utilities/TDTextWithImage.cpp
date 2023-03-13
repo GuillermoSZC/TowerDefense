@@ -3,6 +3,8 @@
 
 #include "UI/Utilities/TDTextWithImage.h"
 #include "UMG/Public/Components/SizeBox.h"
+#include "UMG/Public/Components/Image.h"
+#include "Engine/Texture2D.h"
 
 bool UTDTextWithImage::Initialize()
 {
@@ -35,10 +37,15 @@ void UTDTextWithImage::NativePreConstruct()
 
     if (elementBox)
     {
-        elementBox->bOverride_MinDesiredWidth = true;
+        // elementBox->bOverride_MinDesiredWidth = true; -- DEPRECATED
         elementBox->SetMinDesiredWidth(useOverridenWidth ? overridenWidth : minWidth);
-        elementBox->bOverride_MinDesiredHeight = true;
+        // elementBox->bOverride_MinDesiredHeight = true; -- DEPRECATED
         elementBox->SetMinDesiredHeight(useOverridenHeight ? overridenHeight : minHeight);
+    }
+
+    if (ownerImage)
+    {
+        ownerImage->SetBrushFromTexture(customTexture);
     }
 }
 
@@ -67,4 +74,14 @@ void UTDTextWithImage::TDSetQuantity(int32 _value)
 int32 UTDTextWithImage::TDGetQuantity()
 {
     return quantity;
+}
+
+void UTDTextWithImage::TDSetTexture(UTexture2D* _texture)
+{
+    customTexture = _texture;
+}
+
+UTexture2D* UTDTextWithImage::TDGetTexture(UTexture2D* _texture)
+{
+    return _texture;
 }
