@@ -80,6 +80,8 @@ public:
     UFUNCTION(BlueprintCallable)
         void TDStopRound();
 
+
+     UFUNCTION(BlueprintPure)
     static ATDRoundManager* TDGetRoundManager();
 
     static ATDRoundManager* TDGetRoundManager(TSubclassOf<ATDRoundManager> _classRef);
