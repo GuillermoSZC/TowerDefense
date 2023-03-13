@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Character/TDPlayerCharacter.h"
+#include "Character/TDCharacter.h"
 #include "GameplayEffectTypes.h"
 
 #include "TDEnemy.generated.h"
@@ -13,7 +13,7 @@ class UTDEnemyAttributeSet;
 class ATDPathPoint;
 
 UCLASS()
-class TOWERDEFENSE_API ATDEnemy : public ATDPlayerCharacter
+class TOWERDEFENSE_API ATDEnemy : public ATDCharacter
 {
     GENERATED_BODY()
 public:

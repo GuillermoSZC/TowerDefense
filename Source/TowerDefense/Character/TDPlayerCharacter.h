@@ -3,28 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
-#include "Interfaces/TDInterface.h"
+#include "Character/TDCharacter.h"
 #include "TDPlayerCharacter.generated.h"
 
+/**
+ * 
+ */
 UCLASS()
-class TOWERDEFENSE_API ATDPlayerCharacter : public ACharacter, public ITDInterface
+class TOWERDEFENSE_API ATDPlayerCharacter : public ATDCharacter
 {
 	GENERATED_BODY()
-
-public:
-	// Sets default values for this character's properties
-	ATDPlayerCharacter();
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	
 };
