@@ -34,11 +34,13 @@ void ATDRoundManager::TDStartBuyPhase()
 {
     timeRound = 0.f;
     actualPhase = GamePhase::BuyPhase;
+    FOnBuyPhaseStartDelegate.Broadcast(actualRound);
 }
 
 void ATDRoundManager::TDStartCombatPhase()
 {
     TDStartRound();
+    FOnCombatPhaseStartDelegate.Broadcast(actualRound);
 }
 
 void ATDRoundManager::TDStartRound()
@@ -146,4 +148,9 @@ void ATDRoundManager::TDEnemyKillWeight(int32& _weight)
 
     }
 
+}
+
+float ATDRoundManager::TDGetTimeRound()
+{
+    return timeRound;
 }

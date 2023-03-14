@@ -18,10 +18,20 @@ public:
     virtual bool Initialize() override;
     virtual void NativePreConstruct() override;
     virtual void NativeConstruct() override;
+    virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
 public:
-    //     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-    //         class NUMERO RONDAS - contador enemigos
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        class UTDText* roundText;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        class UTDText* roundNum;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        class UTDText* enemyText;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        class UTDText* enemyCounter;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UImage* firstElement;
@@ -43,7 +53,7 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UTDText* phase;
 
-    /**
+    /** @TODO: Falta hacer componente de la barra de vida
     *
     *
     * UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
@@ -88,12 +98,16 @@ public:
         class UTDTextWithImage* plasmaGem;
 #pragma endregion
 
+
 protected:
 
 
+
+
 private:
-
-
+    UPROPERTY(Transient)
+        class ATDRoundManager* roundManager;
+        
 public:
 
 
@@ -101,6 +115,10 @@ protected:
 
 
 private:
+    UFUNCTION()
+        void TDSetCombatUI(int32 _value);
 
+    UFUNCTION()
+        void TDSetBuyUI(int32 _value);
 
 };

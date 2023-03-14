@@ -13,16 +13,18 @@ class ATDEnemy;
 class UDataTable;
 
 /**
- * 
+ *
  */
 UCLASS()
 class TOWERDEFENSE_API ATDGameMode : public AGameModeBase
 {
-	GENERATED_BODY()
-	
+    GENERATED_BODY()
+
 public:
-	
-	ATDGameMode();
+
+    ATDGameMode();
+
+
 
 public:
 
@@ -40,11 +42,11 @@ public:
         UDataTable* statsDatatable;
 
     UPROPERTY(EditDefaultsOnly)
-    TMap<EElements, UTDElement*> elementsDataAssets;
+        TMap<EElements, UTDElement*> elementsDataAssets;
 
 
 protected:
-	
+
 
 private:
 
@@ -54,9 +56,9 @@ public:
     UTDElement* TDGetDataAssetFromElement(EElements _keyElement);
 
 protected:
+    void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;
 
     void StartPlay() override;
-
 
     void StartToLeaveMap() override;
 
