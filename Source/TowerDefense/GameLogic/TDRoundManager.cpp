@@ -147,3 +147,8 @@ void ATDRoundManager::TDEnemyKillWeight(int32& _weight)
     }
 
 }
+
+float ATDRoundManager::TDGetTimeRound()
+{
+    return timeRound;
+}

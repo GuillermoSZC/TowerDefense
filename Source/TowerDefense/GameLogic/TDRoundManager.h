@@ -99,6 +99,9 @@ public:
 
     void TDEnemyKillWeight(int32& _weight);
 
+    UFUNCTION(BlueprintCallable)
+        float TDGetTimeRound();
+
 
 protected:
 

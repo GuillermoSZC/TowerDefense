@@ -18,6 +18,8 @@ public:
     virtual bool Initialize() override;
     virtual void NativePreConstruct() override;
     virtual void NativeConstruct() override;
+    virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
+
 
 public:
     //     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
@@ -88,11 +90,14 @@ public:
         class UTDTextWithImage* plasmaGem;
 #pragma endregion
 
+
 protected:
 
 
-private:
 
+
+private:
+    
 
 public:
 
