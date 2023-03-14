@@ -34,11 +34,13 @@ void ATDRoundManager::TDStartBuyPhase()
 {
     timeRound = 0.f;
     actualPhase = GamePhase::BuyPhase;
+    FOnBuyPhaseStartDelegate.Broadcast(actualRound);
 }
 
 void ATDRoundManager::TDStartCombatPhase()
 {
     TDStartRound();
+    FOnCombatPhaseStartDelegate.Broadcast(actualRound);
 }
 
 void ATDRoundManager::TDStartRound()

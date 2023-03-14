@@ -8,6 +8,7 @@
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuyPhaseStartSignature, int32, round);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCombatPhaseStartSignature, int32, round);
 
 
 class UTDRoundElementsType;
@@ -48,6 +49,7 @@ public:
 
 
     FOnBuyPhaseStartSignature FOnBuyPhaseStartDelegate;
+    FOnCombatPhaseStartSignature FOnCombatPhaseStartDelegate;
 
 protected:
 

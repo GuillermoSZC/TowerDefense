@@ -105,8 +105,9 @@ protected:
 
 
 private:
-    
-
+    UPROPERTY(Transient)
+        class ATDRoundManager* roundManager;
+        
 public:
 
 
@@ -114,6 +115,10 @@ protected:
 
 
 private:
+    UFUNCTION()
+        void TDSetCombatUI(int32 _value);
 
+    UFUNCTION()
+        void TDSetBuyUI(int32 _value);
 
 };
