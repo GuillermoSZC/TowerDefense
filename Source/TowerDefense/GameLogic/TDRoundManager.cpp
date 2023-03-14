@@ -27,8 +27,18 @@ void ATDRoundManager::BeginPlay()
 {
     Super::BeginPlay();
 
+    TDStartBuyPhase();
+}
+
+void ATDRoundManager::TDStartBuyPhase()
+{
     timeRound = 0.f;
     actualPhase = GamePhase::BuyPhase;
+}
+
+void ATDRoundManager::TDStartCombatPhase()
+{
+    TDStartRound();
 }
 
 void ATDRoundManager::TDStartRound()
@@ -110,7 +120,7 @@ void ATDRoundManager::Tick(float DeltaSeconds)
         if (timeRound <= 0.f)
         {
 
-            TDStartRound();
+            TDStartCombatPhase();
 
         }    
 
@@ -132,9 +142,7 @@ void ATDRoundManager::TDEnemyKillWeight(int32& _weight)
 
         GEngine->AddOnScreenDebugMessage(0,5.f,FColor::Yellow,"Todos muertos");
 
-        timeRound = timeBuyPhase;
-
-        actualPhase = GamePhase::BuyPhase;
+        TDStartBuyPhase();
 
     }
 

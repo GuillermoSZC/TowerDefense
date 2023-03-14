@@ -6,6 +6,10 @@
 #include "GameFramework/Actor.h"
 #include "TDRoundManager.generated.h"
 
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuyPhaseStartSignature, int32, round);
+
+
 class UTDRoundElementsType;
 
 
@@ -42,6 +46,8 @@ public:
     UPROPERTY(EditDefaultsOnly)
         int32 timeBuyPhase = 20.f;
 
+
+    FOnBuyPhaseStartSignature FOnBuyPhaseStartDelegate;
 
 protected:
 
@@ -81,6 +87,8 @@ public:
         void TDStopRound();
 
 
+
+
      UFUNCTION(BlueprintPure)
     static ATDRoundManager* TDGetRoundManager();
 
@@ -98,4 +106,8 @@ protected:
 
 private:
 
+
+    void TDStartBuyPhase();
+
+    void TDStartCombatPhase();
 };
