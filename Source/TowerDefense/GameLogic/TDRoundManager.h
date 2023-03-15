@@ -32,7 +32,7 @@ class TOWERDEFENSE_API ATDRoundManager : public AActor
     GENERATED_BODY()
 
 
-private:
+public:
 
     ATDRoundManager();
 
@@ -67,9 +67,7 @@ private:
 
     float timeRound = 0;
 
-    float timeperSpawn = 0.7f;
-
-    static ATDRoundManager* managerRef;
+    float timeperSpawn = 0.7f;    
 
     bool isSawning = false;
 
@@ -91,10 +89,7 @@ public:
 
 
 
-     UFUNCTION(BlueprintPure)
-    static ATDRoundManager* TDGetRoundManager();
 
-    static ATDRoundManager* TDGetRoundManager(TSubclassOf<ATDRoundManager> _classRef);
 
     virtual void Tick(float DeltaSeconds) override;
 

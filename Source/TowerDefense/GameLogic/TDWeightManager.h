@@ -16,18 +16,17 @@ class TOWERDEFENSE_API UTDWeightManager : public UObject
 {
 	GENERATED_BODY()
 
-private:
-
+public:
 	UTDWeightManager();
 
 public:
 
 	UPROPERTY(EditAnywhere)
-	int32 WeightPerRound = 1;
+	int32 WeightPerRound;
 
 
     UPROPERTY(EditAnywhere)
-        int32 ActualRound = 9;
+        int32 ActualRound;
 
 	TMap<int8, int32> enemiesPerClass;
 
@@ -36,7 +35,6 @@ protected:
 
 private:
 
-	static UPROPERTY(Transient) UTDWeightManager* weightManager;
 
 
     UPROPERTY(Transient)
@@ -51,9 +49,6 @@ private:
 	TArray<EElements> actualRoundElements;
 
 public:
-
-	UFUNCTION()
-	static UTDWeightManager* TDGetWeightManager();
 
 
 	UFUNCTION()
