@@ -15,12 +15,12 @@ ATDRoundManager::ATDRoundManager()
 
 ATDRoundManager::~ATDRoundManager()
 {
-    managerRef = nullptr;
+   
 }
 
 
 
-ATDRoundManager* ATDRoundManager::managerRef = nullptr;
+
 
 
 void ATDRoundManager::BeginPlay()
@@ -32,7 +32,7 @@ void ATDRoundManager::BeginPlay()
 
 void ATDRoundManager::TDStartBuyPhase()
 {
-    timeRound = 0.f;
+    timeRound = timeBuyPhase;
     actualPhase = GamePhase::BuyPhase;
     FOnBuyPhaseStartDelegate.Broadcast(actualRound);
 }
@@ -66,8 +66,8 @@ void ATDRoundManager::TDStartRound()
 
     RoundElements[x]->TDGetRoundElements(actualRoundElements);
 
-
-    RoundWeight= UTDWeightManager::TDGetWeightManager()->TDSetActualRound(actualRound, actualRoundElements);
+   
+    RoundWeight = UTDGameData::TDGetWeightManager()->TDSetActualRound(actualRound, actualRoundElements);
     killedWegith = 0;
 }
 
@@ -76,26 +76,6 @@ void ATDRoundManager::TDStopRound()
     isSawning = false;
 }
 
-ATDRoundManager* ATDRoundManager::TDGetRoundManager()
-{
-
-    if (managerRef == nullptr)
-    {
-        return nullptr;
-    }
-    return managerRef;
-}
-
-ATDRoundManager* ATDRoundManager::TDGetRoundManager(TSubclassOf<ATDRoundManager> _classRef)
-{
-    if (managerRef == nullptr)
-    {
-        UWorld* actualWorld = UTDGameData::TDGetWorld();
-        FActorSpawnParameters paramet;
-        managerRef = actualWorld->SpawnActor<ATDRoundManager>(_classRef);
-    }
-    return managerRef;
-}
 
 void ATDRoundManager::Tick(float DeltaSeconds)
 {
@@ -107,7 +87,7 @@ void ATDRoundManager::Tick(float DeltaSeconds)
         if (timeRound >= timeperSpawn)
         {
 
-            UTDWeightManager::TDGetWeightManager()->TDStartSpawn();
+            UTDGameData::TDGetWeightManager()->TDStartSpawn();
 
 
             timeRound -= timeperSpawn;

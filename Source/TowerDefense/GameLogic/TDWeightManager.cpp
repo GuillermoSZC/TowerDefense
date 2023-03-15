@@ -12,7 +12,6 @@
 #include "Components/CapsuleComponent.h"
 
 
-UTDWeightManager* UTDWeightManager::weightManager = nullptr;
 
 
 
@@ -22,22 +21,6 @@ UTDWeightManager::UTDWeightManager()
 }
 
 
-UTDWeightManager* UTDWeightManager::TDGetWeightManager()
-{
-
-
-    if (weightManager == nullptr)
-    {
-        UWorld* actualWorld = UTDGameData::TDGetWorld();
-        FActorSpawnParameters paramet;
-        //weightManager = actualWorld->SpawnActor<UTDWeightManager>();
-
-        weightManager = NewObject<UTDWeightManager>(UTDWeightManager::StaticClass(), FName(TEXT("WeightManager")), EObjectFlags::RF_MarkAsRootSet);
-    }
-
-    return weightManager;
-
-}
 
 int32 UTDWeightManager::TDSetActualRound(int32& _atualRound, TArray<EElements> _roundElement)
 {
@@ -55,7 +38,7 @@ void UTDWeightManager::TDStartSpawn()
 {
     if (actualWegith >= WeightPerRound)
     {
-        ATDRoundManager::TDGetRoundManager()->TDStopRound();
+        UTDGameData::TDGetRoundManager()->TDStopRound();
         GEngine->AddOnScreenDebugMessage(0, 5.f, FColor::Orange, FString::FromInt(actualWegith));
         return;
     }
@@ -63,7 +46,7 @@ void UTDWeightManager::TDStartSpawn()
     UWorld* actualWorld = UTDGameData::TDGetWorld();
 
 
-    ATDObjectPooler* objectRef = ATDObjectPooler::TDGetObjectPooler();
+    ATDObjectPooler* objectRef = UTDGameData::TDGetObjectPooler();
     ensure(objectRef);
 
     ATDEnemy* actualEnemy = objectRef->TDGetEnemyFromPool();
@@ -101,18 +84,6 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
             FName selectedenemy = RowNames[x];
 
             Row = enemiesDatatable->FindRow<FTDEnemiesDataTable>(selectedenemy, ContextString, true);
-
-//             //provisional, cambiar a algo mas escalable 
-//             if (licheCounter == 3)
-//             {
-//                 return;
-//             }
-// 
-//             if (selectedenemy == FName(TEXT("Lich")) && licheCounter < 3)
-//             {
-//                 ++licheCounter;
-//             }
-
 
             if (Row)
             {

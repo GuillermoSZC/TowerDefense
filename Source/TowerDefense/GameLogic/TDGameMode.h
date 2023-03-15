@@ -51,6 +51,19 @@ protected:
 private:
 
 
+
+    UPROPERTY(Transient)
+    ATDRoundManager* RoundManagerRef = nullptr;
+
+    UPROPERTY(Transient)
+    ATDObjectPooler* ObjectPoolerRef = nullptr;
+
+    UPROPERTY(Transient)
+    UTDWeightManager* weightManagerRef = nullptr;
+
+
+
+
 public:
 
     UTDElement* TDGetDataAssetFromElement(EElements _keyElement);

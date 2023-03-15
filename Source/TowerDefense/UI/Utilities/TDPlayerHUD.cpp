@@ -1,5 +1,6 @@
 #include "UI/Utilities/TDPlayerHUD.h"
 #include "GameLogic/TDRoundManager.h"
+#include "GameLogic/TDGameData.h"
 
 bool UTDPlayerHUD::Initialize()
 {
@@ -19,7 +20,7 @@ void UTDPlayerHUD::NativeConstruct()
 {
     Super::NativeConstruct();
 
-    roundManager = ATDRoundManager::TDGetRoundManager();
+    roundManager = UTDGameData::TDGetRoundManager();
 
     if (roundManager)
     {
