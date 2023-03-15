@@ -56,7 +56,7 @@ void UConeShapeCastTask::Activate()
 
         float distanceSquared = distance * distance;
 
-        if (distSquared >= distance)
+        if (distSquared >= distanceSquared)
         {
             break;
         }

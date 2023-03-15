@@ -91,7 +91,7 @@ void UShapesCastTask::Activate()
     {
         //hitted = GetWorld()->SweepMultiByChannel(hitResultArray, pos, pos, rotation.Quaternion(), TraceChannel, );
         hitted = GetWorld()->SweepMultiByObjectType(hitResultArray, pos, pos, rotation.Quaternion(), objectchannel, FCollisionShape::MakeSphere(radius));
-        DrawDebugSphere(GetWorld(), pos, radius, 8, FColor::Orange, false, 0.f, 0, 5.f);
+        DrawDebugSphere(GetWorld(), pos, radius, 32, FColor::Orange, false, 0.f, 0, 5.f);
 
     }
     break;
