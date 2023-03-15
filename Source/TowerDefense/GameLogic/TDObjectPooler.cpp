@@ -6,34 +6,6 @@
 #include "Character/TDEnemy.h"
 
 
-ATDObjectPooler* ATDObjectPooler::OwnerPooler = nullptr;
-
-ATDObjectPooler* ATDObjectPooler::TDGetObjectPooler(TSubclassOf<ATDObjectPooler> _classRef)
-{
-    if (OwnerPooler == nullptr)
-    {
-        UWorld* actualWorld = UTDGameData::TDGetWorld();
-        FActorSpawnParameters paramet;
-        //OwnerPooler = Cast<ATDObjectPooler>(actualWorld->SpawnActor(ATDObjectPooler::StaticClass()));
-        OwnerPooler = actualWorld->SpawnActor<ATDObjectPooler>(_classRef);
-    }
-
-    return OwnerPooler;
-}
-
-
-
-
-
-ATDObjectPooler* ATDObjectPooler::TDGetObjectPooler()
-{
-    if (OwnerPooler)
-    {
-        return OwnerPooler;
-    }
-    return nullptr;
-}
-
 ATDEnemy* ATDObjectPooler::TDGetEnemyFromPool()
 {
     if (!disabledEnemies.IsEmpty())
@@ -64,7 +36,7 @@ ATDObjectPooler::ATDObjectPooler()
 
 ATDObjectPooler::~ATDObjectPooler()
 {
-    OwnerPooler = nullptr;
+   
 }
 
 // Called when the game starts or when spawned

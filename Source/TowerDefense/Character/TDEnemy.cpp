@@ -34,7 +34,7 @@ UTDElementComponent* ATDEnemy::TDGetElementComponent_Implementation()
 
 void ATDEnemy::TDCharacterDeath_Implementation()
 {
-    ATDObjectPooler::TDGetObjectPooler()->TDAddEnemyToPool(this);
+    UTDGameData::TDGetObjectPooler()->TDAddEnemyToPool(this);
 }
 
 UAnimMontage* ATDEnemy::TDGetSketalMeshMontage_Implementation()

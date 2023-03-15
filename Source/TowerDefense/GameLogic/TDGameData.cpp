@@ -16,6 +16,8 @@ TArray<ATDSpawner*> UTDGameData::spawnerArray;
 ATDBase* UTDGameData::baseRef = nullptr;
 UTDWeightManager* UTDGameData::weightManagerRef = nullptr;
 ATDGameMode* UTDGameData::GameModeRef = nullptr;
+ATDRoundManager* UTDGameData::RoundManagerRef = nullptr;
+ATDObjectPooler* UTDGameData::ObjectPoolerRef = nullptr;
 
 UTDGameData::UTDGameData(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -67,7 +69,7 @@ void UTDGameData::TDRemoveEnmemyToArray(ATDEnemy* _ActualEnemy)
     {
         enemiesArray.Remove(_ActualEnemy);
 
-        ATDRoundManager::TDGetRoundManager()->TDEnemyKillWeight(_ActualEnemy->unitWeight);
+        UTDGameData::TDGetRoundManager()->TDEnemyKillWeight(_ActualEnemy->unitWeight);
     }
 }
 
@@ -178,6 +180,26 @@ ATDGameMode* UTDGameData::TDGetGameMode()
 void UTDGameData::TDSetGameMode(ATDGameMode* _gameModeRef)
 {
     GameModeRef = _gameModeRef;
+}
+
+void UTDGameData::TDSetRoundManager(ATDRoundManager* _RoundManagerRef)
+{
+    RoundManagerRef = _RoundManagerRef;
+}
+
+ATDRoundManager* UTDGameData::TDGetRoundManager()
+{
+    return RoundManagerRef;
+}
+
+void UTDGameData::TDSetObjectPooler(ATDObjectPooler* _ObjectPooler)
+{
+    ObjectPoolerRef = _ObjectPooler;
+}
+
+ATDObjectPooler* UTDGameData::TDGetObjectPooler()
+{
+    return ObjectPoolerRef;
 }
 
 void UTDGameData::TDSpawnEnemyDebug()

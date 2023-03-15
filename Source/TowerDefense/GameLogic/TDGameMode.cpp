@@ -24,8 +24,13 @@ ATDGameMode::ATDGameMode()
 
 void ATDGameMode::InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage)
 {
-    Super::InitGame(MapName, Options, ErrorMessage);
-    
+    return elementsDataAssets[_keyElement];
+}
+
+void ATDGameMode::StartPlay()
+{
+    Super::StartPlay();
+
     UTDGameData::TDSetGameMode(this);
 
 
@@ -33,28 +38,24 @@ void ATDGameMode::InitGame(const FString& MapName, const FString& Options, FStri
     UTDGameData::TDSetWorld(world);
 
     UTDGameData::TDSetAbilityStruct(NewObject<UTDGameplayEventData>(UTDGameplayEventData::StaticClass()));
-    ATDObjectPooler* objectPooler = ATDObjectPooler::TDGetObjectPooler(objectPoolerClass);
+
+    ObjectPoolerRef = world->SpawnActor<ATDObjectPooler>(objectPoolerClass);
+    UTDGameData::TDSetObjectPooler(ObjectPoolerRef);
 
 
-    ATDRoundManager::TDGetRoundManager(RoundManagerClass);
+    RoundManagerRef = world->SpawnActor<ATDRoundManager>(RoundManagerClass);
+    UTDGameData::TDSetRoundManager(RoundManagerRef);
+
+    weightManagerRef = NewObject<UTDWeightManager>(UTDWeightManager::StaticClass(), FName(TEXT("WeightManager")), EObjectFlags::RF_MarkAsRootSet);
+    UTDGameData::TDSetWeightManager(weightManagerRef);
+    weightManagerRef->TDSetDataTable(statsDatatable);
 
 
-    UTDWeightManager* weightManager = UTDWeightManager::TDGetWeightManager();
-    UTDGameData::TDSetWeightManager(weightManager);
-    weightManager->TDSetDataTable(statsDatatable);
-    //weightManager->TDStartSpawn(EnemyClass);
 
-    ATDRoundManager::TDGetRoundManager();
-}
 
-UTDElement* ATDGameMode::TDGetDataAssetFromElement(EElements _keyElement)
-{
-    return elementsDataAssets[_keyElement];
-}
 
-void ATDGameMode::StartPlay()
-{
-    Super::StartPlay();
+
+
 
 }
 
