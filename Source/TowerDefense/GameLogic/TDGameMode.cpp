@@ -22,14 +22,11 @@ ATDGameMode::ATDGameMode()
 
 }
 
+
 void ATDGameMode::InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage)
 {
-    return elementsDataAssets[_keyElement];
-}
-
-void ATDGameMode::StartPlay()
-{
-    Super::StartPlay();
+    
+    Super::InitGame(MapName, Options, ErrorMessage);
 
     UTDGameData::TDSetGameMode(this);
 
@@ -51,11 +48,17 @@ void ATDGameMode::StartPlay()
     weightManagerRef->TDSetDataTable(statsDatatable);
 
 
+}
 
 
+UTDElement* ATDGameMode::TDGetDataAssetFromElement(EElements _keyElement)
+{
+    return elementsDataAssets[_keyElement];
+}
 
-
-
+void ATDGameMode::StartPlay()
+{
+    Super::StartPlay();
 
 }
 
