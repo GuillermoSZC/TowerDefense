@@ -54,7 +54,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	static void TDSetWorld(UWorld* _ActualMap);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintPure)
     static TArray<ATDEnemy*> TDGetEnemiesArray();
 
 	UFUNCTION(BlueprintCallable)
