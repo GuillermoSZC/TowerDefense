@@ -53,12 +53,11 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UTDText* phase;
 
-    /** @TODO: Falta hacer componente de la barra de vida
-    *
-    *
-    * UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UImage* playerElement;
-    */
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        class UTDHealthBar* healthBar;
 
 #pragma region HUD_INVENTORY
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
@@ -107,7 +106,7 @@ protected:
 private:
     UPROPERTY(Transient)
         class ATDRoundManager* roundManager;
-        
+
 public:
 
 
@@ -120,5 +119,8 @@ private:
 
     UFUNCTION()
         void TDSetBuyUI(int32 _value);
+
+    UFUNCTION()
+        void TDSetElementsVisibility(ESlateVisibility _visibility);
 
 };

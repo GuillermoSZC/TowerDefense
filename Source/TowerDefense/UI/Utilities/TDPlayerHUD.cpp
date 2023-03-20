@@ -52,11 +52,28 @@ void UTDPlayerHUD::TDSetCombatUI(int32 _value)
 {
     phase->TDSetCustomText(FText::FromString("Combat Phase"));
     roundNum->TDSetCustomText(FText::FromString(FString::FromInt(_value)));
-    timer->SetVisibility(ESlateVisibility::Collapsed);
+    TDSetElementsVisibility(ESlateVisibility::Collapsed);
 }
 
 void UTDPlayerHUD::TDSetBuyUI(int32 _value)
 {
     phase->TDSetCustomText(FText::FromString("Buy Phase"));
-    timer->SetVisibility(ESlateVisibility::Visible);
+    TDSetElementsVisibility(ESlateVisibility::Visible);
+}
+
+void UTDPlayerHUD::TDSetElementsVisibility(ESlateVisibility _visibility)
+{
+    timer->SetVisibility(_visibility);
+    scrap->SetVisibility(_visibility);
+    swordBlueprint->SetVisibility(_visibility);
+    armorBlueprint->SetVisibility(_visibility);
+    bootsBlueprint->SetVisibility(_visibility);
+    ballistaBlueprint->SetVisibility(_visibility);
+    sonicTowerBlueprint->SetVisibility(_visibility);
+    deathRayTowerBlueprint->SetVisibility(_visibility);
+    speedTowerBlueprint->SetVisibility(_visibility);
+    damageTowerBlueprint->SetVisibility(_visibility);
+    fireGem->SetVisibility(_visibility);
+    iceGem->SetVisibility(_visibility);
+    plasmaGem->SetVisibility(_visibility);
 }
