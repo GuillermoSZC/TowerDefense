@@ -63,9 +63,12 @@ void ATDCharacter::TDHealthChanged(const FOnAttributeChangeData& Data)
     if (Data.NewValue <= 0.f)
     {
         FGameplayEventData DataEvent;
-
         UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(this, GET_GAMEPLAY_TAG(DEATH_TRIGGER_TAG), DataEvent);
     }
+
+    float MaxHealth = CharacterAttributes->GetmaxHealth();
+    float healthPercent = Data.NewValue / MaxHealth;
+    FOnHealthChangeDelegate.Broadcast(healthPercent);
 }
 
 void ATDCharacter::TDAttackDamageChanged(const FOnAttributeChangeData& Data)

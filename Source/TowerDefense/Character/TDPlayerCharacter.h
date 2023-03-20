@@ -50,6 +50,8 @@ protected:
 
     virtual void BeginPlay() override;
 
+   
+    void TDInitialize();
 private:
 
    

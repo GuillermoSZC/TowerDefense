@@ -7,6 +7,10 @@
 #include "Interfaces/TDInterface.h"
 #include "TDCharacter.generated.h"
 
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangeSignature, float, _newValue);
+
+
 class UTDCharacterAttributeSet;
 
 UCLASS()
@@ -25,6 +29,7 @@ public:
         UAbilitySystemComponent* abilitySystem;
 
 
+    FOnHealthChangeSignature FOnHealthChangeDelegate;
 protected:
 
 #pragma region DELEGATES
@@ -34,7 +39,6 @@ protected:
     FDelegateHandle AttackRangeChangedDelegateHandle;
     FDelegateHandle AttackSpeedChangedDelegateHandle;
     FDelegateHandle MovementSpeedChangedDelegateHandle;
-
 
 #pragma endregion
 

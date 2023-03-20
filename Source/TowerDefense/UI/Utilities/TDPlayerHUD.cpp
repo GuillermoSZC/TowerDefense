@@ -1,6 +1,7 @@
 #include "UI/Utilities/TDPlayerHUD.h"
 #include "GameLogic/TDRoundManager.h"
 #include "GameLogic/TDGameData.h"
+#include "Character/TDCharacter.h"
 
 bool UTDPlayerHUD::Initialize()
 {
@@ -27,6 +28,15 @@ void UTDPlayerHUD::NativeConstruct()
         roundManager->FOnBuyPhaseStartDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetBuyUI);
         roundManager->FOnCombatPhaseStartDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetCombatUI);
     }
+
+    ATDCharacter* ownerRef = GetOwningPlayerPawn<ATDCharacter>();
+
+    if (ownerRef)
+    {
+        ownerRef->FOnHealthChangeDelegate.AddUniqueDynamic(healthBar, &UTDHealthBar::TDSetBarPercentage);
+    }
+    
+
 
     if (phase)
     {
