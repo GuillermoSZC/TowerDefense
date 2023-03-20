@@ -14,4 +14,46 @@ class TOWERDEFENSE_API ATDPlayerCharacter : public ATDCharacter
 {
 	GENERATED_BODY()
 	
+public:
+
+	ATDPlayerCharacter();
+
+
+ 
+public:
+
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
+        UDataTable* statsDatatable;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
+        TArray<TSubclassOf<UGameplayAbility>> abiliyList;
+
+
+
+
+protected:
+
+
+
+private:
+
+
+
+
+
+public:
+
+    virtual void Tick(float DeltaTime) override;
+
+protected:
+
+    virtual void BeginPlay() override;
+
+   
+    void TDInitialize();
+private:
+
+   
+
 };
