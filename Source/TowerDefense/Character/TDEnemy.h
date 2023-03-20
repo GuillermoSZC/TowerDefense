@@ -34,9 +34,6 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
         TArray<TSubclassOf<UGameplayAbility>> abiliyList;
 
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
-        UAbilitySystemComponent* abilitySystem;
-
 
     UPROPERTY(VisibleAnywhere)
         TArray<ATDPathPoint*> PathPointsArray;
@@ -52,16 +49,6 @@ public:
 protected:
 
 
-#pragma region DELEGATES
-
-    FDelegateHandle EnemyHealthChangedDelegateHandle;
-    FDelegateHandle EnemyAttackDamageChangedDelegateHandle;
-    FDelegateHandle EnemyAttackRangeChangedDelegateHandle;
-    FDelegateHandle EnemyAttackSpeedChangedDelegateHandle;
-    FDelegateHandle EnemyMovementSpeedChangedDelegateHandle;
-
-
-#pragma endregion
 
 
 private:
@@ -69,10 +56,6 @@ private:
     float refreshPathTime;
     float tickCounterTime;
     float pathDsitance;
-
-
-    UPROPERTY(Transient)
-        const UTDEnemyAttributeSet* EnemyAttributes;
 
     UPROPERTY()
     bool isActive = false;
@@ -129,15 +112,9 @@ private:
 
 
     void TDInitialize();
-    void TDActivateDelegates();
+    
 
-    void TDmaxHealthChanged(const FOnAttributeChangeData& Data);
-    void TDHealthChanged(const FOnAttributeChangeData& Data);
-    void TDAttackDamageChanged(const FOnAttributeChangeData& Data);
-    void TDAttackRangeChanged(const FOnAttributeChangeData& Data);
-    void TDAttackSpeedChanged(const FOnAttributeChangeData& Data);
-    void TDMovementSpeedChanged(const FOnAttributeChangeData& Data);
-
+    
 
 
 
