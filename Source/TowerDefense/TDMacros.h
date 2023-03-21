@@ -6,3 +6,4 @@
 
 
 #define DEATH_TRIGGER_TAG "ability.trigger.death"
+#define ABILITY1_TRIGGER_TAG "ability.trigger.ability1"

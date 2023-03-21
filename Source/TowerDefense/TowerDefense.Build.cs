@@ -17,6 +17,7 @@ public class TowerDefense : ModuleRules
 			"GameplayAbilities",
             "GameplayTags",
             "GameplayTasks",
+			"EnhancedInput",
             "UMG"
         });
 
