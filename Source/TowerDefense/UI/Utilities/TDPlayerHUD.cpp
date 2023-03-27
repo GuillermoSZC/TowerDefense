@@ -20,19 +20,28 @@ void UTDPlayerHUD::NativeConstruct()
 {
     Super::NativeConstruct();
 
+    elementsArray.Add(firstElement);
+    elementsArray.Add(secondElement);
+    elementsArray.Add(thirdElement);
+
+
+
+
     roundManager = UTDGameData::TDGetRoundManager();
 
     if (roundManager)
     {
         roundManager->FOnBuyPhaseStartDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetBuyUI);
         roundManager->FOnCombatPhaseStartDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetCombatUI);
+        roundManager->FOnElementSelectionDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetElementsUI);
+
     }
 
     ATDCharacter* ownerRef = GetOwningPlayerPawn<ATDCharacter>();
 
     if (ownerRef)
     {
-        ownerRef->FOnHealthChangeDelegate.AddUniqueDynamic(healthBar, &UTDHealthBar::TDSetBarPercentage);        
+        ownerRef->FOnHealthChangeDelegate.AddUniqueDynamic(healthBar, &UTDHealthBar::TDSetBarPercentage);
     }
 
     if (phase)
@@ -67,6 +76,28 @@ void UTDPlayerHUD::TDSetBuyUI(int32 _value)
     phase->TDSetCustomText(FText::FromString("Buy Phase"));
     TDSetElementsVisibility(ESlateVisibility::Visible);
 }
+
+void UTDPlayerHUD::TDSetElementsUI(TArray<EElements>& _elements)
+{
+    int arraySize = _elements.Num();
+
+    for (int i = 0; i <= (elementsArray.Num() - 1); ++i)
+    {
+        if (i <= arraySize - 1)
+        {
+            UTexture2D* tempTexture = UTDGameData::TDGetGameInstance()->elementsImage[_elements[i]];
+            elementsArray[i]->SetVisibility(ESlateVisibility::Visible);
+            elementsArray[i]->SetBrushFromTexture(tempTexture);
+        }
+        else
+        {
+            elementsArray[i]->SetVisibility(ESlateVisibility::Collapsed);
+
+        }
+    }
+}
+
+
 
 void UTDPlayerHUD::TDSetElementsVisibility(ESlateVisibility _visibility)
 {

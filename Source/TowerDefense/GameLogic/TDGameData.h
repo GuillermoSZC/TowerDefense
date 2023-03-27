@@ -40,8 +40,9 @@ public:
 	static UPROPERTY(Transient) UTDWeightManager* weightManagerRef;
 	static UPROPERTY(Transient) ATDGameMode* GameModeRef;
 	static UPROPERTY(Transient) ATDRoundManager* RoundManagerRef;
-	static UPROPERTY(Transient) ATDObjectPooler* ObjectPoolerRef;
 
+	static UPROPERTY(Transient) ATDObjectPooler* ObjectPoolerRef;
+	static UPROPERTY(Transient) UTDGameInstance* GameInstanceRef;
 
 
 
@@ -102,6 +103,13 @@ public:
 	UFUNCTION()
 	static ATDGameMode* TDGetGameMode();
 
+	UFUNCTION()
+	static void TDSetGameInstance(UTDGameInstance* _gameinmstanceRef);
+
+
+	static UTDGameInstance* TDGetGameInstance();
+
+
     UFUNCTION()
         static void TDSetGameMode(ATDGameMode* _gameModeRef);
 
@@ -121,6 +129,8 @@ public:
 
     UFUNCTION(BlueprintCallable)
         static ATDObjectPooler* TDGetObjectPooler();
+
+
 
 
 

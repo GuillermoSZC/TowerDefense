@@ -59,7 +59,7 @@ void UTDGetNextWaypointBTService::TickNode(UBehaviorTreeComponent& OwnerComp, ui
                     blackboard->SetValueAsObject(FName(TEXT("BaseBuild")), baseRef);
                     FVector basePos = baseRef->GetActorLocation();
                     basePos.Z = 0.f;
-                    blackboard->SetValueAsVector(FName(TEXT("BasePosition")), basePos);
+                    //blackboard->SetValueAsVector(FName(TEXT("BasePosition")), basePos);
                 }
 
             }

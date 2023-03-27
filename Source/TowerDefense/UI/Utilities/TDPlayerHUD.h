@@ -42,6 +42,10 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UImage* thirdElement;
 
+    UPROPERTY()
+    TArray<UImage*> elementsArray;
+
+
     // @TODO: MINIMAPA - INVESTIGAR EL ASSET DE LA EPIC
     /**
      *
@@ -119,6 +123,10 @@ private:
 
     UFUNCTION()
         void TDSetBuyUI(int32 _value);
+
+    UFUNCTION()
+    void TDSetElementsUI(TArray<EElements>& _elements);
+
 
     UFUNCTION()
         void TDSetElementsVisibility(ESlateVisibility _visibility);

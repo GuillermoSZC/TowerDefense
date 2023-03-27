@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
+#include "UMG/Public/Components/Image.h"
 #include "TDGameInstance.generated.h"
 
 /**
@@ -20,6 +21,8 @@ public:
 	
 public:
 
+	UPROPERTY(EditDefaultsOnly)
+	TMap<EElements, UTexture2D*> elementsImage;
 
 
 protected:

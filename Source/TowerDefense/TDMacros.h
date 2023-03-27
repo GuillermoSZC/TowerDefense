@@ -7,6 +7,8 @@
 
 #define DEATH_TRIGGER_TAG "ability.trigger.death"
 #define ABILITY1_TRIGGER_TAG "ability.trigger.ability1"
+#define ENEMYHIT_TRIGGER_TAG "ability.trigger.enemyHit"
+
 
 
 #define TDDECLARE_ATTRIBUTE_CAPTUREDEF(P,T) \

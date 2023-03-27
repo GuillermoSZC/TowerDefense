@@ -65,7 +65,7 @@ void ATDRoundManager::TDStartRound()
     }
 
     RoundElements[x]->TDGetRoundElements(actualRoundElements);
-
+    FOnElementSelectionDelegate.Broadcast(actualRoundElements);
    
     RoundWeight = UTDGameData::TDGetWeightManager()->TDSetActualRound(actualRound, actualRoundElements);
     killedWegith = 0;

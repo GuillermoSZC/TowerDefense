@@ -16,6 +16,7 @@ TArray<ATDSpawner*> UTDGameData::spawnerArray;
 ATDBase* UTDGameData::baseRef = nullptr;
 UTDWeightManager* UTDGameData::weightManagerRef = nullptr;
 ATDGameMode* UTDGameData::GameModeRef = nullptr;
+UTDGameInstance* UTDGameData::GameInstanceRef = nullptr;
 ATDRoundManager* UTDGameData::RoundManagerRef = nullptr;
 ATDObjectPooler* UTDGameData::ObjectPoolerRef = nullptr;
 
@@ -175,6 +176,16 @@ ATDSpawner* UTDGameData::TDGetSpanwerActor()
 ATDGameMode* UTDGameData::TDGetGameMode()
 {
     return GameModeRef;
+}
+
+void UTDGameData::TDSetGameInstance(UTDGameInstance* _gameinmstanceRef)
+{
+    GameInstanceRef = _gameinmstanceRef;
+}
+
+UTDGameInstance* UTDGameData::TDGetGameInstance()
+{
+    return GameInstanceRef;
 }
 
 void UTDGameData::TDSetGameMode(ATDGameMode* _gameModeRef)
