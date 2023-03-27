@@ -14,7 +14,6 @@ void UTDPlayerHUD::NativePreConstruct()
 {
     Super::NativePreConstruct();
 
-
 }
 
 void UTDPlayerHUD::NativeConstruct()
@@ -33,10 +32,8 @@ void UTDPlayerHUD::NativeConstruct()
 
     if (ownerRef)
     {
-        ownerRef->FOnHealthChangeDelegate.AddUniqueDynamic(healthBar, &UTDHealthBar::TDSetBarPercentage);
+        ownerRef->FOnHealthChangeDelegate.AddUniqueDynamic(healthBar, &UTDHealthBar::TDSetBarPercentage);        
     }
-    
-
 
     if (phase)
     {
