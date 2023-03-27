@@ -99,7 +99,8 @@ public:
     UFUNCTION(BlueprintCallable)
         float TDGetTimeRound();
 
-
+    UFUNCTION(BlueprintPure)
+        int32 TDGetActualRound();
 protected:
 
     virtual void BeginPlay() override;

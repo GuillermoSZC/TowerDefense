@@ -8,7 +8,7 @@
 
 
 
-// Sets default values
+//Sets default values
 ATDTower::ATDTower()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
@@ -41,6 +41,8 @@ void ATDTower::BeginPlay()
 
 	TDInitialize();
 	
+	UTDGameData::TDGetRoundManager()->FOnBuyPhaseStartDelegate.AddDynamic(this, &ATDTower::TDUpdateRoundValues);
+
 }
 
 void ATDTower::TDInitialize()
@@ -125,6 +127,12 @@ ATDEnemy* ATDTower::TDGetEnemyInRange()
 	}
 
 	return minorDistanceToBase;
+}
+
+void ATDTower::TDUpdateRoundValues(int32 _Round)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("UpdateTower"));
+
 }
 
 

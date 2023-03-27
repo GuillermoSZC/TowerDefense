@@ -32,7 +32,7 @@ public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
         UDataTable* statsDatatable;
 
-
+    UPROPERTY(EditAnywhere,BlueprintReadWrite)
     UTDElementComponent* elementComponent = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
@@ -87,6 +87,8 @@ public:
     UFUNCTION(BlueprintCallable)
     ATDEnemy* TDGetEnemyInRange();
 
+    UFUNCTION()
+    void TDUpdateRoundValues(int32 _Round);
 
 
     UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)

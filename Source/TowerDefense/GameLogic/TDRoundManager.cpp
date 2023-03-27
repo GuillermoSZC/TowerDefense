@@ -134,3 +134,8 @@ float ATDRoundManager::TDGetTimeRound()
 {
     return timeRound;
 }
+
+int32 ATDRoundManager::TDGetActualRound()
+{
+    return actualRound;
+}

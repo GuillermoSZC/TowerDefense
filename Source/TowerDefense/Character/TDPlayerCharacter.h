@@ -46,6 +46,9 @@ public:
 
     virtual void Tick(float DeltaTime) override;
 
+    UFUNCTION()
+    void TDUpdateRoundValues(int32 _Rounds);
+
 protected:
 
     virtual void BeginPlay() override;

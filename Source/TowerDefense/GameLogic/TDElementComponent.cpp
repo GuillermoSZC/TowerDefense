@@ -65,3 +65,16 @@ UTDElement* UTDElementComponent::TDGetActualDataAsset()
 	return SpawnedElementData;
 }
 
+float UTDElementComponent::TDGetDamageMultiplier(EElements _element)
+{
+	UTDElement* tempRef = SpawnedElementData;
+
+	if (TemporalElementData)
+	{
+		tempRef = TemporalElementData;
+	}
+
+	return tempRef->ElementsMap[_element];
+
+}
+

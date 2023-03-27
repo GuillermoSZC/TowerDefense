@@ -2,6 +2,7 @@
 
 
 #include "Character/TDPlayerCharacter.h"
+#include "GameLogic/TDGameData.h"
 
 ATDPlayerCharacter::ATDPlayerCharacter()
 {
@@ -15,12 +16,18 @@ void ATDPlayerCharacter::Tick(float DeltaTime)
 
 }
 
+void ATDPlayerCharacter::TDUpdateRoundValues(int32 _Rounds)
+{
+    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Player Update"));
+}
+
 void ATDPlayerCharacter::BeginPlay()
 {
     Super::BeginPlay();
 
-
     TDInitialize();
+
+    UTDGameData::TDGetRoundManager()->FOnBuyPhaseStartDelegate.AddDynamic(this, &ATDPlayerCharacter::TDUpdateRoundValues);
 }
 
 

@@ -30,7 +30,7 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	EElements ownerElement = EElements::None;
 
-	UPROPERTY(VisibleAnywhere)        
+	UPROPERTY(VisibleAnywhere)
 		UTDElement* SpawnedElementData;
 
 
@@ -58,6 +58,9 @@ public:
     UFUNCTION(BlueprintCallable)
 	UTDElement* TDGetActualDataAsset();
 
+
+	UFUNCTION(BlueprintPure)
+	float TDGetDamageMultiplier(EElements _element);
 
 
 protected:
