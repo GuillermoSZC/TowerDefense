@@ -6,34 +6,34 @@
 #include "GameplayEffectExecutionCalculation.h"
 #include "TDMacros.h"
 #include "Map/TDTowerAttributeSet.h"
-#include "TDDamageTowerCalculation.generated.h"
+#include "TDDamageHeroCalculation.generated.h"
 
 /**
  *
  */
 
-struct TDAttributeCaptureDamageTower
+struct TDAttributeCaptureDamageHero
 {
     TDDECLARE_ATTRIBUTE_CAPTUREDEF(health, Target);
-    TDDECLARE_ATTRIBUTE_CAPTUREDEF(damage, Source);
+    TDDECLARE_ATTRIBUTE_CAPTUREDEF(attackDamage, Source);
 
-    TDAttributeCaptureDamageTower()
+    TDAttributeCaptureDamageHero()
     {
         TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDCharacterAttributeSet, health, Target, false);
-        TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDTowerAttributeSet, damage, Source, false);
+        TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDCharacterAttributeSet, attackDamage, Source, false);
     }
 };
 
 
 
 UCLASS()
-class TOWERDEFENSE_API UTDDamageTowerCalculation : public UGameplayEffectExecutionCalculation
+class TOWERDEFENSE_API UTDDamageHeroCalculation : public UGameplayEffectExecutionCalculation
 {
     GENERATED_BODY()
 
 public:
 
-    UTDDamageTowerCalculation();
+    UTDDamageHeroCalculation();
 
 public:
 
@@ -41,7 +41,7 @@ protected:
 
 private:
 
-    TDAttributeCaptureDamageTower structAbilities;
+    TDAttributeCaptureDamageHero structAbilities;
 
 public:
 

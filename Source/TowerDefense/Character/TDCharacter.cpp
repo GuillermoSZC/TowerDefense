@@ -17,8 +17,14 @@ ATDCharacter::ATDCharacter()
 
 
     abilitySystem = CreateDefaultSubobject<UAbilitySystemComponent>("AbilityComponent");
+    elementComponent = CreateDefaultSubobject<UTDElementComponent>("ElementComponent");
+
+}
 
 
+UTDElementComponent* ATDCharacter::TDGetElementComponent_Implementation()
+{
+    return elementComponent;
 }
 
 // Called when the game starts or when spawned

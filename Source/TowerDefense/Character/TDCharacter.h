@@ -46,10 +46,15 @@ protected:
     UPROPERTY(Transient)
         const UTDCharacterAttributeSet* CharacterAttributes;
 
+
+       UPROPERTY(EditAnywhere,BlueprintReadWrite)
+    UTDElementComponent* elementComponent = nullptr;
+
+
 private:
 
 
-
+   
 
 
 public:	
@@ -58,6 +63,10 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+
+     UFUNCTION()
+    virtual UTDElementComponent* TDGetElementComponent_Implementation() override;
 
 
 protected:

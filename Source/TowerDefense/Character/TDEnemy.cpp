@@ -21,15 +21,12 @@ ATDEnemy::ATDEnemy()
     refreshPathTime = 0.2f;
     tickCounterTime = 0.f;
 
-    elementComponent = CreateDefaultSubobject<UTDElementComponent>("ElementComponent");
+  
 
 
 }
 
-UTDElementComponent* ATDEnemy::TDGetElementComponent_Implementation()
-{
-    return elementComponent;
-}
+
 
 void ATDEnemy::TDCharacterDeath_Implementation()
 {
