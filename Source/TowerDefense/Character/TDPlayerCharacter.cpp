@@ -7,6 +7,10 @@
 ATDPlayerCharacter::ATDPlayerCharacter()
 {
 
+
+    SwordMesh = CreateDefaultSubobject<UStaticMeshComponent>("SwordMesh");
+    SwordMesh->SetupAttachment(GetMesh(), "WeaponSocketHero");
+
 }
 
 void ATDPlayerCharacter::Tick(float DeltaTime)

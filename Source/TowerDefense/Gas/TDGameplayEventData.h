@@ -28,6 +28,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
         AActor* ActorReference;
 
+        UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        UStaticMeshComponent* StaticMeshReference;
+
+
 protected:
 
 private:

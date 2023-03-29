@@ -74,4 +74,10 @@ void ATDBase::TDActivateDelegates()
 void ATDBase::TDHealthChanged(const FOnAttributeChangeData& Data)
 {
 
+    if (Data.NewValue <= 0.f)
+    {
+        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Purple, TEXT("muerte de la base"));
+    }
+
+
 }

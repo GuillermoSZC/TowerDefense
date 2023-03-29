@@ -43,6 +43,8 @@ void UTDDamageTowerCalculation::Execute_Implementation(const FGameplayEffectCust
        
         float elementMultiplier = SourceElementComponent->TDGetDamageMultiplier(TargetElementComponent->TDGetOwnerElement());
 
+
+        //cambiar actual Round por el nivel de la torre
         float TotalDamage = elementMultiplier * baseDamage * (1 + (0.1f * actualRound));
 
 
