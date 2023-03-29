@@ -9,6 +9,7 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnBuyPhaseStartSignature, int32, round);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCombatPhaseStartSignature, int32, round);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEnemyKillSignature, int32, _value);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnElementSelectionSignature, TArray<EElements>&, _elements);
 
 
@@ -52,6 +53,7 @@ public:
     FOnBuyPhaseStartSignature FOnBuyPhaseStartDelegate;
     FOnCombatPhaseStartSignature FOnCombatPhaseStartDelegate;
     FOnElementSelectionSignature FOnElementSelectionDelegate;
+    FOnEnemyKillSignature FOnEnemyKillDelegate;
 
 protected:
 
@@ -63,7 +65,7 @@ private:
 
     int32 killedWegith = 0;
 
-    int32 RoundWeight = 0;
+    int32 EnemiesToKill = 0;
 
     int32 actualRound = 0;
 
@@ -85,18 +87,27 @@ public:
     UFUNCTION(BlueprintCallable)
         void TDStartRound();
 
+
+        UFUNCTION(BlueprintCallable)
+        void TDPrepareCombatRound();
+
+
     UFUNCTION(BlueprintCallable)
         void TDStopRound();
 
 
 
+    
+
+	UFUNCTION()
+	void TDPostBeginPlay();
 
 
 
     virtual void Tick(float DeltaSeconds) override;
 
 
-    void TDEnemyKillWeight(int32& _weight);
+    void TDEnemyKillCounter(int32& _weight);
 
     UFUNCTION(BlueprintCallable)
         float TDGetTimeRound();

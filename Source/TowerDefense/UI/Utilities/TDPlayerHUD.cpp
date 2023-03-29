@@ -14,6 +14,7 @@ bool UTDPlayerHUD::Initialize()
 void UTDPlayerHUD::NativePreConstruct()
 {
     Super::NativePreConstruct();
+  
 
 }
 
@@ -21,31 +22,7 @@ void UTDPlayerHUD::NativeConstruct()
 {
     Super::NativeConstruct();
 
-    elementsArray.Add(firstElement);
-    elementsArray.Add(secondElement);
-    elementsArray.Add(thirdElement);
-
-    roundManager = UTDGameData::TDGetRoundManager();
-
-    if (roundManager)
-    {
-        roundManager->FOnBuyPhaseStartDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetBuyUI);
-        roundManager->FOnCombatPhaseStartDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetCombatUI);
-        roundManager->FOnElementSelectionDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetElementsUI);
-    }
-
-    ATDCharacter* ownerRef = GetOwningPlayerPawn<ATDCharacter>();
-
-    if (ownerRef)
-    {
-        ownerRef->FOnHealthChangeDelegate.AddUniqueDynamic(healthBar, &UTDHealthBar::TDSetBarPercentage);
-        ITDInterface::Execute_TDGetElementComponent(ownerRef)->OnElementChangeDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetPlayerElement);
-    }
-
-    if (phase)
-    {
-        phase->TDSetCustomText(FText::FromString("Buy Phase"));
-    }
+      TDInitialize();
 }
 
 void UTDPlayerHUD::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
@@ -62,6 +39,38 @@ void UTDPlayerHUD::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
     timer->TDSetCustomText(FText::FromString(FString::FromInt(timeRound)));
 }
 
+void UTDPlayerHUD::TDInitialize()
+{
+
+    elementsArray.Add(firstElement);
+    elementsArray.Add(secondElement);
+    elementsArray.Add(thirdElement);
+
+    roundManager = UTDGameData::TDGetRoundManager();
+
+    if (roundManager)
+    {
+        roundManager->FOnBuyPhaseStartDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetBuyUI);
+        roundManager->FOnCombatPhaseStartDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetCombatUI);
+        roundManager->FOnElementSelectionDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetElementsUI);
+        roundManager->FOnEnemyKillDelegate.AddUniqueDynamic(this,&UTDPlayerHUD::TDSetEnemyCounter);
+    }
+
+    ATDCharacter* ownerRef = GetOwningPlayerPawn<ATDCharacter>();
+
+    if (ownerRef)
+    {
+        ownerRef->FOnHealthChangeDelegate.AddUniqueDynamic(healthBar, &UTDHealthBar::TDSetBarPercentage);
+        ITDInterface::Execute_TDGetElementComponent(ownerRef)->OnElementChangeDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetPlayerElement);
+    }
+
+    if (phase)
+    {
+        phase->TDSetCustomText(FText::FromString("Buy Phase"));
+    }
+
+}
+
 void UTDPlayerHUD::TDSetCombatUI(int32 _value)
 {
     phase->TDSetCustomText(FText::FromString("Combat Phase"));
@@ -72,6 +81,7 @@ void UTDPlayerHUD::TDSetCombatUI(int32 _value)
 void UTDPlayerHUD::TDSetBuyUI(int32 _value)
 {
     phase->TDSetCustomText(FText::FromString("Buy Phase"));
+    roundNum->TDSetCustomText(FText::FromString(FString::FromInt(_value)));
     TDSetElementsVisibility(ESlateVisibility::Visible);
 }
 
@@ -118,4 +128,10 @@ void UTDPlayerHUD::TDSetPlayerElement(EElements _element)
 {
     UTexture2D* texture = UTDGameData::TDGetGameInstance()->elementsImage[_element];
     playerElement->SetBrushFromTexture(texture);
+}
+
+void UTDPlayerHUD::TDSetEnemyCounter(int32 _counter)
+{
+    enemyCounter->TDSetCustomText(FText::FromString(FString::FromInt(_counter)));
+
 }

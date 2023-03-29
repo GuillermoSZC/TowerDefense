@@ -31,17 +31,6 @@ int32 UTDWeightManager::TDSetActualRound(int32& _atualRound, TArray<EElements> _
     actualWegith = 0;
     licheCounter = 0;
     enemiesPerClass.Empty();
-    return WeightPerRound;
-}
-
-void UTDWeightManager::TDStartSpawn()
-{
-    if (actualWegith >= WeightPerRound)
-    {
-        UTDGameData::TDGetRoundManager()->TDStopRound();
-        GEngine->AddOnScreenDebugMessage(0, 5.f, FColor::Orange, FString::FromInt(actualWegith));
-        return;
-    }
 
     UWorld* actualWorld = UTDGameData::TDGetWorld();
 
@@ -49,13 +38,37 @@ void UTDWeightManager::TDStartSpawn()
     ATDObjectPooler* objectRef = UTDGameData::TDGetObjectPooler();
     ensure(objectRef);
 
-    ATDEnemy* actualEnemy = objectRef->TDGetEnemyFromPool();
+    while (!(actualWegith >= WeightPerRound))
+    {
+        ATDEnemy* actualEnemy = objectRef->TDGetEnemyFromPool();
+
+        if (actualEnemy)
+        {
+            TDSetEnemyValues(actualEnemy);      
+            preparedEnemies.Add(actualEnemy);
+        }
+    }
+
+    return preparedEnemies.Num();
+}
+
+
+
+void UTDWeightManager::TDStartSpawn()
+{
+   
+    ATDEnemy* actualEnemy = nullptr;
+    if (!preparedEnemies.IsEmpty())
+    {
+        actualEnemy = preparedEnemies[0];
+        preparedEnemies.Remove(actualEnemy);
+    }  
 
     if (actualEnemy)
     {
-        TDSetEnemyValues(actualEnemy);
         ATDSpawner* spawnerRef = UTDGameData::TDGetSpanwerActor();
         spawnerRef->TDSpawnEnemy(actualEnemy);
+        actualEnemy->TDSetActive();
     }
 
 }
@@ -130,7 +143,7 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
 
                     temp->TDSetSpawnedElement(UTDGameData::TDGetGameMode()->TDGetDataAssetFromElement(actualRoundElements[y]));
 
-                    _enemyRef->TDSetActive();
+                    //_enemyRef->TDSetActive();
 
                 }
             }

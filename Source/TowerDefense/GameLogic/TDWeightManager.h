@@ -46,7 +46,12 @@ private:
 	UPROPERTY()
 	int8 licheCounter;
 
+	UPROPERTY()
 	TArray<EElements> actualRoundElements;
+
+	UPROPERTY(Transient)
+	TArray<ATDEnemy*> preparedEnemies;
+
 
 public:
 

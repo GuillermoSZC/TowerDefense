@@ -63,6 +63,9 @@ void ATDGameMode::StartPlay()
 {
     Super::StartPlay();
 
+
+    RoundManagerRef->TDPostBeginPlay();
+  
 }
 
 void ATDGameMode::StartToLeaveMap()

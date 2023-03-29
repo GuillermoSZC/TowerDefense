@@ -70,7 +70,7 @@ void UTDGameData::TDRemoveEnmemyToArray(ATDEnemy* _ActualEnemy)
     {
         enemiesArray.Remove(_ActualEnemy);
 
-        UTDGameData::TDGetRoundManager()->TDEnemyKillWeight(_ActualEnemy->unitWeight);
+        UTDGameData::TDGetRoundManager()->TDEnemyKillCounter(_ActualEnemy->unitWeight);
     }
 }
 

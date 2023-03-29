@@ -20,13 +20,16 @@ ATDRoundManager::~ATDRoundManager()
 
 
 
-
-
-
 void ATDRoundManager::BeginPlay()
 {
     Super::BeginPlay();
 
+
+}
+
+
+void ATDRoundManager::TDPostBeginPlay()
+{
     TDStartBuyPhase();
 }
 
@@ -34,22 +37,31 @@ void ATDRoundManager::TDStartBuyPhase()
 {
     timeRound = timeBuyPhase;
     actualPhase = GamePhase::BuyPhase;
+    TDPrepareCombatRound();
+
     FOnBuyPhaseStartDelegate.Broadcast(actualRound);
 }
 
 void ATDRoundManager::TDStartCombatPhase()
 {
     TDStartRound();
+
+   
     FOnCombatPhaseStartDelegate.Broadcast(actualRound);
 }
 
 void ATDRoundManager::TDStartRound()
 {
-
     actualPhase = GamePhase::CombatPhase;
-    ++actualRound;
-    isSawning = true;
     timeRound = timeperSpawn;
+    isSawning = true;
+   
+}
+
+void ATDRoundManager::TDPrepareCombatRound()
+{
+    ++actualRound;
+    
 
     actualRoundElements.Empty();
 
@@ -57,7 +69,7 @@ void ATDRoundManager::TDStartRound()
 
     if (actualRound >= RoundElements.Num())
     {
-         x = actualRound % RoundElements.Num();
+        x = actualRound % RoundElements.Num();
     }
     else
     {
@@ -66,9 +78,9 @@ void ATDRoundManager::TDStartRound()
 
     RoundElements[x]->TDGetRoundElements(actualRoundElements);
     FOnElementSelectionDelegate.Broadcast(actualRoundElements);
-   
-    RoundWeight = UTDGameData::TDGetWeightManager()->TDSetActualRound(actualRound, actualRoundElements);
-    killedWegith = 0;
+
+    EnemiesToKill = UTDGameData::TDGetWeightManager()->TDSetActualRound(actualRound, actualRoundElements);
+    FOnEnemyKillDelegate.Broadcast(EnemiesToKill);
 }
 
 void ATDRoundManager::TDStopRound()
@@ -114,12 +126,19 @@ void ATDRoundManager::Tick(float DeltaSeconds)
 
 }
 
-void ATDRoundManager::TDEnemyKillWeight(int32& _weight)
+void ATDRoundManager::TDEnemyKillCounter(int32& _weight)
 {
 
-    killedWegith += _weight;
+    if (_weight <= 0)
+    {
+        return;
+    }
 
-    if (killedWegith >= RoundWeight)
+    --EnemiesToKill;
+
+    FOnEnemyKillDelegate.Broadcast(EnemiesToKill);
+
+    if (EnemiesToKill <= 0)
     {
 
         GEngine->AddOnScreenDebugMessage(0,5.f,FColor::Yellow,"Todos muertos");

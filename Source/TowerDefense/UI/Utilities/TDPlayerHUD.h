@@ -114,6 +114,10 @@ private:
 public:
 
 
+    UFUNCTION(BlueprintCallable)
+    void TDInitialize();
+
+
 protected:
 
 
@@ -132,5 +136,9 @@ private:
 
     UFUNCTION()
         void TDSetPlayerElement(EElements _element);
+
+        UFUNCTION()
+        void TDSetEnemyCounter(int32 _counter);
+
 
 };
