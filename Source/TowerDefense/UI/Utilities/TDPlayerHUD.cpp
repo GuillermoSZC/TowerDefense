@@ -2,6 +2,7 @@
 #include "GameLogic/TDRoundManager.h"
 #include "GameLogic/TDGameData.h"
 #include "Character/TDCharacter.h"
+#include "Interfaces/TDInterface.h"
 
 bool UTDPlayerHUD::Initialize()
 {
@@ -24,9 +25,6 @@ void UTDPlayerHUD::NativeConstruct()
     elementsArray.Add(secondElement);
     elementsArray.Add(thirdElement);
 
-
-
-
     roundManager = UTDGameData::TDGetRoundManager();
 
     if (roundManager)
@@ -34,7 +32,6 @@ void UTDPlayerHUD::NativeConstruct()
         roundManager->FOnBuyPhaseStartDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetBuyUI);
         roundManager->FOnCombatPhaseStartDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetCombatUI);
         roundManager->FOnElementSelectionDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetElementsUI);
-
     }
 
     ATDCharacter* ownerRef = GetOwningPlayerPawn<ATDCharacter>();
@@ -42,6 +39,7 @@ void UTDPlayerHUD::NativeConstruct()
     if (ownerRef)
     {
         ownerRef->FOnHealthChangeDelegate.AddUniqueDynamic(healthBar, &UTDHealthBar::TDSetBarPercentage);
+        ITDInterface::Execute_TDGetElementComponent(ownerRef)->OnElementChangeDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetPlayerElement);
     }
 
     if (phase)
@@ -114,4 +112,10 @@ void UTDPlayerHUD::TDSetElementsVisibility(ESlateVisibility _visibility)
     fireGem->SetVisibility(_visibility);
     iceGem->SetVisibility(_visibility);
     plasmaGem->SetVisibility(_visibility);
+}
+
+void UTDPlayerHUD::TDSetPlayerElement(EElements _element)
+{
+    UTexture2D* texture = UTDGameData::TDGetGameInstance()->elementsImage[_element];
+    playerElement->SetBrushFromTexture(texture);
 }

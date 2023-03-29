@@ -6,61 +6,62 @@
 #include "Components/ActorComponent.h"
 #include "TDElementComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnElementChangeSignature, EElements, _element);
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class TOWERDEFENSE_API UTDElementComponent : public UActorComponent
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
-public:	
-	// Sets default values for this component's properties
-	UTDElementComponent();
+public:
+    // Sets default values for this component's properties
+    UTDElementComponent();
 
 
 
 public:
+    FOnElementChangeSignature OnElementChangeDelegate;
 
 
-	
 
 protected:
 
 private:
 
-	UPROPERTY(VisibleAnywhere)
-	EElements ownerElement = EElements::None;
+    UPROPERTY(VisibleAnywhere)
+        EElements ownerElement = EElements::None;
 
-	UPROPERTY(VisibleAnywhere)
-		UTDElement* SpawnedElementData;
-
-
-	UPROPERTY(VisibleAnywhere)        
-		UTDElement* TemporalElementData;
+    UPROPERTY(VisibleAnywhere)
+        UTDElement* SpawnedElementData;
 
 
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+    UPROPERTY(VisibleAnywhere)
+        UTDElement* TemporalElementData;
 
 
-	UFUNCTION(BlueprintCallable)
-	void TDSetSpawnedElement(UTDElement* _DataAsset);
+public:
+    // Called every frame
+    virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 
     UFUNCTION(BlueprintCallable)
-    void TDSetTemporalElement(UTDElement* _DataAsset);
+        void TDSetSpawnedElement(UTDElement* _DataAsset);
 
     UFUNCTION(BlueprintCallable)
-    void TDRemoveTemporalElement();
-
-	UFUNCTION(BlueprintCallable)
-	EElements TDGetOwnerElement();
+        void TDSetTemporalElement(UTDElement* _DataAsset);
 
     UFUNCTION(BlueprintCallable)
-	UTDElement* TDGetActualDataAsset();
+        void TDRemoveTemporalElement();
+
+    UFUNCTION(BlueprintCallable)
+        EElements TDGetOwnerElement();
+
+    UFUNCTION(BlueprintCallable)
+        UTDElement* TDGetActualDataAsset();
 
 
-	UFUNCTION(BlueprintPure)
-	float TDGetDamageMultiplier(EElements _element);
+    UFUNCTION(BlueprintPure)
+        float TDGetDamageMultiplier(EElements _element);
 
 
 protected:

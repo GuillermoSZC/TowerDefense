@@ -43,7 +43,7 @@ public:
         class UImage* thirdElement;
 
     UPROPERTY()
-    TArray<UImage*> elementsArray;
+        TArray<UImage*> elementsArray;
 
 
     // @TODO: MINIMAPA - INVESTIGAR EL ASSET DE LA EPIC
@@ -125,10 +125,12 @@ private:
         void TDSetBuyUI(int32 _value);
 
     UFUNCTION()
-    void TDSetElementsUI(TArray<EElements>& _elements);
-
+        void TDSetElementsUI(TArray<EElements>& _elements);
 
     UFUNCTION()
         void TDSetElementsVisibility(ESlateVisibility _visibility);
+
+    UFUNCTION()
+        void TDSetPlayerElement(EElements _element);
 
 };
