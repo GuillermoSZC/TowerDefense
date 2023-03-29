@@ -30,6 +30,9 @@ public:
         TArray<TSubclassOf<UGameplayAbility>> abiliyList;
 
 
+    UPROPERTY(EditAnywhere,BlueprintReadWrite)
+    UStaticMeshComponent* SwordMesh;
+
 
 
 protected:
