@@ -2,6 +2,7 @@
 
 
 #include "GameLogic/TDElementComponent.h"
+#include "TDElement.h"
 
 // Sets default values for this component's properties
 UTDElementComponent::UTDElementComponent()

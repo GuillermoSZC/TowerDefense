@@ -7,6 +7,7 @@
 #include "AttributesSets/TDMovementAttributeSet.h"
 #include "AttributesSets/TDDamageAttributeSet.h"
 #include "AttributesSets/TDHealthAttributeSet.h"
+#include "GameLogic/TDElementComponent.h"
 
 
 

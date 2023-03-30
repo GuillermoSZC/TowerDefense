@@ -6,7 +6,7 @@
 #include "Abilities/Tasks/AbilityTask.h"
 #include "DelegateTickTask.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTickDelegate, float, elapsedTime, float, DeltaTime);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTickSignature, float, elapsedTime, float, DeltaTime);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FStartDelegateTickTask);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FEndDelegateTickTask);
 
@@ -25,7 +25,7 @@ private:
 	float delegateFrecuencyElapsed;
 
 	UPROPERTY(BlueprintAssignable)
-		FTickDelegate delegateFunctionality;
+		FTickSignature delegateFunctionality;
 	
 	UPROPERTY(BlueprintAssignable)
 		FEndDelegateTickTask onEnd;

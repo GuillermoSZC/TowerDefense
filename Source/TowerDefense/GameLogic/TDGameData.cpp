@@ -7,6 +7,7 @@
 #include "Character/TDEnemy.h"
 #include "TDObjectPooler.h"
 #include "TDWeightManager.h"
+#include "TDRoundManager.h"
 
 
 UWorld* UTDGameData::gameWorld = nullptr;
