@@ -12,7 +12,6 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangeSignature, float, _newValue);
 
 
-class UTDCharacterAttributeSet;
 class UTDHealthAttributeSet;
 class UTDDamageAttributeSet;
 class UTDMovementAttributeSet;
@@ -60,8 +59,7 @@ protected:
 #pragma endregion
 
 
-    UPROPERTY(Transient)
-        const UTDCharacterAttributeSet* CharacterAttributes;
+
 
       
     

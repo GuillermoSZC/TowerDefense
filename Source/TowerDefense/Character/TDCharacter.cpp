@@ -2,7 +2,6 @@
 
 
 #include "TDCharacter.h"
-#include "TDCharacterAttributeSet.h"
 #include "TDMacros.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AttributesSets/TDMovementAttributeSet.h"

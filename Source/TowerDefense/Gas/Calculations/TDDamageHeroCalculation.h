@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameplayEffectExecutionCalculation.h"
 #include "TDMacros.h"
-#include "Map/TDTowerAttributeSet.h"
 #include "AttributesSets/TDHealthAttributeSet.h"
 #include "AttributesSets/TDDamageAttributeSet.h"
 #include "TDDamageHeroCalculation.generated.h"

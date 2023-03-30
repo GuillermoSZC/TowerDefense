@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameLogic/TDAttributeSet.h"
+#include "AttributesSets/TDAttributeSet.h"
 #include "TDDamageAttributeSet.generated.h"
 
 /**

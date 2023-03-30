@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TDTower.h"
-#include "TDTowerAttributeSet.h"
 #include "GameplayEffectTypes.h"
 #include "GameLogic/TDGameData.h"
 #include "Character/TDEnemy.h"

@@ -1,6 +1,6 @@
 #include "TDBase.h"
 #include "Components/BoxComponent.h"
-#include "TDBaseAttributeSet.h"
+
 #include "GameplayEffectTypes.h"
 #include "GameLogic/TDGameData.h"
 #include "Components/StaticMeshComponent.h"

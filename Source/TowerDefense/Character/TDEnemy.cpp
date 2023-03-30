@@ -2,7 +2,6 @@
 #include "AbilitySystemComponent.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "GameLogic/TDGameData.h"
-#include "TDEnemyAttributeSet.h"
 #include "GameplayTagContainer.h"
 #include "TDMacros.h"
 #include "GameLogic/TDPathPoint.h"
