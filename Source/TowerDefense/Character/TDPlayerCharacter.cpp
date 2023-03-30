@@ -22,7 +22,7 @@ void ATDPlayerCharacter::Tick(float DeltaTime)
 
 void ATDPlayerCharacter::TDUpdateRoundValues(int32 _Rounds)
 {
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Player Update"));
+    //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Player Update"));
 }
 
 void ATDPlayerCharacter::BeginPlay()

@@ -120,7 +120,7 @@ void ATDRoundManager::Tick(float DeltaSeconds)
 
         }    
 
-        GEngine->AddOnScreenDebugMessage(0, 0.f, FColor::Blue, FString::SanitizeFloat(timeRound));
+        //GEngine->AddOnScreenDebugMessage(0, 0.f, FColor::Blue, FString::SanitizeFloat(timeRound));
         timeRound -= DeltaSeconds;
 
     }
@@ -143,7 +143,7 @@ void ATDRoundManager::TDEnemyKillCounter(int32& _weight)
     if (EnemiesToKill <= 0)
     {
 
-        GEngine->AddOnScreenDebugMessage(0,5.f,FColor::Yellow,"Todos muertos");
+        //GEngine->AddOnScreenDebugMessage(0,5.f,FColor::Yellow,"Todos muertos");
 
         TDStartBuyPhase();
 

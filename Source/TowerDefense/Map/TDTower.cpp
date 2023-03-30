@@ -132,7 +132,7 @@ ATDEnemy* ATDTower::TDGetEnemyInRange()
 
 void ATDTower::TDUpdateRoundValues(int32 _Round)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("UpdateTower"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("UpdateTower"));
 
 }
 
@@ -141,7 +141,7 @@ int ATDTower::TGGApplyEffect_Implementation()
 {
 
 
-	 GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Funca"));
+	 //GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Funca"));
 
 	return 0;
 }

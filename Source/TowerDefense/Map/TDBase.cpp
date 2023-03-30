@@ -48,7 +48,7 @@ UAbilitySystemComponent* ATDBase::GetAbilitySystemComponent() const
 
 int ATDBase::TGGApplyEffect_Implementation()
 {
-    GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("BaseApplyEffect_Implementation"));
+    //GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("BaseApplyEffect_Implementation"));
 
     return 0;
 }
@@ -77,7 +77,7 @@ void ATDBase::TDHealthChanged(const FOnAttributeChangeData& Data)
 
     if (Data.NewValue <= 0.f)
     {
-        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Purple, TEXT("muerte de la base"));
+        //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Purple, TEXT("muerte de la base"));
     }
 
 

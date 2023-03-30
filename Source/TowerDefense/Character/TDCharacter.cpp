@@ -64,7 +64,9 @@ void ATDCharacter::TDActivateDelegates()
 
 void ATDCharacter::TDmaxHealthChanged(const FOnAttributeChangeData& Data)
 {
-
+    float actualhealth = healthAttributes->Gethealth();
+    float healthPercent = actualhealth / Data.NewValue;
+    FOnHealthChangeDelegate.Broadcast(healthPercent);
 }
 
 void ATDCharacter::TDHealthChanged(const FOnAttributeChangeData& Data)
