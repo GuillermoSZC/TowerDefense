@@ -48,7 +48,16 @@ public:
         int32 limitEnemiesPerRound;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-        UDataTable* gasDataTable;
+        UDataTable* healthDataTable;
+
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        UDataTable* damageDataTable;
+
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        UDataTable* movementDataTable;
+
 
     UPROPERTY(EditAnywhere,BlueprintReadWrite)
     float movementVariation;

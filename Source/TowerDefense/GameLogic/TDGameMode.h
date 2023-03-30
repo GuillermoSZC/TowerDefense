@@ -7,10 +7,13 @@
 #include "TDObjectPooler.h"
 #include "ElementsEnum.h"
 #include "TDRoundManager.h"
+
 #include "TDGameMode.generated.h"
 
 class ATDEnemy;
 class UDataTable;
+class UTDElement;
+class UTDWeightManager;
 
 /**
  *

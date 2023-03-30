@@ -7,6 +7,7 @@
 #include "Gas/TDGameplayEventData.h"
 #include "TDWeightManager.h"
 #include "Engine/DataTable.h"
+#include "TDElement.h"
 
 
 ATDGameMode::ATDGameMode()

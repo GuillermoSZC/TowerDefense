@@ -9,7 +9,7 @@
 UTDDamageTowerCalculation::UTDDamageTowerCalculation()
 {
     RelevantAttributesToCapture.Add(structAbilities.healthTargetDef);
-    RelevantAttributesToCapture.Add(structAbilities.damageSourceDef);
+    RelevantAttributesToCapture.Add(structAbilities.attackDamageSourceDef);
 }
 
 
@@ -30,7 +30,7 @@ void UTDDamageTowerCalculation::Execute_Implementation(const FGameplayEffectCust
         FAggregatorEvaluateParameters evaluationParameters;
 
         float baseDamage = 0.f;
-        ensure(ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(structAbilities.damageSourceDef, evaluationParameters, baseDamage));
+        ensure(ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(structAbilities.attackDamageSourceDef, evaluationParameters, baseDamage));
 
 
         float enemyHealth = 0.f;

@@ -37,14 +37,20 @@ void ATDPlayerCharacter::BeginPlay()
 
 void ATDPlayerCharacter::TDInitialize()
 {
-    const UAttributeSet* attributesInit = abilitySystem->InitStats(UTDCharacterAttributeSet::StaticClass(), statsDatatable);
-    CharacterAttributes = Cast<UTDCharacterAttributeSet>(attributesInit);
+    const UAttributeSet* attributesInit1 = abilitySystem->InitStats(UTDHealthAttributeSet::StaticClass(), healthDatatable);
+    healthAttributes = Cast<UTDHealthAttributeSet>(attributesInit1);
+
+    const UAttributeSet* attributesInit2 = abilitySystem->InitStats(UTDDamageAttributeSet::StaticClass(), damageDatatable);
+    damageAttributes = Cast<UTDDamageAttributeSet>(attributesInit2);
+
+    const UAttributeSet* attributesInit3 = abilitySystem->InitStats(UTDMovementAttributeSet::StaticClass(), movementDatatable);
+    movementAttributes = Cast<UTDMovementAttributeSet>(attributesInit3);
 
     for (size_t i = 0; i < abiliyList.Num(); ++i)
     {
         FGameplayAbilitySpecHandle specHandle = abilitySystem->GiveAbility(FGameplayAbilitySpec(abiliyList[i].GetDefaultObject(), 1, 0));
     }
-    GetCharacterMovement()->MaxWalkSpeed = CharacterAttributes->GetmovementSpeed();
+    GetCharacterMovement()->MaxWalkSpeed = movementAttributes->GetmovementSpeed();
 
     TDActivateDelegates();
 }

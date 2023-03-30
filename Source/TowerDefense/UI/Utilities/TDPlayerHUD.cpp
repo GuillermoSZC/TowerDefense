@@ -1,8 +1,13 @@
 #include "UI/Utilities/TDPlayerHUD.h"
 #include "GameLogic/TDRoundManager.h"
 #include "GameLogic/TDGameData.h"
+#include "GameLogic/TDGameInstance.h"
+#include "GameLogic/TDElementComponent.h"
 #include "Character/TDCharacter.h"
 #include "Interfaces/TDInterface.h"
+#include "UMG/Public/Components/Image.h"
+#include "UI/Utilities/TDTextWithImage.h"
+
 
 bool UTDPlayerHUD::Initialize()
 {

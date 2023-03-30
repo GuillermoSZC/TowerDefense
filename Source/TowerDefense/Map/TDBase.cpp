@@ -4,6 +4,7 @@
 #include "GameplayEffectTypes.h"
 #include "GameLogic/TDGameData.h"
 #include "Components/StaticMeshComponent.h"
+#include "AttributesSets/TDHealthAttributeSet.h"
 
 FName ATDBase::BoxComponentName(TEXT("BoxComponentName"));
 FName ATDBase::StaticMeshName(TEXT("BaseMesh"));
@@ -55,8 +56,8 @@ int ATDBase::TGGApplyEffect_Implementation()
 void ATDBase::TDInitialize()
 {
 
-    const UAttributeSet* attributesInit = AbilitySystem->InitStats(UTDBaseAttributeSet::StaticClass(), StatsDatatable);
-    BaseAttributes = Cast<UTDBaseAttributeSet>(attributesInit);
+    const UAttributeSet* attributesInit = AbilitySystem->InitStats(UTDHealthAttributeSet::StaticClass(), healthDatatable);
+    BaseAttributes = Cast<UTDHealthAttributeSet>(attributesInit);
 
     for (size_t i = 0; i < AbiliyList.Num(); ++i)
     {

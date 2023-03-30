@@ -5,6 +5,8 @@
 #include "GameplayEffectTypes.h"
 #include "GameLogic/TDGameData.h"
 #include "Character/TDEnemy.h"
+#include "GameLogic/TDRoundManager.h"
+#include "AttributesSets/TDDamageAttributeSet.h"
 
 
 
@@ -48,8 +50,8 @@ void ATDTower::BeginPlay()
 void ATDTower::TDInitialize()
 {
 
-	const UAttributeSet* attributesInit = abilitySystem->InitStats(UTDTowerAttributeSet::StaticClass(), statsDatatable);
-	TowerAttributes = Cast<UTDTowerAttributeSet>(attributesInit);
+	const UAttributeSet* attributesInit = abilitySystem->InitStats(UTDDamageAttributeSet::StaticClass(), damageDatatable);
+	TowerAttributes = Cast<UTDDamageAttributeSet>(attributesInit);
 	periodAttack = TowerAttributes->GetattackSpeed();
 
     for (size_t i = 0; i < abiliyList.Num(); ++i)
@@ -99,7 +101,7 @@ ATDEnemy* ATDTower::TDGetEnemyInRange()
 	TArray<ATDEnemy*> enemiesArray = UTDGameData::TDGetEnemiesArray();
 
 	FVector ownerLocation = GetActorLocation();
-	float TowerRadius = TowerAttributes->Getrange();
+	float TowerRadius = TowerAttributes->GetattackRange();
 	ATDEnemy* minorDistanceToBase = nullptr;
 
 
@@ -151,8 +153,8 @@ int ATDTower::TGGApplyEffect_Implementation()
 
  void ATDTower::TDActivateDelegates()
  {
-	 TowerDamageChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetdamageAttribute()).AddUObject(this, &ATDTower::TDDamageChanged);
-	 TowerRangeChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetrangeAttribute()).AddUObject(this, &ATDTower::TDRangeChanged);
+	 TowerDamageChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetattackDamageAttribute()).AddUObject(this, &ATDTower::TDDamageChanged);
+	 TowerRangeChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetattackRangeAttribute()).AddUObject(this, &ATDTower::TDRangeChanged);
 	 TowerPeriodAttackChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetattackSpeedAttribute()).AddUObject(this, &ATDTower::TDPeriodAttackChanged);
  }
 

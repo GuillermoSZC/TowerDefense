@@ -10,6 +10,8 @@
 #include "Character/TDEnemyController.h"
 #include "AIModule/Classes/BehaviorTree/BehaviorTree.h"
 #include "Components/CapsuleComponent.h"
+#include "TDElementComponent.h"
+#include "TDGameMode.h"
 
 
 
@@ -129,7 +131,9 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
                     _enemyRef->GetMesh()->SetRelativeScale3D(Row->MeshScale);
                     _enemyRef->GetMesh()->SetAnimInstanceClass(Row->animationBlueprint);
                     _enemyRef->TDSetAnimMontaje(Row->animationMontaje.LoadSynchronous());
-                    _enemyRef->statsDatatable = Row->gasDataTable;
+                    _enemyRef->healthDatatable = Row->healthDataTable;
+                    _enemyRef->damageDatatable = Row->damageDataTable;
+                    _enemyRef->movementDatatable = Row->movementDataTable;
                     _enemyRef->movementVariation = Row->movementVariation;
                     _enemyRef->GetCapsuleComponent()->SetCapsuleRadius(Row->capsuleRadius);
                     _enemyRef->GetCapsuleComponent()->SetCapsuleHalfHeight(Row->capsuleHeight);

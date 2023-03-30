@@ -5,6 +5,9 @@
 #include "TDCharacterAttributeSet.h"
 #include "TDMacros.h"
 #include "AbilitySystemBlueprintLibrary.h"
+#include "AttributesSets/TDMovementAttributeSet.h"
+#include "AttributesSets/TDDamageAttributeSet.h"
+#include "AttributesSets/TDHealthAttributeSet.h"
 
 
 
@@ -52,12 +55,12 @@ void ATDCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 void ATDCharacter::TDActivateDelegates()
 {
-    abilitySystem->GetGameplayAttributeValueChangeDelegate(CharacterAttributes->GethealthAttribute()).AddUObject(this, &ATDCharacter::TDHealthChanged);
-    abilitySystem->GetGameplayAttributeValueChangeDelegate(CharacterAttributes->GetmaxHealthAttribute()).AddUObject(this, &ATDCharacter::TDmaxHealthChanged);
-    abilitySystem->GetGameplayAttributeValueChangeDelegate(CharacterAttributes->GetattackDamageAttribute()).AddUObject(this, &ATDCharacter::TDAttackDamageChanged);
-    abilitySystem->GetGameplayAttributeValueChangeDelegate(CharacterAttributes->GetattackRangeAttribute()).AddUObject(this, &ATDCharacter::TDAttackRangeChanged);
-    abilitySystem->GetGameplayAttributeValueChangeDelegate(CharacterAttributes->GetattackSpeedAttribute()).AddUObject(this, &ATDCharacter::TDAttackSpeedChanged);
-    abilitySystem->GetGameplayAttributeValueChangeDelegate(CharacterAttributes->GetmovementSpeedAttribute()).AddUObject(this, &ATDCharacter::TDMovementSpeedChanged);
+    abilitySystem->GetGameplayAttributeValueChangeDelegate(healthAttributes->GethealthAttribute()).AddUObject(this, &ATDCharacter::TDHealthChanged);
+    abilitySystem->GetGameplayAttributeValueChangeDelegate(healthAttributes->GetmaxHealthAttribute()).AddUObject(this, &ATDCharacter::TDmaxHealthChanged);
+    abilitySystem->GetGameplayAttributeValueChangeDelegate(damageAttributes->GetattackDamageAttribute()).AddUObject(this, &ATDCharacter::TDAttackDamageChanged);
+    abilitySystem->GetGameplayAttributeValueChangeDelegate(damageAttributes->GetattackRangeAttribute()).AddUObject(this, &ATDCharacter::TDAttackRangeChanged);
+    abilitySystem->GetGameplayAttributeValueChangeDelegate(damageAttributes->GetattackSpeedAttribute()).AddUObject(this, &ATDCharacter::TDAttackSpeedChanged);
+    abilitySystem->GetGameplayAttributeValueChangeDelegate(movementAttributes->GetmovementSpeedAttribute()).AddUObject(this, &ATDCharacter::TDMovementSpeedChanged);
 }
 
 void ATDCharacter::TDmaxHealthChanged(const FOnAttributeChangeData& Data)
@@ -73,7 +76,7 @@ void ATDCharacter::TDHealthChanged(const FOnAttributeChangeData& Data)
         UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(this, GET_GAMEPLAY_TAG(DEATH_TRIGGER_TAG), DataEvent);
     }
 
-    float MaxHealth = CharacterAttributes->GetmaxHealth();
+    float MaxHealth = healthAttributes->GetmaxHealth();
     float healthPercent = Data.NewValue / MaxHealth;
     FOnHealthChangeDelegate.Broadcast(healthPercent);
 }

@@ -6,9 +6,9 @@
 #include "AbilitySystemInterface.h"
 #include "TDBase.generated.h"
 
-class UTDBaseAttributeSet;
 class UDataTable;
 struct FOnAttributeChangeData;
+class UTDHealthAttributeSet;
 
 UCLASS()
 class TOWERDEFENSE_API ATDBase : public AActor, public ITDInterface, public IAbilitySystemInterface
@@ -20,7 +20,7 @@ public:
 
 public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
-        UDataTable* StatsDatatable;
+        UDataTable* healthDatatable;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
         TArray<TSubclassOf<class UGameplayAbility>> AbiliyList;
@@ -47,7 +47,7 @@ private:
 #pragma endregion
 
     UPROPERTY(Transient)
-        const UTDBaseAttributeSet* BaseAttributes;
+        const UTDHealthAttributeSet* BaseAttributes;
 
 public:
     UFUNCTION(BlueprintCallable)

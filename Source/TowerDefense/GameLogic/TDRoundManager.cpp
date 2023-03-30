@@ -3,6 +3,8 @@
 
 #include "GameLogic/TDRoundManager.h"
 #include "TDRoundElementsType.h"
+#include "TDWeightManager.h"
+#include "TDGameData.h"
 
 
 

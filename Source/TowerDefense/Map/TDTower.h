@@ -11,6 +11,7 @@
 class UTDTowerAttributeSet;
 class UDataTable;
 struct FOnAttributeChangeData;
+class UTDDamageAttributeSet;
 
 
 
@@ -30,7 +31,7 @@ public:
 public:
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
-        UDataTable* statsDatatable;
+        UDataTable* damageDatatable;
 
     UPROPERTY(EditAnywhere,BlueprintReadWrite)
     UTDElementComponent* elementComponent = nullptr;
@@ -66,7 +67,7 @@ private:
     float periodAttack;
 
     UPROPERTY(Transient)
-        const UTDTowerAttributeSet* TowerAttributes;
+        const UTDDamageAttributeSet* TowerAttributes;
 
 
 

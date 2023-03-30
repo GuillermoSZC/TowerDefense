@@ -2,6 +2,7 @@
 
 
 #include "GameLogic/TDRoundElementsType.h"
+#include "ElementsEnum.h"
 
 UTDRoundElementsType::UTDRoundElementsType()
 {

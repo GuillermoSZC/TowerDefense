@@ -3,6 +3,7 @@
 
 #include "IA/Task/TDActivateAbilityByEventTaskAI.h"
 #include "TDMacros.h"
+#include "AbilitySystemBlueprintLibrary.h"
 
 EBTNodeResult::Type UTDActivateAbilityByEventTaskAI::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {

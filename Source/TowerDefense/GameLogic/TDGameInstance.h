@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
 #include "UMG/Public/Components/Image.h"
+#include "ElementsEnum.h"
 #include "TDGameInstance.generated.h"
 
 /**

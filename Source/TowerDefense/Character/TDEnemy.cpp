@@ -162,14 +162,22 @@ void ATDEnemy::BeginPlay()
 
 void ATDEnemy::TDInitialize()
 {  
-    const UAttributeSet* attributesInit = abilitySystem->InitStats(UTDEnemyAttributeSet::StaticClass(), statsDatatable);
-    CharacterAttributes = Cast<UTDEnemyAttributeSet>(attributesInit);
+    const UAttributeSet* attributesInit1 = abilitySystem->InitStats(UTDHealthAttributeSet::StaticClass(), healthDatatable);
+    healthAttributes = Cast<UTDHealthAttributeSet>(attributesInit1);
+
+    const UAttributeSet* attributesInit2 = abilitySystem->InitStats(UTDDamageAttributeSet::StaticClass(), damageDatatable);
+    damageAttributes = Cast<UTDDamageAttributeSet>(attributesInit2);
+
+    const UAttributeSet* attributesInit3 = abilitySystem->InitStats(UTDMovementAttributeSet::StaticClass(), movementDatatable);
+    movementAttributes = Cast<UTDMovementAttributeSet>(attributesInit3);
+
+
     for (size_t i = 0; i < abiliyList.Num(); ++i)
     {
         FGameplayAbilitySpecHandle specHandle = abilitySystem->GiveAbility(FGameplayAbilitySpec(abiliyList[i].GetDefaultObject(), 1, 0));
     }
     float randomValue = FMath::FRandRange(-movementVariation, movementVariation);
-    GetCharacterMovement()->MaxWalkSpeed = CharacterAttributes->GetmovementSpeed() + randomValue;
+    GetCharacterMovement()->MaxWalkSpeed = movementAttributes->GetmovementSpeed() + randomValue;
 
     TDActivateDelegates();
 }

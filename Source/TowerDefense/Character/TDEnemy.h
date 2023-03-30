@@ -17,19 +17,9 @@ class TOWERDEFENSE_API ATDEnemy : public ATDCharacter
 {
     GENERATED_BODY()
 public:
-    ATDEnemy();
-
-
-
-
-
-   
+    ATDEnemy();  
 
 public:
-
-
-    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
-        UDataTable* statsDatatable;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
         TArray<TSubclassOf<UGameplayAbility>> abiliyList;
@@ -47,8 +37,6 @@ public:
 
 
 protected:
-
-
 
 
 private:

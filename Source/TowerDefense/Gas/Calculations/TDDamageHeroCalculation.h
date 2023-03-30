@@ -6,6 +6,8 @@
 #include "GameplayEffectExecutionCalculation.h"
 #include "TDMacros.h"
 #include "Map/TDTowerAttributeSet.h"
+#include "AttributesSets/TDHealthAttributeSet.h"
+#include "AttributesSets/TDDamageAttributeSet.h"
 #include "TDDamageHeroCalculation.generated.h"
 
 /**
@@ -19,8 +21,8 @@ struct TDAttributeCaptureDamageHero
 
     TDAttributeCaptureDamageHero()
     {
-        TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDCharacterAttributeSet, health, Target, false);
-        TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDCharacterAttributeSet, attackDamage, Source, false);
+        TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDHealthAttributeSet, health, Target, false);
+        TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDDamageAttributeSet, attackDamage, Source, false);
     }
 };
 

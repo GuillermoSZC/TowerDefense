@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Interfaces/TDInterface.h"
+#include "GameplayEffectTypes.h"
 #include "TDCharacter.generated.h"
 
 
@@ -12,6 +13,9 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangeSignature, float, _ne
 
 
 class UTDCharacterAttributeSet;
+class UTDHealthAttributeSet;
+class UTDDamageAttributeSet;
+class UTDMovementAttributeSet;
 
 UCLASS()
 class TOWERDEFENSE_API ATDCharacter : public ACharacter, public ITDInterface
@@ -27,6 +31,19 @@ public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
         UAbilitySystemComponent* abilitySystem;
+
+
+      UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
+        UDataTable* healthDatatable;
+
+      
+        UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
+        UDataTable* damageDatatable;
+
+
+           UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
+        UDataTable* movementDatatable;
+
 
 
     FOnHealthChangeSignature FOnHealthChangeDelegate;
@@ -45,6 +62,20 @@ protected:
 
     UPROPERTY(Transient)
         const UTDCharacterAttributeSet* CharacterAttributes;
+
+      
+    
+    UPROPERTY(Transient)
+        const UTDHealthAttributeSet* healthAttributes;    
+
+    UPROPERTY(Transient)
+        const UTDDamageAttributeSet* damageAttributes;    
+     
+    UPROPERTY(Transient)
+        const UTDMovementAttributeSet* movementAttributes;
+
+
+
 
 
        UPROPERTY(EditAnywhere,BlueprintReadWrite)
