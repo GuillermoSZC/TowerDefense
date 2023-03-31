@@ -129,9 +129,9 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
                     _enemyRef->GetMesh()->SetRelativeScale3D(Row->MeshScale);
                     _enemyRef->GetMesh()->SetAnimInstanceClass(Row->animationBlueprint);
                     _enemyRef->TDSetAnimMontaje(Row->animationMontaje.LoadSynchronous());
-                    _enemyRef->healthDatatable = Row->healthDataTable;
-                    _enemyRef->damageDatatable = Row->damageDataTable;
-                    _enemyRef->movementDatatable = Row->movementDataTable;
+                    _enemyRef->healthDatatable = Row->EnemyStatsDataAsset->healthDataTable;
+                    _enemyRef->damageDatatable = Row->EnemyStatsDataAsset->damageDataTable;
+                    _enemyRef->movementDatatable = Row->EnemyStatsDataAsset->movementDataTable;
                     _enemyRef->movementVariation = Row->movementVariation;
                     _enemyRef->GetCapsuleComponent()->SetCapsuleRadius(Row->capsuleRadius);
                     _enemyRef->GetCapsuleComponent()->SetCapsuleHalfHeight(Row->capsuleHeight);

@@ -2,19 +2,20 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
+#include "TDEnemyStats.h"
 #include "TDEnemiesDataTable.generated.h"
 
 /**
- * 
+ *
  */
 USTRUCT(BlueprintType)
 struct TOWERDEFENSE_API FTDEnemiesDataTable : public FTableRowBase
 {
-	GENERATED_USTRUCT_BODY()
+    GENERATED_USTRUCT_BODY()
 
 public:
-	FTDEnemiesDataTable();
-	~FTDEnemiesDataTable();
+    FTDEnemiesDataTable();
+    ~FTDEnemiesDataTable();
 
 public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -33,10 +34,10 @@ public:
         FVector HealthBarPosition = FVector(0.f, -40.f, 160.f);
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    float capsuleHeight = 130.f;
+        float capsuleHeight = 130.f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    float capsuleRadius = 55.f;
+        float capsuleRadius = 55.f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
         TSubclassOf<UAnimInstance> animationBlueprint;
@@ -54,19 +55,10 @@ public:
         int32 limitEnemiesPerRound;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-        UDataTable* healthDataTable;
+        UTDEnemyStats* EnemyStatsDataAsset;
 
-    
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-        UDataTable* damageDataTable;
-
-    
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-        UDataTable* movementDataTable;
-
-
-    UPROPERTY(EditAnywhere,BlueprintReadWrite)
-    float movementVariation;
+        float movementVariation;
 
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -76,7 +68,7 @@ public:
         TSoftObjectPtr<class UBehaviorTree> behaviorTree;
 
 
-        
+
 
 protected:
 

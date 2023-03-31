@@ -13,6 +13,9 @@
 #include "GameLogic/TDObjectPooler.h"
 #include "Components/WidgetComponent.h"
 #include "UI/Utilities/TDHealthBar.h"
+#include "AttributesSets/TDHealthAttributeSet.h"
+#include "AttributesSets/TDDamageAttributeSet.h"
+#include "AttributesSets/TDMovementAttributeSet.h"
 
 
 ATDEnemy::ATDEnemy()

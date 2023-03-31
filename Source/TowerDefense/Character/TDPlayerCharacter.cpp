@@ -3,6 +3,7 @@
 
 #include "Character/TDPlayerCharacter.h"
 #include "GameLogic/TDGameData.h"
+#include "GameLogic/TDRoundManager.h"
 
 ATDPlayerCharacter::ATDPlayerCharacter()
 {
