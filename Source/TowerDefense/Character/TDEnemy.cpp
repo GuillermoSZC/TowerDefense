@@ -137,6 +137,11 @@ void ATDEnemy::TDSetActive()
     GetMesh()->SetVisibility(true, true);
     GetCapsuleComponent()->SetCollisionProfileName(FName(TEXT("EnemyPawn")));
     GetCharacterMovement()->GravityScale = 1.f;
+
+    if (healthBar)
+    {
+        healthBar->SetVisibility(ESlateVisibility::Visible);
+    }
 }
 
 void ATDEnemy::TDSetDisable()
@@ -151,6 +156,21 @@ void ATDEnemy::TDSetDisable()
     GetCapsuleComponent()->SetCollisionProfileName(FName(TEXT("NoCollision")));
     GetCharacterMovement()->GravityScale = 0.f;
     SetActorLocation(FVector(0.f, 0.f, -10000.f));
+
+    if (healthBar)
+    {
+        healthBar->SetVisibility(ESlateVisibility::Collapsed);
+    }
+}
+
+UTDHealthBar* ATDEnemy::TDGetHealthBarReference()
+{
+    return healthBar;
+}
+
+UWidgetComponent* ATDEnemy::TDGetHealthWidgetComponent()
+{
+    return widgetComponent;
 }
 
 void ATDEnemy::BeginPlay()
@@ -161,7 +181,11 @@ void ATDEnemy::BeginPlay()
     {
         healthBar = Cast<UTDHealthBar>(widgetComponent->GetUserWidgetObject());
 
-        FOnHealthChangeDelegate.AddDynamic(healthBar, &UTDHealthBar::TDSetBarPercentage);
+        if (healthBar)
+        {
+            // healthBar->TDSetHealthBarSize();
+            FOnHealthChangeDelegate.AddDynamic(healthBar, &UTDHealthBar::TDSetBarPercentage);
+        }
     }
 }
 

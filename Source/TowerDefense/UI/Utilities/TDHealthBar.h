@@ -31,6 +31,10 @@ public:
     UFUNCTION(BlueprintCallable)
         void TDSetBarPercentage(float _value);
 
+
+    UFUNCTION(BlueprintCallable)
+        void TDSetHealthBarSize(FVector2D& _value);
+
 protected:
 
 private:

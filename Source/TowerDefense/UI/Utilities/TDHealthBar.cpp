@@ -34,3 +34,8 @@ void UTDHealthBar::TDSetBarPercentage(float _value)
         healthBar->SetPercent(_value);
     }
 }
+
+void UTDHealthBar::TDSetHealthBarSize(FVector2D& _value)
+{
+    healthBarScale = _value;
+}

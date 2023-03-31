@@ -35,13 +35,13 @@ public:
     UPROPERTY(EditAnywhere, Category = "Spawn Configuration")
         int unitWeight = 1.f;
 
+
+protected:
     UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "HUD")
         class UWidgetComponent* widgetComponent;
 
     UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "HUD")
         class UTDHealthBar* healthBar;
-
-protected:
 
 
 private:
@@ -78,13 +78,10 @@ public:
     UFUNCTION()
         ATDPathPoint* TDGetNextPathPoint();
 
-
-
     UFUNCTION()
         void TDSetAnimMontaje(UAnimMontage* _montageRef);
 
     virtual UAnimMontage* TDGetSketalMeshMontage_Implementation() override;
-
 
     UFUNCTION()
         void TDSetActive();
@@ -94,6 +91,11 @@ public:
 
     virtual void TDCharacterDeath_Implementation() override;
 
+    UFUNCTION(BlueprintCallable)
+        class UTDHealthBar* TDGetHealthBarReference();
+
+    UFUNCTION(BlueprintCallable)
+        class UWidgetComponent* TDGetHealthWidgetComponent();
 
 protected:
     // Called when the game starts or when spawned

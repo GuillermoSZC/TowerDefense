@@ -27,6 +27,12 @@ public:
         FVector MeshScale = FVector(1.f);
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        FVector2D HealthBarSize = FVector2D(1.2f, 0.4f);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        FVector HealthBarPosition = FVector(0.f, -40.f, 160.f);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     float capsuleHeight = 130.f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)

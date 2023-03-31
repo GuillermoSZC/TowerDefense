@@ -12,10 +12,8 @@
 #include "Components/CapsuleComponent.h"
 #include "TDElementComponent.h"
 #include "TDGameMode.h"
-
-
-
-
+#include "UI/Utilities/TDHealthBar.h"
+#include "Components/WidgetComponent.h"
 
 UTDWeightManager::UTDWeightManager()
 {
@@ -141,6 +139,8 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
                     _enemyRef->unitWeight = Row->weight;
                     ATDEnemyController* enemyController = _enemyRef->GetController<ATDEnemyController>();
                     enemyController->RunBehaviorTree(Row->behaviorTree.LoadSynchronous());
+                    _enemyRef->TDGetHealthBarReference()->TDSetHealthBarSize(Row->HealthBarSize);
+                    _enemyRef->TDGetHealthWidgetComponent()->SetRelativeLocation(Row->HealthBarPosition);
 
                     int y = FMath::Rand() % actualRoundElements.Num();
                     UTDElementComponent* temp = ITDInterface::Execute_TDGetElementComponent(_enemyRef);
