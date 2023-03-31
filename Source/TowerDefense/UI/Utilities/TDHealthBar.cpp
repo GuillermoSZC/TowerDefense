@@ -6,7 +6,7 @@ bool UTDHealthBar::Initialize()
 {
     Super::Initialize();
 
-    
+    TDSetHealthBarSize(healthBarScale);
 
     return true;
 }
@@ -15,16 +15,11 @@ void UTDHealthBar::NativePreConstruct()
 {
     Super::NativePreConstruct();
 
-    if (healthBar)
-    {
-        healthBar->SetRenderScale(healthBarScale);
-    }
 }
 
 void UTDHealthBar::NativeConstruct()
 {
     Super::NativeConstruct();
-
 }
 
 void UTDHealthBar::TDSetBarPercentage(float _value)
@@ -37,5 +32,8 @@ void UTDHealthBar::TDSetBarPercentage(float _value)
 
 void UTDHealthBar::TDSetHealthBarSize(FVector2D& _value)
 {
-    healthBarScale = _value;
+    if (healthBar)
+    {
+        healthBar->SetRenderScale(_value);
+    }
 }

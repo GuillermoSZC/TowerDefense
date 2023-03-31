@@ -183,7 +183,6 @@ void ATDEnemy::BeginPlay()
 
         if (healthBar)
         {
-            // healthBar->TDSetHealthBarSize();
             FOnHealthChangeDelegate.AddDynamic(healthBar, &UTDHealthBar::TDSetBarPercentage);
         }
     }
