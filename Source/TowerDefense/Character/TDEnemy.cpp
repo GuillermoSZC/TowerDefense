@@ -11,6 +11,8 @@
 #include "TDEnemyController.h"
 #include "AIModule/Classes/BrainComponent.h"
 #include "GameLogic/TDObjectPooler.h"
+#include "Components/WidgetComponent.h"
+#include "UI/Utilities/TDHealthBar.h"
 
 
 ATDEnemy::ATDEnemy()
@@ -20,9 +22,8 @@ ATDEnemy::ATDEnemy()
     refreshPathTime = 0.2f;
     tickCounterTime = 0.f;
 
-  
-
-
+    widgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComponent"));
+    widgetComponent->SetupAttachment(RootComponent);
 }
 
 
@@ -145,22 +146,27 @@ void ATDEnemy::TDSetDisable()
     abilitySystem->RemoveAllSpawnedAttributes();
     UTDGameData::TDRemoveEnmemyToArray(this);
     ATDEnemyController* controllerRef = GetController<ATDEnemyController>();
-    controllerRef->GetBrainComponent()->StopLogic(FString::SanitizeFloat(5.f));    
+    controllerRef->GetBrainComponent()->StopLogic(FString::SanitizeFloat(5.f));
     GetMesh()->SetVisibility(false, true);
     GetCapsuleComponent()->SetCollisionProfileName(FName(TEXT("NoCollision")));
     GetCharacterMovement()->GravityScale = 0.f;
-    SetActorLocation(FVector(0.f,0.f,-10000.f));
+    SetActorLocation(FVector(0.f, 0.f, -10000.f));
 }
 
 void ATDEnemy::BeginPlay()
 {
     Super::BeginPlay();
 
-   
+    if (widgetComponent)
+    {
+        healthBar = Cast<UTDHealthBar>(widgetComponent->GetUserWidgetObject());
+
+        FOnHealthChangeDelegate.AddDynamic(healthBar, &UTDHealthBar::TDSetBarPercentage);
+    }
 }
 
 void ATDEnemy::TDInitialize()
-{  
+{
     const UAttributeSet* attributesInit1 = abilitySystem->InitStats(UTDHealthAttributeSet::StaticClass(), healthDatatable);
     healthAttributes = Cast<UTDHealthAttributeSet>(attributesInit1);
 

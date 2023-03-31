@@ -17,7 +17,7 @@ class TOWERDEFENSE_API ATDEnemy : public ATDCharacter
 {
     GENERATED_BODY()
 public:
-    ATDEnemy();  
+    ATDEnemy();
 
 public:
 
@@ -35,6 +35,11 @@ public:
     UPROPERTY(EditAnywhere, Category = "Spawn Configuration")
         int unitWeight = 1.f;
 
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "HUD")
+        class UWidgetComponent* widgetComponent;
+
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "HUD")
+        class UTDHealthBar* healthBar;
 
 protected:
 
@@ -46,14 +51,14 @@ private:
     float pathDsitance;
 
     UPROPERTY()
-    bool isActive = false;
+        bool isActive = false;
 
 
 
     UPROPERTY(Transient)
-    UAnimMontage* montageRef = nullptr;
+        UAnimMontage* montageRef = nullptr;
 
-  
+
 
 
 public:
@@ -73,19 +78,19 @@ public:
     UFUNCTION()
         ATDPathPoint* TDGetNextPathPoint();
 
-   
+
 
     UFUNCTION()
-    void TDSetAnimMontaje(UAnimMontage* _montageRef);
+        void TDSetAnimMontaje(UAnimMontage* _montageRef);
 
     virtual UAnimMontage* TDGetSketalMeshMontage_Implementation() override;
 
 
     UFUNCTION()
-    void TDSetActive();
+        void TDSetActive();
 
     UFUNCTION()
-    void TDSetDisable();
+        void TDSetDisable();
 
     virtual void TDCharacterDeath_Implementation() override;
 
@@ -96,11 +101,10 @@ protected:
 
 private:
 
-
     void TDInitialize();
-    
 
-    
+
+
 
 
 
