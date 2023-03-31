@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Abilities/Tasks/AbilityTask.h"
+#include "Gas/Task/WaitAddRemoveTag.h"
 #include "DelegateTickTask.h"
 #include "TickDuringTag.generated.h"
 
 
 
 // DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTickSignatures, float, DeltaTime);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWaitGameplayTagDelegate);
 
 
 
@@ -19,7 +19,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWaitGameplayTagDelegate);
  *
  */
 UCLASS()
-class TOWERDEFENSE_API UTickDuringTag : public UAbilityTask
+class TOWERDEFENSE_API UTickDuringTag : public UWaitAddRemoveTag
 {
     GENERATED_BODY()
 
@@ -33,17 +33,6 @@ public:
 
 protected:
 
-
-    bool RegisteredCallback;
-
-    bool OnlyTriggerOnce;
-
-    bool hasTag;
-
-    FDelegateHandle DelegateHandle;
-
-    FGameplayTag	mTag;
-
 private:
 
 
@@ -55,16 +44,7 @@ private:
 
 
       UPROPERTY(BlueprintAssignable)
-        FTickSignature FTick;
-
-
-    UPROPERTY(BlueprintAssignable)
-        FWaitGameplayTagDelegate	Added;
-
-    UPROPERTY(BlueprintAssignable)
-        FWaitGameplayTagDelegate	Removed;
-
-  
+        FTickSignature FTick;  
 
 public:
 
@@ -74,18 +54,13 @@ public:
 protected:
 
 
-    UAbilitySystemComponent* GetTargetASC();
-
-    virtual void OnDestroy(bool AbilityIsEnding) override;
 
     void TickTask(float DeltaTime) override;
 
 private:
 
-    virtual void Activate() override;
 
-    UFUNCTION()
-        virtual void GameplayTagCallback(const FGameplayTag Tag, int32 NewCount);
+
 
 
 

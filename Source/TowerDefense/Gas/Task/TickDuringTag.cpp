@@ -26,69 +26,6 @@ UTickDuringTag* UTickDuringTag::TickDuringTag(UGameplayAbility* OwningAbility, F
 }
 
 
-UAbilitySystemComponent* UTickDuringTag::GetTargetASC()
-{
-    return AbilitySystemComponent.Get();
-}
-
-
-void UTickDuringTag::GameplayTagCallback(const FGameplayTag Tag, int32 NewCount)
-{
-    if (NewCount == 1)
-    {
-        if (ShouldBroadcastAbilityTaskDelegates())
-        {
-            hasTag = true;
-            Added.Broadcast();
-        }
-    }
-
-    if (NewCount == 0)
-    {
-        if (ShouldBroadcastAbilityTaskDelegates())
-        {
-           
-            Removed.Broadcast();
-        }
-
-        if (OnlyTriggerOnce && hasTag == true)
-        {
-            hasTag = false;
-            EndTask();
-        }
-        else
-        {
-            hasTag = false;
-        }
-    }
-
-
-
-}
-
-void UTickDuringTag::Activate()
-{
-    UAbilitySystemComponent* ASC = GetTargetASC();
-
-    if (ASC && ASC->HasMatchingGameplayTag(mTag))
-    {
-        if (ShouldBroadcastAbilityTaskDelegates())
-        {
-            hasTag = true;
-            Added.Broadcast();
-        }
-    }
-
-    if (ASC)
-    {
-        DelegateHandle = ASC->RegisterGameplayTagEvent(mTag).AddUObject(this, &UTickDuringTag::GameplayTagCallback);
-        RegisteredCallback = true;
-
-    }
-}
-
-
-
 void UTickDuringTag::TickTask(float DeltaTime)
 {
     Super::TickTask(DeltaTime);
@@ -108,13 +45,3 @@ void UTickDuringTag::TickTask(float DeltaTime)
 }
 
 
-void UTickDuringTag::OnDestroy(bool AbilityIsEnding)
-{
-    UAbilitySystemComponent* ASC = GetTargetASC();
-    if (RegisteredCallback && ASC)
-    {
-        ASC->RegisterGameplayTagEvent(mTag).Remove(DelegateHandle);
-    }
-
-    Super::OnDestroy(AbilityIsEnding);
-}
