@@ -72,7 +72,13 @@ void UShapesCastTask::Activate()
     case shapeType::capsule:
     {
         hitted = GetWorld()->SweepMultiByObjectType(hitResultArray, pos, pos, rotation.Quaternion(), objectchannel, FCollisionShape::MakeCapsule(radius, height));
-        DrawDebugCapsule(GetWorld(), pos, height, radius, rotation.Quaternion(), FColor::Orange, false, 0.f, 0, 5.f);
+
+        if (ITDInterface::Execute_TDIsDebugActive(GetAvatarActor()))
+        {
+            DrawDebugCapsule(GetWorld(), pos, height, radius, rotation.Quaternion(), FColor::Orange, false, 0.f, 0, 5.f);
+
+        }
+
 
     }
     break;
@@ -81,7 +87,11 @@ void UShapesCastTask::Activate()
     {
 
         hitted = GetWorld()->SweepMultiByObjectType(hitResultArray, pos, pos, rotation.Quaternion(), objectchannel, FCollisionShape::MakeBox(boxSize));
-        DrawDebugBox(GetWorld(), pos, boxSize, rotation.Quaternion(), FColor::Orange, false, 0.f, 0, 5.f);
+        if (ITDInterface::Execute_TDIsDebugActive(GetAvatarActor()))
+        {
+            DrawDebugBox(GetWorld(), pos, boxSize, rotation.Quaternion(), FColor::Orange, false, 0.f, 0, 5.f);
+
+        }
 
     }
     break;
@@ -91,7 +101,10 @@ void UShapesCastTask::Activate()
     {
         //hitted = GetWorld()->SweepMultiByChannel(hitResultArray, pos, pos, rotation.Quaternion(), TraceChannel, );
         hitted = GetWorld()->SweepMultiByObjectType(hitResultArray, pos, pos, rotation.Quaternion(), objectchannel, FCollisionShape::MakeSphere(radius));
-        DrawDebugSphere(GetWorld(), pos, radius, 32, FColor::Orange, false, 0.f, 0, 5.f);
+        if (ITDInterface::Execute_TDIsDebugActive(GetAvatarActor()))
+        {
+            DrawDebugSphere(GetWorld(), pos, radius, 32, FColor::Orange, false, 0.f, 0, 5.f);
+        }
 
     }
     break;

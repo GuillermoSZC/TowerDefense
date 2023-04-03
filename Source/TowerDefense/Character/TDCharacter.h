@@ -26,6 +26,9 @@ public:
 	ATDCharacter();
 
 
+
+
+
 public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
@@ -96,6 +99,9 @@ public:
 
      UFUNCTION()
     virtual UTDElementComponent* TDGetElementComponent_Implementation() override;
+
+
+     bool TDIsDebugActive_Implementation() const override;
 
 
 protected:
