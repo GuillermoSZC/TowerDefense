@@ -50,7 +50,7 @@ void UConeShapeCastTask::Activate()
 
         if (anglePos > coneAngle)
         {
-            break;
+            continue;
         }
 
         float distSquared = FVector::DistSquared2D(Pos, iterLocation);
@@ -59,12 +59,12 @@ void UConeShapeCastTask::Activate()
 
         if (distSquared >= distanceSquared)
         {
-            break;
+            continue;
         }
 
         if (actorsInside.Contains(iter))
         {
-            break;
+            continue;
         }
 
         actorsInside.Add(iter);
