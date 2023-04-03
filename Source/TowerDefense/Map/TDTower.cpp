@@ -25,6 +25,11 @@ ATDTower::ATDTower()
 
 }
 
+bool ATDTower::TDIsDebugActive_Implementation() const
+{
+	return false;
+}
+
 UTDElementComponent* ATDTower::TDGetElementComponent_Implementation()
 {
 	return elementComponent;

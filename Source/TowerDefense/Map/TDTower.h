@@ -26,7 +26,10 @@ public:
     ATDTower();  
 
 
-    virtual UTDElementComponent* TDGetElementComponent_Implementation() override;
+    
+
+
+   
 
 public:
 
@@ -98,6 +101,10 @@ public:
     UFUNCTION()
     void TDResetAttackTimer_Implementation() override;
 
+    virtual UTDElementComponent* TDGetElementComponent_Implementation() override;
+
+    UFUNCTION(BlueprintPure)
+    bool TDIsDebugActive_Implementation() const override;
 
 protected:
     // Called when the game starts or when spawned

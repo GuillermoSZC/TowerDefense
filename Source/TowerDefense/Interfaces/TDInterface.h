@@ -39,7 +39,10 @@ public:
 
 
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-        UTDElementComponent* TDGetElementComponent();
+        UTDElementComponent* TDGetElementComponent() ;
+ 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	bool TDIsDebugActive() const;
 
 
 	//Este solo se puede implementar en BP

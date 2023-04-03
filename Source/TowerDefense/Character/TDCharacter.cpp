@@ -25,6 +25,7 @@ ATDCharacter::ATDCharacter()
 }
 
 
+
 UTDElementComponent* ATDCharacter::TDGetElementComponent_Implementation()
 {
     return elementComponent;
@@ -51,6 +52,10 @@ void ATDCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 }
 
+bool ATDCharacter::TDIsDebugActive_Implementation() const
+{
+    return false;
+}
 
 
 void ATDCharacter::TDActivateDelegates()

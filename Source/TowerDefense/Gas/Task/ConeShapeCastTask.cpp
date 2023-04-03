@@ -2,6 +2,7 @@
 
 
 #include "Gas/Task/ConeShapeCastTask.h"
+#include "DrawDebugHelpers.h"
 
 
 UConeShapeCastTask::UConeShapeCastTask()
@@ -25,7 +26,7 @@ UConeShapeCastTask* UConeShapeCastTask::TDConeCheckInside(UGameplayAbility* Owni
 }
 
 void UConeShapeCastTask::Activate()
-{    
+{
 
     FVector Pos2D = Pos;
     Pos2D.Z = 0;
@@ -40,7 +41,7 @@ void UConeShapeCastTask::Activate()
 
 
         FVector directionIter = iterLocation2D - Pos2D;
-       
+
 
 
         FVector NormalizeDirectionIter = directionIter.GetSafeNormal();
@@ -66,10 +67,36 @@ void UConeShapeCastTask::Activate()
             break;
         }
 
-        actorsInside.Add(iter);        
+        actorsInside.Add(iter);
     }
 
 
     hit.Broadcast(actorsInside);
+
+
+    AActor* owner = GetAvatarActor();
+
+
+    if (ITDInterface::Execute_TDIsDebugActive(owner))
+    {
+        UWorld* world = owner->GetWorld();
+
+
+        FRotator rightRotator = FRotator(0.f, coneAngle, 0.f);
+        FVector rightAngleVector = rightRotator.RotateVector(Dir);
+
+        FRotator leftRotator = FRotator(0.f, -coneAngle, 0.f);
+        FVector leftAngleVector = leftRotator.RotateVector(Dir);
+
+        DrawDebugLine(world, Pos, Pos + rightAngleVector * distance, FColor::Orange, false, 1.5f, 0, 15.f);
+        DrawDebugLine(world, Pos, Pos + leftAngleVector * distance, FColor::Orange, false, 1.5f, 0, 15.f);
+        DrawDebugLine(world, Pos + rightAngleVector * distance, Pos + leftAngleVector * distance, FColor::Orange, false, 1.5f, 0, 15.f);
+
+
+
+
+    }
+
+
 
 }
