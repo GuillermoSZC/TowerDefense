@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "UMG/Public/Components/Button.h"
 #include "TDButton.generated.h"
 
 /**
@@ -21,7 +22,7 @@ public:
 
 public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UButton* ownerButton;
+        UButton* ownerButton;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UTDText* textButton;

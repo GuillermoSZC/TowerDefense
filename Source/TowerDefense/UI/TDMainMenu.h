@@ -19,7 +19,8 @@ public:
 
 
 public:
-
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        class UTDButton* playButton;
 
 protected:
 
@@ -28,7 +29,8 @@ private:
 
 
 public:
-
+    UFUNCTION(BlueprintImplementableEvent)
+        void TDOpenLevel();
 
 protected:
 
