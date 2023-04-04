@@ -74,12 +74,18 @@ public:
     UFUNCTION()
         int TGGApplyEffect_Implementation();
 
+
+
+
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
 
     // Called every frame
     virtual void Tick(float DeltaTime) override;
+
+        UFUNCTION(BlueprintCallable,BlueprintImplementableEvent)
+    void OnBaseDeath();
 
 
 private:
@@ -88,4 +94,6 @@ private:
     void TDActivateDelegates();
 
     void TDHealthChanged(const FOnAttributeChangeData& Data);
+
+
 };

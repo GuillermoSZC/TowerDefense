@@ -93,12 +93,15 @@ void ATDBase::TDActivateDelegates()
 void ATDBase::TDHealthChanged(const FOnAttributeChangeData& Data)
 {
 
-    if (Data.NewValue <= 0.f)
-    {
-        UTDGameData::TDDisableAllEnemies();
-    }
 
     float MaxHealth = BaseAttributes->GetmaxHealth();
     float healthPercent = Data.NewValue / MaxHealth;
     FOnHealthChangeDelegate.Broadcast(healthPercent);
+
+    if (Data.NewValue <= 0.f)
+    {
+        UTDGameData::TDDisableAllEnemies();
+        OnBaseDeath();
+    }
+
 }
