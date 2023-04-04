@@ -4,7 +4,12 @@
 #include "GameFramework/Actor.h"
 #include "Interfaces/TDInterface.h"
 #include "AbilitySystemInterface.h"
+#include "Delegates/TDDeclareDelegates.h"
 #include "TDBase.generated.h"
+
+
+
+
 
 class UDataTable;
 struct FOnAttributeChangeData;
@@ -25,7 +30,20 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
         TArray<TSubclassOf<class UGameplayAbility>> AbiliyList;
 
+
+    FOnHealthChangeSignature FOnHealthChangeDelegate;
+
+
+
 protected:
+
+
+           UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "HUD")
+        class UWidgetComponent* widgetComponent;
+
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "HUD")
+        class UTDHealthBar* healthBar;
+
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true")) 
         UAbilitySystemComponent* AbilitySystem;
 

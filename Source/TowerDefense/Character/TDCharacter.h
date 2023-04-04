@@ -6,10 +6,10 @@
 #include "GameFramework/Character.h"
 #include "Interfaces/TDInterface.h"
 #include "GameplayEffectTypes.h"
+#include "Delegates/TDDeclareDelegates.h"
 #include "TDCharacter.generated.h"
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangeSignature, float, _newValue);
 
 
 class UTDHealthAttributeSet;

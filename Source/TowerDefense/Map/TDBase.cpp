@@ -22,6 +22,10 @@ ATDBase::ATDBase(const FObjectInitializer& ObjectInitializer)
     BaseStaticMesh->AttachToComponent(BoxCollision, FAttachmentTransformRules::KeepRelativeTransform);
 
     AbilitySystem = CreateDefaultSubobject<UAbilitySystemComponent>("AbilityComponent");
+
+    widgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComponent"));
+    widgetComponent->SetupAttachment(RootComponent);
+
 }
 
 // Called when the game starts or when spawned
@@ -30,6 +34,20 @@ void ATDBase::BeginPlay()
     Super::BeginPlay();
 
     UTDGameData::TDSetBaseActor(this);
+
+
+    if (widgetComponent)
+    {
+        healthBar = Cast<UTDHealthBar>(widgetComponent->GetUserWidgetObject());
+
+        if (healthBar)
+        {
+            FOnHealthChangeDelegate.AddDynamic(healthBar, &UTDHealthBar::TDSetBarPercentage);
+            FVector2D sizeTemp = FVector2D(1.2f, 0.4f);
+            healthBar->TDSetHealthBarSize(sizeTemp);
+        }
+    }
+
 
     TDInitialize();
 }
@@ -77,8 +95,10 @@ void ATDBase::TDHealthChanged(const FOnAttributeChangeData& Data)
 
     if (Data.NewValue <= 0.f)
     {
-        //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Purple, TEXT("muerte de la base"));
+        UTDGameData::TDDisableAllEnemies();
     }
 
-
+    float MaxHealth = BaseAttributes->GetmaxHealth();
+    float healthPercent = Data.NewValue / MaxHealth;
+    FOnHealthChangeDelegate.Broadcast(healthPercent);
 }

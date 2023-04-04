@@ -20,7 +20,6 @@ ATDEnemy* ATDObjectPooler::TDGetEnemyFromPool()
 
 void ATDObjectPooler::TDAddEnemyToPool(ATDEnemy* _enemyRef)
 {
-    _enemyRef->TDSetDisable();
     activeEnemies.Remove(_enemyRef);
     disabledEnemies.Add(_enemyRef);
 

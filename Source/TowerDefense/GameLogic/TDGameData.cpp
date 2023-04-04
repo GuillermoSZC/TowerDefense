@@ -76,6 +76,14 @@ void UTDGameData::TDRemoveEnmemyToArray(ATDEnemy* _ActualEnemy)
 }
 
 
+void UTDGameData::TDDisableAllEnemies()
+{
+    for (ATDEnemy* iter : enemiesArray)
+    {
+        iter->TDSetDisable();
+    }
+}
+
 UTDGameplayEventData* UTDGameData::TDGetAbilityStrcut()
 {
     return abilityData;

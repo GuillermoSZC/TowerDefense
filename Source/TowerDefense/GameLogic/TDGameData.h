@@ -64,6 +64,9 @@ public:
     UFUNCTION(BlueprintCallable)
     static void TDRemoveEnmemyToArray(ATDEnemy* _ActualEnemy);
 
+	UFUNCTION(BlueprintCallable)
+	static void TDDisableAllEnemies();
+
 	UFUNCTION(BlueprintPure)
     static UTDGameplayEventData* TDGetAbilityStrcut();
 

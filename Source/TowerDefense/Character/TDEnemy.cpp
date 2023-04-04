@@ -34,6 +34,9 @@ ATDEnemy::ATDEnemy()
 void ATDEnemy::TDCharacterDeath_Implementation()
 {
     UTDGameData::TDGetObjectPooler()->TDAddEnemyToPool(this);
+    TDSetDisable();
+    UTDGameData::TDRemoveEnmemyToArray(this);
+
 }
 
 UAnimMontage* ATDEnemy::TDGetSketalMeshMontage_Implementation()
@@ -152,7 +155,6 @@ void ATDEnemy::TDSetDisable()
     isActive = false;
     abilitySystem->ClearAllAbilities();
     abilitySystem->RemoveAllSpawnedAttributes();
-    UTDGameData::TDRemoveEnmemyToArray(this);
     ATDEnemyController* controllerRef = GetController<ATDEnemyController>();
     controllerRef->GetBrainComponent()->StopLogic(FString::SanitizeFloat(5.f));
     GetMesh()->SetVisibility(false, true);
