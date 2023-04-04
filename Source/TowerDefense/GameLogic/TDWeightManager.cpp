@@ -135,7 +135,7 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
                     _enemyRef->movementVariation = Row->movementVariation;
                     _enemyRef->GetCapsuleComponent()->SetCapsuleRadius(Row->capsuleRadius);
                     _enemyRef->GetCapsuleComponent()->SetCapsuleHalfHeight(Row->capsuleHeight);
-                    _enemyRef->abiliyList = Row->abiliyList;
+                    _enemyRef->abiliyList = Row->abiliyAsset->abiliyList;
                     _enemyRef->unitWeight = Row->weight;
                     ATDEnemyController* enemyController = _enemyRef->GetController<ATDEnemyController>();
                     enemyController->RunBehaviorTree(Row->behaviorTree.LoadSynchronous());

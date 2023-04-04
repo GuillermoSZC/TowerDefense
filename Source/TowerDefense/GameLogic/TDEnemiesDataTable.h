@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
 #include "TDEnemyStats.h"
+#include "TDAbilitiesDataAsset.h"
 #include "TDEnemiesDataTable.generated.h"
 
 /**
@@ -66,13 +67,14 @@ public:
 
 #pragma region GAS_VALUES
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Ability System Values")
+
         UTDEnemyStats* EnemyStatsDataAsset;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Ability System Values")
         float movementVariation;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Ability System Values")
-        TArray<TSubclassOf<class UGameplayAbility>> abiliyList;
+      UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Ability System Values")
+          UTDAbilitiesDataAsset* abiliyAsset;
 #pragma endregion
 
 #pragma region AI
