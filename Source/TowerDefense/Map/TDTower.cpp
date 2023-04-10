@@ -98,10 +98,7 @@ void ATDTower::Tick(float DeltaTime)
 		timer -= periodAttack;
 
 		ITDInterface::Execute_TGGApplyEffect(this);
-		//UAbilitySystemBlueprintLibrary::
 
-
-		
 	}
 
 
@@ -179,6 +176,7 @@ int ATDTower::TGGApplyEffect_Implementation()
 
  void ATDTower::TDRangeChanged(const FOnAttributeChangeData& Data)
  {
+	 FOnAttackRangeChangeDelegate.Broadcast(Data.NewValue);
 
  }
 

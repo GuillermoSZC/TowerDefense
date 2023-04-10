@@ -69,6 +69,14 @@ void ATDCharacter::TDActivateDelegates()
     abilitySystem->GetGameplayAttributeValueChangeDelegate(movementAttributes->GetmovementSpeedAttribute()).AddUObject(this, &ATDCharacter::TDMovementSpeedChanged);
 }
 
+void ATDCharacter::TDInitialize()
+{
+    for (FGameplayTag iter : TagsToAdd)
+    {
+        abilitySystem->AddLooseGameplayTag(iter);
+    }
+}
+
 void ATDCharacter::TDmaxHealthChanged(const FOnAttributeChangeData& Data)
 {
     float actualhealth = healthAttributes->Gethealth();

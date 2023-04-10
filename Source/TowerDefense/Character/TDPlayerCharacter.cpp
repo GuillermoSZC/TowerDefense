@@ -38,6 +38,8 @@ void ATDPlayerCharacter::BeginPlay()
 
 void ATDPlayerCharacter::TDInitialize()
 {
+    Super::TDInitialize();
+
     const UAttributeSet* attributesInit1 = abilitySystem->InitStats(UTDHealthAttributeSet::StaticClass(), healthDatatable);
     healthAttributes = Cast<UTDHealthAttributeSet>(attributesInit1);
 

@@ -46,7 +46,8 @@ public:
            UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
         UDataTable* movementDatatable;
 
-
+           UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
+           TArray<FGameplayTag> TagsToAdd;
 
     FOnHealthChangeSignature FOnHealthChangeDelegate;
 protected:
@@ -109,6 +110,8 @@ protected:
     virtual void BeginPlay() override;
 
     void TDActivateDelegates();
+
+    virtual void TDInitialize();
 
 private:
 

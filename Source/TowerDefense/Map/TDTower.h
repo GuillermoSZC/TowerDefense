@@ -6,11 +6,12 @@
 #include "GameFramework/Actor.h"
 #include "Interfaces/TDInterface.h"
 #include "AbilitySystemInterface.h"
+#include "GameplayEffectTypes.h"
+#include "Delegates/TDDeclareDelegates.h"
 #include "TDTower.generated.h"
 
 class UTDTowerAttributeSet;
 class UDataTable;
-struct FOnAttributeChangeData;
 class UTDDamageAttributeSet;
 
 
@@ -41,6 +42,11 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
         TArray<TSubclassOf<class UGameplayAbility>> abiliyList;
+
+
+    UPROPERTY(BlueprintAssignable)
+    FOnAttackRangeChangeSignature FOnAttackRangeChangeDelegate;
+
 
 protected:
 
@@ -118,10 +124,11 @@ private:
 
     void TDActivateDelegates();
 
-
     void TDDamageChanged(const FOnAttributeChangeData& Data);
 
+
     void TDRangeChanged(const FOnAttributeChangeData& Data);
+
 
     void TDPeriodAttackChanged(const FOnAttributeChangeData& Data);
 

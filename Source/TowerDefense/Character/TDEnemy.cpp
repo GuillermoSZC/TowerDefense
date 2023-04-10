@@ -195,6 +195,8 @@ void ATDEnemy::BeginPlay()
 
 void ATDEnemy::TDInitialize()
 {
+    Super::TDInitialize();
+
     const UAttributeSet* attributesInit1 = abilitySystem->InitStats(UTDHealthAttributeSet::StaticClass(), healthDatatable);
     healthAttributes = Cast<UTDHealthAttributeSet>(attributesInit1);
 
