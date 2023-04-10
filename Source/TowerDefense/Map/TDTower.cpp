@@ -65,6 +65,14 @@ void ATDTower::TDInitialize()
 
 	TDActivateDelegates();
 
+
+	if (periodAttack == 0.f)
+	{
+		ITDInterface::Execute_TGGApplyEffect(this);
+		SetActorTickEnabled(false);
+	}
+
+
 	timer = 0.f;
 
 }

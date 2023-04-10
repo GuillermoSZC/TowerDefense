@@ -8,6 +8,7 @@
 #include "AttributesSets/TDDamageAttributeSet.h"
 #include "AttributesSets/TDHealthAttributeSet.h"
 #include "GameLogic/TDElementComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 
@@ -105,5 +106,5 @@ void ATDCharacter::TDAttackSpeedChanged(const FOnAttributeChangeData& Data)
 
 void ATDCharacter::TDMovementSpeedChanged(const FOnAttributeChangeData& Data)
 {
-
+    GetCharacterMovement()->MaxWalkSpeed = Data.NewValue;
 }
