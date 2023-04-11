@@ -27,7 +27,7 @@ void UDelegateTickTask::Activate()
 void UDelegateTickTask::TickTask(float DeltaTime)
 {
 
-	if (elapsedDelegateTime < delegateDuration)
+	if (delegateDuration == -1.f || elapsedDelegateTime < delegateDuration )
 	{
 		delegateFrecuencyElapsed += DeltaTime;
 		elapsedDelegateTime += DeltaTime;
@@ -38,7 +38,7 @@ void UDelegateTickTask::TickTask(float DeltaTime)
 			delegateFunctionality.Broadcast(elapsedDelegateTime,DeltaTime);
 		}
 	}
-	else 
+	else if (delegateDuration != -1.f)
 	{
 		onEnd.Broadcast();
 		EndTask();

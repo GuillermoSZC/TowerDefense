@@ -153,6 +153,14 @@ void ATDEnemy::TDSetActive()
 void ATDEnemy::TDSetDisable()
 {
     isActive = false;
+
+    FGameplayTagContainer tags;
+    TArray<FActiveGameplayEffectHandle> effectsActive;
+    effectsActive = abilitySystem->GetActiveEffectsWithAllTags(tags);
+    for (FActiveGameplayEffectHandle iter : effectsActive)
+    {
+        abilitySystem->RemoveActiveGameplayEffect(iter);
+    }
     abilitySystem->ClearAllAbilities();
     abilitySystem->RemoveAllSpawnedAttributes();
     ATDEnemyController* controllerRef = GetController<ATDEnemyController>();

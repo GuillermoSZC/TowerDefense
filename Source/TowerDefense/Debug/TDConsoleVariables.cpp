@@ -16,3 +16,7 @@ ECVF_Cheat);
 CREATE_BOOL_CONSOLE_VAR_DRAW_DEBUG(ShowDebugBalisticTower, "BalisticTower");
 
 CREATE_BOOL_CONSOLE_VAR_DRAW_DEBUG(ShowDebugSonicTower, "SonicTower");
+
+CREATE_BOOL_CONSOLE_VAR_DRAW_DEBUG(ShowDebugDamageTower, "DamageTower");
+
+CREATE_BOOL_CONSOLE_VAR_DRAW_DEBUG(ShowDebugSpeedTower, "SpeedTower");

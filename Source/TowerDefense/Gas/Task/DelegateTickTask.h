@@ -34,7 +34,12 @@ private:
 		FStartDelegateTickTask onStart;
 
 public:
-	
+
+	/**
+	 * Tick during Duration
+	 *
+	 * @param delegateDuration If this is -1 the duration will be infinite
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Ability|Tasks", meta = (HidePin = "OwningAbility", DefaultToSelf = "OwningAbility", BlueprintInternalUseOnly = "TRUE"))
 		static UDelegateTickTask* DelegateTemporalTask(UGameplayAbility* OwningAbility, float _delegateDuration, float _delegateCallFrecuency = 0.f /*@pamam _delegateCallFrecuency: time passed beetween delegateFunctionality execution*/);
 
