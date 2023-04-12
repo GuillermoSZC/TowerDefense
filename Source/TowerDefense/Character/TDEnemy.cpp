@@ -176,6 +176,11 @@ void ATDEnemy::TDSetDisable()
     }
 }
 
+const bool ATDEnemy::TDGetActiveState()
+{
+    return isActive;
+}
+
 UTDHealthBar* ATDEnemy::TDGetHealthBarReference()
 {
     return healthBar;

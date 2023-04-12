@@ -89,6 +89,9 @@ public:
     UFUNCTION()
         void TDSetDisable();
 
+    UFUNCTION(BlueprintPure)
+    const bool TDGetActiveState();
+
     virtual void TDCharacterDeath_Implementation() override;
 
     UFUNCTION(BlueprintCallable)

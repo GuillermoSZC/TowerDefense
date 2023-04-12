@@ -20,3 +20,6 @@ CREATE_BOOL_CONSOLE_VAR_DRAW_DEBUG(ShowDebugSonicTower, "SonicTower");
 CREATE_BOOL_CONSOLE_VAR_DRAW_DEBUG(ShowDebugDamageTower, "DamageTower");
 
 CREATE_BOOL_CONSOLE_VAR_DRAW_DEBUG(ShowDebugSpeedTower, "SpeedTower");
+
+
+CREATE_BOOL_CONSOLE_VAR_DRAW_DEBUG(ShowDebugDeathRayTower, "DeathRayTower");

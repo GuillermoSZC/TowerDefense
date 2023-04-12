@@ -45,6 +45,10 @@ public:
 	bool TDIsDebugActive() const;
 
 
+	UFUNCTION(BlueprintImplementableEvent,BlueprintCallable)
+	void TDRotateHeadTower(const FVector& _PositionToLook);
+
+
 	//Este solo se puede implementar en BP
 //     UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 //         const bool TGGApplyEffect2() const;
