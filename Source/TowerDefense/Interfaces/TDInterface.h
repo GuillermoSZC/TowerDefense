@@ -49,6 +49,10 @@ public:
 	void TDRotateHeadTower(const FVector& _PositionToLook);
 
 
+	UFUNCTION(BlueprintImplementableEvent,BlueprintCallable)
+	FVector TDGetShootPosition();
+
+
 	//Este solo se puede implementar en BP
 //     UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 //         const bool TGGApplyEffect2() const;
