@@ -147,6 +147,7 @@ void ATDEnemy::TDSetActive()
     if (healthBar)
     {
         healthBar->SetVisibility(ESlateVisibility::Visible);
+        FOnHealthChangeDelegate.Broadcast(1.f);
     }
 }
 

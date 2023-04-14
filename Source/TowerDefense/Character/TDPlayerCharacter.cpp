@@ -31,7 +31,7 @@ void ATDPlayerCharacter::BeginPlay()
     Super::BeginPlay();
 
     TDInitialize();
-
+    UTDGameData::TDSetPlayerRef(this);
     UTDGameData::TDGetRoundManager()->FOnBuyPhaseStartDelegate.AddDynamic(this, &ATDPlayerCharacter::TDUpdateRoundValues);
 }
 

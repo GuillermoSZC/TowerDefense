@@ -66,6 +66,7 @@ void UTDPlayerHUD::TDInitialize()
     if (ownerRef)
     {
         ownerRef->FOnHealthChangeDelegate.AddUniqueDynamic(healthBar, &UTDHealthBar::TDSetBarPercentage);
+        ownerRef->FOnHealthChangeDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDUpdateHealthNumber);
         ITDInterface::Execute_TDGetElementComponent(ownerRef)->OnElementChangeDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetPlayerElement);
     }
 
@@ -139,4 +140,10 @@ void UTDPlayerHUD::TDSetEnemyCounter(int32 _counter)
 {
     enemyCounter->TDSetCustomText(FText::FromString(FString::FromInt(_counter)));
 
+}
+
+void UTDPlayerHUD::TDUpdateHealthNumber(float _num)
+{
+    healthNumber->TDSetCustomText(FText::FromString(FString::SanitizeFloat(_num)));
+    
 }

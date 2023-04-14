@@ -63,6 +63,9 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UTDHealthBar* healthBar;
 
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+    class UTDText* healthNumber;
+
 #pragma region HUD_INVENTORY
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UTDTextWithImage* scrap;
@@ -140,5 +143,6 @@ private:
         UFUNCTION()
         void TDSetEnemyCounter(int32 _counter);
 
-
+        UFUNCTION()
+        void TDUpdateHealthNumber(float _num);
 };

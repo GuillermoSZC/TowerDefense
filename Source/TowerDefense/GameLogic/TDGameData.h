@@ -44,6 +44,8 @@ public:
 	static UPROPERTY(Transient) ATDObjectPooler* ObjectPoolerRef;
 	static UPROPERTY(Transient) UTDGameInstance* GameInstanceRef;
 
+	static UPROPERTY(Transient) ATDPlayerCharacter* playerRef;
+
 
 
 
@@ -134,6 +136,12 @@ public:
         static ATDObjectPooler* TDGetObjectPooler();
 
 
+
+	UFUNCTION(BlueprintPure)
+	static ATDPlayerCharacter* TDGetPlayerRef();
+
+	UFUNCTION()
+	static void TDSetPlayerRef(ATDPlayerCharacter* _ref);
 
 
 

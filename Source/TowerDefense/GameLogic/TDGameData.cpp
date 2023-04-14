@@ -20,6 +20,7 @@ ATDGameMode* UTDGameData::GameModeRef = nullptr;
 UTDGameInstance* UTDGameData::GameInstanceRef = nullptr;
 ATDRoundManager* UTDGameData::RoundManagerRef = nullptr;
 ATDObjectPooler* UTDGameData::ObjectPoolerRef = nullptr;
+ATDPlayerCharacter* UTDGameData::playerRef = nullptr;
 
 UTDGameData::UTDGameData(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -220,6 +221,16 @@ void UTDGameData::TDSetObjectPooler(ATDObjectPooler* _ObjectPooler)
 ATDObjectPooler* UTDGameData::TDGetObjectPooler()
 {
     return ObjectPoolerRef;
+}
+
+ATDPlayerCharacter* UTDGameData::TDGetPlayerRef()
+{
+    return playerRef;
+}
+
+void UTDGameData::TDSetPlayerRef(ATDPlayerCharacter* _ref)
+{
+    playerRef = _ref;
 }
 
 void UTDGameData::TDSpawnEnemyDebug()
