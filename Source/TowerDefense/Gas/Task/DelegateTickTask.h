@@ -4,11 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Abilities/Tasks/AbilityTask.h"
+#include "Delegates/TDDeclareDelegates.h"
 #include "DelegateTickTask.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTickSignature, float, elapsedTime, float, DeltaTime);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FStartDelegateTickTask);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FEndDelegateTickTask);
+
 
 UCLASS()
 class TOWERDEFENSE_API UDelegateTickTask : public UAbilityTask

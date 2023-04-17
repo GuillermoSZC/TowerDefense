@@ -14,6 +14,11 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttackRangeChangeSignature, float
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnElementChangeSignature, EElements, _element);
 
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTickSignature, float, elapsedTime, float, DeltaTime);
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FCurveTickSignature, float, alphaBlend, float, DeltaTime);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FStartDelegateTickTask);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FEndDelegateTickTask);
 
 
 UCLASS()

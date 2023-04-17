@@ -22,7 +22,7 @@ ATDEnemy::ATDEnemy()
 {
     PrimaryActorTick.bCanEverTick = true;
 
-    refreshPathTime = 0.2f;
+    refreshPathTime = 0.08f;
     tickCounterTime = 0.f;
 
     widgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComponent"));
