@@ -50,6 +50,7 @@ public:
            TArray<FGameplayTag> TagsToAdd;
 
     FOnHealthChangeSignature FOnHealthChangeDelegate;
+    
 protected:
 
 #pragma region DELEGATES
@@ -104,7 +105,8 @@ public:
 
      bool TDIsDebugActive_Implementation() const override;
 
-
+         UFUNCTION(BlueprintImplementableEvent)
+    void TDOnElementChange(EElements _newElement);
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
@@ -116,7 +118,7 @@ protected:
 private:
 
 
-
+    
 
 
     void TDmaxHealthChanged(const FOnAttributeChangeData& Data);

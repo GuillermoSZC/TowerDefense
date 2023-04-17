@@ -7,7 +7,6 @@
 #include "ElementsEnum.h"
 #include "TDElementComponent.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnElementChangeSignature, EElements, _element);
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class TOWERDEFENSE_API UTDElementComponent : public UActorComponent

@@ -36,7 +36,10 @@ UTDElementComponent* ATDCharacter::TDGetElementComponent_Implementation()
 void ATDCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+    elementComponent->OnElementChangeDelegate.AddUniqueDynamic(this, &ATDCharacter::TDOnElementChange);
+
+
 }
 
 // Called every frame
