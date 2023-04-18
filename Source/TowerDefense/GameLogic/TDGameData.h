@@ -105,7 +105,7 @@ public:
 	UFUNCTION()
 	static ATDSpawner* TDGetSpanwerActor();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintPure)
 	static ATDGameMode* TDGetGameMode();
 
 	UFUNCTION()
