@@ -1,4 +1,4 @@
- // Fill out your copyright notice in the Description page of Project Settings.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "GameLogic/TDRoundManager.h"
@@ -17,7 +17,7 @@ ATDRoundManager::ATDRoundManager()
 
 ATDRoundManager::~ATDRoundManager()
 {
-   
+
 }
 
 
@@ -48,7 +48,7 @@ void ATDRoundManager::TDStartCombatPhase()
 {
     TDStartRound();
 
-   
+
     FOnCombatPhaseStartDelegate.Broadcast(actualRound);
 }
 
@@ -57,13 +57,13 @@ void ATDRoundManager::TDStartRound()
     actualPhase = GamePhase::CombatPhase;
     timeRound = timeperSpawn;
     isSawning = true;
-   
+
 }
 
 void ATDRoundManager::TDPrepareCombatRound()
 {
     ++actualRound;
-    
+
 
     actualRoundElements.Empty();
 
@@ -118,7 +118,7 @@ void ATDRoundManager::Tick(float DeltaSeconds)
 
             TDStartCombatPhase();
 
-        }    
+        }
 
         //GEngine->AddOnScreenDebugMessage(0, 0.f, FColor::Blue, FString::SanitizeFloat(timeRound));
         timeRound -= DeltaSeconds;
@@ -128,13 +128,9 @@ void ATDRoundManager::Tick(float DeltaSeconds)
 
 }
 
-void ATDRoundManager::TDEnemyKillCounter(int32& _weight)
+void ATDRoundManager::TDMinusEnemyKillCounter()
 {
 
-    if (_weight <= 0)
-    {
-        return;
-    }
 
     --EnemiesToKill;
 
@@ -151,6 +147,11 @@ void ATDRoundManager::TDEnemyKillCounter(int32& _weight)
 
 }
 
+void ATDRoundManager::TDAddEnemyKilCounter()
+{
+    EnemiesToKill += 1;
+}
+
 float ATDRoundManager::TDGetTimeRound()
 {
     return timeRound;
@@ -159,4 +160,49 @@ float ATDRoundManager::TDGetTimeRound()
 int32 ATDRoundManager::TDGetActualRound()
 {
     return actualRound;
+}
+
+ATDEnemy* ATDRoundManager::TDCreateEnemy(FName enemyName, AActor* _instigator)
+{
+    ATDObjectPooler* objectRef = UTDGameData::TDGetObjectPooler();
+    ATDEnemy* actualEnemy = objectRef->TDGetEnemyFromPool();
+
+    if (!actualEnemy)
+    {
+        return nullptr;
+    }
+
+    UTDWeightManager* weightManager = UTDGameData::TDGetWeightManager();
+
+    if (!weightManager)
+    {
+        return nullptr;
+    }
+
+    FTDEnemiesDataTable Row;
+    weightManager->TDGetRowFromDataTable(enemyName, Row);
+
+//     if (!Row)
+//     {
+//         return nullptr;
+//     }
+
+    weightManager->TDSetEnemyValues(actualEnemy, Row);
+    EnemiesToKill += 1;
+
+    ATDEnemy* enemyInstigator = Cast<ATDEnemy>(_instigator);
+
+    ATDEnemyController* enemyController = actualEnemy->GetController<ATDEnemyController>();
+    UBlackboardComponent* blackboard = enemyController->GetBlackboardComponent();
+
+    ATDPathPoint* firstWaypoint = enemyInstigator->PathPointsArray[0];
+
+    blackboard->SetValueAsObject(FName(TEXT("WaypointActor")), firstWaypoint);
+    blackboard->SetValueAsVector(FName(TEXT("WaypointPosition")), firstWaypoint->GetActorLocation());
+
+
+    actualEnemy->TDSetPath(firstWaypoint);
+    actualEnemy->TDSetActive();
+
+    return actualEnemy;
 }

@@ -124,7 +124,7 @@ public:
 	static void TDSetRoundManager(ATDRoundManager* _RoundManagerRef);
 
 
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintPure)
         static ATDRoundManager* TDGetRoundManager();
 
 
