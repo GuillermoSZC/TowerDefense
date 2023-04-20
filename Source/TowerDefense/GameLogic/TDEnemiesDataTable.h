@@ -4,6 +4,7 @@
 #include "Engine/DataTable.h"
 #include "TDEnemyStats.h"
 #include "TDAbilitiesDataAsset.h"
+#include "TDweaponDataAsset.h"
 #include "TDEnemiesDataTable.generated.h"
 
 /**
@@ -79,6 +80,11 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Ability System Values")
         UTDAbilitiesDataAsset* abiliyAsset;
+
+
+    UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Gameplay Ability System Values")
+        UTDweaponDataAsset* WeaponAsset;
+
 #pragma endregion
 
 #pragma region AI

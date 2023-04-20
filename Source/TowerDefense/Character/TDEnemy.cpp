@@ -27,6 +27,13 @@ ATDEnemy::ATDEnemy()
 
     widgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComponent"));
     widgetComponent->SetupAttachment(RootComponent);
+
+
+    skeletalWeaponComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SkeletalWeaponMesh"));
+    skeletalWeaponComponent->SetupAttachment(GetMesh());
+
+    StaticWeaponComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaicWeaponMesh"));
+    StaticWeaponComponent->SetupAttachment(GetMesh());
 }
 
 

@@ -146,9 +146,8 @@ FTDEnemiesDataTable* UTDWeightManager::TDSelectRandomRowFromDataTable()
 void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable& Row)
 {
 
-
+    //Mesh and anim 
     _enemyRef->GetMesh()->SetSkeletalMesh(Row.enemyMesh.LoadSynchronous());
-
     if (Row.material)
     {
         _enemyRef->GetMesh()->SetMaterial(0, Row.material);
@@ -157,22 +156,52 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable
     _enemyRef->GetMesh()->SetRelativeScale3D(Row.MeshScale);
     _enemyRef->GetMesh()->SetAnimInstanceClass(Row.animationBlueprint);
     _enemyRef->TDSetAnimMontaje(Row.animationMontaje.LoadSynchronous());
+    _enemyRef->GetCapsuleComponent()->SetCapsuleRadius(Row.capsuleRadius);
+    _enemyRef->GetCapsuleComponent()->SetCapsuleHalfHeight(Row.capsuleHeight);
+
+
+    //GAS
     _enemyRef->healthDatatable = Row.EnemyStatsDataAsset->healthDataTable;
     _enemyRef->damageDatatable = Row.EnemyStatsDataAsset->damageDataTable;
     _enemyRef->movementDatatable = Row.EnemyStatsDataAsset->movementDataTable;
     _enemyRef->movementVariation = Row.movementVariation;
-    _enemyRef->GetCapsuleComponent()->SetCapsuleRadius(Row.capsuleRadius);
-    _enemyRef->GetCapsuleComponent()->SetCapsuleHalfHeight(Row.capsuleHeight);
     _enemyRef->abiliyList = Row.abiliyAsset->abiliyList;
+
+    //Weapon
+    if (Row.WeaponAsset)
+    {
+        if (Row.WeaponAsset->assetClass == AssetType::SkeletalMesh)
+        {
+            _enemyRef->skeletalWeaponComponent->SetSkeletalMesh(Row.WeaponAsset->skeletalWeaponMesh.LoadSynchronous());
+            _enemyRef->skeletalWeaponComponent->SetupAttachment(_enemyRef->GetMesh(), Row.WeaponAsset->SocketName);
+        }
+        else if (Row.WeaponAsset->assetClass == AssetType::StaticMesh)
+        {
+            _enemyRef->StaticWeaponComponent->SetStaticMesh(Row.WeaponAsset->StaticWeaponMesh.LoadSynchronous());
+            _enemyRef->StaticWeaponComponent->SetupAttachment(_enemyRef->GetMesh(), Row.WeaponAsset->SocketName);
+        }
+
+        if (Row.WeaponAsset->weaponAbility)
+        {
+            _enemyRef->abilitySystem->GiveAbility(FGameplayAbilitySpec(Row.WeaponAsset->weaponAbility.GetDefaultObject(), 1, 0));
+        }
+    }
+
+
     _enemyRef->unitWeight = Row.weight;
+
+    //AI
     ATDEnemyController* enemyController = _enemyRef->GetController<ATDEnemyController>();
     enemyController->RunBehaviorTree(Row.behaviorTree.LoadSynchronous());
+
+    //UI
     _enemyRef->TDGetHealthBarReference()->TDSetHealthBarSize(Row.HealthBarSize);
     _enemyRef->TDGetHealthWidgetComponent()->SetRelativeLocation(Row.HealthBarPosition);
 
+
+    //Element
     int y = FMath::Rand() % actualRoundElements.Num();
     UTDElementComponent* temp = ITDInterface::Execute_TDGetElementComponent(_enemyRef);
-
     temp->TDSetSpawnedElement(UTDGameData::TDGetGameMode()->TDGetDataAssetFromElement(actualRoundElements[y]));
 
     //_enemyRef->TDSetActive();
