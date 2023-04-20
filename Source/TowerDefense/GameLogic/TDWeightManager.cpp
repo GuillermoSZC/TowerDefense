@@ -170,15 +170,17 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable
     //Weapon
     if (Row.WeaponAsset)
     {
+        FAttachmentTransformRules rules = FAttachmentTransformRules(EAttachmentRule::KeepRelative,false);
+
         if (Row.WeaponAsset->assetClass == AssetType::SkeletalMesh)
         {
             _enemyRef->skeletalWeaponComponent->SetSkeletalMesh(Row.WeaponAsset->skeletalWeaponMesh.LoadSynchronous());
-            _enemyRef->skeletalWeaponComponent->SetupAttachment(_enemyRef->GetMesh(), Row.WeaponAsset->SocketName);
+            _enemyRef->skeletalWeaponComponent->AttachToComponent(_enemyRef->GetMesh(),rules, Row.WeaponAsset->SocketName);
         }
         else if (Row.WeaponAsset->assetClass == AssetType::StaticMesh)
         {
             _enemyRef->StaticWeaponComponent->SetStaticMesh(Row.WeaponAsset->StaticWeaponMesh.LoadSynchronous());
-            _enemyRef->StaticWeaponComponent->SetupAttachment(_enemyRef->GetMesh(), Row.WeaponAsset->SocketName);
+            _enemyRef->StaticWeaponComponent->AttachToComponent(_enemyRef->GetMesh(),rules, Row.WeaponAsset->SocketName);
         }
 
         if (Row.WeaponAsset->weaponAbility)
