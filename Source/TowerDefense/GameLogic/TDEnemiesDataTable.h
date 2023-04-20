@@ -28,6 +28,10 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Mesh")
         FVector MeshScale = FVector(1.f);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Mesh")
+        UMaterialInterface* material;
+
 #pragma endregion
 
 #pragma region HUD
@@ -73,8 +77,8 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Ability System Values")
         float movementVariation;
 
-      UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Ability System Values")
-          UTDAbilitiesDataAsset* abiliyAsset;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Ability System Values")
+        UTDAbilitiesDataAsset* abiliyAsset;
 #pragma endregion
 
 #pragma region AI

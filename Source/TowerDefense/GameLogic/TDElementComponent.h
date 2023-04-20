@@ -53,7 +53,7 @@ public:
     UFUNCTION(BlueprintCallable)
         void TDRemoveTemporalElement();
 
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintPure)
         EElements TDGetOwnerElement();
 
     UFUNCTION(BlueprintCallable)

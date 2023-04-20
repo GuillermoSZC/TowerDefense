@@ -105,7 +105,7 @@ public:
 	UFUNCTION()
 	static ATDSpawner* TDGetSpanwerActor();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintPure)
 	static ATDGameMode* TDGetGameMode();
 
 	UFUNCTION()
@@ -124,7 +124,7 @@ public:
 	static void TDSetRoundManager(ATDRoundManager* _RoundManagerRef);
 
 
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintPure)
         static ATDRoundManager* TDGetRoundManager();
 
 

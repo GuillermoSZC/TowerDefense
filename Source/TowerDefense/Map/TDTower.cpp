@@ -49,6 +49,11 @@ void ATDTower::BeginPlay()
 	
 	UTDGameData::TDGetRoundManager()->FOnBuyPhaseStartDelegate.AddDynamic(this, &ATDTower::TDUpdateRoundValues);
 
+	if (elementComponent)
+	{
+		elementComponent->OnElementChangeDelegate.AddUniqueDynamic(this, &ATDTower::TDOnElementChange);
+	}
+
 }
 
 void ATDTower::TDInitialize()
@@ -146,6 +151,11 @@ void ATDTower::TDUpdateRoundValues(int32 _Round)
 
 }
 
+
+void ATDTower::TDOnElementChange_Implementation(EElements _newElement)
+{
+
+}
 
 int ATDTower::TGGApplyEffect_Implementation()
 {

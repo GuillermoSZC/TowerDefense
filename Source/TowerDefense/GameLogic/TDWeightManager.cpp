@@ -44,7 +44,8 @@ int32 UTDWeightManager::TDSetActualRound(int32& _atualRound, TArray<EElements> _
 
         if (actualEnemy)
         {
-            TDSetEnemyValues(actualEnemy);      
+            FTDEnemiesDataTable* Row = TDSelectRandomRowFromDataTable();
+            TDSetEnemyValues(actualEnemy, *Row);
             preparedEnemies.Add(actualEnemy);
         }
     }
@@ -54,15 +55,26 @@ int32 UTDWeightManager::TDSetActualRound(int32& _atualRound, TArray<EElements> _
 
 
 
+void UTDWeightManager::TDGetRowFromDataTable(FName _RowName, FTDEnemiesDataTable& _Row)
+{
+    if (enemiesDatatable)
+    {
+        FString ContextString = TEXT("Data table context");
+        TArray<FName> RowNames = enemiesDatatable->GetRowNames(); 
+        FTDEnemiesDataTable* temp = enemiesDatatable->FindRow<FTDEnemiesDataTable>(_RowName, ContextString, true);
+        _Row = *(temp);       
+    }  
+}
+
 void UTDWeightManager::TDStartSpawn()
 {
-   
+
     ATDEnemy* actualEnemy = nullptr;
     if (!preparedEnemies.IsEmpty())
     {
         actualEnemy = preparedEnemies[0];
         preparedEnemies.Remove(actualEnemy);
-    }  
+    }
 
     if (actualEnemy)
     {
@@ -80,9 +92,8 @@ void UTDWeightManager::TDSetDataTable(UDataTable* _ref)
 
 
 
-void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
+FTDEnemiesDataTable* UTDWeightManager::TDSelectRandomRowFromDataTable()
 {
-
     if (enemiesDatatable)
     {
         FString ContextString = TEXT("Data table context");
@@ -100,7 +111,7 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
 
             if (Row)
             {
-                loop = ActualRound >= Row->firstPossibleApperance && WeightPerRound >= actualWegith + Row->weight;
+                loop = Row->weight != -1 && ActualRound >= Row->firstPossibleApperance && WeightPerRound >= actualWegith + Row->weight;
 
                 if (Row->limitEnemiesPerRound >= 1)
                 {
@@ -109,7 +120,7 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
                         loop = Row->limitEnemiesPerRound > enemiesPerClass[x];
                     }
                 }
-                
+
                 if (loop)
                 {
                     if (enemiesPerClass.Contains(x))
@@ -123,35 +134,48 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef)
                     }
 
                     actualWegith += Row->weight;
-
-                    _enemyRef->GetMesh()->SetSkeletalMesh(Row->enemyMesh.LoadSynchronous());
-                    _enemyRef->GetMesh()->SetRelativeLocation(Row->MeshPosition);
-                    _enemyRef->GetMesh()->SetRelativeScale3D(Row->MeshScale);
-                    _enemyRef->GetMesh()->SetAnimInstanceClass(Row->animationBlueprint);
-                    _enemyRef->TDSetAnimMontaje(Row->animationMontaje.LoadSynchronous());
-                    _enemyRef->healthDatatable = Row->EnemyStatsDataAsset->healthDataTable;
-                    _enemyRef->damageDatatable = Row->EnemyStatsDataAsset->damageDataTable;
-                    _enemyRef->movementDatatable = Row->EnemyStatsDataAsset->movementDataTable;
-                    _enemyRef->movementVariation = Row->movementVariation;
-                    _enemyRef->GetCapsuleComponent()->SetCapsuleRadius(Row->capsuleRadius);
-                    _enemyRef->GetCapsuleComponent()->SetCapsuleHalfHeight(Row->capsuleHeight);
-                    _enemyRef->abiliyList = Row->abiliyAsset->abiliyList;
-                    _enemyRef->unitWeight = Row->weight;
-                    ATDEnemyController* enemyController = _enemyRef->GetController<ATDEnemyController>();
-                    enemyController->RunBehaviorTree(Row->behaviorTree.LoadSynchronous());
-                    _enemyRef->TDGetHealthBarReference()->TDSetHealthBarSize(Row->HealthBarSize);
-                    _enemyRef->TDGetHealthWidgetComponent()->SetRelativeLocation(Row->HealthBarPosition);
-
-                    int y = FMath::Rand() % actualRoundElements.Num();
-                    UTDElementComponent* temp = ITDInterface::Execute_TDGetElementComponent(_enemyRef);
-
-                    temp->TDSetSpawnedElement(UTDGameData::TDGetGameMode()->TDGetDataAssetFromElement(actualRoundElements[y]));
-
-                    //_enemyRef->TDSetActive();
-
+                    return Row;
                 }
             }
         }
+
     }
+    return nullptr;
+}
+
+void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable& Row)
+{
+
+
+    _enemyRef->GetMesh()->SetSkeletalMesh(Row.enemyMesh.LoadSynchronous());
+
+    if (Row.material)
+    {
+        _enemyRef->GetMesh()->SetMaterial(0, Row.material);
+    }
+    _enemyRef->GetMesh()->SetRelativeLocation(Row.MeshPosition);
+    _enemyRef->GetMesh()->SetRelativeScale3D(Row.MeshScale);
+    _enemyRef->GetMesh()->SetAnimInstanceClass(Row.animationBlueprint);
+    _enemyRef->TDSetAnimMontaje(Row.animationMontaje.LoadSynchronous());
+    _enemyRef->healthDatatable = Row.EnemyStatsDataAsset->healthDataTable;
+    _enemyRef->damageDatatable = Row.EnemyStatsDataAsset->damageDataTable;
+    _enemyRef->movementDatatable = Row.EnemyStatsDataAsset->movementDataTable;
+    _enemyRef->movementVariation = Row.movementVariation;
+    _enemyRef->GetCapsuleComponent()->SetCapsuleRadius(Row.capsuleRadius);
+    _enemyRef->GetCapsuleComponent()->SetCapsuleHalfHeight(Row.capsuleHeight);
+    _enemyRef->abiliyList = Row.abiliyAsset->abiliyList;
+    _enemyRef->unitWeight = Row.weight;
+    ATDEnemyController* enemyController = _enemyRef->GetController<ATDEnemyController>();
+    enemyController->RunBehaviorTree(Row.behaviorTree.LoadSynchronous());
+    _enemyRef->TDGetHealthBarReference()->TDSetHealthBarSize(Row.HealthBarSize);
+    _enemyRef->TDGetHealthWidgetComponent()->SetRelativeLocation(Row.HealthBarPosition);
+
+    int y = FMath::Rand() % actualRoundElements.Num();
+    UTDElementComponent* temp = ITDInterface::Execute_TDGetElementComponent(_enemyRef);
+
+    temp->TDSetSpawnedElement(UTDGameData::TDGetGameMode()->TDGetDataAssetFromElement(actualRoundElements[y]));
+
+    //_enemyRef->TDSetActive();
+
 }
 

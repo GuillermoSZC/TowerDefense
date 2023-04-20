@@ -4,9 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "TDEnemiesDataTable.h"
 #include "TDWeightManager.generated.h"
 
 class ATDEnemy;
+
 
 /**
  * 
@@ -67,11 +69,17 @@ public:
 	int32 TDSetActualRound(int32& _atualRound, TArray<EElements> _roundElement);
 
 
+	UFUNCTION()
+	void TDGetRowFromDataTable(FName _RowName, FTDEnemiesDataTable& _Row);
+
+	void TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable& Row);
+
 protected:
 
 private:
 
 
-	void TDSetEnemyValues(ATDEnemy* _enemyRef);
+	FTDEnemiesDataTable* TDSelectRandomRowFromDataTable();
+
 	
 };

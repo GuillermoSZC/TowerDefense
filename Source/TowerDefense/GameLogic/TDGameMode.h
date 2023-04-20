@@ -14,6 +14,7 @@ class ATDEnemy;
 class UDataTable;
 class UTDElement;
 class UTDWeightManager;
+class UTDGameplayEventData;
 
 /**
  *
@@ -44,8 +45,10 @@ public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
         UDataTable* statsDatatable;
 
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
         TMap<EElements, UTDElement*> elementsDataAssets;
+
+  
 
 
 protected:
@@ -53,7 +56,8 @@ protected:
 
 private:
 
-
+      UPROPERTY(Transient)
+    UTDGameplayEventData* AbilityStruct;
 
     UPROPERTY(Transient)
     ATDRoundManager* RoundManagerRef = nullptr;

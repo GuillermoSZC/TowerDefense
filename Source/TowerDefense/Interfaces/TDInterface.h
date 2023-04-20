@@ -10,50 +10,58 @@
 UINTERFACE(MinimalAPI, Blueprintable)
 class UTDInterface : public UInterface
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 };
 
 /**
- * 
+ *
  */
 class TOWERDEFENSE_API ITDInterface
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
-	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
+        // Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 
 
-	//Este se puede implementar en BP y en C++
+    //Este se puede implementar en BP y en C++
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-         int TGGApplyEffect();
+        int TGGApplyEffect();
 
-	UFUNCTION(BlueprintNativeEvent,BlueprintCallable)
-	void TDResetAttackTimer();
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+        void TDResetAttackTimer();
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	UAnimMontage* TDGetSketalMeshMontage();
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+        UAnimMontage* TDGetSketalMeshMontage();
 
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
         void TDCharacterDeath();
 
 
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-        UTDElementComponent* TDGetElementComponent() ;
- 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	bool TDIsDebugActive() const;
+        UTDElementComponent* TDGetElementComponent();
 
 
-	UFUNCTION(BlueprintImplementableEvent,BlueprintCallable)
-	void TDRotateHeadTower(const FVector& _PositionToLook);
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+        void TDSetTemporalElement(EElements _newElement);
+
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+        void TDRemoveTemporalElement();
 
 
-	UFUNCTION(BlueprintImplementableEvent,BlueprintCallable)
-	FVector TDGetShootPosition();
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+        bool TDIsDebugActive() const;
 
 
-	//Este solo se puede implementar en BP
+    UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+        void TDRotateHeadTower(const FVector& _PositionToLook);
+
+
+    UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+        FVector TDGetShootPosition();
+
+
+    //Este solo se puede implementar en BP
 //     UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 //         const bool TGGApplyEffect2() const;
 

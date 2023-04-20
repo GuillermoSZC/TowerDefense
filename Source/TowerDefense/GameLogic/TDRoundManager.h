@@ -93,27 +93,32 @@ public:
 
 
     UFUNCTION(BlueprintCallable)
-        void TDStopRound();
-
-
-
-    
+        void TDStopRound();    
 
 	UFUNCTION()
 	void TDPostBeginPlay();
 
-
-
     virtual void Tick(float DeltaSeconds) override;
 
 
-    void TDEnemyKillCounter(int32& _weight);
+    void TDMinusEnemyKillCounter();
+
+
+    UFUNCTION(BlueprintCallable)
+     void TDAddEnemyKilCounter();
+
 
     UFUNCTION(BlueprintCallable)
         float TDGetTimeRound();
 
     UFUNCTION(BlueprintPure)
         int32 TDGetActualRound();
+
+
+    UFUNCTION(BlueprintCallable)
+        ATDEnemy* TDCreateEnemy(FName enemyName, AActor* _instigator);
+
+
 protected:
 
     virtual void BeginPlay() override;

@@ -38,7 +38,9 @@ void ATDGameMode::InitGame(const FString& MapName, const FString& Options, FStri
     UWorld* world = GetWorld();
     UTDGameData::TDSetWorld(world);
 
-    UTDGameData::TDSetAbilityStruct(NewObject<UTDGameplayEventData>(UTDGameplayEventData::StaticClass()));
+    AbilityStruct = NewObject<UTDGameplayEventData>(UTDGameplayEventData::StaticClass());
+    UTDGameData::TDSetAbilityStruct(AbilityStruct);
+
 
     ObjectPoolerRef = world->SpawnActor<ATDObjectPooler>(objectPoolerClass);
     UTDGameData::TDSetObjectPooler(ObjectPoolerRef);

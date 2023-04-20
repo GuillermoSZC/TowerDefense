@@ -10,6 +10,7 @@ UTDDamageHeroCalculation::UTDDamageHeroCalculation()
 {
     RelevantAttributesToCapture.Add(structAbilities.healthTargetDef);
     RelevantAttributesToCapture.Add(structAbilities.attackDamageSourceDef);
+    RelevantAttributesToCapture.Add(structAbilities.levelSourceDef);
 }
 
 
@@ -36,7 +37,8 @@ void UTDDamageHeroCalculation::Execute_Implementation(const FGameplayEffectCusto
         float enemyHealth = 0.f;
         ensure(ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(structAbilities.healthTargetDef, evaluationParameters, enemyHealth));
 
-        int32 actualRound = UTDGameData::TDGetRoundManager()->TDGetActualRound();
+        float level = 0.f;
+        ensure(ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(structAbilities.levelSourceDef, evaluationParameters, level));
 
         UTDElementComponent* SourceElementComponent = ITDInterface::Execute_TDGetElementComponent(sourceActor);
         UTDElementComponent* TargetElementComponent = ITDInterface::Execute_TDGetElementComponent(targetActor);
@@ -45,7 +47,7 @@ void UTDDamageHeroCalculation::Execute_Implementation(const FGameplayEffectCusto
 
 
         //@TODO cambiar actual Round por el nivel de la torre
-        float TotalDamage = elementMultiplier * baseDamage * (1 + (0.1f * actualRound));
+        float TotalDamage = elementMultiplier * baseDamage * (1 + (0.1f * level));
 
 
         FGameplayModifierEvaluatedData TargetHealthModification = FGameplayModifierEvaluatedData(structAbilities.healthTargetProperty, EGameplayModOp::Additive, -TotalDamage);
