@@ -20,15 +20,10 @@ ATDRoundManager::~ATDRoundManager()
 
 }
 
-
-
 void ATDRoundManager::BeginPlay()
 {
     Super::BeginPlay();
-
-
 }
-
 
 void ATDRoundManager::TDPostBeginPlay()
 {
@@ -46,19 +41,12 @@ void ATDRoundManager::TDStartBuyPhase()
 
 void ATDRoundManager::TDStartCombatPhase()
 {
-    TDStartRound();
-
+    actualPhase = GamePhase::CombatPhase;
+    timeRound = timeperSpawn;
 
     FOnCombatPhaseStartDelegate.Broadcast(actualRound);
 }
 
-void ATDRoundManager::TDStartRound()
-{
-    actualPhase = GamePhase::CombatPhase;
-    timeRound = timeperSpawn;
-    isSawning = true;
-
-}
 
 void ATDRoundManager::TDPrepareCombatRound()
 {
@@ -85,66 +73,43 @@ void ATDRoundManager::TDPrepareCombatRound()
     FOnEnemyKillDelegate.Broadcast(EnemiesToKill);
 }
 
-void ATDRoundManager::TDStopRound()
-{
-    isSawning = false;
-}
 
 
 void ATDRoundManager::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
 
-
-    if (actualPhase == GamePhase::CombatPhase && isSawning)
+    if (actualPhase == GamePhase::CombatPhase )
     {
         if (timeRound >= timeperSpawn)
         {
 
-            UTDGameData::TDGetWeightManager()->TDStartSpawn();
-
-
+            UTDGameData::TDGetWeightManager()->TDSpawnEnemy();
             timeRound -= timeperSpawn;
         }
-
         timeRound += DeltaSeconds;
     }
 
     if (actualPhase == GamePhase::BuyPhase)
     {
-
         if (timeRound <= 0.f)
         {
-
             TDStartCombatPhase();
-
         }
-
-        //GEngine->AddOnScreenDebugMessage(0, 0.f, FColor::Blue, FString::SanitizeFloat(timeRound));
         timeRound -= DeltaSeconds;
-
     }
-
-
 }
 
 void ATDRoundManager::TDMinusEnemyKillCounter()
 {
-
-
     --EnemiesToKill;
 
     FOnEnemyKillDelegate.Broadcast(EnemiesToKill);
 
     if (EnemiesToKill <= 0)
     {
-
-        //GEngine->AddOnScreenDebugMessage(0,5.f,FColor::Yellow,"Todos muertos");
-
         TDStartBuyPhase();
-
     }
-
 }
 
 void ATDRoundManager::TDAddEnemyKilCounter()
@@ -181,17 +146,10 @@ ATDEnemy* ATDRoundManager::TDCreateEnemy(FName enemyName, AActor* _instigator)
 
     FTDEnemiesDataTable Row;
     weightManager->TDGetRowFromDataTable(enemyName, Row);
-
-//     if (!Row)
-//     {
-//         return nullptr;
-//     }
-
     weightManager->TDSetEnemyValues(actualEnemy, Row);
     EnemiesToKill += 1;
 
     ATDEnemy* enemyInstigator = Cast<ATDEnemy>(_instigator);
-
     ATDEnemyController* enemyController = actualEnemy->GetController<ATDEnemyController>();
     UBlackboardComponent* blackboard = enemyController->GetBlackboardComponent();
 

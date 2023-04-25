@@ -235,6 +235,6 @@ void UTDGameData::TDSetPlayerRef(ATDPlayerCharacter* _ref)
 
 void UTDGameData::TDSpawnEnemyDebug()
 {
-    weightManagerRef->TDStartSpawn();
+    weightManagerRef->TDSpawnEnemy();
 }
 

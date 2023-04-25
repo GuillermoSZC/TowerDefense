@@ -14,23 +14,19 @@ class TOWERDEFENSE_API UTDElementComponent : public UActorComponent
     GENERATED_BODY()
 
 public:
-    // Sets default values for this component's properties
     UTDElementComponent();
-
-
 
 public:
     FOnElementChangeSignature OnElementChangeDelegate;
 
-
-
 protected:
-
 private:
+
 
     UPROPERTY(VisibleAnywhere)
         EElements ownerElement = EElements::None;
 
+    //DataAsset that store the ownerElement and the damage multipliers to other classes
     UPROPERTY(VisibleAnywhere)
         UTDElement* SpawnedElementData;
 
@@ -46,7 +42,7 @@ public:
 
     UFUNCTION(BlueprintCallable)
         void TDSetSpawnedElement(UTDElement* _DataAsset);
-
+ 
     UFUNCTION(BlueprintCallable)
         void TDSetTemporalElement(UTDElement* _DataAsset);
 

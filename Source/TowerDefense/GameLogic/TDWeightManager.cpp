@@ -29,10 +29,7 @@ int32 UTDWeightManager::TDSetActualRound(int32& _atualRound, TArray<EElements> _
     ActualRound = _atualRound;
     WeightPerRound = ActualRound * 10;
     actualWegith = 0;
-    licheCounter = 0;
     enemiesPerClass.Empty();
-
-    UWorld* actualWorld = UTDGameData::TDGetWorld();
 
 
     ATDObjectPooler* objectRef = UTDGameData::TDGetObjectPooler();
@@ -66,7 +63,7 @@ void UTDWeightManager::TDGetRowFromDataTable(FName _RowName, FTDEnemiesDataTable
     }  
 }
 
-void UTDWeightManager::TDStartSpawn()
+void UTDWeightManager::TDSpawnEnemy()
 {
 
     ATDEnemy* actualEnemy = nullptr;
@@ -79,7 +76,7 @@ void UTDWeightManager::TDStartSpawn()
     if (actualEnemy)
     {
         ATDSpawner* spawnerRef = UTDGameData::TDGetSpanwerActor();
-        spawnerRef->TDSpawnEnemy(actualEnemy);
+        spawnerRef->TDPlaceEnemy(actualEnemy);
         actualEnemy->TDSetActive();
     }
 
@@ -111,8 +108,10 @@ FTDEnemiesDataTable* UTDWeightManager::TDSelectRandomRowFromDataTable()
 
             if (Row)
             {
+                //check if the selected enemy's weight is more than the limit weight
                 loop = Row->weight != -1 && ActualRound >= Row->firstPossibleApperance && WeightPerRound >= actualWegith + Row->weight;
 
+                //check if there
                 if (Row->limitEnemiesPerRound >= 1)
                 {
                     if (enemiesPerClass.Contains(x))
@@ -189,7 +188,7 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable
         }
     }
 
-
+    //Weight
     _enemyRef->unitWeight = Row.weight;
 
     //AI
@@ -205,8 +204,6 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable
     int y = FMath::Rand() % actualRoundElements.Num();
     UTDElementComponent* temp = ITDInterface::Execute_TDGetElementComponent(_enemyRef);
     temp->TDSetSpawnedElement(UTDGameData::TDGetGameMode()->TDGetDataAssetFromElement(actualRoundElements[y]));
-
-    //_enemyRef->TDSetActive();
 
 }
 

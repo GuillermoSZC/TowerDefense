@@ -4,24 +4,18 @@
 #include "GameLogic/TDElementComponent.h"
 #include "TDElement.h"
 
-// Sets default values for this component's properties
 UTDElementComponent::UTDElementComponent()
 {
-    // Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-    // off to improve performance if you don't need them.
+
     PrimaryComponentTick.bCanEverTick = false;
 
-    // ...
+
 }
 
 
-// Called when the game starts
 void UTDElementComponent::BeginPlay()
 {
     Super::BeginPlay();
-
-    // ...
-
 }
 
 
@@ -30,7 +24,6 @@ void UTDElementComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-    // ...
 }
 
 void UTDElementComponent::TDSetSpawnedElement(UTDElement* _DataAsset)

@@ -17,17 +17,12 @@ class UTDRoundElementsType;
 
 
 UENUM(BlueprintType)
-enum class GamePhase : uint8 
+enum class GamePhase : uint8
 {
     BuyPhase = 0,
     CombatPhase = 1
 };
 
-
-
-/**
- *
- */
 UCLASS(BlueprintType, Blueprintable)
 class TOWERDEFENSE_API ATDRoundManager : public AActor
 {
@@ -45,22 +40,18 @@ public:
     UPROPERTY(EditAnywhere, Instanced)
         TArray<UTDRoundElementsType*> RoundElements;
 
-
     UPROPERTY(EditDefaultsOnly)
         int32 timeBuyPhase = 20.f;
 
 
+
+    //Delegates
     FOnBuyPhaseStartSignature FOnBuyPhaseStartDelegate;
     FOnCombatPhaseStartSignature FOnCombatPhaseStartDelegate;
     FOnElementSelectionSignature FOnElementSelectionDelegate;
     FOnEnemyKillSignature FOnEnemyKillDelegate;
 
 protected:
-
-
-
-
-
 private:
 
     int32 killedWegith = 0;
@@ -71,41 +62,34 @@ private:
 
     float timeRound = 0;
 
-    float timeperSpawn = 0.7f;    
+    float timeperSpawn = 0.7f;
 
-    bool isSawning = false;
 
     TArray<EElements> actualRoundElements;
 
 
     GamePhase actualPhase = GamePhase::BuyPhase;
 
-    
+
 
 
 public:
+
+    //Prepare the elements for the actual round and prepare all the enemies for the actual round selected with the weightManager
     UFUNCTION(BlueprintCallable)
-        void TDStartRound();
-
-
-        UFUNCTION(BlueprintCallable)
         void TDPrepareCombatRound();
 
-
-    UFUNCTION(BlueprintCallable)
-        void TDStopRound();    
-
-	UFUNCTION()
-	void TDPostBeginPlay();
+    UFUNCTION()
+        void TDPostBeginPlay();
 
     virtual void Tick(float DeltaSeconds) override;
 
-
+    //Reduce the amount of the actuals enemies of this round by one. If the amount is <= 0 end combatPhase and start buyPhase
     void TDMinusEnemyKillCounter();
 
-
+    //Increase the amount of the actuals enemies of this round by one
     UFUNCTION(BlueprintCallable)
-     void TDAddEnemyKilCounter();
+        void TDAddEnemyKilCounter();
 
 
     UFUNCTION(BlueprintCallable)
@@ -114,7 +98,12 @@ public:
     UFUNCTION(BlueprintPure)
         int32 TDGetActualRound();
 
-
+    /// <summary>
+    /// Get an enemy from the pool, prepare with the values from the DataTable with the enemyName and the actor that make this and spawn with the new enemy
+    /// </summary>
+    /// <param name="enemyName">Row Name of the EnemyDataTable</param>
+    /// <param name="_instigator">Enemy who activated this from an ability</param>
+    /// <returns>Returns the new enemy created</returns>
     UFUNCTION(BlueprintCallable)
         ATDEnemy* TDCreateEnemy(FName enemyName, AActor* _instigator);
 
@@ -125,8 +114,9 @@ protected:
 
 private:
 
-
+    //Change to BuyPhase and activate the delegate for all the objects listening
     void TDStartBuyPhase();
 
+    //Change to CombatPhase and activate the delegate for all the objects listening
     void TDStartCombatPhase();
 };

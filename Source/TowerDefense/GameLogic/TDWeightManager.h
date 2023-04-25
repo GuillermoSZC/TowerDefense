@@ -34,10 +34,7 @@ public:
 
 
 protected:
-
 private:
-
-
 
     UPROPERTY(Transient)
         UDataTable* enemiesDatatable;
@@ -45,8 +42,6 @@ private:
 	UPROPERTY()
 	int32 actualWegith = 0;
 
-	UPROPERTY()
-	int8 licheCounter;
 
 	UPROPERTY()
 	TArray<EElements> actualRoundElements;
@@ -57,28 +52,37 @@ private:
 
 public:
 
-
+	/// <summary>
+	/// Take an enemy from the prepared enemies to spawn it on the map
+	/// </summary>
 	UFUNCTION()
-	void TDStartSpawn();
+	void TDSpawnEnemy();
 
 	UFUNCTION()
 	void TDSetDataTable(UDataTable* _ref);
 
-
+	/// <summary>
+	/// Prepare the round. It select the enemies with the DataTable Values and prepare it for the start of the combat Round.
+	/// Also clean the previous values for this new round.
+	/// </summary>
+	/// <param name="_atualRound"></param>
+	/// <param name="_roundElement">Set randomly an element fot every enemy</param>
+	/// <returns>It returns the amount of enemies the player will face to</returns>
 	UFUNCTION()
 	int32 TDSetActualRound(int32& _atualRound, TArray<EElements> _roundElement);
 
-
+	//Get a Row from the DataTable with the name of the Row.
 	UFUNCTION()
 	void TDGetRowFromDataTable(FName _RowName, FTDEnemiesDataTable& _Row);
 
+	//Set the values from the DataTable to the enemy passed
 	void TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable& Row);
 
 protected:
 
 private:
 
-
+	//Get a randomly a Row from the DataTable
 	FTDEnemiesDataTable* TDSelectRandomRowFromDataTable();
 
 	

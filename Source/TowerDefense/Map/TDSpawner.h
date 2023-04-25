@@ -35,7 +35,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
-	void TDSpawnEnemy(ATDEnemy* _enemyRef);
+	void TDPlaceEnemy(ATDEnemy* _enemyRef);
 
 
 

@@ -35,7 +35,7 @@ void ATDSpawner::Tick(float DeltaTime)
 
 }
 
-void ATDSpawner::TDSpawnEnemy(ATDEnemy* _enemyRef)
+void ATDSpawner::TDPlaceEnemy(ATDEnemy* _enemyRef)
 {
 
 
