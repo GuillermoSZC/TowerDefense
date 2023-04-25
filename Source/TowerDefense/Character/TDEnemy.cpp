@@ -16,6 +16,7 @@
 #include "AttributesSets/TDHealthAttributeSet.h"
 #include "AttributesSets/TDDamageAttributeSet.h"
 #include "AttributesSets/TDMovementAttributeSet.h"
+#include "AIModule/Classes/BehaviorTree/BlackboardComponent.h"
 
 
 ATDEnemy::ATDEnemy()
@@ -140,13 +141,16 @@ void ATDEnemy::TDSetAnimMontaje(UAnimMontage* _montageRef)
     montageRef = _montageRef;
 }
 
-void ATDEnemy::TDSetActive()
+void ATDEnemy::TDSetActive_Implementation()
 {
     isActive = true;
     TDInitialize();
     UTDGameData::TDAddEnmemyToArray(this);
     ATDEnemyController* controllerRef = GetController<ATDEnemyController>();
     controllerRef->GetBrainComponent()->StartLogic();
+    //ATDPlayerCharacter* temp = nullptr;
+    //temp = UTDGameData::TDGetPlayerRef();
+    //controllerRef->GetBlackboardComponent()->SetValueAsObject(FName(TEXT("PlayerActor")),temp);
     GetMesh()->SetVisibility(true, true);
     GetCapsuleComponent()->SetCollisionProfileName(FName(TEXT("EnemyPawn")));
     GetCharacterMovement()->GravityScale = 1.f;
@@ -158,7 +162,7 @@ void ATDEnemy::TDSetActive()
     }
 }
 
-void ATDEnemy::TDSetDisable()
+void ATDEnemy::TDSetDisable_Implementation()
 {
     isActive = false;
 

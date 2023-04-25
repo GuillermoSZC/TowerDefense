@@ -90,10 +90,10 @@ public:
 
     virtual UAnimMontage* TDGetSketalMeshMontage_Implementation() override;
 
-    UFUNCTION()
+    UFUNCTION(BlueprintNativeEvent)
         void TDSetActive();
 
-    UFUNCTION()
+    UFUNCTION(BlueprintNativeEvent)
         void TDSetDisable();
 
     UFUNCTION(BlueprintPure)
