@@ -41,6 +41,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	float GreaterDistance;
 
+	UPROPERTY(EditAnywhere)
+	TArray<FBlackboardKeySelector> KeysToLook;
+
 protected:
 
 

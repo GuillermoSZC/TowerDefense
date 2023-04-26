@@ -35,11 +35,11 @@ public:
     UPROPERTY(EditAnywhere, Category = "Spawn Configuration")
         int unitWeight = 1.f;
 
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     USkeletalMeshComponent* skeletalWeaponComponent;
 
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     UStaticMeshComponent* StaticWeaponComponent;
 
 

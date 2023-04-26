@@ -102,13 +102,21 @@ EBlackboardNotificationResult UTDCheckDistance::OnBlackboardKeyValueChange(const
     }
 
 
-    if (BlackboardKey.GetSelectedKeyID() == ChangedKeyID)
-    {
-        // can't simply use BehaviorComp->RequestExecution(this) here, we need to support condition/value change modes
+//     if (BlackboardKey.GetSelectedKeyID() == ChangedKeyID)
+//     {
+//         const EBTDecoratorAbortRequest RequestMode = EBTDecoratorAbortRequest::ConditionPassing;
+//         ConditionalFlowAbort(*BehaviorComp, RequestMode);
+//     }
 
-        const EBTDecoratorAbortRequest RequestMode = EBTDecoratorAbortRequest::ConditionPassing;
-        ConditionalFlowAbort(*BehaviorComp, RequestMode);
+    for (FBlackboardKeySelector iter : KeysToLook)
+    {
+        if (iter.GetSelectedKeyID() == ChangedKeyID)
+        {
+            const EBTDecoratorAbortRequest RequestMode = EBTDecoratorAbortRequest::ConditionPassing;
+            ConditionalFlowAbort(*BehaviorComp, RequestMode);
+        }
     }
+
     return EBlackboardNotificationResult::ContinueObserving;
 }
 
