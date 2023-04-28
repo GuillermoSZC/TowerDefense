@@ -23,3 +23,9 @@ CREATE_BOOL_CONSOLE_VAR_DRAW_DEBUG(ShowDebugSpeedTower, "SpeedTower");
 
 
 CREATE_BOOL_CONSOLE_VAR_DRAW_DEBUG(ShowDebugDeathRayTower, "DeathRayTower");
+
+
+CREATE_BOOL_CONSOLE_VAR_DRAW_DEBUG(ShowDebugGoblin, "DebugGoblin");
+
+CREATE_BOOL_CONSOLE_VAR_DRAW_DEBUG(ShowDebugSkeleton, "DebugSkeleton");
+

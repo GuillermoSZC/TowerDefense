@@ -145,6 +145,11 @@ FTDEnemiesDataTable* UTDWeightManager::TDSelectRandomRowFromDataTable()
 void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable& Row)
 {
 
+    //Debug
+   
+    _enemyRef->DebugString = Row.DebugName;
+
+
     //Mesh and anim 
     _enemyRef->GetMesh()->SetSkeletalMesh(Row.enemyMesh.LoadSynchronous());
     if (Row.material)

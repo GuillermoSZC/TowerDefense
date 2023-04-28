@@ -21,6 +21,10 @@ public:
 
 public:
 
+
+      UPROPERTY(BlueprintReadOnly)
+    FString DebugString;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
         TArray<TSubclassOf<UGameplayAbility>> abiliyList;
 
@@ -28,6 +32,7 @@ public:
     UPROPERTY(VisibleAnywhere)
         TArray<ATDPathPoint*> PathPointsArray;
 
+     
 
     UPROPERTY(EditAnywhere, Category = "Spawn Configuration")
         float movementVariation = 100.f;

@@ -91,4 +91,8 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
         TSoftObjectPtr<class UBehaviorTree> behaviorTree;
 #pragma endregion
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Debug")
+    FString DebugName;
+
 };

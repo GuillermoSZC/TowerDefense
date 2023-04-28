@@ -51,7 +51,7 @@ public:
 
 
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintPure)
 	static UWorld* TDGetWorld();
 
 	UFUNCTION(BlueprintCallable)
