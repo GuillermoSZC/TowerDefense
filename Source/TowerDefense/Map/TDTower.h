@@ -8,6 +8,8 @@
 #include "AbilitySystemInterface.h"
 #include "GameplayEffectTypes.h"
 #include "Delegates/TDDeclareDelegates.h"
+#include "InputCoreTypes.h"
+
 #include "TDTower.generated.h"
 
 class UTDTowerAttributeSet;
@@ -115,6 +117,9 @@ public:
 
     UFUNCTION(BlueprintNativeEvent)
     void TDOnElementChange(EElements _newElement);
+
+    UFUNCTION(BlueprintImplementableEvent,BlueprintCallable)
+    void TDOnClickedTower(AActor* Target, FKey ButtonPressed);
 
 
 protected:

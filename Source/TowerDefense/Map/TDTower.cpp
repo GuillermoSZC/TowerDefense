@@ -48,6 +48,7 @@ void ATDTower::BeginPlay()
 	TDInitialize();
 	
 	UTDGameData::TDGetRoundManager()->FOnBuyPhaseStartDelegate.AddDynamic(this, &ATDTower::TDUpdateRoundValues);
+	OnClicked.AddDynamic(this, &ATDTower::TDOnClickedTower);
 
 	if (elementComponent)
 	{
