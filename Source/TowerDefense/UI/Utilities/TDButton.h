@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "UMG/Public/Components/Button.h"
+#include "Engine/DataTable.h"
 #include "TDButton.generated.h"
 
 /**
@@ -37,10 +38,10 @@ public:
         bool showButtonBackground;
 
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Button Settings|Visual")
-        float buttonSizeX;
+        float buttonSizeX; // @TODO: Quitar logica de resize
 
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Button Settings|Visual")
-        float buttonSizeY;
+        float buttonSizeY; // @TODO: Quitar logica de resize
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Button Settings|Data", meta = (InlineEditConditionToggle))
         bool useButtonText;

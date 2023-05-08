@@ -5,6 +5,7 @@
 #include "Engine/World.h"
 #include "Gas/TDGameplayEventData.h"
 #include "Character/TDEnemy.h"
+#include "Character/TDPlayerCharacter.h"
 #include "TDObjectPooler.h"
 #include "TDWeightManager.h"
 #include "TDRoundManager.h"
