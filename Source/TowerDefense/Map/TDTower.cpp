@@ -6,7 +6,12 @@
 #include "Character/TDEnemy.h"
 #include "GameLogic/TDRoundManager.h"
 #include "AttributesSets/TDDamageAttributeSet.h"
+#include "GameLogic/TDElementComponent.h"
+#include "UI/TDTowerUpgrade.h"
+#include "Character/TDPlayerCharacter.h"
 
+
+UTDTowerUpgrade* ATDTower::uiUpgradeRef = nullptr;
 
 
 //Sets default values
@@ -19,6 +24,7 @@ ATDTower::ATDTower()
 
 	timer = 0.f;
 
+	isUIActive = false;
 
 	abilitySystem = CreateDefaultSubobject<UAbilitySystemComponent>("AbilityComponent");
 	elementComponent = CreateDefaultSubobject<UTDElementComponent>("ElementComponent");
@@ -55,6 +61,14 @@ void ATDTower::BeginPlay()
 		elementComponent->OnElementChangeDelegate.AddUniqueDynamic(this, &ATDTower::TDOnElementChange);
 	}
 
+	distSquared = distanceToUI * distanceToUI;
+
+	if (uiUpgradeClass && !uiUpgradeRef)
+	{
+		uiUpgradeRef = CreateWidget<UTDTowerUpgrade>(GetWorld(), uiUpgradeClass);
+		uiUpgradeRef->AddToViewport();
+		uiUpgradeRef->SetVisibility(ESlateVisibility::Collapsed);
+	}
 }
 
 void ATDTower::TDInitialize()
@@ -107,6 +121,10 @@ void ATDTower::Tick(float DeltaTime)
 
 	}
 
+	if (isUIActive && !TDCheckPlayerInRange())
+	{
+		TDHideUI();
+	}
 
 }
 
@@ -158,6 +176,26 @@ void ATDTower::TDOnElementChange_Implementation(EElements _newElement)
 
 }
 
+void ATDTower::TDHideUI_Implementation()
+{
+	isUIActive = false;
+
+	if (uiUpgradeRef)
+	{
+		uiUpgradeRef->SetVisibility(ESlateVisibility::Collapsed);
+	}
+}
+
+void ATDTower::TDVisibleUI_Implementation()
+{
+	isUIActive = true;
+
+	if (uiUpgradeRef)
+	{
+		uiUpgradeRef->SetVisibility(ESlateVisibility::Visible);
+	}
+}
+
 int ATDTower::TGGApplyEffect_Implementation()
 {
 
@@ -167,18 +205,12 @@ int ATDTower::TGGApplyEffect_Implementation()
 	return 0;
 }
 
-
-
-
-
  void ATDTower::TDActivateDelegates()
  {
 	 TowerDamageChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetattackDamageAttribute()).AddUObject(this, &ATDTower::TDDamageChanged);
 	 TowerRangeChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetattackRangeAttribute()).AddUObject(this, &ATDTower::TDRangeChanged);
 	 TowerPeriodAttackChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetattackSpeedAttribute()).AddUObject(this, &ATDTower::TDPeriodAttackChanged);
  }
-
-
 
  void ATDTower::TDDamageChanged(const FOnAttributeChangeData& Data)
  {
@@ -194,4 +226,40 @@ int ATDTower::TGGApplyEffect_Implementation()
  void ATDTower::TDPeriodAttackChanged(const FOnAttributeChangeData& Data)
  {
 	 periodAttack = Data.NewValue;
+ }
+
+ float ATDTower::TDCheckDistanceWithPlayer()
+ {
+	 float distanceSquared;
+
+	 FVector ownerLocation = GetActorLocation();
+	 FVector playerLocation = UTDGameData::TDGetPlayerRef()->GetActorLocation();
+	 distanceSquared = FVector::DistSquared2D(ownerLocation, playerLocation);
+
+	 return distanceSquared;
+ }
+
+ bool ATDTower::TDCheckPlayerInRange()
+ {
+	 if (TDCheckDistanceWithPlayer() > distSquared)
+	 {
+		 return false;
+	 }
+
+	 return true;
+ }
+
+ bool ATDTower::TDCanShowUI()
+ {
+	 if (!TDCheckPlayerInRange())
+	 {
+		 return false;
+	 }
+
+	 if (UTDGameData::TDGetRoundManager()->TDGetActualPhase() != GamePhase::BuyPhase)
+	 {
+		 return false;
+	 }
+
+	 return true;
  }

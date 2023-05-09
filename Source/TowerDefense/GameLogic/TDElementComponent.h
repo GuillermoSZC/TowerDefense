@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "ElementsEnum.h"
+#include "Delegates/TDDeclareDelegates.h"
 #include "TDElementComponent.generated.h"
 
 

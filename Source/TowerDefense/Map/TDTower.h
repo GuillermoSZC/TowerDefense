@@ -15,6 +15,7 @@
 class UTDTowerAttributeSet;
 class UDataTable;
 class UTDDamageAttributeSet;
+class UTDTowerUpgrade;
 
 
 
@@ -26,67 +27,61 @@ class TOWERDEFENSE_API ATDTower : public AActor, public ITDInterface, public IAb
 
 public:
     // Sets default values for this actor's properties
-    ATDTower();  
-
-
-    
-
-
-   
+    ATDTower();
 
 public:
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
         UDataTable* damageDatatable;
 
-    UPROPERTY(EditAnywhere,BlueprintReadWrite)
-    UTDElementComponent* elementComponent = nullptr;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        UTDElementComponent* elementComponent = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
         TArray<TSubclassOf<class UGameplayAbility>> abiliyList;
 
-
     UPROPERTY(BlueprintAssignable)
-    FOnAttackRangeChangeSignature FOnAttackRangeChangeDelegate;
+        FOnAttackRangeChangeSignature FOnAttackRangeChangeDelegate;
 
+    static UPROPERTY(EditAnywhere)
+        UTDTowerUpgrade* uiUpgradeRef;
+
+    UPROPERTY(EditDefaultsOnly)
+        TSubclassOf<UTDTowerUpgrade> uiUpgradeClass;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+        bool isUIActive;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+        float distanceToUI;
 
 protected:
-
-
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
         UAbilitySystemComponent* abilitySystem;
 
-
 #pragma region DELEGATES
 
-    
+
     FDelegateHandle TowerRangeChangedDelegateHandle;
     FDelegateHandle TowerDamageChangedDelegateHandle;
     FDelegateHandle TowerPeriodAttackChangedDelegateHandle;
 #pragma endregion
 
-
-
- 
-
 private:
+    UPROPERTY()
+        float timer;
 
     UPROPERTY()
-    float timer;
-
-    UPROPERTY()
-    float periodAttack;
+        float periodAttack;
 
     UPROPERTY(Transient)
         const UTDDamageAttributeSet* TowerAttributes;
 
-
-
-
-
-
     UFUNCTION(BlueprintCallable)
-    UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+        UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+    UPROPERTY()
+        float distSquared;
 
 public:
     // Called every frame
@@ -97,36 +92,39 @@ public:
 
 
     UFUNCTION(BlueprintCallable)
-    ATDEnemy* TDGetEnemyInRange();
+        ATDEnemy* TDGetEnemyInRange();
 
     UFUNCTION()
-    void TDUpdateRoundValues(int32 _Round);
+        void TDUpdateRoundValues(int32 _Round);
 
 
     UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
         void TDActivateAction();
 
     UFUNCTION()
-    void TDResetAttackTimer_Implementation() override;
+        void TDResetAttackTimer_Implementation() override;
 
     virtual UTDElementComponent* TDGetElementComponent_Implementation() override;
 
     UFUNCTION(BlueprintPure)
-    bool TDIsDebugActive_Implementation() const override;
-
+        bool TDIsDebugActive_Implementation() const override;
 
     UFUNCTION(BlueprintNativeEvent)
-    void TDOnElementChange(EElements _newElement);
+        void TDOnElementChange(EElements _newElement);
 
-    UFUNCTION(BlueprintImplementableEvent,BlueprintCallable)
-    void TDOnClickedTower(AActor* Target, FKey ButtonPressed);
+    UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+        void TDOnClickedTower(AActor* Target, FKey ButtonPressed);
+
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+        void TDHideUI();
+
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+        void TDVisibleUI();
 
 
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
-
-
 
 private:
 
@@ -139,9 +137,15 @@ private:
 
     void TDRangeChanged(const FOnAttributeChangeData& Data);
 
-
     void TDPeriodAttackChanged(const FOnAttributeChangeData& Data);
 
+    UFUNCTION(BlueprintPure)
+        float TDCheckDistanceWithPlayer();
 
+    UFUNCTION(BlueprintPure)
+        bool TDCheckPlayerInRange();
+
+    UFUNCTION(BlueprintPure)
+        bool TDCanShowUI();
 
 };
