@@ -5,11 +5,12 @@
 #include "TDTowerShop.generated.h"
 
 class UTDButton;
+class ATDTowerStructure;
 
 UCLASS()
 class TOWERDEFENSE_API UTDTowerShop : public UUserWidget
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 public:
     virtual bool Initialize() override;
     virtual void NativePreConstruct() override;
@@ -34,15 +35,41 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDButton* exitButton;
 
+
 protected:
 
 private:
+    UPROPERTY()
+        ATDTowerStructure* owner;
 
 public:
+    UFUNCTION()
+        void TDSetOwnerRef(ATDTowerStructure* _value);
+
+    UFUNCTION()
+        ATDTowerStructure* TDGetOwnerRef();
+
 
 protected:
 
 private:
+#pragma region BUTTON_IMPLEMENTATION
+    UFUNCTION()
+        void TDBalisticSpawn();
 
+    UFUNCTION()
+        void TDSonicSpawn();
 
+    UFUNCTION()
+        void TDDeadRaySpawn();
+
+    UFUNCTION()
+        void TDMovementSpawn();
+
+    UFUNCTION()
+        void TDAttackSpawn();
+
+    UFUNCTION()
+        void TDCloseUI();
+#pragma endregion
 };

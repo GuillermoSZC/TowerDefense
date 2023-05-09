@@ -4,10 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameLogic/TDTowerEnum.h"
 #include "TDTowerStructure.generated.h"
 
 class UStaticMeshComponent;
 class UTDTowerShop;
+class ATDTower;
 
 UCLASS()
 class TOWERDEFENSE_API ATDTowerStructure : public AActor
@@ -32,6 +34,9 @@ public:
     UPROPERTY(EditDefaultsOnly)
         TSubclassOf<UTDTowerShop> uiShopClass;
 
+    UPROPERTY(EditAnywhere)
+        bool isTowerSpawned;
+
 protected:
 
 
@@ -41,8 +46,20 @@ private:
     UPROPERTY()
         float distSquared;
 
+    UPROPERTY(EditDefaultsOnly)
+        TMap<TEnumAsByte<ETowers>, TSubclassOf<ATDTower>> towerMap;
+
 public:
     virtual void Tick(float DeltaTime) override;
+
+    UFUNCTION(BlueprintCallable)
+        void TDTowerSpawn(ETowers _tower);
+
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+        void TDHideUI();
+
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+        void TDVisibleUI();
 
 protected:
     virtual void BeginPlay() override;
@@ -50,11 +67,6 @@ protected:
     UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
         void TDOnClickedStructure(AActor* Target, FKey ButtonPressed);
 
-    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-        void TDHideUI();
-
-    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-        void TDVisibleUI();
 
 private:
     UFUNCTION(BlueprintPure)

@@ -4,6 +4,7 @@
 #include "Character/TDPlayerCharacter.h"
 #include "UI/TDTowerShop.h"
 #include "GameLogic/TDRoundManager.h"
+#include "TDTower.h"
 
 
 FName ATDTowerStructure::StaticMeshName(TEXT("StructureMesh"));
@@ -18,6 +19,13 @@ ATDTowerStructure::ATDTowerStructure()
     RootComponent = towerStructure;
 
     isUIActive = false;
+    isTowerSpawned = false;
+
+    towerMap.Add(ETowers::Balistic, nullptr);
+    towerMap.Add(ETowers::Sonic, nullptr);
+    towerMap.Add(ETowers::DeathRay, nullptr);
+    towerMap.Add(ETowers::Attack, nullptr);
+    towerMap.Add(ETowers::Speed, nullptr);
 }
 
 void ATDTowerStructure::BeginPlay()
@@ -62,8 +70,13 @@ bool ATDTowerStructure::TDCheckPlayerInRange()
 
 bool ATDTowerStructure::TDCanShowUI()
 {
+    if (isTowerSpawned)
+    {
+        return false;
+    }
+
     if (!TDCheckPlayerInRange())
-    {        
+    {
         return false;
     }
 
@@ -87,6 +100,7 @@ void ATDTowerStructure::TDHideUI_Implementation()
     if (uiShopRef)
     {
         uiShopRef->SetVisibility(ESlateVisibility::Collapsed);
+        uiShopRef->TDSetOwnerRef(nullptr);
     }
 }
 
@@ -97,6 +111,7 @@ void ATDTowerStructure::TDVisibleUI_Implementation()
     if (uiShopRef)
     {
         uiShopRef->SetVisibility(ESlateVisibility::Visible);
+        uiShopRef->TDSetOwnerRef(this);
     }
 }
 
@@ -110,3 +125,13 @@ void ATDTowerStructure::Tick(float DeltaTime)
     }
 }
 
+void ATDTowerStructure::TDTowerSpawn(ETowers _tower)
+{
+    FVector location = GetActorLocation();
+
+    GetWorld()->SpawnActor(towerMap[_tower], &location, &FRotator::ZeroRotator);
+
+    TDHideUI();
+    
+    isTowerSpawned = true;
+}

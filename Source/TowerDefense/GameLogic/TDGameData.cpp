@@ -9,6 +9,7 @@
 #include "TDObjectPooler.h"
 #include "TDWeightManager.h"
 #include "TDRoundManager.h"
+#include "Map/TDTowerStructure.h"
 
 
 UWorld* UTDGameData::gameWorld = nullptr;
@@ -38,6 +39,7 @@ void UTDGameData::TDResetGameData()
     abilityData = nullptr;
     baseRef = nullptr;
     spawnerArray.Empty();
+    ATDTowerStructure::uiShopRef = nullptr;
 }
 
 UWorld* UTDGameData::TDGetWorld()
