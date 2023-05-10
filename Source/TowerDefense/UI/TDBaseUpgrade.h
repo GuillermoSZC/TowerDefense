@@ -7,6 +7,7 @@
 #include "TDBaseUpgrade.generated.h"
 
 class UTDButton;
+class ATDBase;
 
 UCLASS()
 class TOWERDEFENSE_API UTDBaseUpgrade : public UUserWidget
@@ -43,15 +44,41 @@ protected:
 
 
 private:
-
+    UPROPERTY(Transient)
+        ATDBase* owner;
 
 public:
+    UFUNCTION()
+        ATDBase* TDGetOwner();
 
+    UFUNCTION()
+        void TDSetOwner(ATDBase* _owner);
 
 protected:
 
 
 private:
+#pragma region BUTTONS_IMPLEMENTATION
+    UFUNCTION()
+        void TDPlasmaUpgrade();
 
+    UFUNCTION()
+        void TDFireUpgrade();
 
+    UFUNCTION()
+        void TDIceUpgrade();
+
+    UFUNCTION()
+        void TDHealthUpgrade();
+
+    UFUNCTION()
+        void TDSpeedUpgrade();
+
+    UFUNCTION()
+        void TDDamageUpgrade();
+
+    UFUNCTION()
+        void TDCloseUI();
+
+#pragma endregion
 };

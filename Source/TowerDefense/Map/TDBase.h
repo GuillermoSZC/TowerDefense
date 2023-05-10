@@ -14,6 +14,7 @@
 class UDataTable;
 struct FOnAttributeChangeData;
 class UTDHealthAttributeSet;
+class UTDBaseUpgrade;
 
 UCLASS()
 class TOWERDEFENSE_API ATDBase : public AActor, public ITDInterface, public IAbilitySystemInterface
@@ -33,18 +34,32 @@ public:
 
     FOnHealthChangeSignature FOnHealthChangeDelegate;
 
+    static UPROPERTY(EditAnywhere)
+        UTDBaseUpgrade* uiUpgradeRef;
+
+    UPROPERTY(EditDefaultsOnly)
+        TSubclassOf<UTDBaseUpgrade> uiUpgradeClass;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+        bool isUIActive;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+        float distanceToUI;
+
+    UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+        void TDOnClickedBase(AActor* Target, FKey ButtonPressed);
 
 
 protected:
 
 
-           UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "HUD")
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "HUD")
         class UWidgetComponent* widgetComponent;
 
     UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "HUD")
         class UTDHealthBar* healthBar;
 
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true")) 
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
         UAbilitySystemComponent* AbilitySystem;
 
 #pragma region DELEGATES
@@ -62,6 +77,9 @@ private:
     static FName BoxComponentName;
 
     static FName StaticMeshName;
+
+    UPROPERTY()
+        float distSquared;
 #pragma endregion
 
     UPROPERTY(Transient)
@@ -74,7 +92,11 @@ public:
     UFUNCTION()
         int TGGApplyEffect_Implementation();
 
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+        void TDHideUI();
 
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+        void TDVisibleUI();
 
 
 protected:
@@ -84,8 +106,8 @@ protected:
     // Called every frame
     virtual void Tick(float DeltaTime) override;
 
-        UFUNCTION(BlueprintCallable,BlueprintImplementableEvent)
-    void OnBaseDeath();
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+        void OnBaseDeath();
 
 
 private:
@@ -95,5 +117,13 @@ private:
 
     void TDHealthChanged(const FOnAttributeChangeData& Data);
 
+    UFUNCTION(BlueprintPure)
+        float TDCheckDistanceWithPlayer();
+
+    UFUNCTION(BlueprintPure)
+        bool TDCheckPlayerInRange();
+
+    UFUNCTION(BlueprintPure)
+        bool TDCanShowUI();
 
 };

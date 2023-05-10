@@ -42,10 +42,10 @@ public:
 
 
     UFUNCTION(BlueprintCallable)
-        void TDSetSpawnedElement(UTDElement* _DataAsset);
+        void TDSetSpawnedElement(EElements _element);
  
     UFUNCTION(BlueprintCallable)
-        void TDSetTemporalElement(UTDElement* _DataAsset);
+        void TDSetTemporalElement(EElements _element);
 
     UFUNCTION(BlueprintCallable)
         void TDRemoveTemporalElement();

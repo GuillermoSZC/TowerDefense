@@ -9,6 +9,8 @@
 #include "GameLogic/TDElementComponent.h"
 #include "UI/TDTowerUpgrade.h"
 #include "Character/TDPlayerCharacter.h"
+#include <UMG/Public/Blueprint/WidgetBlueprintLibrary.h>
+#include "Character/TDPlayerController.h"
 
 
 UTDTowerUpgrade* ATDTower::uiUpgradeRef = nullptr;
@@ -118,7 +120,6 @@ void ATDTower::Tick(float DeltaTime)
 		timer -= periodAttack;
 
 		ITDInterface::Execute_TGGApplyEffect(this);
-
 	}
 
 	if (isUIActive && !TDCheckPlayerInRange())
@@ -183,6 +184,7 @@ void ATDTower::TDHideUI_Implementation()
 	if (uiUpgradeRef)
 	{
 		uiUpgradeRef->SetVisibility(ESlateVisibility::Collapsed);
+		UWidgetBlueprintLibrary::SetInputMode_GameOnly(Cast<ATDPlayerController>(UTDGameData::playerRef->GetController()));
 	}
 }
 
@@ -192,7 +194,9 @@ void ATDTower::TDVisibleUI_Implementation()
 
 	if (uiUpgradeRef)
 	{
+		uiUpgradeRef->TDSetOwner(this);
 		uiUpgradeRef->SetVisibility(ESlateVisibility::Visible);
+		UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(Cast<ATDPlayerController>(UTDGameData::playerRef->GetController()), uiUpgradeRef);
 	}
 }
 

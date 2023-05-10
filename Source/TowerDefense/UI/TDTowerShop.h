@@ -39,7 +39,7 @@ public:
 protected:
 
 private:
-    UPROPERTY()
+    UPROPERTY(Transient)
         ATDTowerStructure* owner;
 
 public:

@@ -9,16 +9,12 @@
 #include "GameplayEffectTypes.h"
 #include "Delegates/TDDeclareDelegates.h"
 #include "InputCoreTypes.h"
-
 #include "TDTower.generated.h"
 
 class UTDTowerAttributeSet;
 class UDataTable;
 class UTDDamageAttributeSet;
 class UTDTowerUpgrade;
-
-
-
 
 UCLASS()
 class TOWERDEFENSE_API ATDTower : public AActor, public ITDInterface, public IAbilitySystemInterface
@@ -34,7 +30,7 @@ public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
         UDataTable* damageDatatable;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) // @TODO: Pasar a privado?
         UTDElementComponent* elementComponent = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
@@ -77,9 +73,6 @@ private:
     UPROPERTY(Transient)
         const UTDDamageAttributeSet* TowerAttributes;
 
-    UFUNCTION(BlueprintCallable)
-        UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-
     UPROPERTY()
         float distSquared;
 
@@ -121,6 +114,8 @@ public:
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
         void TDVisibleUI();
 
+    UFUNCTION(BlueprintCallable)
+        UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 protected:
     // Called when the game starts or when spawned

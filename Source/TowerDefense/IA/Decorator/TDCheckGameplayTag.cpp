@@ -4,6 +4,8 @@
 #include "IA/Decorator/TDCheckGameplayTag.h"
 #include "GameplayTagAssetInterface.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
+#include "Character/TDCharacter.h"
+#include <AIModule/Classes/AIController.h>
 
 UTDDecoratorCheckGameplayTag::UTDDecoratorCheckGameplayTag()
 {

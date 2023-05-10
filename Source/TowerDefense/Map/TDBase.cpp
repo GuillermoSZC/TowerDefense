@@ -1,13 +1,20 @@
 #include "TDBase.h"
 #include "Components/BoxComponent.h"
-
 #include "GameplayEffectTypes.h"
 #include "GameLogic/TDGameData.h"
 #include "Components/StaticMeshComponent.h"
 #include "AttributesSets/TDHealthAttributeSet.h"
+#include <UMG/Public/Components/WidgetComponent.h>
+#include "UI/Utilities/TDHealthBar.h"
+#include "UI/TDBaseUpgrade.h"
+#include "GameLogic/TDRoundManager.h"
+#include "Character/TDPlayerCharacter.h"
+#include <UMG/Public/Blueprint/WidgetBlueprintLibrary.h>
+#include "Character/TDPlayerController.h"
 
 FName ATDBase::BoxComponentName(TEXT("BoxComponentName"));
 FName ATDBase::StaticMeshName(TEXT("BaseMesh"));
+UTDBaseUpgrade* ATDBase::uiUpgradeRef = nullptr;
 
 ATDBase::ATDBase(const FObjectInitializer& ObjectInitializer)
 {
@@ -35,6 +42,7 @@ void ATDBase::BeginPlay()
 
     UTDGameData::TDSetBaseActor(this);
 
+    OnClicked.AddDynamic(this, &ATDBase::TDOnClickedBase);
 
     if (widgetComponent)
     {
@@ -48,6 +56,14 @@ void ATDBase::BeginPlay()
         }
     }
 
+    distSquared = distanceToUI * distanceToUI;
+
+    if (uiUpgradeClass && !uiUpgradeRef)
+    {
+        uiUpgradeRef = CreateWidget<UTDBaseUpgrade>(GetWorld(), uiUpgradeClass);
+        uiUpgradeRef->AddToViewport();
+        uiUpgradeRef->SetVisibility(ESlateVisibility::Collapsed);
+    }
 
     TDInitialize();
 }
@@ -57,11 +73,38 @@ void ATDBase::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
+    if (isUIActive && !TDCheckPlayerInRange())
+    {
+        TDHideUI();
+    }
 }
 
 UAbilitySystemComponent* ATDBase::GetAbilitySystemComponent() const
 {
     return AbilitySystem;
+}
+
+void ATDBase::TDHideUI_Implementation()
+{
+    isUIActive = false;
+
+    if (uiUpgradeRef)
+    {
+        uiUpgradeRef->SetVisibility(ESlateVisibility::Collapsed);
+        UWidgetBlueprintLibrary::SetInputMode_GameOnly(Cast<ATDPlayerController>(UTDGameData::playerRef->GetController()));
+    }
+}
+
+void ATDBase::TDVisibleUI_Implementation()
+{
+    isUIActive = true;
+
+    if (uiUpgradeRef)
+    {
+        uiUpgradeRef->TDSetOwner(this);
+        uiUpgradeRef->SetVisibility(ESlateVisibility::Visible);
+        UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(Cast<ATDPlayerController>(UTDGameData::playerRef->GetController()), uiUpgradeRef);
+    }
 }
 
 int ATDBase::TGGApplyEffect_Implementation()
@@ -104,4 +147,40 @@ void ATDBase::TDHealthChanged(const FOnAttributeChangeData& Data)
         OnBaseDeath();
     }
 
+}
+
+float ATDBase::TDCheckDistanceWithPlayer()
+{
+    float distanceSquared;
+
+    FVector ownerLocation = GetActorLocation();
+    FVector playerLocation = UTDGameData::TDGetPlayerRef()->GetActorLocation();
+    distanceSquared = FVector::DistSquared2D(ownerLocation, playerLocation);
+    
+    return distanceSquared;
+}
+
+bool ATDBase::TDCheckPlayerInRange()
+{
+    if (TDCheckDistanceWithPlayer() > distSquared)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool ATDBase::TDCanShowUI()
+{
+    if (!TDCheckPlayerInRange())
+    {
+        return false;
+    }
+
+    if (UTDGameData::TDGetRoundManager()->TDGetActualPhase() != GamePhase::BuyPhase)
+    {
+        return false;
+    }
+
+    return true;
 }

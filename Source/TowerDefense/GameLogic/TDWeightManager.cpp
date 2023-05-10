@@ -14,6 +14,8 @@
 #include "TDGameMode.h"
 #include "UI/Utilities/TDHealthBar.h"
 #include "Components/WidgetComponent.h"
+#include "GameplayAbilitySpec.h"
+#include "AbilitySystemComponent.h"
 
 UTDWeightManager::UTDWeightManager()
 {
@@ -208,7 +210,6 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable
     //Element
     int y = FMath::Rand() % actualRoundElements.Num();
     UTDElementComponent* temp = ITDInterface::Execute_TDGetElementComponent(_enemyRef);
-    temp->TDSetSpawnedElement(UTDGameData::TDGetGameMode()->TDGetDataAssetFromElement(actualRoundElements[y]));
-
+    temp->TDSetSpawnedElement(actualRoundElements[y]);
 }
 

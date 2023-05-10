@@ -5,6 +5,8 @@
 #include "UI/TDTowerShop.h"
 #include "GameLogic/TDRoundManager.h"
 #include "TDTower.h"
+#include <UMG/Public/Blueprint/WidgetBlueprintLibrary.h>
+#include "Character/TDPlayerController.h"
 
 
 FName ATDTowerStructure::StaticMeshName(TEXT("StructureMesh"));
@@ -101,6 +103,7 @@ void ATDTowerStructure::TDHideUI_Implementation()
     {
         uiShopRef->SetVisibility(ESlateVisibility::Collapsed);
         uiShopRef->TDSetOwnerRef(nullptr);
+        UWidgetBlueprintLibrary::SetInputMode_GameOnly(Cast<ATDPlayerController>(UTDGameData::playerRef->GetController()));
     }
 }
 
@@ -112,6 +115,7 @@ void ATDTowerStructure::TDVisibleUI_Implementation()
     {
         uiShopRef->SetVisibility(ESlateVisibility::Visible);
         uiShopRef->TDSetOwnerRef(this);
+        UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(Cast<ATDPlayerController>(UTDGameData::playerRef->GetController()), uiShopRef);
     }
 }
 

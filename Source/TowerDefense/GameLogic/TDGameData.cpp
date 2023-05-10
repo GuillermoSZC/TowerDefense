@@ -11,6 +11,7 @@
 #include "TDRoundManager.h"
 #include "Map/TDTowerStructure.h"
 #include "Map/TDTower.h"
+#include "Map/TDBase.h"
 
 
 UWorld* UTDGameData::gameWorld = nullptr;
@@ -30,9 +31,6 @@ UTDGameData::UTDGameData(const FObjectInitializer& ObjectInitializer) : Super(Ob
 
 }
 
-
-
-
 void UTDGameData::TDResetGameData()
 {
     gameWorld = nullptr;
@@ -42,6 +40,7 @@ void UTDGameData::TDResetGameData()
     spawnerArray.Empty();
     ATDTowerStructure::uiShopRef = nullptr;
     ATDTower::uiUpgradeRef = nullptr;
+    ATDBase::uiUpgradeRef = nullptr;
 }
 
 UWorld* UTDGameData::TDGetWorld()
