@@ -39,17 +39,7 @@ public:
     UPROPERTY(BlueprintAssignable)
         FOnAttackRangeChangeSignature FOnAttackRangeChangeDelegate;
 
-    static UPROPERTY(EditAnywhere)
-        UTDTowerUpgrade* uiUpgradeRef;
 
-    UPROPERTY(EditDefaultsOnly)
-        TSubclassOf<UTDTowerUpgrade> uiUpgradeClass;
-
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-        bool isUIActive;
-
-    UPROPERTY(EditAnywhere, BlueprintReadOnly)
-        float distanceToUI;
 
 protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
@@ -73,8 +63,6 @@ private:
     UPROPERTY(Transient)
         const UTDDamageAttributeSet* TowerAttributes;
 
-    UPROPERTY()
-        float distSquared;
 
 public:
     // Called every frame
@@ -105,14 +93,6 @@ public:
     UFUNCTION(BlueprintNativeEvent)
         void TDOnElementChange(EElements _newElement);
 
-    UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-        void TDOnClickedTower(AActor* Target, FKey ButtonPressed);
-
-    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-        void TDHideUI();
-
-    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-        void TDVisibleUI();
 
     UFUNCTION(BlueprintCallable)
         UAbilitySystemComponent* GetAbilitySystemComponent() const override;
@@ -134,13 +114,5 @@ private:
 
     void TDPeriodAttackChanged(const FOnAttributeChangeData& Data);
 
-    UFUNCTION(BlueprintPure)
-        float TDCheckDistanceWithPlayer();
-
-    UFUNCTION(BlueprintPure)
-        bool TDCheckPlayerInRange();
-
-    UFUNCTION(BlueprintPure)
-        bool TDCanShowUI();
 
 };

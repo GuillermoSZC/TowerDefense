@@ -1,4 +1,6 @@
 #include "UI/TDUserWidget.h"
+#include "Components/TDWidgetShopComponent.h"
+
 
 bool UTDUserWidget::Initialize()
 {
@@ -21,12 +23,12 @@ void UTDUserWidget::NativeConstruct()
 
 }
 
-AActor* UTDUserWidget::TDGetOwner()
+UTDWidgetShopComponent* UTDUserWidget::TDGetOwner()
 {
     return owner;
 }
 
-void UTDUserWidget::TDSetOwner(AActor* _owner)
+void UTDUserWidget::TDSetOwner(UTDWidgetShopComponent* _owner)
 {
     owner = _owner;
 }

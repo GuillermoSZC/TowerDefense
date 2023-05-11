@@ -14,6 +14,13 @@ ATDPlayerCharacter::ATDPlayerCharacter()
 
 }
 
+void ATDPlayerCharacter::PostInitializeComponents()
+{
+    Super::PostInitializeComponents();
+    UTDGameData::TDSetPlayerRef(this);
+
+}
+
 void ATDPlayerCharacter::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
@@ -31,7 +38,6 @@ void ATDPlayerCharacter::BeginPlay()
     Super::BeginPlay();
 
     TDInitialize();
-    UTDGameData::TDSetPlayerRef(this);
     UTDGameData::TDGetRoundManager()->FOnBuyPhaseStartDelegate.AddDynamic(this, &ATDPlayerCharacter::TDUpdateRoundValues);
 }
 

@@ -4,6 +4,10 @@
 #include "Components/ActorComponent.h"
 #include "TDWidgetShopComponent.generated.h"
 
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnOpenUISignature, UWidget* , _widget);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCloseUISignature);
+
 class UUserWidget;
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
@@ -15,24 +19,32 @@ public:
     UTDWidgetShopComponent();
 
 public:
-    static UPROPERTY(EditAnywhere, Category = "User Interface")
-        UUserWidget* widgetRef;
+
 
     UPROPERTY(EditDefaultsOnly, Category = "User Interface")
-        TSubclassOf<UUserWidget> widgetClass;
+        TSubclassOf<UTDUserWidget> widgetClass;
 
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "User Interface")
-        bool isUIActive;
+
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "User Interface")
         float distanceToUI;
 
 protected:
 
+         UPROPERTY(VisibleAnywhere, Category = "User Interface")
+        UTDUserWidget* widgetRef;
+
+             UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "User Interface")
+        bool isUIActive;
 
 private:
     UPROPERTY()
         float distSquared;
+
+    UPROPERTY()
+    FOnOpenUISignature  FOnOpenUIDelegate;
+    UPROPERTY()
+    FOnCloseUISignature  FOnCloseUIDelegate;
 
 public:
     virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;

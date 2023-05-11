@@ -2,6 +2,7 @@
 #include "Map/TDTowerStructure.h"
 #include "Utilities/TDButton.h"
 #include "UMG/Public/Components/Button.h"
+#include "Components/TDWidgetShopComponent.h"
 
 bool UTDTowerShop::Initialize()
 {
@@ -73,6 +74,6 @@ void UTDTowerShop::TDCloseUI()
 {
     if (owner)
     {
-        // owner->TDHideUI();
+         owner->TDHideUI();
     }
 }

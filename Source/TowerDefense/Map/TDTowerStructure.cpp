@@ -10,7 +10,6 @@
 
 
 FName ATDTowerStructure::StaticMeshName(TEXT("StructureMesh"));
-UTDTowerShop* ATDTowerStructure::uiShopRef = nullptr;
 
 ATDTowerStructure::ATDTowerStructure()
 {
@@ -20,8 +19,7 @@ ATDTowerStructure::ATDTowerStructure()
 
     RootComponent = towerStructure;
 
-    isUIActive = false;
-    isTowerSpawned = false;
+    //isTowerSpawned = false;
 
     towerMap.Add(ETowers::Balistic, nullptr);
     towerMap.Add(ETowers::Sonic, nullptr);
@@ -34,99 +32,16 @@ void ATDTowerStructure::BeginPlay()
 {
     Super::BeginPlay();
 
-    OnClicked.AddDynamic(this, &ATDTowerStructure::TDOnClickedStructure);
 
-    distSquared = distanceToUI * distanceToUI;
+   
 
-    if (uiShopClass && !uiShopRef)
-    {
-        uiShopRef = CreateWidget<UTDTowerShop>(GetWorld(), uiShopClass);
-        uiShopRef->AddToViewport();
-        uiShopRef->SetVisibility(ESlateVisibility::Collapsed);
-    }
-
-    UTDGameData::TDGetRoundManager()->FOnCombatPhaseStartDelegate.AddUniqueDynamic(this, &ATDTowerStructure::TDOnBuyPhaseStart);
 }
 
-float ATDTowerStructure::TDCheckDistanceWithPlayer()
-{
-    float distanceSquared;
-
-    FVector ownerLocation = GetActorLocation();
-    FVector playerLocation = UTDGameData::TDGetPlayerRef()->GetActorLocation();
-
-    distanceSquared = FVector::DistSquared2D(ownerLocation, playerLocation);
-
-    return distanceSquared;
-}
-
-bool ATDTowerStructure::TDCheckPlayerInRange()
-{
-    if (TDCheckDistanceWithPlayer() > distSquared)
-    {
-        return false;
-    }
-
-    return true;
-}
-
-bool ATDTowerStructure::TDCanShowUI()
-{
-    if (isTowerSpawned)
-    {
-        return false;
-    }
-
-    if (!TDCheckPlayerInRange())
-    {
-        return false;
-    }
-
-    if (UTDGameData::TDGetRoundManager()->TDGetActualPhase() != GamePhase::BuyPhase)
-    {
-        return false;
-    }
-
-    return true;
-}
-
-void ATDTowerStructure::TDOnBuyPhaseStart(int _value)
-{
-    TDHideUI();
-}
-
-void ATDTowerStructure::TDHideUI_Implementation()
-{
-    isUIActive = false;
-
-    if (uiShopRef)
-    {
-        uiShopRef->SetVisibility(ESlateVisibility::Collapsed);
-        uiShopRef->TDSetOwner(nullptr);
-        UWidgetBlueprintLibrary::SetInputMode_GameOnly(Cast<ATDPlayerController>(UTDGameData::playerRef->GetController()));
-    }
-}
-
-void ATDTowerStructure::TDVisibleUI_Implementation()
-{
-    isUIActive = true;
-
-    if (uiShopRef)
-    {
-        uiShopRef->SetVisibility(ESlateVisibility::Visible);
-        uiShopRef->TDSetOwner(this);
-        UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(Cast<ATDPlayerController>(UTDGameData::playerRef->GetController()), uiShopRef);
-    }
-}
 
 void ATDTowerStructure::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    if (isUIActive && !TDCheckPlayerInRange())
-    {
-        TDHideUI();
-    }
 }
 
 void ATDTowerStructure::TDTowerSpawn(ETowers _tower)
@@ -135,7 +50,7 @@ void ATDTowerStructure::TDTowerSpawn(ETowers _tower)
 
     GetWorld()->SpawnActor(towerMap[_tower], &location, &FRotator::ZeroRotator);
 
-    TDHideUI();
+    //TDHideUI();
     
-    isTowerSpawned = true;
+    /*isTowerSpawned = true;*/
 }

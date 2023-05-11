@@ -8,6 +8,7 @@
 #include "TDMacros.h"
 #include "TDCharacter.h"
 #include "EnhancedInputSubsystems.h"
+#include "UMG/Public/Blueprint/WidgetBlueprintLibrary.h"
 
 
 ATDPlayerController::ATDPlayerController()
@@ -25,6 +26,7 @@ void ATDPlayerController::BeginPlay()
     if (Subsystem)
     {
         Subsystem->AddMappingContext(DefaultMappingContext, 0);
+
     }
     
 
@@ -81,5 +83,30 @@ void ATDPlayerController::TDHitAction(const FInputActionValue& _value)
     
     FGameplayEventData abilityData;
     UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(playerPawn, GET_GAMEPLAY_TAG(ABILITY1_TRIGGER_TAG), abilityData);
+}
+
+void ATDPlayerController::TDOnOpenUI(UWidget* _widgetRef)
+{
+    UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(this, _widgetRef);
+
+    UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
+    if (Subsystem)
+    {
+        Subsystem->RemoveMappingContext(DefaultMappingContext);
+
+    }
+
+}
+
+void ATDPlayerController::TDOnCloseUI() 
+{
+    UWidgetBlueprintLibrary::SetInputMode_GameOnly(this);
+
+    UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
+    if (Subsystem)
+    {
+        Subsystem->AddMappingContext(DefaultMappingContext, 0);
+    }
+
 }
 

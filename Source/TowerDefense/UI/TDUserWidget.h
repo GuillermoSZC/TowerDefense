@@ -4,6 +4,8 @@
 #include "Blueprint/UserWidget.h"
 #include "TDUserWidget.generated.h"
 
+class UTDWidgetShopComponent;
+
 UCLASS()
 class TOWERDEFENSE_API UTDUserWidget : public UUserWidget
 {
@@ -18,16 +20,16 @@ public:
 
 protected:
     UPROPERTY(Transient)
-        AActor* owner;
+        UTDWidgetShopComponent* owner;
 
 private:
 
 public:
     UFUNCTION()
-        AActor* TDGetOwner();
+        UTDWidgetShopComponent* TDGetOwner();
 
     UFUNCTION()
-        void TDSetOwner(AActor* _owner);
+        void TDSetOwner(UTDWidgetShopComponent* _owner);
 
 protected:
 

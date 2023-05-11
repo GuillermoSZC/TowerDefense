@@ -34,20 +34,6 @@ public:
 
     FOnHealthChangeSignature FOnHealthChangeDelegate;
 
-    static UPROPERTY(EditAnywhere)
-        UTDBaseUpgrade* uiUpgradeRef;
-
-    UPROPERTY(EditDefaultsOnly)
-        TSubclassOf<UTDBaseUpgrade> uiUpgradeClass;
-
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-        bool isUIActive;
-
-    UPROPERTY(EditAnywhere, BlueprintReadOnly)
-        float distanceToUI;
-
-    UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-        void TDOnClickedBase(AActor* Target, FKey ButtonPressed);
 
 
 protected:
@@ -78,8 +64,6 @@ private:
 
     static FName StaticMeshName;
 
-    UPROPERTY()
-        float distSquared;
 #pragma endregion
 
     UPROPERTY(Transient)
@@ -92,11 +76,6 @@ public:
     UFUNCTION()
         int TGGApplyEffect_Implementation();
 
-    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-        void TDHideUI();
-
-    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-        void TDVisibleUI();
 
 
 protected:
@@ -117,13 +96,6 @@ private:
 
     void TDHealthChanged(const FOnAttributeChangeData& Data);
 
-    UFUNCTION(BlueprintPure)
-        float TDCheckDistanceWithPlayer();
-
-    UFUNCTION(BlueprintPure)
-        bool TDCheckPlayerInRange();
-
-    UFUNCTION(BlueprintPure)
-        bool TDCanShowUI();
+ 
 
 };

@@ -36,29 +36,29 @@ public:
 
 public:
 
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, Category = "Classes")
         TSubclassOf<ATDObjectPooler> objectPoolerClass;
 
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, Category = "Classes")
         TSubclassOf<ATDRoundManager> RoundManagerClass;
 
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, Category = "Classes")
         TSubclassOf<ATDEnemy> EnemyClass;
 
 
-    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Classes")
         UDataTable* statsDatatable;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
         TMap<EElements, UTDElement*> elementsDataAssets;
 
-    UPROPERTY()
+    UPROPERTY(EditDefaultsOnly, Category = "Classes")
         TSubclassOf<UTDTowerShop> towerShopClass;
 
-    UPROPERTY()
+    UPROPERTY(EditDefaultsOnly, Category = "Classes")
         TSubclassOf<UTDTowerUpgrade> towerUpgradeClass;
 
-    UPROPERTY()
+    UPROPERTY(EditDefaultsOnly, Category = "Classes")
         TSubclassOf<UTDBaseUpgrade> baseUpgradeClass;
 
 protected:
@@ -78,14 +78,16 @@ private:
     UPROPERTY(Transient)
         UTDWeightManager* weightManagerRef = nullptr;
 
-//     UPROPERTY()
-//         TMap<TSubclassOf<UTDUserWidget>, UTDUserWidget*> widgetMap;
+     UPROPERTY()
+         TMap<TSubclassOf<UTDUserWidget>, UTDUserWidget*> widgetMap;
 
 
 
 public:
 
     UTDElement* TDGetDataAssetFromElement(EElements _keyElement);
+
+    UTDUserWidget* TDGetWidgetFromClass(TSubclassOf<UTDUserWidget> _class);
 
 protected:
     void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;
@@ -99,8 +101,8 @@ protected:
 
 
 private:
-//     UFUNCTION()
-//         void TDAddToViewport(UTDUserWidget* _widget, TSubclassOf<UTDUserWidget> _widgetClass);
+     UFUNCTION()
+         UTDUserWidget* TDAddToViewport(TSubclassOf<UTDUserWidget> _widgetClass);
 
 
 };

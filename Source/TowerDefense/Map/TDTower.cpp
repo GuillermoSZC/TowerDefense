@@ -13,8 +13,6 @@
 #include "Character/TDPlayerController.h"
 
 
-UTDTowerUpgrade* ATDTower::uiUpgradeRef = nullptr;
-
 
 //Sets default values
 ATDTower::ATDTower()
@@ -26,7 +24,6 @@ ATDTower::ATDTower()
 
 	timer = 0.f;
 
-	isUIActive = false;
 
 	abilitySystem = CreateDefaultSubobject<UAbilitySystemComponent>("AbilityComponent");
 	elementComponent = CreateDefaultSubobject<UTDElementComponent>("ElementComponent");
@@ -56,21 +53,13 @@ void ATDTower::BeginPlay()
 	TDInitialize();
 	
 	UTDGameData::TDGetRoundManager()->FOnBuyPhaseStartDelegate.AddDynamic(this, &ATDTower::TDUpdateRoundValues);
-	OnClicked.AddDynamic(this, &ATDTower::TDOnClickedTower);
 
 	if (elementComponent)
 	{
 		elementComponent->OnElementChangeDelegate.AddUniqueDynamic(this, &ATDTower::TDOnElementChange);
 	}
 
-	distSquared = distanceToUI * distanceToUI;
 
-	if (uiUpgradeClass && !uiUpgradeRef)
-	{
-		uiUpgradeRef = CreateWidget<UTDTowerUpgrade>(GetWorld(), uiUpgradeClass);
-		uiUpgradeRef->AddToViewport();
-		uiUpgradeRef->SetVisibility(ESlateVisibility::Collapsed);
-	}
 }
 
 void ATDTower::TDInitialize()
@@ -122,10 +111,6 @@ void ATDTower::Tick(float DeltaTime)
 		ITDInterface::Execute_TGGApplyEffect(this);
 	}
 
-	if (isUIActive && !TDCheckPlayerInRange())
-	{
-		TDHideUI();
-	}
 
 }
 
@@ -177,28 +162,7 @@ void ATDTower::TDOnElementChange_Implementation(EElements _newElement)
 
 }
 
-void ATDTower::TDHideUI_Implementation()
-{
-	isUIActive = false;
 
-	if (uiUpgradeRef)
-	{
-		uiUpgradeRef->SetVisibility(ESlateVisibility::Collapsed);
-		UWidgetBlueprintLibrary::SetInputMode_GameOnly(Cast<ATDPlayerController>(UTDGameData::playerRef->GetController()));
-	}
-}
-
-void ATDTower::TDVisibleUI_Implementation()
-{
-	isUIActive = true;
-
-	if (uiUpgradeRef)
-	{
-		uiUpgradeRef->TDSetOwner(this);
-		uiUpgradeRef->SetVisibility(ESlateVisibility::Visible);
-		UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(Cast<ATDPlayerController>(UTDGameData::playerRef->GetController()), uiUpgradeRef);
-	}
-}
 
 int ATDTower::TGGApplyEffect_Implementation()
 {
@@ -232,38 +196,4 @@ int ATDTower::TGGApplyEffect_Implementation()
 	 periodAttack = Data.NewValue;
  }
 
- float ATDTower::TDCheckDistanceWithPlayer()
- {
-	 float distanceSquared;
 
-	 FVector ownerLocation = GetActorLocation();
-	 FVector playerLocation = UTDGameData::TDGetPlayerRef()->GetActorLocation();
-	 distanceSquared = FVector::DistSquared2D(ownerLocation, playerLocation);
-
-	 return distanceSquared;
- }
-
- bool ATDTower::TDCheckPlayerInRange()
- {
-	 if (TDCheckDistanceWithPlayer() > distSquared)
-	 {
-		 return false;
-	 }
-
-	 return true;
- }
-
- bool ATDTower::TDCanShowUI()
- {
-	 if (!TDCheckPlayerInRange())
-	 {
-		 return false;
-	 }
-
-	 if (UTDGameData::TDGetRoundManager()->TDGetActualPhase() != GamePhase::BuyPhase)
-	 {
-		 return false;
-	 }
-
-	 return true;
- }

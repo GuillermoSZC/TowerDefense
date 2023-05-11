@@ -38,9 +38,7 @@ void UTDGameData::TDResetGameData()
     abilityData = nullptr;
     baseRef = nullptr;
     spawnerArray.Empty();
-    ATDTowerStructure::uiShopRef = nullptr;
-    ATDTower::uiUpgradeRef = nullptr;
-    ATDBase::uiUpgradeRef = nullptr;
+    
 }
 
 UWorld* UTDGameData::TDGetWorld()
