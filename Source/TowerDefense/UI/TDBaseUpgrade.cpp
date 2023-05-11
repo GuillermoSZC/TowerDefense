@@ -34,16 +34,6 @@ void UTDBaseUpgrade::NativeConstruct()
     exit->ownerButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDCloseUI);
 }
 
-ATDBase* UTDBaseUpgrade::TDGetOwner()
-{
-    return owner;
-}
-
-void UTDBaseUpgrade::TDSetOwner(ATDBase* _owner)
-{
-    owner = _owner;
-}
-
 void UTDBaseUpgrade::TDPlasmaUpgrade()
 {
     
@@ -78,6 +68,6 @@ void UTDBaseUpgrade::TDCloseUI()
 {
     if (owner)
     {
-        owner->TDHideUI();
+        // owner->TDHideUI();
     }
 }

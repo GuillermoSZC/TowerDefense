@@ -1,14 +1,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
+#include "TDUserWidget.h"
 #include "TDTowerShop.generated.h"
 
 class UTDButton;
 class ATDTowerStructure;
 
 UCLASS()
-class TOWERDEFENSE_API UTDTowerShop : public UUserWidget
+class TOWERDEFENSE_API UTDTowerShop : public UTDUserWidget
 {
     GENERATED_BODY()
 public:
@@ -39,16 +39,8 @@ public:
 protected:
 
 private:
-    UPROPERTY(Transient)
-        ATDTowerStructure* owner;
 
 public:
-    UFUNCTION()
-        void TDSetOwnerRef(ATDTowerStructure* _value);
-
-    UFUNCTION()
-        ATDTowerStructure* TDGetOwnerRef();
-
 
 protected:
 

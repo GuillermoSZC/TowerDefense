@@ -103,7 +103,7 @@ void ATDBase::TDVisibleUI_Implementation()
     {
         uiUpgradeRef->TDSetOwner(this);
         uiUpgradeRef->SetVisibility(ESlateVisibility::Visible);
-        UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(Cast<ATDPlayerController>(UTDGameData::playerRef->GetController()), uiUpgradeRef);
+        UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(Cast<ATDPlayerController>(UTDGameData::playerRef->GetController()), uiUpgradeRef);
     }
 }
 

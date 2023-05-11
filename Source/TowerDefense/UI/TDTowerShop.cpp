@@ -29,21 +29,11 @@ void UTDTowerShop::NativeConstruct()
     exitButton->ownerButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDCloseUI);
 }
 
-void UTDTowerShop::TDSetOwnerRef(ATDTowerStructure* _value)
-{
-    owner = _value;
-}
-
-ATDTowerStructure* UTDTowerShop::TDGetOwnerRef()
-{
-    return owner;
-}
-
 void UTDTowerShop::TDBalisticSpawn()
 {
     if (owner)
     {
-        owner->TDTowerSpawn(ETowers::Balistic);
+        // owner->TDTowerSpawn(ETowers::Balistic);
     }
 }
 
@@ -51,7 +41,7 @@ void UTDTowerShop::TDSonicSpawn()
 {
     if (owner)
     {
-        owner->TDTowerSpawn(ETowers::Sonic);
+        // owner->TDTowerSpawn(ETowers::Sonic);
     }
 }
 
@@ -59,7 +49,7 @@ void UTDTowerShop::TDDeadRaySpawn()
 {
     if (owner)
     {
-        owner->TDTowerSpawn(ETowers::DeathRay);
+        // owner->TDTowerSpawn(ETowers::DeathRay);
     }
 }
 
@@ -67,7 +57,7 @@ void UTDTowerShop::TDMovementSpawn()
 {
     if (owner)
     {
-        owner->TDTowerSpawn(ETowers::Speed);
+        // owner->TDTowerSpawn(ETowers::Speed);
     }
 }
 
@@ -75,7 +65,7 @@ void UTDTowerShop::TDAttackSpawn()
 {
     if (owner)
     {
-        owner->TDTowerSpawn(ETowers::Attack);
+        // owner->TDTowerSpawn(ETowers::Attack);
     }
 }
 
@@ -83,6 +73,6 @@ void UTDTowerShop::TDCloseUI()
 {
     if (owner)
     {
-        owner->TDHideUI();
+        // owner->TDHideUI();
     }
 }

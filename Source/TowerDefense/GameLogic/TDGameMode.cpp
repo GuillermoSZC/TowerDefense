@@ -8,6 +8,9 @@
 #include "TDWeightManager.h"
 #include "Engine/DataTable.h"
 #include "TDElement.h"
+#include "UI/TDTowerShop.h"
+#include "UI/TDTowerUpgrade.h"
+#include "UI/TDBaseUpgrade.h"
 
 
 ATDGameMode::ATDGameMode()
@@ -53,7 +56,13 @@ void ATDGameMode::InitGame(const FString& MapName, const FString& Options, FStri
     UTDGameData::TDSetWeightManager(weightManagerRef);
     weightManagerRef->TDSetDataTable(statsDatatable);
 
-
+//     UTDTowerShop* uiTowerShop;
+//     UTDTowerUpgrade* uiTowerUpgrade;
+//     UTDBaseUpgrade* uiBaseUpgrade;
+// 
+//     TDAddToViewport(uiTowerShop, towerShopClass);
+//     TDAddToViewport(uiTowerUpgrade, towerUpgradeClass);
+//     TDAddToViewport(uiBaseUpgrade, baseUpgradeClass);
 }
 
 
@@ -84,3 +93,13 @@ void ATDGameMode::Reset()
     Super::Reset();
 
 }
+
+// void ATDGameMode::TDAddToViewport(UTDUserWidget* _widget, TSubclassOf<UTDUserWidget> _widgetClass)
+// {
+//     if (!_widget)
+//     {
+//         _widget = CreateWidget<UTDUserWidget>(GetWorld(), _widgetClass);
+//         _widget->AddToViewport();
+//         _widget->SetVisibility(ESlateVisibility::Collapsed);
+//     }
+// }

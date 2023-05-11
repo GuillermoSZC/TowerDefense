@@ -34,16 +34,6 @@ void UTDTowerUpgrade::NativeConstruct()
     exit->ownerButton->OnClicked.AddDynamic(this, &UTDTowerUpgrade::TDCloseUI);
 }
 
-void UTDTowerUpgrade::TDSetOwner(ATDTower* _owner)
-{
-    owner = _owner;
-}
-
-ATDTower* UTDTowerUpgrade::TDGetOwner()
-{
-    return owner;
-}
-
 void UTDTowerUpgrade::TDPlasmaUpgrade()
 {
     TDSetElement(EElements::Plasma);
@@ -68,7 +58,7 @@ void UTDTowerUpgrade::TDLevelUp()
     modif.Attribute = UTDLevelAttributeSet::GetlevelAttribute();
     modif.ModifierMagnitude = FGameplayEffectModifierMagnitude(FScalableFloat(1));
     staticEffect->Modifiers.Add(modif);
-    owner->GetAbilitySystemComponent()->ApplyGameplayEffectToSelf(staticEffect, 1, FGameplayEffectContextHandle());
+    Cast<ATDTower>(owner)->GetAbilitySystemComponent()->ApplyGameplayEffectToSelf(staticEffect, 1, FGameplayEffectContextHandle());
     staticEffect->ConditionalBeginDestroy();
 }
 
@@ -76,7 +66,7 @@ void UTDTowerUpgrade::TDCloseUI()
 {
     if (owner)
     {
-        owner->TDHideUI();
+        // owner->TDHideUI();
     }
 }
 

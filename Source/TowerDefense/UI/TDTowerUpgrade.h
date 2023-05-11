@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
+#include "TDUserWidget.h"
 #include "TDTowerUpgrade.generated.h"
 
 class UTDButton;
 class ATDTower;
 
 UCLASS()
-class TOWERDEFENSE_API UTDTowerUpgrade : public UUserWidget
+class TOWERDEFENSE_API UTDTowerUpgrade : public UTDUserWidget
 {
     GENERATED_BODY()
 public:
@@ -38,15 +38,9 @@ protected:
 
 
 private:
-    UPROPERTY(Transient)
-        ATDTower* owner;
+
 
 public:
-    UFUNCTION()
-        void TDSetOwner(ATDTower* _owner);
-
-    UFUNCTION()
-        ATDTower* TDGetOwner();
 
 protected:
 

@@ -15,6 +15,10 @@ class UDataTable;
 class UTDElement;
 class UTDWeightManager;
 class UTDGameplayEventData;
+class UTDUserWidget;
+class UTDTowerShop;
+class UTDTowerUpgrade;
+class UTDBaseUpgrade;
 
 /**
  *
@@ -45,29 +49,37 @@ public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
         UDataTable* statsDatatable;
 
-    UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
         TMap<EElements, UTDElement*> elementsDataAssets;
 
-  
+    UPROPERTY()
+        TSubclassOf<UTDTowerShop> towerShopClass;
 
+    UPROPERTY()
+        TSubclassOf<UTDTowerUpgrade> towerUpgradeClass;
+
+    UPROPERTY()
+        TSubclassOf<UTDBaseUpgrade> baseUpgradeClass;
 
 protected:
 
 
 private:
 
-      UPROPERTY(Transient)
-    UTDGameplayEventData* AbilityStruct;
+    UPROPERTY(Transient)
+        UTDGameplayEventData* AbilityStruct;
 
     UPROPERTY(Transient)
-    ATDRoundManager* RoundManagerRef = nullptr;
+        ATDRoundManager* RoundManagerRef = nullptr;
 
     UPROPERTY(Transient)
-    ATDObjectPooler* ObjectPoolerRef = nullptr;
+        ATDObjectPooler* ObjectPoolerRef = nullptr;
 
     UPROPERTY(Transient)
-    UTDWeightManager* weightManagerRef = nullptr;
+        UTDWeightManager* weightManagerRef = nullptr;
 
+//     UPROPERTY()
+//         TMap<TSubclassOf<UTDUserWidget>, UTDUserWidget*> widgetMap;
 
 
 
@@ -87,6 +99,8 @@ protected:
 
 
 private:
+//     UFUNCTION()
+//         void TDAddToViewport(UTDUserWidget* _widget, TSubclassOf<UTDUserWidget> _widgetClass);
 
 
 };

@@ -102,7 +102,7 @@ void ATDTowerStructure::TDHideUI_Implementation()
     if (uiShopRef)
     {
         uiShopRef->SetVisibility(ESlateVisibility::Collapsed);
-        uiShopRef->TDSetOwnerRef(nullptr);
+        uiShopRef->TDSetOwner(nullptr);
         UWidgetBlueprintLibrary::SetInputMode_GameOnly(Cast<ATDPlayerController>(UTDGameData::playerRef->GetController()));
     }
 }
@@ -114,8 +114,8 @@ void ATDTowerStructure::TDVisibleUI_Implementation()
     if (uiShopRef)
     {
         uiShopRef->SetVisibility(ESlateVisibility::Visible);
-        uiShopRef->TDSetOwnerRef(this);
-        UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(Cast<ATDPlayerController>(UTDGameData::playerRef->GetController()), uiShopRef);
+        uiShopRef->TDSetOwner(this);
+        UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(Cast<ATDPlayerController>(UTDGameData::playerRef->GetController()), uiShopRef);
     }
 }
 
