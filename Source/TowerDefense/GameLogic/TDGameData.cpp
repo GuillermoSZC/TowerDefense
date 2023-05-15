@@ -5,9 +5,13 @@
 #include "Engine/World.h"
 #include "Gas/TDGameplayEventData.h"
 #include "Character/TDEnemy.h"
+#include "Character/TDPlayerCharacter.h"
 #include "TDObjectPooler.h"
 #include "TDWeightManager.h"
 #include "TDRoundManager.h"
+#include "Map/TDTowerStructure.h"
+#include "Map/TDTower.h"
+#include "Map/TDBase.h"
 
 
 UWorld* UTDGameData::gameWorld = nullptr;
@@ -27,9 +31,6 @@ UTDGameData::UTDGameData(const FObjectInitializer& ObjectInitializer) : Super(Ob
 
 }
 
-
-
-
 void UTDGameData::TDResetGameData()
 {
     gameWorld = nullptr;
@@ -37,6 +38,7 @@ void UTDGameData::TDResetGameData()
     abilityData = nullptr;
     baseRef = nullptr;
     spawnerArray.Empty();
+    
 }
 
 UWorld* UTDGameData::TDGetWorld()

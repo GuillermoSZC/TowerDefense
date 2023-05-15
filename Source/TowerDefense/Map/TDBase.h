@@ -14,6 +14,7 @@
 class UDataTable;
 struct FOnAttributeChangeData;
 class UTDHealthAttributeSet;
+class UTDBaseUpgrade;
 
 UCLASS()
 class TOWERDEFENSE_API ATDBase : public AActor, public ITDInterface, public IAbilitySystemInterface
@@ -38,13 +39,13 @@ public:
 protected:
 
 
-           UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "HUD")
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "HUD")
         class UWidgetComponent* widgetComponent;
 
     UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "HUD")
         class UTDHealthBar* healthBar;
 
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true")) 
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
         UAbilitySystemComponent* AbilitySystem;
 
 #pragma region DELEGATES
@@ -62,6 +63,7 @@ private:
     static FName BoxComponentName;
 
     static FName StaticMeshName;
+
 #pragma endregion
 
     UPROPERTY(Transient)
@@ -76,7 +78,6 @@ public:
 
 
 
-
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
@@ -84,8 +85,8 @@ protected:
     // Called every frame
     virtual void Tick(float DeltaTime) override;
 
-        UFUNCTION(BlueprintCallable,BlueprintImplementableEvent)
-    void OnBaseDeath();
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+        void OnBaseDeath();
 
 
 private:
@@ -95,5 +96,6 @@ private:
 
     void TDHealthChanged(const FOnAttributeChangeData& Data);
 
+ 
 
 };

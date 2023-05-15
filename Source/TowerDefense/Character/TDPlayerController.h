@@ -50,6 +50,13 @@ private:
 
 public:
 
+     UFUNCTION()
+    void TDOnOpenUI(UWidget* _widgetRef);
+    UFUNCTION()
+    void TDOnCloseUI();
+
+
+
 protected:
 
 
@@ -64,4 +71,5 @@ private:
     void TDMoveSideAction(const FInputActionValue& _value);
     void TDHitAction(const FInputActionValue& _value);
 
+   
 };

@@ -15,6 +15,10 @@ class UDataTable;
 class UTDElement;
 class UTDWeightManager;
 class UTDGameplayEventData;
+class UTDUserWidget;
+class UTDTowerShop;
+class UTDTowerUpgrade;
+class UTDBaseUpgrade;
 
 /**
  *
@@ -32,48 +36,58 @@ public:
 
 public:
 
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, Category = "Classes")
         TSubclassOf<ATDObjectPooler> objectPoolerClass;
 
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, Category = "Classes")
         TSubclassOf<ATDRoundManager> RoundManagerClass;
 
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, Category = "Classes")
         TSubclassOf<ATDEnemy> EnemyClass;
 
 
-    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Classes")
         UDataTable* statsDatatable;
 
-    UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
         TMap<EElements, UTDElement*> elementsDataAssets;
 
-  
+    UPROPERTY(EditDefaultsOnly, Category = "Classes")
+        TSubclassOf<UTDTowerShop> towerShopClass;
 
+    UPROPERTY(EditDefaultsOnly, Category = "Classes")
+        TSubclassOf<UTDTowerUpgrade> towerUpgradeClass;
+
+    UPROPERTY(EditDefaultsOnly, Category = "Classes")
+        TSubclassOf<UTDBaseUpgrade> baseUpgradeClass;
 
 protected:
 
 
 private:
 
-      UPROPERTY(Transient)
-    UTDGameplayEventData* AbilityStruct;
+    UPROPERTY(Transient)
+        UTDGameplayEventData* AbilityStruct;
 
     UPROPERTY(Transient)
-    ATDRoundManager* RoundManagerRef = nullptr;
+        ATDRoundManager* RoundManagerRef = nullptr;
 
     UPROPERTY(Transient)
-    ATDObjectPooler* ObjectPoolerRef = nullptr;
+        ATDObjectPooler* ObjectPoolerRef = nullptr;
 
     UPROPERTY(Transient)
-    UTDWeightManager* weightManagerRef = nullptr;
+        UTDWeightManager* weightManagerRef = nullptr;
 
+     UPROPERTY()
+         TMap<TSubclassOf<UTDUserWidget>, UTDUserWidget*> widgetMap;
 
 
 
 public:
 
     UTDElement* TDGetDataAssetFromElement(EElements _keyElement);
+
+    UTDUserWidget* TDGetWidgetFromClass(TSubclassOf<UTDUserWidget> _class);
 
 protected:
     void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;
@@ -87,6 +101,8 @@ protected:
 
 
 private:
+     UFUNCTION()
+         UTDUserWidget* TDAddToViewport(TSubclassOf<UTDUserWidget> _widgetClass);
 
 
 };

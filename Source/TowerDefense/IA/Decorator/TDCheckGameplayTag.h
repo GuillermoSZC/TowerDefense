@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTDecorator.h"
+#include <AbilitySystemComponent.h>
 #include "TDCheckGameplayTag.generated.h"
 
 /**

@@ -4,6 +4,10 @@
 #include "IA/Decorator/TDCheckDistance.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
+#include <AIModule/Classes/BehaviorTree/Blackboard/BlackboardKeyType.h>
+#include <AIModule/Classes/BehaviorTree/BlackboardComponent.h>
+#include "Character/TDEnemyController.h"
+#include "Character/TDEnemy.h"
 
 UTDCheckDistance::UTDCheckDistance()
 {

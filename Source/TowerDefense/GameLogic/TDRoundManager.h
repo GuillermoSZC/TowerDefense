@@ -107,6 +107,8 @@ public:
     UFUNCTION(BlueprintCallable)
         ATDEnemy* TDCreateEnemy(FName enemyName, AActor* _instigator);
 
+    UFUNCTION(BlueprintPure)
+        GamePhase TDGetActualPhase();
 
 protected:
 

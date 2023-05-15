@@ -2,6 +2,11 @@
 
 
 #include "IA/Service/TDUpdatePlayerPosition.h"
+#include "Character/TDPlayerCharacter.h"
+#include "Character/TDEnemyController.h"
+#include "Character/TDEnemy.h"
+#include <AIModule/Classes/BehaviorTree/BlackboardComponent.h>
+#include "GameLogic/TDGameData.h"
 
 UTDUpdatePlayerPosition::UTDUpdatePlayerPosition()
 {

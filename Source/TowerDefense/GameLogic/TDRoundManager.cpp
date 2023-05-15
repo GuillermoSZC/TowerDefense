@@ -5,6 +5,11 @@
 #include "TDRoundElementsType.h"
 #include "TDWeightManager.h"
 #include "TDGameData.h"
+#include "TDObjectPooler.h"
+#include "Character/TDEnemyController.h"
+#include "Character/TDEnemy.h"
+#include <AIModule/Classes/BehaviorTree/BlackboardComponent.h>
+#include "TDPathPoint.h"
 
 
 
@@ -163,4 +168,9 @@ ATDEnemy* ATDRoundManager::TDCreateEnemy(FName enemyName, AActor* _instigator)
     actualEnemy->TDSetActive();
 
     return actualEnemy;
+}
+
+GamePhase ATDRoundManager::TDGetActualPhase()
+{
+    return actualPhase;
 }

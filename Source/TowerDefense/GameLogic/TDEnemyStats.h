@@ -4,6 +4,8 @@
 #include "Engine/DataAsset.h"
 #include "TDEnemyStats.generated.h"
 
+class UDataTable;
+
 /**
  * 
  */

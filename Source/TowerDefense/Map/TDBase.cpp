@@ -1,10 +1,14 @@
 #include "TDBase.h"
 #include "Components/BoxComponent.h"
-
 #include "GameplayEffectTypes.h"
 #include "GameLogic/TDGameData.h"
 #include "Components/StaticMeshComponent.h"
 #include "AttributesSets/TDHealthAttributeSet.h"
+#include <UMG/Public/Components/WidgetComponent.h>
+#include "UI/Utilities/TDHealthBar.h"
+#include "GameLogic/TDRoundManager.h"
+//#include "Character/TDPlayerCharacter.h"
+//#include "Character/TDPlayerController.h"
 
 FName ATDBase::BoxComponentName(TEXT("BoxComponentName"));
 FName ATDBase::StaticMeshName(TEXT("BaseMesh"));
@@ -63,6 +67,8 @@ UAbilitySystemComponent* ATDBase::GetAbilitySystemComponent() const
 {
     return AbilitySystem;
 }
+
+
 
 int ATDBase::TGGApplyEffect_Implementation()
 {

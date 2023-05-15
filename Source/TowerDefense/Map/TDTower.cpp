@@ -6,6 +6,11 @@
 #include "Character/TDEnemy.h"
 #include "GameLogic/TDRoundManager.h"
 #include "AttributesSets/TDDamageAttributeSet.h"
+#include "GameLogic/TDElementComponent.h"
+#include "UI/TDTowerUpgrade.h"
+#include "Character/TDPlayerCharacter.h"
+#include <UMG/Public/Blueprint/WidgetBlueprintLibrary.h>
+#include "Character/TDPlayerController.h"
 
 
 
@@ -48,12 +53,12 @@ void ATDTower::BeginPlay()
 	TDInitialize();
 	
 	UTDGameData::TDGetRoundManager()->FOnBuyPhaseStartDelegate.AddDynamic(this, &ATDTower::TDUpdateRoundValues);
-	OnClicked.AddDynamic(this, &ATDTower::TDOnClickedTower);
 
 	if (elementComponent)
 	{
 		elementComponent->OnElementChangeDelegate.AddUniqueDynamic(this, &ATDTower::TDOnElementChange);
 	}
+
 
 }
 
@@ -104,7 +109,6 @@ void ATDTower::Tick(float DeltaTime)
 		timer -= periodAttack;
 
 		ITDInterface::Execute_TGGApplyEffect(this);
-
 	}
 
 
@@ -158,6 +162,8 @@ void ATDTower::TDOnElementChange_Implementation(EElements _newElement)
 
 }
 
+
+
 int ATDTower::TGGApplyEffect_Implementation()
 {
 
@@ -167,18 +173,12 @@ int ATDTower::TGGApplyEffect_Implementation()
 	return 0;
 }
 
-
-
-
-
  void ATDTower::TDActivateDelegates()
  {
 	 TowerDamageChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetattackDamageAttribute()).AddUObject(this, &ATDTower::TDDamageChanged);
 	 TowerRangeChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetattackRangeAttribute()).AddUObject(this, &ATDTower::TDRangeChanged);
 	 TowerPeriodAttackChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetattackSpeedAttribute()).AddUObject(this, &ATDTower::TDPeriodAttackChanged);
  }
-
-
 
  void ATDTower::TDDamageChanged(const FOnAttributeChangeData& Data)
  {
@@ -195,3 +195,5 @@ int ATDTower::TGGApplyEffect_Implementation()
  {
 	 periodAttack = Data.NewValue;
  }
+
+

@@ -10,8 +10,8 @@ bool UTDButton::Initialize()
 {
     Super::Initialize();
 
-    buttonSizeX = 1;
-    buttonSizeY = 1;
+    buttonSizeX = 1; // @TODO: Quitar logica de resize
+    buttonSizeY = 1; // @TODO: Quitar logica de resize
 
     return true;
 }
@@ -22,7 +22,7 @@ void UTDButton::NativePreConstruct()
 
     if (ownerButton)
     {
-        ownerButton->SetRenderScale(FVector2D(buttonSizeX, buttonSizeY));
+        ownerButton->SetRenderScale(FVector2D(buttonSizeX, buttonSizeY)); // @TODO: Quitar logica de resize
     }
 
     if (textButton)

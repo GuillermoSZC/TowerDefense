@@ -9,15 +9,12 @@
 #include "GameplayEffectTypes.h"
 #include "Delegates/TDDeclareDelegates.h"
 #include "InputCoreTypes.h"
-
 #include "TDTower.generated.h"
 
 class UTDTowerAttributeSet;
 class UDataTable;
 class UTDDamageAttributeSet;
-
-
-
+class UTDTowerUpgrade;
 
 UCLASS()
 class TOWERDEFENSE_API ATDTower : public AActor, public ITDInterface, public IAbilitySystemInterface
@@ -26,67 +23,46 @@ class TOWERDEFENSE_API ATDTower : public AActor, public ITDInterface, public IAb
 
 public:
     // Sets default values for this actor's properties
-    ATDTower();  
-
-
-    
-
-
-   
+    ATDTower();
 
 public:
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
         UDataTable* damageDatatable;
 
-    UPROPERTY(EditAnywhere,BlueprintReadWrite)
-    UTDElementComponent* elementComponent = nullptr;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite) // @TODO: Pasar a privado?
+        UTDElementComponent* elementComponent = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
         TArray<TSubclassOf<class UGameplayAbility>> abiliyList;
 
-
     UPROPERTY(BlueprintAssignable)
-    FOnAttackRangeChangeSignature FOnAttackRangeChangeDelegate;
+        FOnAttackRangeChangeSignature FOnAttackRangeChangeDelegate;
+
 
 
 protected:
-
-
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
         UAbilitySystemComponent* abilitySystem;
 
-
 #pragma region DELEGATES
 
-    
+
     FDelegateHandle TowerRangeChangedDelegateHandle;
     FDelegateHandle TowerDamageChangedDelegateHandle;
     FDelegateHandle TowerPeriodAttackChangedDelegateHandle;
 #pragma endregion
 
-
-
- 
-
 private:
+    UPROPERTY()
+        float timer;
 
     UPROPERTY()
-    float timer;
-
-    UPROPERTY()
-    float periodAttack;
+        float periodAttack;
 
     UPROPERTY(Transient)
         const UTDDamageAttributeSet* TowerAttributes;
 
-
-
-
-
-
-    UFUNCTION(BlueprintCallable)
-    UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 public:
     // Called every frame
@@ -97,36 +73,33 @@ public:
 
 
     UFUNCTION(BlueprintCallable)
-    ATDEnemy* TDGetEnemyInRange();
+        ATDEnemy* TDGetEnemyInRange();
 
     UFUNCTION()
-    void TDUpdateRoundValues(int32 _Round);
+        void TDUpdateRoundValues(int32 _Round);
 
 
     UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
         void TDActivateAction();
 
     UFUNCTION()
-    void TDResetAttackTimer_Implementation() override;
+        void TDResetAttackTimer_Implementation() override;
 
     virtual UTDElementComponent* TDGetElementComponent_Implementation() override;
 
     UFUNCTION(BlueprintPure)
-    bool TDIsDebugActive_Implementation() const override;
-
+        bool TDIsDebugActive_Implementation() const override;
 
     UFUNCTION(BlueprintNativeEvent)
-    void TDOnElementChange(EElements _newElement);
+        void TDOnElementChange(EElements _newElement);
 
-    UFUNCTION(BlueprintImplementableEvent,BlueprintCallable)
-    void TDOnClickedTower(AActor* Target, FKey ButtonPressed);
 
+    UFUNCTION(BlueprintCallable)
+        UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
-
-
 
 private:
 
@@ -139,9 +112,7 @@ private:
 
     void TDRangeChanged(const FOnAttributeChangeData& Data);
 
-
     void TDPeriodAttackChanged(const FOnAttributeChangeData& Data);
-
 
 
 };

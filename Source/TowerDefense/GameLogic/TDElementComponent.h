@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "ElementsEnum.h"
+#include "Delegates/TDDeclareDelegates.h"
 #include "TDElementComponent.generated.h"
 
 
@@ -41,10 +42,10 @@ public:
 
 
     UFUNCTION(BlueprintCallable)
-        void TDSetSpawnedElement(UTDElement* _DataAsset);
+        void TDSetSpawnedElement(EElements _element);
  
     UFUNCTION(BlueprintCallable)
-        void TDSetTemporalElement(UTDElement* _DataAsset);
+        void TDSetTemporalElement(EElements _element);
 
     UFUNCTION(BlueprintCallable)
         void TDRemoveTemporalElement();

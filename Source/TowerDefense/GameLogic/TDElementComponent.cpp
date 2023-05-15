@@ -3,6 +3,9 @@
 
 #include "GameLogic/TDElementComponent.h"
 #include "TDElement.h"
+#include "TDGameData.h"
+#include "TDGameMode.h"
+
 
 UTDElementComponent::UTDElementComponent()
 {
@@ -26,16 +29,16 @@ void UTDElementComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 
 }
 
-void UTDElementComponent::TDSetSpawnedElement(UTDElement* _DataAsset)
+void UTDElementComponent::TDSetSpawnedElement(EElements _element)
 {
-    SpawnedElementData = _DataAsset;
+    SpawnedElementData = UTDGameData::TDGetGameMode()->TDGetDataAssetFromElement(_element);
     ownerElement = SpawnedElementData->ownerElement;
     OnElementChangeDelegate.Broadcast(ownerElement);
 }
 
-void UTDElementComponent::TDSetTemporalElement(UTDElement* _DataAsset)
+void UTDElementComponent::TDSetTemporalElement(EElements _element)
 {
-    TemporalElementData = _DataAsset;
+    TemporalElementData = UTDGameData::TDGetGameMode()->TDGetDataAssetFromElement(_element);
     ownerElement = TemporalElementData->ownerElement;
     OnElementChangeDelegate.Broadcast(ownerElement);
 }
@@ -58,6 +61,7 @@ UTDElement* UTDElementComponent::TDGetActualDataAsset()
     {
         return TemporalElementData;
     }
+
     return SpawnedElementData;
 }
 
