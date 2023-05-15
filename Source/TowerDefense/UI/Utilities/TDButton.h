@@ -8,6 +8,8 @@
 #include "Engine/DataTable.h"
 #include "TDButton.generated.h"
 
+class UTDRichTextBlock;
+
 /**
  *
  */
@@ -26,22 +28,13 @@ public:
         UButton* ownerButton;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDText* textButton;
+        UTDRichTextBlock* richText;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Button Settings|Visual", meta = (InlineEditConditionToggle))
         bool useCustomTextStyleData;
 
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Button Settings|Visual", meta = (ToolTip = "Edits text style data.", EditCondition = "useCustomTextStyleData"))
         UDataTable* textStyleData;
-
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Button Settings|Visual", meta = (ToolTip = "Edits if background is shown."))
-        bool showButtonBackground;
-
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Button Settings|Visual")
-        float buttonSizeX; // @TODO: Quitar logica de resize
-
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Button Settings|Visual")
-        float buttonSizeY; // @TODO: Quitar logica de resize
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Button Settings|Data", meta = (InlineEditConditionToggle))
         bool useButtonText;

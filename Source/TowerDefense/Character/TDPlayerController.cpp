@@ -82,23 +82,21 @@ void ATDPlayerController::TDHitAction(const FInputActionValue& _value)
 
 void ATDPlayerController::TDOnOpenUI(UWidget* _widgetRef)
 {
-    UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(this, _widgetRef);
-
     UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
     if (Subsystem)
     {
-        // Subsystem->RemoveMappingContext(DefaultMappingContext);
+        SetIgnoreMoveInput(true);
+        SetIgnoreLookInput(true);
     }
 }
 
 void ATDPlayerController::TDOnCloseUI() 
 {
-    UWidgetBlueprintLibrary::SetInputMode_GameOnly(this);
-
     UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
     if (Subsystem)
     {
-        // Subsystem->AddMappingContext(DefaultMappingContext, 0);
+        SetIgnoreMoveInput(false);
+        SetIgnoreLookInput(false);
     }
 }
 
