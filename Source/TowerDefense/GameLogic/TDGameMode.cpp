@@ -61,10 +61,6 @@ void ATDGameMode::InitGame(const FString& MapName, const FString& Options, FStri
     UTDUserWidget* uiTowerUpgrade = TDAddToViewport(towerUpgradeClass);
     UTDUserWidget* uiBaseUpgrade = TDAddToViewport(baseUpgradeClass);
 
-
-
-
-
     widgetMap.Add(towerShopClass, uiTowerShop);
     widgetMap.Add(towerUpgradeClass, uiTowerUpgrade);
     widgetMap.Add(baseUpgradeClass, uiBaseUpgrade);
@@ -87,7 +83,6 @@ void ATDGameMode::StartPlay()
 
 
     RoundManagerRef->TDPostBeginPlay();
-
 }
 
 void ATDGameMode::StartToLeaveMap()
@@ -95,14 +90,12 @@ void ATDGameMode::StartToLeaveMap()
     Super::StartToLeaveMap();
 
     UTDGameData::TDResetGameData();
-
 }
 
 void ATDGameMode::Reset()
 {
     Super::Reset();
     widgetMap.Empty();
-
 }
 
 UTDUserWidget* ATDGameMode::TDAddToViewport(TSubclassOf<UTDUserWidget> _widgetClass)
