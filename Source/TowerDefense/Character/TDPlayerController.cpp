@@ -9,6 +9,8 @@
 #include "TDCharacter.h"
 #include "EnhancedInputSubsystems.h"
 #include "UMG/Public/Blueprint/WidgetBlueprintLibrary.h"
+#include <Abilities/GameplayAbilityTypes.h>
+#include <AbilitySystemBlueprintLibrary.h>
 
 
 ATDPlayerController::ATDPlayerController()
@@ -35,13 +37,6 @@ void ATDPlayerController::BeginPlay()
     InputEnhanced->BindAction(HitActionInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDHitAction);
     InputEnhanced->BindAction(MoveSideInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDMoveSideAction);
     InputEnhanced->BindAction(MoveForwardInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDMoveForwardAction);
-
-
-
-
-
-
-
 }
 
 void ATDPlayerController::TDMoveForwardAction(const FInputActionValue& _value)
@@ -92,10 +87,8 @@ void ATDPlayerController::TDOnOpenUI(UWidget* _widgetRef)
     UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
     if (Subsystem)
     {
-        Subsystem->RemoveMappingContext(DefaultMappingContext);
-
+        // Subsystem->RemoveMappingContext(DefaultMappingContext);
     }
-
 }
 
 void ATDPlayerController::TDOnCloseUI() 
@@ -105,8 +98,7 @@ void ATDPlayerController::TDOnCloseUI()
     UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
     if (Subsystem)
     {
-        Subsystem->AddMappingContext(DefaultMappingContext, 0);
+        // Subsystem->AddMappingContext(DefaultMappingContext, 0);
     }
-
 }
 

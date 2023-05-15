@@ -4,11 +4,11 @@
 #include "Components/ActorComponent.h"
 #include "TDWidgetShopComponent.generated.h"
 
+class UTDUserWidget;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnOpenUISignature, UWidget* , _widget);
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnOpenUISignature, UWidget*, _widget);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCloseUISignature);
-
-class UUserWidget;
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class TOWERDEFENSE_API UTDWidgetShopComponent : public UActorComponent
@@ -31,10 +31,10 @@ public:
 
 protected:
 
-         UPROPERTY(VisibleAnywhere, Category = "User Interface")
+    UPROPERTY(VisibleAnywhere, Category = "User Interface")
         UTDUserWidget* widgetRef;
 
-             UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "User Interface")
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "User Interface")
         bool isUIActive;
 
 private:
@@ -42,9 +42,9 @@ private:
         float distSquared;
 
     UPROPERTY()
-    FOnOpenUISignature  FOnOpenUIDelegate;
+        FOnOpenUISignature  FOnOpenUIDelegate;
     UPROPERTY()
-    FOnCloseUISignature  FOnCloseUIDelegate;
+        FOnCloseUISignature  FOnCloseUIDelegate;
 
 public:
     virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;

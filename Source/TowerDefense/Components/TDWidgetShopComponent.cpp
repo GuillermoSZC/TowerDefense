@@ -2,6 +2,9 @@
 #include "GameLogic/TDGameData.h"
 #include <UMG/Public/Blueprint/WidgetBlueprintLibrary.h>
 #include "GameLogic/TDGameMode.h"
+#include "Character/TDPlayerController.h"
+#include "Character/TDPlayerCharacter.h"
+#include "UI/TDUserWidget.h"
 
 UTDWidgetShopComponent::UTDWidgetShopComponent()
 {
@@ -27,7 +30,6 @@ void UTDWidgetShopComponent::BeginPlay()
     FOnOpenUIDelegate.AddDynamic(playerController, &ATDPlayerController::TDOnOpenUI);
     FOnCloseUIDelegate.AddDynamic(playerController, &ATDPlayerController::TDOnCloseUI);
 
-
     widgetRef = UTDGameData::TDGetGameMode()->TDGetWidgetFromClass(widgetClass);
 }
 
@@ -39,8 +41,7 @@ void UTDWidgetShopComponent::TickComponent(float DeltaTime, ELevelTick TickType,
     if (isUIActive && !TDCheckPlayerInRange())
     {
         TDHideUI();
-    }
-
+    }    
 }
 
 void UTDWidgetShopComponent::TDHideUI_Implementation()
