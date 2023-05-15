@@ -30,7 +30,7 @@ void ATDPlayerController::BeginPlay()
         Subsystem->AddMappingContext(DefaultMappingContext, 0);
 
     }
-    
+
 
     UEnhancedInputComponent* InputEnhanced = Cast<UEnhancedInputComponent>(InputComponent);
 
@@ -57,7 +57,7 @@ void ATDPlayerController::TDMoveForwardAction(const FInputActionValue& _value)
 
 void ATDPlayerController::TDMoveSideAction(const FInputActionValue& _value)
 {
-  
+
 
     const float Magnitude = _value.GetMagnitude();
     if (Magnitude != 0.f)
@@ -75,28 +75,20 @@ void ATDPlayerController::TDMoveSideAction(const FInputActionValue& _value)
 void ATDPlayerController::TDHitAction(const FInputActionValue& _value)
 {
 
-    
+
     FGameplayEventData abilityData;
     UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(playerPawn, GET_GAMEPLAY_TAG(ABILITY1_TRIGGER_TAG), abilityData);
 }
 
 void ATDPlayerController::TDOnOpenUI(UWidget* _widgetRef)
 {
-    UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-    if (Subsystem)
-    {
-        SetIgnoreMoveInput(true);
-        SetIgnoreLookInput(true);
-    }
+    SetIgnoreMoveInput(true);
+    SetIgnoreLookInput(true);
 }
 
-void ATDPlayerController::TDOnCloseUI() 
+void ATDPlayerController::TDOnCloseUI()
 {
-    UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-    if (Subsystem)
-    {
-        SetIgnoreMoveInput(false);
-        SetIgnoreLookInput(false);
-    }
+    SetIgnoreMoveInput(false);
+    SetIgnoreLookInput(false);
 }
 
