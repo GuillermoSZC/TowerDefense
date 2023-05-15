@@ -7,6 +7,8 @@
 #include "Interfaces/TDInterface.h"
 #include "UMG/Public/Components/Image.h"
 #include "UI/Utilities/TDTextWithImage.h"
+#include "TDText.h"
+#include "TDHealthBar.h"
 
 
 bool UTDPlayerHUD::Initialize()

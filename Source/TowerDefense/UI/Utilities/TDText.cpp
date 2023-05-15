@@ -25,6 +25,8 @@ void UTDText::NativePreConstruct()
     {
         TDSetCustomTextStyle(textStyleData);
     }
+
+    
 }
 
 void UTDText::NativeConstruct()
@@ -41,5 +43,8 @@ void UTDText::TDSetCustomText(FText _newText)
 
 void UTDText::TDSetCustomTextStyle(UDataTable* _newTextStyleData)
 {
-    customRichText->SetTextStyleSet(_newTextStyleData);
+    if (customRichText)
+    {
+        customRichText->SetTextStyleSet(_newTextStyleData);
+    }
 }
