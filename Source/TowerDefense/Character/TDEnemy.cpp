@@ -203,6 +203,26 @@ UWidgetComponent* ATDEnemy::TDGetHealthWidgetComponent()
     return widgetComponent;
 }
 
+UDataTable* ATDEnemy::TDGetLootDataTable() const
+{
+    return lootDataTable;
+}
+
+void ATDEnemy::TDSetLootDataTable(UDataTable* val)
+{
+    lootDataTable = val;
+}
+
+UDataTable* ATDEnemy::TDGetChanceDataTable() const
+{
+    return chanceDataTable;
+}
+
+void ATDEnemy::TDSetChanceDataTable(UDataTable* val)
+{
+    chanceDataTable = val;
+}
+
 void ATDEnemy::BeginPlay()
 {
     Super::BeginPlay();

@@ -52,6 +52,10 @@ public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
         TMap<EElements, UTDElement*> elementsDataAssets;
 
+    
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+        TMap<EElements, UDataTable*> elementsDataLoot;
+
     UPROPERTY(EditDefaultsOnly, Category = "Classes")
         TSubclassOf<UTDTowerShop> towerShopClass;
 
@@ -80,12 +84,16 @@ private:
 
      UPROPERTY()
          TMap<TSubclassOf<UTDUserWidget>, UTDUserWidget*> widgetMap;
+     
+   
 
 
 
 public:
 
     UTDElement* TDGetDataAssetFromElement(EElements _keyElement);
+
+    UDataTable* TDGetDataLootFromElement(EElements _keyElement);
 
     UTDUserWidget* TDGetWidgetFromClass(TSubclassOf<UTDUserWidget> _class);
 

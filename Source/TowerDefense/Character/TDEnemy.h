@@ -19,6 +19,8 @@ class TOWERDEFENSE_API ATDEnemy : public ATDCharacter
 public:
     ATDEnemy();
 
+   
+  
 public:
 
 
@@ -65,7 +67,11 @@ private:
     UPROPERTY()
         bool isActive = false;
 
+    UPROPERTY(Transient)
+    UDataTable* lootDataTable;
 
+        UPROPERTY(EditAnywhere)
+    UDataTable* chanceDataTable;
 
     UPROPERTY(Transient)
         UAnimMontage* montageRef = nullptr;
@@ -111,6 +117,20 @@ public:
 
     UFUNCTION(BlueprintCallable)
         class UWidgetComponent* TDGetHealthWidgetComponent();
+
+    UFUNCTION(BlueprintPure)
+    UDataTable* TDGetLootDataTable() const;
+
+    UFUNCTION(BlueprintCallable)
+    void TDSetLootDataTable(UDataTable* val);
+
+        UFUNCTION(BlueprintPure)
+    UDataTable* TDGetChanceDataTable() const;
+
+    UFUNCTION(BlueprintCallable)
+    void TDSetChanceDataTable(UDataTable* val);
+
+
 
 protected:
     // Called when the game starts or when spawned
