@@ -57,12 +57,12 @@ private:
         void TDIceUpgrade();
 
     UFUNCTION()
+        void TDCloseUI();
+#pragma endregion
+
+    UFUNCTION()
         void TDLevelUp();
 
     UFUNCTION()
-        void TDCloseUI();
-
-    UFUNCTION()
         void TDSetElement(EElements _element);
-#pragma endregion
 };
