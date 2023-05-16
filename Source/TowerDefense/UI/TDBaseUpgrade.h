@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "TDUserWidget.h"
+#include <GameplayEffect.h>
+#include "GameLogic/ElementsEnum.h"
 #include "TDBaseUpgrade.generated.h"
 
 class UTDButton;
@@ -19,6 +21,7 @@ public:
     virtual void NativeConstruct() override;
 
 public:
+#pragma region UI_COMPONENTS
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDButton* plasmaUpgrade;
 
@@ -39,13 +42,25 @@ public:
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDButton* exit;
+#pragma endregion
+
+    UPROPERTY(EditDefaultsOnly)
+        TSubclassOf<UGameplayEffect> healthEffect;
+
+    UPROPERTY(EditDefaultsOnly)
+        TSubclassOf<UGameplayEffect> speedEffect;
+
+    UPROPERTY(EditDefaultsOnly)
+        TSubclassOf<UGameplayEffect> damageEffect;
 
 protected:
 
 
 private:
 
+
 public:
+
 
 protected:
 
@@ -72,6 +87,14 @@ private:
 
     UFUNCTION()
         void TDCloseUI();
-
 #pragma endregion
+
+    UFUNCTION()
+        void TDSetElement(EElements _element);
+
+    UFUNCTION()
+        void TDLevelUp();
+
+    UFUNCTION()
+        void TDSetGameplayEffect(TSubclassOf<UGameplayEffect> _gameplayEffect);
 };
