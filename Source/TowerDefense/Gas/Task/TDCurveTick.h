@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Abilities/Tasks/AbilityTask.h"
+#include "Delegates/TDDeclareDelegates.h"
 #include "TDCurveTick.generated.h"
 
 class UCurveFloat;
@@ -20,22 +21,14 @@ public:
 
     UTDCurveTick();
 
-
-
-
 public:
 
 protected:
-
-    
     UPROPERTY(BlueprintAssignable)
         FCurveTickSignature FCurveTickSignatureDelegate;
 
-
-        UPROPERTY(BlueprintAssignable)
+    UPROPERTY(BlueprintAssignable)
         FEndDelegateTickTask FEndDelegateTickTaskDelegate;
-
-
 
 private:
     UPROPERTY(Transient)
@@ -44,12 +37,8 @@ private:
     FAlphaBlend timeline;
 
 public:
-
-
     UFUNCTION(BlueprintCallable, Category = "Ability|Tasks", meta = (HidePin = "OwningAbility", DefaultToSelf = "OwningAbility", BlueprintInternalUseOnly = "TRUE"))
         static UTDCurveTick* TDTickDuringCurve(UGameplayAbility* OwningAbility, UCurveFloat* _curve);
-
-
 
     void TickTask(float DeltaTime) override;
 

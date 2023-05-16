@@ -3,6 +3,7 @@
 
 #include "Gas/Task/WaitAddRemoveTag.h"
 #include "AbilitySystemComponent.h"
+#include "TickDuringTag.h"
 
 UWaitAddRemoveTag::UWaitAddRemoveTag()
 {
