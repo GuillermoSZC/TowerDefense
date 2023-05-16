@@ -8,6 +8,7 @@
 #include "Utilities/TDButton.h"
 #include <GameplayEffect.h>
 #include "AttributesSets/TDLevelAttributeSet.h"
+#include "Components/TDWidgetShopComponent.h"
 
 bool UTDTowerUpgrade::Initialize()
 {
@@ -58,7 +59,7 @@ void UTDTowerUpgrade::TDLevelUp()
     modif.Attribute = UTDLevelAttributeSet::GetlevelAttribute();
     modif.ModifierMagnitude = FGameplayEffectModifierMagnitude(FScalableFloat(1));
     staticEffect->Modifiers.Add(modif);
-    Cast<ATDTower>(owner)->GetAbilitySystemComponent()->ApplyGameplayEffectToSelf(staticEffect, 1, FGameplayEffectContextHandle());
+    Cast<ATDTower>(owner->GetOwner())->GetAbilitySystemComponent()->ApplyGameplayEffectToSelf(staticEffect, 1, FGameplayEffectContextHandle());
     staticEffect->ConditionalBeginDestroy();
 }
 
@@ -66,7 +67,7 @@ void UTDTowerUpgrade::TDCloseUI()
 {
     if (owner)
     {
-        // owner->TDHideUI();
+        owner->TDHideUI();
     }
 }
 
@@ -74,7 +75,7 @@ void UTDTowerUpgrade::TDSetElement(EElements _element)
 {
     if (owner)
     {
-        UTDElementComponent* temp = ITDInterface::Execute_TDGetElementComponent(owner);
-        temp->TDSetSpawnedElement(_element);
+        UTDElementComponent* temp = ITDInterface::Execute_TDGetElementComponent(owner->GetOwner());
+        temp->TDSetSpawnedElement(_element);        
     }
 }
