@@ -25,6 +25,11 @@ ATDGameMode::ATDGameMode()
     elementsDataAssets.Add(EElements::Freeze, nullptr);
     elementsDataAssets.Add(EElements::Plasma, nullptr);
 
+
+    elementsDataLoot.Add(EElements::None, nullptr);
+    elementsDataLoot.Add(EElements::Fire, nullptr);
+    elementsDataLoot.Add(EElements::Freeze, nullptr);
+    elementsDataLoot.Add(EElements::Plasma, nullptr);
 }
 
 
@@ -70,6 +75,11 @@ void ATDGameMode::InitGame(const FString& MapName, const FString& Options, FStri
 UTDElement* ATDGameMode::TDGetDataAssetFromElement(EElements _keyElement)
 {
     return elementsDataAssets[_keyElement];
+}
+
+UDataTable* ATDGameMode::TDGetDataLootFromElement(EElements _keyElement)
+{
+    return elementsDataLoot[_keyElement];
 }
 
 UTDUserWidget* ATDGameMode::TDGetWidgetFromClass(TSubclassOf<UTDUserWidget> _class)

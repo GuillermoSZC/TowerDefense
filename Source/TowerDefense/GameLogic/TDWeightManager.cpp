@@ -14,8 +14,6 @@
 #include "TDGameMode.h"
 #include "UI/Utilities/TDHealthBar.h"
 #include "Components/WidgetComponent.h"
-#include "GameplayAbilitySpec.h"
-#include "AbilitySystemComponent.h"
 
 UTDWeightManager::UTDWeightManager()
 {
@@ -31,7 +29,10 @@ int32 UTDWeightManager::TDSetActualRound(int32& _atualRound, TArray<EElements> _
     ActualRound = _atualRound;
     WeightPerRound = ActualRound * 10;
     actualWegith = 0;
+    licheCounter = 0;
     enemiesPerClass.Empty();
+
+    UWorld* actualWorld = UTDGameData::TDGetWorld();
 
 
     ATDObjectPooler* objectRef = UTDGameData::TDGetObjectPooler();
@@ -65,7 +66,7 @@ void UTDWeightManager::TDGetRowFromDataTable(FName _RowName, FTDEnemiesDataTable
     }  
 }
 
-void UTDWeightManager::TDSpawnEnemy()
+void UTDWeightManager::TDStartSpawn()
 {
 
     ATDEnemy* actualEnemy = nullptr;
@@ -78,7 +79,7 @@ void UTDWeightManager::TDSpawnEnemy()
     if (actualEnemy)
     {
         ATDSpawner* spawnerRef = UTDGameData::TDGetSpanwerActor();
-        spawnerRef->TDPlaceEnemy(actualEnemy);
+        spawnerRef->TDSpawnEnemy(actualEnemy);
         actualEnemy->TDSetActive();
     }
 
@@ -110,10 +111,8 @@ FTDEnemiesDataTable* UTDWeightManager::TDSelectRandomRowFromDataTable()
 
             if (Row)
             {
-                //check if the selected enemy's weight is more than the limit weight
                 loop = Row->weight != -1 && ActualRound >= Row->firstPossibleApperance && WeightPerRound >= actualWegith + Row->weight;
 
-                //check if there
                 if (Row->limitEnemiesPerRound >= 1)
                 {
                     if (enemiesPerClass.Contains(x))
@@ -147,13 +146,9 @@ FTDEnemiesDataTable* UTDWeightManager::TDSelectRandomRowFromDataTable()
 void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable& Row)
 {
 
-    //Debug
-   
-    _enemyRef->DebugString = Row.DebugName;
 
-
-    //Mesh and anim 
     _enemyRef->GetMesh()->SetSkeletalMesh(Row.enemyMesh.LoadSynchronous());
+
     if (Row.material)
     {
         _enemyRef->GetMesh()->SetMaterial(0, Row.material);
@@ -162,54 +157,32 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable
     _enemyRef->GetMesh()->SetRelativeScale3D(Row.MeshScale);
     _enemyRef->GetMesh()->SetAnimInstanceClass(Row.animationBlueprint);
     _enemyRef->TDSetAnimMontaje(Row.animationMontaje.LoadSynchronous());
-    _enemyRef->GetCapsuleComponent()->SetCapsuleRadius(Row.capsuleRadius);
-    _enemyRef->GetCapsuleComponent()->SetCapsuleHalfHeight(Row.capsuleHeight);
-
-
-    //GAS
     _enemyRef->healthDatatable = Row.EnemyStatsDataAsset->healthDataTable;
     _enemyRef->damageDatatable = Row.EnemyStatsDataAsset->damageDataTable;
     _enemyRef->movementDatatable = Row.EnemyStatsDataAsset->movementDataTable;
     _enemyRef->movementVariation = Row.movementVariation;
+    _enemyRef->GetCapsuleComponent()->SetCapsuleRadius(Row.capsuleRadius);
+    _enemyRef->GetCapsuleComponent()->SetCapsuleHalfHeight(Row.capsuleHeight);
     _enemyRef->abiliyList = Row.abiliyAsset->abiliyList;
-
-    //Weapon
-    if (Row.WeaponAsset)
-    {
-        FAttachmentTransformRules rules = FAttachmentTransformRules(EAttachmentRule::KeepRelative,false);
-
-        if (Row.WeaponAsset->assetClass == AssetType::SkeletalMesh)
-        {
-            _enemyRef->skeletalWeaponComponent->SetSkeletalMesh(Row.WeaponAsset->skeletalWeaponMesh.LoadSynchronous());
-            _enemyRef->skeletalWeaponComponent->AttachToComponent(_enemyRef->GetMesh(),rules, Row.WeaponAsset->SocketName);
-        }
-        else if (Row.WeaponAsset->assetClass == AssetType::StaticMesh)
-        {
-            _enemyRef->StaticWeaponComponent->SetStaticMesh(Row.WeaponAsset->StaticWeaponMesh.LoadSynchronous());
-            _enemyRef->StaticWeaponComponent->AttachToComponent(_enemyRef->GetMesh(),rules, Row.WeaponAsset->SocketName);
-        }
-
-        if (Row.WeaponAsset->weaponAbility)
-        {
-            _enemyRef->abilitySystem->GiveAbility(FGameplayAbilitySpec(Row.WeaponAsset->weaponAbility.GetDefaultObject(), 1, 0));
-        }
-    }
-
-    //Weight
     _enemyRef->unitWeight = Row.weight;
-
-    //AI
     ATDEnemyController* enemyController = _enemyRef->GetController<ATDEnemyController>();
     enemyController->RunBehaviorTree(Row.behaviorTree.LoadSynchronous());
-
-    //UI
     _enemyRef->TDGetHealthBarReference()->TDSetHealthBarSize(Row.HealthBarSize);
     _enemyRef->TDGetHealthWidgetComponent()->SetRelativeLocation(Row.HealthBarPosition);
 
-
-    //Element
     int y = FMath::Rand() % actualRoundElements.Num();
     UTDElementComponent* temp = ITDInterface::Execute_TDGetElementComponent(_enemyRef);
     temp->TDSetSpawnedElement(actualRoundElements[y]);
+
+
+    //Loot
+    UDataTable* lootTable = UTDGameData::TDGetGameMode()->TDGetDataLootFromElement(actualRoundElements[y]);
+    _enemyRef->TDSetLootDataTable(lootTable);
+
+    if (Row.chanceDataTable)
+    {
+        _enemyRef->TDSetChanceDataTable(Row.chanceDataTable);
+    }
+
 }
 

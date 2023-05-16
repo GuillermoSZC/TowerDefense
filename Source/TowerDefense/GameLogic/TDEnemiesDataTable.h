@@ -92,6 +92,16 @@ public:
         TSoftObjectPtr<class UBehaviorTree> behaviorTree;
 #pragma endregion
 
+
+#pragma  region LOOT
+
+    UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = "Loot")
+    UDataTable* chanceDataTable;
+
+#pragma endregion
+
+
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Debug")
     FString DebugName;
 
