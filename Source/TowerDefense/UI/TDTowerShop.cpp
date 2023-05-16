@@ -4,6 +4,15 @@
 #include "UMG/Public/Components/Button.h"
 #include "Components/TDWidgetShopComponent.h"
 
+UTDTowerShop::UTDTowerShop(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+{
+    towerMap.Add(ETowers::Balistic, nullptr);
+    towerMap.Add(ETowers::Sonic, nullptr);
+    towerMap.Add(ETowers::DeathRay, nullptr);
+    towerMap.Add(ETowers::Attack, nullptr);
+    towerMap.Add(ETowers::Speed, nullptr);
+}
+
 bool UTDTowerShop::Initialize()
 {
     Super::Initialize();
@@ -14,7 +23,6 @@ bool UTDTowerShop::Initialize()
 void UTDTowerShop::NativePreConstruct()
 {
     Super::NativePreConstruct();
-
 
 }
 
@@ -32,48 +40,52 @@ void UTDTowerShop::NativeConstruct()
 
 void UTDTowerShop::TDBalisticSpawn()
 {
-    if (owner)
-    {
-        // owner->TDTowerSpawn(ETowers::Balistic);
-    }
+    TDSpawnLogic(ETowers::Balistic);
 }
 
 void UTDTowerShop::TDSonicSpawn()
 {
-    if (owner)
-    {
-        // owner->TDTowerSpawn(ETowers::Sonic);
-    }
+    TDSpawnLogic(ETowers::Sonic);
 }
 
 void UTDTowerShop::TDDeadRaySpawn()
 {
-    if (owner)
-    {
-        // owner->TDTowerSpawn(ETowers::DeathRay);
-    }
+    TDSpawnLogic(ETowers::DeathRay);
 }
 
 void UTDTowerShop::TDMovementSpawn()
 {
-    if (owner)
-    {
-        // owner->TDTowerSpawn(ETowers::Speed);
-    }
+    TDSpawnLogic(ETowers::Speed);
 }
 
 void UTDTowerShop::TDAttackSpawn()
 {
-    if (owner)
-    {
-        // owner->TDTowerSpawn(ETowers::Attack);
-    }
+    TDSpawnLogic(ETowers::Attack);
 }
 
 void UTDTowerShop::TDCloseUI()
 {
     if (owner)
     {
-         owner->TDHideUI();
+        owner->TDHideUI();
+    }
+}
+
+void UTDTowerShop::TDSpawnLogic(ETowers _tower)
+{
+    FVector location = owner->GetOwner()->GetActorLocation();
+    UWorld* world = GetWorld();
+
+    world->SpawnActor(towerMap[_tower], &location, &FRotator::ZeroRotator);
+
+    TDEndSpawnLogic();
+}
+
+void UTDTowerShop::TDEndSpawnLogic()
+{
+    if (owner)
+    {
+        owner->TDHideUI();
+        owner->GetOwner()->OnClicked.Clear();
     }
 }
