@@ -145,4 +145,12 @@ private:
 
         UFUNCTION()
         void TDUpdateHealthNumber(float _num);
+
+
+        UFUNCTION()
+        void TDUpdateInventory();
+
+
+        UFUNCTION()
+        FText TDGetTextFromItem(ELootItems _item);
 };

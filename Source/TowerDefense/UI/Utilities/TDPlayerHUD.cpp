@@ -9,6 +9,7 @@
 #include "UI/Utilities/TDTextWithImage.h"
 #include "TDText.h"
 #include "TDHealthBar.h"
+#include "Character/TDPlayerCharacter.h"
 
 
 bool UTDPlayerHUD::Initialize()
@@ -21,7 +22,7 @@ bool UTDPlayerHUD::Initialize()
 void UTDPlayerHUD::NativePreConstruct()
 {
     Super::NativePreConstruct();
-  
+
 
 }
 
@@ -29,7 +30,7 @@ void UTDPlayerHUD::NativeConstruct()
 {
     Super::NativeConstruct();
 
-      TDInitialize();
+    TDInitialize();
 }
 
 void UTDPlayerHUD::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
@@ -60,7 +61,7 @@ void UTDPlayerHUD::TDInitialize()
         roundManager->FOnBuyPhaseStartDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetBuyUI);
         roundManager->FOnCombatPhaseStartDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetCombatUI);
         roundManager->FOnElementSelectionDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetElementsUI);
-        roundManager->FOnEnemyKillDelegate.AddUniqueDynamic(this,&UTDPlayerHUD::TDSetEnemyCounter);
+        roundManager->FOnEnemyKillDelegate.AddUniqueDynamic(this, &UTDPlayerHUD::TDSetEnemyCounter);
     }
 
     ATDCharacter* ownerRef = GetOwningPlayerPawn<ATDCharacter>();
@@ -84,6 +85,9 @@ void UTDPlayerHUD::TDSetCombatUI(int32 _value)
     phase->TDSetCustomText(FText::FromString("Combat Phase"));
     roundNum->TDSetCustomText(FText::FromString(FString::FromInt(_value)));
     TDSetElementsVisibility(ESlateVisibility::Collapsed);
+
+    
+
 }
 
 void UTDPlayerHUD::TDSetBuyUI(int32 _value)
@@ -91,6 +95,7 @@ void UTDPlayerHUD::TDSetBuyUI(int32 _value)
     phase->TDSetCustomText(FText::FromString("Buy Phase"));
     roundNum->TDSetCustomText(FText::FromString(FString::FromInt(_value)));
     TDSetElementsVisibility(ESlateVisibility::Visible);
+    TDUpdateInventory();
 }
 
 void UTDPlayerHUD::TDSetElementsUI(TArray<EElements>& _elements)
@@ -147,5 +152,31 @@ void UTDPlayerHUD::TDSetEnemyCounter(int32 _counter)
 void UTDPlayerHUD::TDUpdateHealthNumber(float _num)
 {
     healthNumber->TDSetCustomText(FText::FromString(FString::SanitizeFloat(_num)));
-    
+
+}
+
+void UTDPlayerHUD::TDUpdateInventory()
+{
+        scrap->TDSetText(TDGetTextFromItem(ELootItems::Scrap));        
+        swordBlueprint->TDSetText(TDGetTextFromItem(ELootItems::SwordBP));
+        armorBlueprint->TDSetText(TDGetTextFromItem(ELootItems::ArmorBP));
+        bootsBlueprint->TDSetText(TDGetTextFromItem(ELootItems::BootsBP));
+        ballistaBlueprint->TDSetText(TDGetTextFromItem(ELootItems::BalisticBP));
+        sonicTowerBlueprint->TDSetText(TDGetTextFromItem(ELootItems::SonicBP));
+        deathRayTowerBlueprint->TDSetText(TDGetTextFromItem(ELootItems::DeathRayBP));
+        speedTowerBlueprint->TDSetText(TDGetTextFromItem(ELootItems::SpeedTowerBP));
+        damageTowerBlueprint->TDSetText(TDGetTextFromItem(ELootItems::AttackTowerBP));
+        fireGem->TDSetText(TDGetTextFromItem(ELootItems::Fire));
+        iceGem->TDSetText(TDGetTextFromItem(ELootItems::Ice));
+        plasmaGem->TDSetText(TDGetTextFromItem(ELootItems::Plasma));
+}
+
+FText UTDPlayerHUD::TDGetTextFromItem(ELootItems _item)
+{
+    ATDPlayerCharacter* playerRef = UTDGameData::TDGetPlayerRef();
+    int32 inttemp = playerRef->TDGetAmountItemByItem(_item);
+    FString StringTemp = FString::FromInt(inttemp);
+    FText texttemp = FText::FromString(StringTemp);
+    return texttemp;
+
 }

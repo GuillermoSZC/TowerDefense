@@ -49,7 +49,8 @@ void ATDPlayerCharacter::TDUpdateRoundValues(int32 _Rounds)
 
 int32 ATDPlayerCharacter::TDGetAmountItemByItem(ELootItems _item)
 {
-    return PlayerInventory[_item];
+    int32 inttemp = PlayerInventory[_item];
+    return inttemp;
 }
 
 int32 ATDPlayerCharacter::TDAddItemToInventory(ELootItems _item, int32 _amount /*= 1*/)
@@ -57,10 +58,12 @@ int32 ATDPlayerCharacter::TDAddItemToInventory(ELootItems _item, int32 _amount /
     uint32 temp = 0;
     if (PlayerInventory.Contains(_item))
     {
-         temp = PlayerInventory[_item];
-         temp += _amount;
-         PlayerInventory.Add(_item, temp);
-    }   
+        FString ObjectTypesTemp = UEnum::GetValueAsString(_item);
+        GEngine->AddOnScreenDebugMessage(0, 5.f, FColor::Green, ObjectTypesTemp);
+        temp = PlayerInventory[_item];
+        temp += _amount;
+        PlayerInventory.Add(_item, temp);
+    }
     return temp;
 }
 

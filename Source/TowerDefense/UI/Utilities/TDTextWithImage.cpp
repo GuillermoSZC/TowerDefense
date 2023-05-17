@@ -59,6 +59,7 @@ void UTDTextWithImage::NativeConstruct()
 void UTDTextWithImage::TDSetText(FText _text)
 {
     customText = _text;
+    elementText->TDSetCustomText(customText);
 }
 
 FText UTDTextWithImage::TDGetText()
