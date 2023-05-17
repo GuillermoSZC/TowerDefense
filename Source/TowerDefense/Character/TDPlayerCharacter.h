@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Character/TDCharacter.h"
+#include "GameLogic/TDLootEnum.h"
 #include "TDPlayerCharacter.generated.h"
 
 /**
@@ -39,11 +40,11 @@ public:
 
 protected:
 
+        UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+    TMap<ELootItems, int32> PlayerInventory;
 
 
 private:
-
-
 
 
 
@@ -53,6 +54,13 @@ public:
 
     UFUNCTION()
     void TDUpdateRoundValues(int32 _Rounds);
+
+    UFUNCTION(BlueprintPure)
+    int32 TDGetAmountItemByItem(ELootItems _item);
+
+    UFUNCTION(BlueprintCallable)
+        int32 TDAddItemToInventory(ELootItems _item, int32 _amount = 1);
+
 
 protected:
 

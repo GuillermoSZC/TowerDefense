@@ -12,6 +12,20 @@ ATDPlayerCharacter::ATDPlayerCharacter()
     SwordMesh = CreateDefaultSubobject<UStaticMeshComponent>("SwordMesh");
     SwordMesh->SetupAttachment(GetMesh(), "WeaponSocketHero");
 
+    PlayerInventory.Add(ELootItems::Scrap, 0);
+    PlayerInventory.Add(ELootItems::SwordBP, 0);
+    PlayerInventory.Add(ELootItems::ArmorBP, 0);
+    PlayerInventory.Add(ELootItems::BootsBP, 0);
+    PlayerInventory.Add(ELootItems::BalisticBP, 0);
+    PlayerInventory.Add(ELootItems::SonicBP, 0);
+    PlayerInventory.Add(ELootItems::DeathRayBP, 0);
+    PlayerInventory.Add(ELootItems::SpeedTowerBP, 0);
+    PlayerInventory.Add(ELootItems::AttackTowerBP, 0);
+    PlayerInventory.Add(ELootItems::Fire, 0);
+    PlayerInventory.Add(ELootItems::Ice, 0);
+    PlayerInventory.Add(ELootItems::Plasma, 0);
+
+
 }
 
 void ATDPlayerCharacter::PostInitializeComponents()
@@ -31,6 +45,23 @@ void ATDPlayerCharacter::Tick(float DeltaTime)
 void ATDPlayerCharacter::TDUpdateRoundValues(int32 _Rounds)
 {
     //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Player Update"));
+}
+
+int32 ATDPlayerCharacter::TDGetAmountItemByItem(ELootItems _item)
+{
+    return PlayerInventory[_item];
+}
+
+int32 ATDPlayerCharacter::TDAddItemToInventory(ELootItems _item, int32 _amount /*= 1*/)
+{
+    uint32 temp = 0;
+    if (PlayerInventory.Contains(_item))
+    {
+         temp = PlayerInventory[_item];
+         temp += _amount;
+         PlayerInventory.Add(_item, temp);
+    }   
+    return temp;
 }
 
 void ATDPlayerCharacter::BeginPlay()
