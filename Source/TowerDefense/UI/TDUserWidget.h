@@ -31,8 +31,8 @@ public:
     UFUNCTION()
         void TDSetOwner(UTDWidgetShopComponent* _owner);
 
-protected:
-
+    UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+        void TDFadeIn();
 
 private:
 

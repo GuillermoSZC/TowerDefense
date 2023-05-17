@@ -63,6 +63,7 @@ void UTDWidgetShopComponent::TDVisibleUI_Implementation()
     {
         widgetRef->TDSetOwner(this);
         widgetRef->SetVisibility(ESlateVisibility::Visible);
+        widgetRef->TDFadeIn();
         FOnOpenUIDelegate.Broadcast(widgetRef);
     }
 }

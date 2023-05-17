@@ -32,9 +32,6 @@ void ATDTowerStructure::BeginPlay()
 {
     Super::BeginPlay();
 
-
-   
-
 }
 
 
