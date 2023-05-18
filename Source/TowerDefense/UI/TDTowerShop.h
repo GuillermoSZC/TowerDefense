@@ -7,6 +7,7 @@
 #include "TDTowerShop.generated.h"
 
 class UTDButton;
+class UTDTextWithImage;
 
 UCLASS()
 class TOWERDEFENSE_API UTDTowerShop : public UTDUserWidget
@@ -37,6 +38,28 @@ public:
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDButton* exitButton;
+
+
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* BalisticCostText;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* SonicCostText;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* DeathRayCostText;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* SpeedCostText;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* AttackCostText;
+
+
+
+
+
 
     UPROPERTY(EditDefaultsOnly)
         TMap<ETowers, TSubclassOf<ATDTower>> towerMap;

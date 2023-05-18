@@ -8,6 +8,7 @@
 #include "ElementsEnum.h"
 #include "TDRoundManager.h"
 
+
 #include "TDGameMode.generated.h"
 
 class ATDEnemy;
@@ -19,6 +20,7 @@ class UTDUserWidget;
 class UTDTowerShop;
 class UTDTowerUpgrade;
 class UTDBaseUpgrade;
+class UTDCostManager;
 
 /**
  *
@@ -65,6 +67,9 @@ public:
     UPROPERTY(EditDefaultsOnly, Category = "Classes")
         TSubclassOf<UTDBaseUpgrade> baseUpgradeClass;
 
+        UPROPERTY(EditDefaultsOnly, Category = "Classes")
+        TSubclassOf<UTDCostManager> CostManagerClass;
+
 protected:
 
 
@@ -84,7 +89,9 @@ private:
 
      UPROPERTY()
          TMap<TSubclassOf<UTDUserWidget>, UTDUserWidget*> widgetMap;
-     
+
+     UPROPERTY(Transient)
+         UTDCostManager* CostManagerRef = nullptr;
    
 
 

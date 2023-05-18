@@ -2,6 +2,7 @@
 
 
 #include "GameLogic/AnimNotifies/TDAddTagAnimNotifyState.h"
+#include "AbilitySystemComponent.h"
 
 void UTDAddTagAnimNotifyState::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float TotalDuration)
 {

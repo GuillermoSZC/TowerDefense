@@ -23,7 +23,7 @@ void UTDWidgetShopComponent::BeginPlay()
 
     GetOwner()->OnClicked.AddDynamic(this, &UTDWidgetShopComponent::TDOnClickedActor);
 
-    UTDGameData::TDGetRoundManager()->FOnBuyPhaseStartDelegate.AddDynamic(this, &UTDWidgetShopComponent::TDOnBuyPhaseStart);
+    UTDGameData::TDGetRoundManager()->FOnCombatPhaseStartDelegate.AddDynamic(this, &UTDWidgetShopComponent::TDOnCombatPhaseStart);
 
     ATDPlayerController* playerController = UTDGameData::TDGetPlayerRef()->GetController<ATDPlayerController>();
 
@@ -111,7 +111,7 @@ bool UTDWidgetShopComponent::TDCanShowUI()
     return true;
 }
 
-void UTDWidgetShopComponent::TDOnBuyPhaseStart(int32 _value)
+void UTDWidgetShopComponent::TDOnCombatPhaseStart(int32 _value)
 {
     if (isUIActive)
     {

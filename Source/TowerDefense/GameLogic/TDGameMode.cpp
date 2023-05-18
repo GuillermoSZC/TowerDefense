@@ -12,6 +12,7 @@
 #include "UI/TDTowerUpgrade.h"
 #include "UI/TDBaseUpgrade.h"
 #include "TDGameInstance.h"
+#include "TDCostManager.h"
 
 
 ATDGameMode::ATDGameMode()
@@ -61,6 +62,11 @@ void ATDGameMode::InitGame(const FString& MapName, const FString& Options, FStri
     weightManagerRef = NewObject<UTDWeightManager>(UTDWeightManager::StaticClass(), FName(TEXT("WeightManager")), EObjectFlags::RF_MarkAsRootSet);
     UTDGameData::TDSetWeightManager(weightManagerRef);
     weightManagerRef->TDSetDataTable(statsDatatable);
+
+
+    CostManagerRef = NewObject<UTDCostManager>(CostManagerClass, FName(TEXT("CostManager")), EObjectFlags::RF_MarkAsRootSet);
+    UTDGameData::TDSetCostManager(CostManagerRef);
+
 
     UTDUserWidget* uiTowerShop = TDAddToViewport(towerShopClass);
     UTDUserWidget* uiTowerUpgrade = TDAddToViewport(towerUpgradeClass);

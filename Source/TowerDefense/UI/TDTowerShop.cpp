@@ -3,6 +3,8 @@
 #include "Utilities/TDButton.h"
 #include "UMG/Public/Components/Button.h"
 #include "Components/TDWidgetShopComponent.h"
+#include "Utilities/TDTextWithImage.h"
+
 
 UTDTowerShop::UTDTowerShop(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {

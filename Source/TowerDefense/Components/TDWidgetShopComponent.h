@@ -73,5 +73,5 @@ private:
         bool TDCanShowUI();
 
     UFUNCTION()
-        void TDOnBuyPhaseStart(int32 _value);
+        void TDOnCombatPhaseStart(int32 _value);
 };
