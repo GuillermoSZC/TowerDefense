@@ -20,6 +20,9 @@ public:
     virtual void NativePreConstruct() override;
     virtual void NativeConstruct() override;
 
+
+  
+
 public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDButton* balisticButton;
@@ -69,6 +72,8 @@ protected:
 private:
 
 public:
+
+    void TDOnVisibilityChange(ESlateVisibility _visible) override;
 
 protected:
 

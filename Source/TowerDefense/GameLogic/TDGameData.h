@@ -154,6 +154,10 @@ public:
 	static void TDSetCostManager(UTDCostManager* _ref);
 
 
+	UFUNCTION(BlueprintPure)
+	static FText TDConvertIntToFText(int32 _num);
+
+
 	//Debug
 	UFUNCTION(BlueprintCallable)
 	static void TDSpawnEnemyDebug();

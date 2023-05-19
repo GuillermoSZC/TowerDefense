@@ -31,9 +31,15 @@ public:
     UFUNCTION()
         void TDSetOwner(UTDWidgetShopComponent* _owner);
 
-    UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+    UFUNCTION()
+    virtual void TDOnVisibilityChange(ESlateVisibility _visible);
+    
+  UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
         void TDFadeIn();
 
+protected:
+
+  
 private:
 
 

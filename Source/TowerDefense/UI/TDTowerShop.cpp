@@ -40,6 +40,19 @@ void UTDTowerShop::NativeConstruct()
     exitButton->ownerButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDCloseUI);
 }
 
+void UTDTowerShop::TDOnVisibilityChange(ESlateVisibility _visible)
+{
+    if (_visible == ESlateVisibility::Visible)
+    {
+        FBuyCost cost = FBuyCost();
+        cost = UTDGameData::TDGetCostManager()->TDCalculateTowerBuyCost(ETowers::Balistic);
+
+        BalisticCostText->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
+        SonicCostText->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
+
+    }
+}
+
 void UTDTowerShop::TDBalisticSpawn()
 {
     TDSpawnLogic(ETowers::Balistic);

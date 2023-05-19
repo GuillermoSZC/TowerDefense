@@ -246,6 +246,13 @@ void UTDGameData::TDSetCostManager(UTDCostManager* _ref)
     CostManagerRef = _ref;
 }
 
+FText UTDGameData::TDConvertIntToFText(int32 _num)
+{
+    FString StringTemp = FString::FromInt(_num);
+    FText texttemp = FText::FromString(StringTemp);
+    return texttemp;
+}
+
 void UTDGameData::TDSpawnEnemyDebug()
 {
     weightManagerRef->TDSpawnEnemy();

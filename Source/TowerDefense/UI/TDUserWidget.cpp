@@ -21,6 +21,8 @@ void UTDUserWidget::NativeConstruct()
     Super::NativeConstruct();
 
 
+    OnVisibilityChanged.AddDynamic(this, &UTDUserWidget::TDOnVisibilityChange);
+        
 }
 
 UTDWidgetShopComponent* UTDUserWidget::TDGetOwner()
@@ -31,4 +33,9 @@ UTDWidgetShopComponent* UTDUserWidget::TDGetOwner()
 void UTDUserWidget::TDSetOwner(UTDWidgetShopComponent* _owner)
 {
     owner = _owner;
+}
+
+void UTDUserWidget::TDOnVisibilityChange(ESlateVisibility _visible)
+{
+
 }

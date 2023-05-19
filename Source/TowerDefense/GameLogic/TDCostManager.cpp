@@ -5,14 +5,14 @@
 
 UTDCostManager::UTDCostManager()
 {
-    TowerBuyCost.Add(ETowers::Balistic, 1);
-    TowerBuyCost.Add(ETowers::Sonic, 1);
-    TowerBuyCost.Add(ETowers::DeathRay, 1);
-    TowerBuyCost.Add(ETowers::Speed, 1);
-    TowerBuyCost.Add(ETowers::Attack, 1);
+    TowerBuyCost.Add(ETowers::Balistic, FBuyCost());
+    TowerBuyCost.Add(ETowers::Sonic, FBuyCost());
+    TowerBuyCost.Add(ETowers::DeathRay, FBuyCost());
+    TowerBuyCost.Add(ETowers::Speed, FBuyCost());
+    TowerBuyCost.Add(ETowers::Attack, FBuyCost());
 }
 
-int32 UTDCostManager::TDCalculateTowerBuyCost_Implementation(ETowers _tower)
+FBuyCost UTDCostManager::TDCalculateTowerBuyCost_Implementation(ETowers _tower)
 {
-    return 0;
+    return FBuyCost();
 }

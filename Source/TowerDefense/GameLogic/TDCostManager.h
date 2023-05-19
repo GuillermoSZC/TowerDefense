@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "TDTowerEnum.h"
+#include "TDBuyStruct.h"
 #include "TDCostManager.generated.h"
 
 /**
@@ -23,15 +24,15 @@ public:
 
 public:
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	TMap<ETowers, int32> TowerBuyCost;
+	TMap<ETowers, FBuyCost> TowerBuyCost;
 	
 protected:
 
 private:
 
 public:
-	UFUNCTION(BlueprintNativeEvent,BlueprintPure)
-	int32 TDCalculateTowerBuyCost(ETowers _tower);
+	UFUNCTION(BlueprintNativeEvent)
+		FBuyCost TDCalculateTowerBuyCost(ETowers _tower);
 
 
 protected:
