@@ -46,7 +46,7 @@ public:
 
 	static UPROPERTY(Transient) ATDPlayerCharacter* playerRef;
 
-	static UPROPERTY(Transient) UTDCostManager* CostManagerRef;
+	static UPROPERTY(Transient) ATDCostManager* CostManagerRef;
 
 
 
@@ -147,11 +147,11 @@ public:
 
 
 	UFUNCTION(BlueprintPure)
-	static UTDCostManager* TDGetCostManager();
+	static ATDCostManager* TDGetCostManager();
 
 
 	UFUNCTION()
-	static void TDSetCostManager(UTDCostManager* _ref);
+	static void TDSetCostManager(ATDCostManager* _ref);
 
 
 	UFUNCTION(BlueprintPure)

@@ -62,6 +62,10 @@ public:
         int32 TDAddItemToInventory(ELootItems _item, int32 _amount = 1);
 
 
+    UFUNCTION(BlueprintPure)
+    TMap<ELootItems, int32>& TDGetPlayerInventory();
+
+
 protected:
 
     virtual void BeginPlay() override;

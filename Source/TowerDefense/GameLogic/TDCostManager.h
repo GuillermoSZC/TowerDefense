@@ -3,36 +3,42 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "TDTowerEnum.h"
 #include "TDBuyStruct.h"
 #include "TDCostManager.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS(BlueprintType, Blueprintable)
-class TOWERDEFENSE_API UTDCostManager : public UObject
+class TOWERDEFENSE_API ATDCostManager : public AActor
 {
-	GENERATED_BODY()
-	
+    GENERATED_BODY()
 
 
-public:
-
-	UTDCostManager();
 
 public:
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	TMap<ETowers, FBuyCost> TowerBuyCost;
-	
+
+    ATDCostManager();
+
+public:
+    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+        TMap<ETowers, FBuyCost> TowerBuyCost;
+
 protected:
 
 private:
 
 public:
-	UFUNCTION(BlueprintNativeEvent)
-		FBuyCost TDCalculateTowerBuyCost(ETowers _tower);
+
+    UFUNCTION(BlueprintNativeEvent)
+        FBuyCost TDCalculateTowerBuyCost(ELootItems _Item);
+
+    UFUNCTION()
+        bool TDCanAffordBuy(ELootItems _Item);
+
+
 
 
 protected:

@@ -25,7 +25,7 @@ UTDGameInstance* UTDGameData::GameInstanceRef = nullptr;
 ATDRoundManager* UTDGameData::RoundManagerRef = nullptr;
 ATDObjectPooler* UTDGameData::ObjectPoolerRef = nullptr;
 ATDPlayerCharacter* UTDGameData::playerRef = nullptr;
-UTDCostManager* UTDGameData::CostManagerRef = nullptr;
+ATDCostManager* UTDGameData::CostManagerRef = nullptr;
 
 UTDGameData::UTDGameData(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -236,12 +236,12 @@ void UTDGameData::TDSetPlayerRef(ATDPlayerCharacter* _ref)
     playerRef = _ref;
 }
 
-UTDCostManager* UTDGameData::TDGetCostManager()
+ATDCostManager* UTDGameData::TDGetCostManager()
 {
     return CostManagerRef;
 }
 
-void UTDGameData::TDSetCostManager(UTDCostManager* _ref)
+void UTDGameData::TDSetCostManager(ATDCostManager* _ref)
 {
     CostManagerRef = _ref;
 }

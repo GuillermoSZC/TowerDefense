@@ -67,6 +67,11 @@ int32 ATDPlayerCharacter::TDAddItemToInventory(ELootItems _item, int32 _amount /
     return temp;
 }
 
+TMap<ELootItems, int32>& ATDPlayerCharacter::TDGetPlayerInventory()
+{
+    return PlayerInventory;
+}
+
 void ATDPlayerCharacter::BeginPlay()
 {
     Super::BeginPlay();

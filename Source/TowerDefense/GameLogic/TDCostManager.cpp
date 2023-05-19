@@ -3,7 +3,7 @@
 
 #include "GameLogic/TDCostManager.h"
 
-UTDCostManager::UTDCostManager()
+ATDCostManager::ATDCostManager()
 {
     TowerBuyCost.Add(ETowers::Balistic, FBuyCost());
     TowerBuyCost.Add(ETowers::Sonic, FBuyCost());
@@ -12,7 +12,28 @@ UTDCostManager::UTDCostManager()
     TowerBuyCost.Add(ETowers::Attack, FBuyCost());
 }
 
-FBuyCost UTDCostManager::TDCalculateTowerBuyCost_Implementation(ETowers _tower)
+FBuyCost ATDCostManager::TDCalculateTowerBuyCost_Implementation(ELootItems _Item)
 {
     return FBuyCost();
 }
+
+bool ATDCostManager::TDCanAffordBuy(ELootItems _BPItem)
+{
+    FBuyCost costTemp = TDCalculateTowerBuyCost_Implementation(_Item);
+
+    TMap<ELootItems, int32> PlayerInventory;
+
+    PlayerInventory = UTDGameData::TDGetPlayerRef()->TDGetPlayerInventory();
+
+    int32 PlayerScrap = PlayerInventory[ELootItems::Scrap];
+    int32 PlayerBP = PlayerInventory[_Item];
+
+
+    if (PlayerScrap >= costTemp.scrapCost && PlayerBP >= costTemp.BPCost)
+    {
+        return true;
+    }
+
+    return false;
+}
+

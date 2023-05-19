@@ -64,7 +64,7 @@ void ATDGameMode::InitGame(const FString& MapName, const FString& Options, FStri
     weightManagerRef->TDSetDataTable(statsDatatable);
 
 
-    CostManagerRef = NewObject<UTDCostManager>(CostManagerClass, FName(TEXT("CostManager")), EObjectFlags::RF_MarkAsRootSet);
+    CostManagerRef = world->SpawnActor<ATDCostManager>(CostManagerClass);
     UTDGameData::TDSetCostManager(CostManagerRef);
 
 

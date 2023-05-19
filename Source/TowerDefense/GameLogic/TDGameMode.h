@@ -20,7 +20,7 @@ class UTDUserWidget;
 class UTDTowerShop;
 class UTDTowerUpgrade;
 class UTDBaseUpgrade;
-class UTDCostManager;
+class ATDCostManager;
 
 /**
  *
@@ -68,7 +68,7 @@ public:
         TSubclassOf<UTDBaseUpgrade> baseUpgradeClass;
 
         UPROPERTY(EditDefaultsOnly, Category = "Classes")
-        TSubclassOf<UTDCostManager> CostManagerClass;
+        TSubclassOf<ATDCostManager> CostManagerClass;
 
 protected:
 
@@ -91,7 +91,7 @@ private:
          TMap<TSubclassOf<UTDUserWidget>, UTDUserWidget*> widgetMap;
 
      UPROPERTY(Transient)
-         UTDCostManager* CostManagerRef = nullptr;
+         ATDCostManager* CostManagerRef = nullptr;
    
 
 
