@@ -165,8 +165,8 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable
     else
     {
         TArray<FSkeletalMaterial> SKMaterials;
-        Row.enemyMesh.LoadSynchronous()->GetMaterials(SKMaterials);
-        _enemyRef->GetMesh()->SetMaterial(0, SKMaterials[0]);
+        SKMaterials =  Row.enemyMesh.LoadSynchronous()->GetMaterials();
+        _enemyRef->GetMesh()->SetMaterial(0, SKMaterials[0].MaterialInterface);
     }
     _enemyRef->GetMesh()->SetRelativeLocation(Row.MeshPosition);
     _enemyRef->GetMesh()->SetRelativeScale3D(Row.MeshScale);
