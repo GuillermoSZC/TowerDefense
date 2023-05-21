@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AnimNotify_PlayNiagaraEffect.h"
+#include "TDElementVFXDataAsset.h"
 #include "TDPlayVFXFromDataAsset.generated.h"
 
 /**
@@ -15,6 +16,10 @@ class TOWERDEFENSE_API UTDPlayVFXFromDataAsset : public UAnimNotify_PlayNiagaraE
 	GENERATED_BODY()
 	
 public:
-	void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, const FAnimNotifyEventReference& EventReference) override;
+	UPROPERTY(EditAnywhere)
+	TEnumAsByte<EffectType> VFXtype;
+
+protected:
+	UFXSystemComponent* SpawnEffect(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation) override;
 
 };

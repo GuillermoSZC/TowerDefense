@@ -71,5 +71,9 @@ private:
     void TDMoveSideAction(const FInputActionValue& _value);
     void TDHitAction(const FInputActionValue& _value);
 
-   
+   UFUNCTION()
+    void TDOnBuyPhaseStart(int32 _num);
+
+   UFUNCTION()
+    void TDOnCombatPhaseStart(int32 _num);
 };

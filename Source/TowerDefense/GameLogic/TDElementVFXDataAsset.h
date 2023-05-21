@@ -10,6 +10,17 @@
  *
  */
 
+UENUM(BlueprintType)
+enum EffectType 
+{
+    AttackSword,
+    StaticSword,
+    HitEnemy,
+    TrailSword
+};
+
+
+
 class UNiagaraSystem;
 
 UCLASS(BlueprintType,Blueprintable)
@@ -21,10 +32,21 @@ class TOWERDEFENSE_API UTDElementVFXDataAsset : public UDataAsset
 public:
 
  
-
+    UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
+        TObjectPtr<UNiagaraSystem> AttackSwordEffect;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-        TObjectPtr<UNiagaraSystem> HitSwordEffect;
+        TObjectPtr<UNiagaraSystem> StaticSwordEffect;
 
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+        TObjectPtr<UNiagaraSystem> HitEnemySwordEffect;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+        TObjectPtr<UNiagaraSystem> TrailSwordEffect;
+
+public:
+
+    //UFUNCTION(BlueprintPure)
+    TObjectPtr<UNiagaraSystem> TDGetVFXType(EffectType _effect);
 
 };

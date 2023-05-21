@@ -8,25 +8,26 @@
 #include "Particles/ParticleSystemComponent.h"
 
 
-void UTDPlayVFXFromDataAsset::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, const FAnimNotifyEventReference& EventReference)
-{
 
-    if (UTDGameData::TDGetPlayerRef() && UTDGameData::TDGetPlayerRef()->TDGetActualElementVFXAsset() && UTDGameData::TDGetPlayerRef()->TDGetActualElementVFXAsset()->HitSwordEffect)
+
+UFXSystemComponent* UTDPlayVFXFromDataAsset::SpawnEffect(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation)
+{
+    if (SpawnedEffect && IsValid(SpawnedEffect))
     {
-        if(Template != UTDGameData::TDGetPlayerRef()->TDGetActualElementVFXAsset()->HitSwordEffect)
+        SpawnedEffect->Deactivate();
+        SpawnedEffect->ConditionalBeginDestroy();
+    }
+
+    if (UTDGameData::TDGetPlayerRef() && UTDGameData::TDGetPlayerRef()->TDGetActualElementVFXAsset() && UTDGameData::TDGetPlayerRef()->TDGetActualElementVFXAsset()->TDGetVFXType(VFXtype))
+    {
+        if (Template != UTDGameData::TDGetPlayerRef()->TDGetActualElementVFXAsset()->TDGetVFXType(VFXtype))
         {
-            if (IsValid(SpawnedEffect))
-            {
-                //SpawnedEffect->
-                //SpawnedEffect->DeactivateImmediate();
-                //SpawnedEffect->ConditionalBeginDestroy();
-                //SpawnedEffect = nullptr;
-            }       
-            Template = UTDGameData::TDGetPlayerRef()->TDGetActualElementVFXAsset()->HitSwordEffect;
+            Template = UTDGameData::TDGetPlayerRef()->TDGetActualElementVFXAsset()->TDGetVFXType(VFXtype);
         }
     }
 
 
+    Super::SpawnEffect(MeshComp, Animation);
 
-    Super::Notify(MeshComp, Animation, EventReference);
+    return SpawnedEffect;
 }

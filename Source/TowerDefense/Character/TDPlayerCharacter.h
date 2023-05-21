@@ -7,6 +7,8 @@
 #include "GameLogic/TDLootEnum.h"
 #include "TDPlayerCharacter.generated.h"
 
+class UNiagaraComponent;
+
 /**
  * 
  */
@@ -44,7 +46,8 @@ public:
     UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Element VFX")
     TMap<EElements, UTDElementVFXDataAsset*> ElementsVFX;
 
-
+    UPROPERTY(EditAnywhere,BlueprintReadWrite)
+    UNiagaraComponent* swordCover;
 
 protected:
 

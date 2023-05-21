@@ -31,6 +31,8 @@ void ATDPlayerController::BeginPlay()
 
     }
 
+    UTDGameData::TDGetRoundManager()->FOnBuyPhaseStartDelegate.AddDynamic(this, &ATDPlayerController::TDOnBuyPhaseStart);
+    UTDGameData::TDGetRoundManager()->FOnCombatPhaseStartDelegate.AddDynamic(this, &ATDPlayerController::TDOnCombatPhaseStart);
 
     UEnhancedInputComponent* InputEnhanced = Cast<UEnhancedInputComponent>(InputComponent);
 
@@ -80,10 +82,25 @@ void ATDPlayerController::TDHitAction(const FInputActionValue& _value)
     UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(playerPawn, GET_GAMEPLAY_TAG(ABILITY1_TRIGGER_TAG), abilityData);
 }
 
+void ATDPlayerController::TDOnBuyPhaseStart(int32 _num)
+{
+    bEnableClickEvents = true;
+    bShowMouseCursor = true;
+    bEnableTouchEvents = true;
+}
+
+void ATDPlayerController::TDOnCombatPhaseStart(int32 _num)
+{
+    bEnableClickEvents = false;
+    bShowMouseCursor = false;
+    bEnableTouchEvents = false;
+}
+
 void ATDPlayerController::TDOnOpenUI(UWidget* _widgetRef)
 {
     SetIgnoreMoveInput(true);
     SetIgnoreLookInput(true);
+
 }
 
 void ATDPlayerController::TDOnCloseUI()
