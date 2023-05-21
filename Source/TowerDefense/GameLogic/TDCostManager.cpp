@@ -19,14 +19,14 @@ FBuyCost ATDCostManager::TDCalculateTowerBuyCost_Implementation(ELootItems _Item
 
 bool ATDCostManager::TDCanAffordBuy(ELootItems _BPItem)
 {
-    FBuyCost costTemp = TDCalculateTowerBuyCost_Implementation(_Item);
+    FBuyCost costTemp = TDCalculateTowerBuyCost_Implementation(_BPItem);
 
     TMap<ELootItems, int32> PlayerInventory;
 
     PlayerInventory = UTDGameData::TDGetPlayerRef()->TDGetPlayerInventory();
 
     int32 PlayerScrap = PlayerInventory[ELootItems::Scrap];
-    int32 PlayerBP = PlayerInventory[_Item];
+    int32 PlayerBP = PlayerInventory[_BPItem];
 
 
     if (PlayerScrap >= costTemp.scrapCost && PlayerBP >= costTemp.BPCost)
