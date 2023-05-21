@@ -35,11 +35,16 @@ UTDGameData::UTDGameData(const FObjectInitializer& ObjectInitializer) : Super(Ob
 void UTDGameData::TDResetGameData()
 {
     gameWorld = nullptr;
-    enemiesArray.Empty();
     abilityData = nullptr;
-    baseRef = nullptr;
+    enemiesArray.Empty();
     spawnerArray.Empty();
-    
+    baseRef = nullptr;
+    weightManagerRef = nullptr;
+    GameModeRef = nullptr;
+    RoundManagerRef = nullptr;
+    ObjectPoolerRef = nullptr;
+    playerRef = nullptr;
+    CostManagerRef = nullptr;    
 }
 
 UWorld* UTDGameData::TDGetWorld()

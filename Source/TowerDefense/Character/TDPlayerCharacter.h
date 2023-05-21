@@ -7,6 +7,8 @@
 #include "GameLogic/TDLootEnum.h"
 #include "TDPlayerCharacter.generated.h"
 
+class UNiagaraComponent;
+
 /**
  * 
  */
@@ -23,6 +25,10 @@ public:
  
 
 
+
+
+
+ 
 public:
 
 
@@ -37,12 +43,20 @@ public:
     UStaticMeshComponent* SwordMesh;
 
 
+    UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Element VFX")
+    TMap<EElements, UTDElementVFXDataAsset*> ElementsVFX;
+
+    UPROPERTY(EditAnywhere,BlueprintReadWrite)
+    UNiagaraComponent* swordCover;
 
 protected:
 
-        UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+        UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Loot Inventory")
     TMap<ELootItems, int32> PlayerInventory;
 
+
+        UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Element VFX")
+            UTDElementVFXDataAsset* actualVFXAsset = nullptr;
 
 private:
 
@@ -66,12 +80,21 @@ public:
     TMap<ELootItems, int32>& TDGetPlayerInventory();
 
 
+    UFUNCTION(BlueprintPure)
+        UTDElementVFXDataAsset* TDGetActualElementVFXAsset();
+
+
 protected:
 
     virtual void BeginPlay() override;
 
    
     void TDInitialize();
+
+    void TDOnElementChange_Implementation(EElements _newElement) override;
+
+    
+
 private:
 
 

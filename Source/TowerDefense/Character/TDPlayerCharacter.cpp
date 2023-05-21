@@ -4,6 +4,8 @@
 #include "Character/TDPlayerCharacter.h"
 #include "GameLogic/TDGameData.h"
 #include "GameLogic/TDRoundManager.h"
+#include "NiagaraComponent.h"
+#include "GameLogic/TDElementVFXDataAsset.h"
 
 ATDPlayerCharacter::ATDPlayerCharacter()
 {
@@ -11,6 +13,9 @@ ATDPlayerCharacter::ATDPlayerCharacter()
 
     SwordMesh = CreateDefaultSubobject<UStaticMeshComponent>("SwordMesh");
     SwordMesh->SetupAttachment(GetMesh(), "WeaponSocketHero");
+
+    swordCover = CreateDefaultSubobject<UNiagaraComponent>("SwordCoverNiagara");
+    swordCover->SetupAttachment(GetMesh(), "VFXSwordHandle");
 
     PlayerInventory.Add(ELootItems::Scrap, 0);
     PlayerInventory.Add(ELootItems::SwordBP, 0);
@@ -26,6 +31,22 @@ ATDPlayerCharacter::ATDPlayerCharacter()
     PlayerInventory.Add(ELootItems::Plasma, 0);
 
 
+
+    ElementsVFX.Add(EElements::None, nullptr);
+    ElementsVFX.Add(EElements::Fire, nullptr);
+    ElementsVFX.Add(EElements::Freeze, nullptr);
+    ElementsVFX.Add(EElements::Plasma, nullptr);
+
+
+}
+
+
+
+void ATDPlayerCharacter::TDOnElementChange_Implementation(EElements _newElement)
+{
+
+    actualVFXAsset = ElementsVFX[_newElement];
+    swordCover->SetAsset(actualVFXAsset->StaticSwordEffect);
 }
 
 void ATDPlayerCharacter::PostInitializeComponents()
@@ -70,6 +91,15 @@ int32 ATDPlayerCharacter::TDAddItemToInventory(ELootItems _item, int32 _amount /
 TMap<ELootItems, int32>& ATDPlayerCharacter::TDGetPlayerInventory()
 {
     return PlayerInventory;
+}
+
+UTDElementVFXDataAsset* ATDPlayerCharacter::TDGetActualElementVFXAsset()
+{
+    if (actualVFXAsset)
+    {
+        return actualVFXAsset;
+    }
+    return nullptr;
 }
 
 void ATDPlayerCharacter::BeginPlay()

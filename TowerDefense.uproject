@@ -13,7 +13,8 @@
 				"CoreUObject",
 				"GameplayAbilities",
 				"UMG",
-				"AIModule"
+				"AIModule",
+				"NiagaraAnimNotifies"
 			]
 		}
 	],
