@@ -29,6 +29,9 @@ public:
 
 
 
+
+    void PostInitializeComponents() override;
+
 public:
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
@@ -105,8 +108,8 @@ public:
 
      bool TDIsDebugActive_Implementation() const override;
 
-         UFUNCTION(BlueprintImplementableEvent)
-    void TDOnElementChange(EElements _newElement);
+         UFUNCTION(BlueprintNativeEvent)
+     void TDOnElementChange(EElements _newElement);
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;

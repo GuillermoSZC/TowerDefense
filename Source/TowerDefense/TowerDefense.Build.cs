@@ -18,7 +18,8 @@ public class TowerDefense : ModuleRules
             "GameplayTags",
             "GameplayTasks",
 			"EnhancedInput",
-            "UMG"
+            "UMG",
+			"Niagara"
         });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

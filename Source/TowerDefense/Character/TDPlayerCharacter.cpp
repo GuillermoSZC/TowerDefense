@@ -26,6 +26,21 @@ ATDPlayerCharacter::ATDPlayerCharacter()
     PlayerInventory.Add(ELootItems::Plasma, 0);
 
 
+
+    ElementsVFX.Add(EElements::None, nullptr);
+    ElementsVFX.Add(EElements::Fire, nullptr);
+    ElementsVFX.Add(EElements::Freeze, nullptr);
+    ElementsVFX.Add(EElements::Plasma, nullptr);
+
+
+}
+
+
+
+void ATDPlayerCharacter::TDOnElementChange_Implementation(EElements _newElement)
+{
+
+    actualVFXAsset = ElementsVFX[_newElement];
 }
 
 void ATDPlayerCharacter::PostInitializeComponents()
@@ -70,6 +85,15 @@ int32 ATDPlayerCharacter::TDAddItemToInventory(ELootItems _item, int32 _amount /
 TMap<ELootItems, int32>& ATDPlayerCharacter::TDGetPlayerInventory()
 {
     return PlayerInventory;
+}
+
+UTDElementVFXDataAsset* ATDPlayerCharacter::TDGetActualElementVFXAsset()
+{
+    if (actualVFXAsset)
+    {
+        return actualVFXAsset;
+    }
+    return nullptr;
 }
 
 void ATDPlayerCharacter::BeginPlay()

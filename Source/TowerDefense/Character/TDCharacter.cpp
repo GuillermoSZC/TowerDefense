@@ -27,6 +27,13 @@ ATDCharacter::ATDCharacter()
 
 
 
+void ATDCharacter::PostInitializeComponents()
+{
+    Super::PostInitializeComponents();
+    elementComponent->OnElementChangeDelegate.AddUniqueDynamic(this, &ATDCharacter::TDOnElementChange);
+
+}
+
 UTDElementComponent* ATDCharacter::TDGetElementComponent_Implementation()
 {
     return elementComponent;
@@ -36,9 +43,6 @@ UTDElementComponent* ATDCharacter::TDGetElementComponent_Implementation()
 void ATDCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-    elementComponent->OnElementChangeDelegate.AddUniqueDynamic(this, &ATDCharacter::TDOnElementChange);
-
 
 }
 
@@ -53,6 +57,13 @@ void ATDCharacter::Tick(float DeltaTime)
 void ATDCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+}
+
+
+
+void ATDCharacter::TDOnElementChange_Implementation(EElements _newElement)
+{
 
 }
 
