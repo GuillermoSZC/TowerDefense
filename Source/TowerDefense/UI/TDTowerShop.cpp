@@ -4,6 +4,11 @@
 #include "UMG/Public/Components/Button.h"
 #include "Components/TDWidgetShopComponent.h"
 #include "Utilities/TDTextWithImage.h"
+#include "Utilities/TDComposedButton.h"
+#include "GameLogic/TDBuyStruct.h"
+#include "GameLogic/TDCostManager.h"
+#include "GameLogic/TDGameData.h"
+#include "GameLogic/TDLootEnum.h"
 
 
 UTDTowerShop::UTDTowerShop(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
@@ -32,12 +37,12 @@ void UTDTowerShop::NativeConstruct()
 {
     Super::NativeConstruct();
 
-    balisticButton->ownerButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDBalisticSpawn);
-    sonicButton->ownerButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDSonicSpawn);
-    deadRayButton->ownerButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDDeadRaySpawn);
-    movementButton->ownerButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDMovementSpawn);
-    attackButton->ownerButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDAttackSpawn);
-    exitButton->ownerButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDCloseUI);
+    balisticButton->imgButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDBalisticSpawn);
+    sonicButton->imgButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDSonicSpawn);
+    deadRayButton->imgButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDDeadRaySpawn);
+    movementButton->imgButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDMovementSpawn);
+    attackButton->imgButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDAttackSpawn);
+    exitButton->imgButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDCloseUI);
 }
 
 void UTDTowerShop::TDOnVisibilityChange(ESlateVisibility _visible)
@@ -47,15 +52,15 @@ void UTDTowerShop::TDOnVisibilityChange(ESlateVisibility _visible)
         FBuyCost cost = FBuyCost();
         cost = UTDGameData::TDGetCostManager()->TDCalculateTowerBuyCost(ELootItems::BalisticBP);
 
-        BalisticCostText->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
-        SonicCostText->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
+        // BalisticCostText->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
+        // SonicCostText->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
 
     }
 }
 
 void UTDTowerShop::TDBalisticSpawn()
 {
-    TDSpawnLogic(ETowers::Balistic);
+    // TDSpawnLogic(ETowers::Balistic);
 }
 
 void UTDTowerShop::TDSonicSpawn()

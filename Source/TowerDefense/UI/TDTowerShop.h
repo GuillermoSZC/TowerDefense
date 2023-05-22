@@ -8,6 +8,7 @@
 
 class UTDButton;
 class UTDTextWithImage;
+class UTDComposedButton;
 
 UCLASS()
 class TOWERDEFENSE_API UTDTowerShop : public UTDUserWidget
@@ -25,44 +26,22 @@ public:
 
 public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* balisticButton;
+        UTDComposedButton* balisticButton;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* sonicButton;
+        UTDComposedButton* sonicButton;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* deadRayButton;
+        UTDComposedButton* deadRayButton;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* movementButton;
+        UTDComposedButton* movementButton;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* attackButton;
+        UTDComposedButton* attackButton;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* exitButton;
-
-
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDTextWithImage* BalisticCostText;
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDTextWithImage* SonicCostText;
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDTextWithImage* DeathRayCostText;
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDTextWithImage* SpeedCostText;
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDTextWithImage* AttackCostText;
-
-
-
-
-
+        UTDComposedButton* exitButton;
 
     UPROPERTY(EditDefaultsOnly)
         TMap<ETowers, TSubclassOf<ATDTower>> towerMap;
