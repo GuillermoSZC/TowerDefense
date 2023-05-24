@@ -6,9 +6,9 @@
 #include "Map/TDTower.h"
 #include "TDTowerShop.generated.h"
 
-class UTDButton;
 class UTDTextWithImage;
 class UTDComposedButton;
+class UTDBaseButton;
 
 UCLASS()
 class TOWERDEFENSE_API UTDTowerShop : public UTDUserWidget
@@ -41,7 +41,7 @@ public:
         UTDComposedButton* attackButton;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDComposedButton* exitButton;
+        UTDBaseButton* exitButton;
 
     UPROPERTY(EditDefaultsOnly)
         TMap<ETowers, TSubclassOf<ATDTower>> towerMap;

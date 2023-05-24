@@ -8,8 +8,9 @@
 #include "GameLogic/ElementsEnum.h"
 #include "TDBaseUpgrade.generated.h"
 
-class UTDButton;
 class ATDBase;
+class UTDComposedButton;
+class UTDBaseButton;
 
 UCLASS()
 class TOWERDEFENSE_API UTDBaseUpgrade : public UTDUserWidget
@@ -23,25 +24,25 @@ public:
 public:
 #pragma region UI_COMPONENTS
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* plasmaUpgrade;
+        UTDComposedButton* plasmaUpgrade;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* fireUpgrade;
+        UTDComposedButton* fireUpgrade;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* iceUpgrade;
+        UTDComposedButton* iceUpgrade;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* healthUpgrade;
+        UTDComposedButton* healthUpgrade;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* speedUpgrade;
+        UTDComposedButton* speedUpgrade;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* damageUpgrade;
+        UTDComposedButton* damageUpgrade;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* exit;
+        UTDBaseButton* exit;
 #pragma endregion
 
     UPROPERTY(EditDefaultsOnly)

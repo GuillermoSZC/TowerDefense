@@ -6,8 +6,9 @@
 #include "TDUserWidget.h"
 #include "TDTowerUpgrade.generated.h"
 
-class UTDButton;
 class ATDTower;
+class UTDComposedButton;
+class UTDBaseButton;
 
 UCLASS()
 class TOWERDEFENSE_API UTDTowerUpgrade : public UTDUserWidget
@@ -20,19 +21,19 @@ public:
 
 public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* plasmaUpgrade;
+        UTDComposedButton* plasmaUpgrade;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* fireUpgrade;
+        UTDComposedButton* fireUpgrade;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* iceUpgrade;
+        UTDComposedButton* iceUpgrade;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* levelUp;
+        UTDComposedButton* levelUp;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* exit;
+        UTDBaseButton* exit;
 
 protected:
 

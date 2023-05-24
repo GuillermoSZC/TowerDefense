@@ -1,6 +1,5 @@
 #include "UI/TDTowerShop.h"
 #include "Map/TDTowerStructure.h"
-#include "Utilities/TDButton.h"
 #include "UMG/Public/Components/Button.h"
 #include "Components/TDWidgetShopComponent.h"
 #include "Utilities/TDTextWithImage.h"
@@ -9,6 +8,8 @@
 #include "GameLogic/TDCostManager.h"
 #include "GameLogic/TDGameData.h"
 #include "GameLogic/TDLootEnum.h"
+#include "Utilities/TDBaseButton.h"
+
 
 
 UTDTowerShop::UTDTowerShop(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
@@ -42,7 +43,7 @@ void UTDTowerShop::NativeConstruct()
     deadRayButton->imgButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDDeadRaySpawn);
     movementButton->imgButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDMovementSpawn);
     attackButton->imgButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDAttackSpawn);
-    exitButton->imgButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDCloseUI);
+    exitButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDCloseUI);
 }
 
 void UTDTowerShop::TDOnVisibilityChange(ESlateVisibility _visible)
@@ -60,7 +61,7 @@ void UTDTowerShop::TDOnVisibilityChange(ESlateVisibility _visible)
 
 void UTDTowerShop::TDBalisticSpawn()
 {
-    // TDSpawnLogic(ETowers::Balistic);
+    TDSpawnLogic(ETowers::Balistic);
 }
 
 void UTDTowerShop::TDSonicSpawn()

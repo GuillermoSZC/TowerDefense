@@ -2,7 +2,6 @@
 
 
 #include "UI/TDBaseUpgrade.h"
-#include "Utilities/TDButton.h"
 #include "Map/TDBase.h"
 #include "GameLogic/TDGameData.h"
 #include "AttributesSets/TDLevelAttributeSet.h"
@@ -10,6 +9,9 @@
 #include "Character/TDPlayerCharacter.h"
 #include "GameLogic/TDElementComponent.h"
 #include "Interfaces/TDInterface.h"
+#include "Utilities/TDComposedButton.h"
+#include "Utilities/TDBaseButton.h"
+
 
 bool UTDBaseUpgrade::Initialize()
 {
@@ -29,13 +31,13 @@ void UTDBaseUpgrade::NativeConstruct()
 {
     Super::NativeConstruct();
 
-    plasmaUpgrade->ownerButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDPlasmaUpgrade);
-    fireUpgrade->ownerButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDFireUpgrade);
-    iceUpgrade->ownerButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDIceUpgrade);
-    healthUpgrade->ownerButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDHealthUpgrade);
-    speedUpgrade->ownerButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDSpeedUpgrade);
-    damageUpgrade->ownerButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDDamageUpgrade);
-    exit->ownerButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDCloseUI);
+    plasmaUpgrade->imgButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDPlasmaUpgrade);
+    fireUpgrade->imgButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDFireUpgrade);
+    iceUpgrade->imgButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDIceUpgrade);
+    healthUpgrade->imgButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDHealthUpgrade);
+    speedUpgrade->imgButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDSpeedUpgrade);
+    damageUpgrade->imgButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDDamageUpgrade);
+    exit->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDCloseUI);
 }
 
 void UTDBaseUpgrade::TDPlasmaUpgrade()

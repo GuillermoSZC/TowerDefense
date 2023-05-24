@@ -5,10 +5,12 @@
 #include "Map/TDTower.h"
 #include "GameLogic/TDElementComponent.h"
 #include "GameLogic/ElementsEnum.h"
-#include "Utilities/TDButton.h"
 #include <GameplayEffect.h>
 #include "AttributesSets/TDLevelAttributeSet.h"
 #include "Components/TDWidgetShopComponent.h"
+#include "Utilities/TDComposedButton.h"
+#include "Utilities/TDBaseButton.h"
+
 
 bool UTDTowerUpgrade::Initialize()
 {
@@ -28,11 +30,11 @@ void UTDTowerUpgrade::NativeConstruct()
 {
     Super::NativeConstruct();
 
-    plasmaUpgrade->ownerButton->OnClicked.AddDynamic(this, &UTDTowerUpgrade::TDPlasmaUpgrade);
-    fireUpgrade->ownerButton->OnClicked.AddDynamic(this, &UTDTowerUpgrade::TDFireUpgrade);
-    iceUpgrade->ownerButton->OnClicked.AddDynamic(this, &UTDTowerUpgrade::TDIceUpgrade);
-    levelUp->ownerButton->OnClicked.AddDynamic(this, &UTDTowerUpgrade::TDLevelUp);
-    exit->ownerButton->OnClicked.AddDynamic(this, &UTDTowerUpgrade::TDCloseUI);
+    plasmaUpgrade->imgButton->OnClicked.AddDynamic(this, &UTDTowerUpgrade::TDPlasmaUpgrade);
+    fireUpgrade->imgButton->OnClicked.AddDynamic(this, &UTDTowerUpgrade::TDFireUpgrade);
+    iceUpgrade->imgButton->OnClicked.AddDynamic(this, &UTDTowerUpgrade::TDIceUpgrade);
+    levelUp->imgButton->OnClicked.AddDynamic(this, &UTDTowerUpgrade::TDLevelUp);
+    exit->OnClicked.AddDynamic(this, &UTDTowerUpgrade::TDCloseUI);
 }
 
 void UTDTowerUpgrade::TDPlasmaUpgrade()
