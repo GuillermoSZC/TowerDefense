@@ -7,6 +7,8 @@
 #include <UMG/Public/Components/WidgetComponent.h>
 #include "UI/Utilities/TDHealthBar.h"
 #include "GameLogic/TDRoundManager.h"
+#include "Interfaces/TDInterface.h"
+#include "AttributesSets/TDLevelAttributeSet.h"
 //#include "Character/TDPlayerCharacter.h"
 //#include "Character/TDPlayerController.h"
 
@@ -32,9 +34,46 @@ ATDBase::ATDBase(const FObjectInitializer& ObjectInitializer)
 
 }
 
-void ATDBase::TDCalcultateCost_Implementation(FBuyCost& _cost, ELootItems _item)
+void ATDBase::TDCalcultateCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item)
 {
-   UTDGameData::TDGetCostManager()->TDCalculateTowerBuyCost(_cost,_item); 
+    int level = 0;
+    UAbilitySystemComponent* abilitySystem = UTDGameData::TDGetPlayerRef()->abilitySystem;
+    bool found = false;
+
+    switch (_item)
+    {
+    case ELootItems::BootsBP:
+    {
+        level = abilitySystem->GetGameplayAttributeValue(UTDLevelAttributeSet::GetBootsLevelAttribute(), found);
+        ensure(found);
+    }
+    break;
+
+    case ELootItems::ArmorBP:
+    {
+        level = abilitySystem->GetGameplayAttributeValue(UTDLevelAttributeSet::GetArmorLevelAttribute(), found);
+        ensure(found);
+    }
+    break;
+
+    case ELootItems::SwordBP:
+    {
+        level = abilitySystem->GetGameplayAttributeValue(UTDLevelAttributeSet::GetDamageLevelAttribute(), found);
+        ensure(found);
+    }
+    break;
+
+    default:
+    {
+    }
+    break;
+    }
+
+    ensure(found);
+
+
+    UTDGameData::TDGetCostManager()->TDCalculateUpgradeCost(_cost, _item, level);
+
 }
 
 // Called when the game starts or when spawned
@@ -74,6 +113,12 @@ UAbilitySystemComponent* ATDBase::GetAbilitySystemComponent() const
 }
 
 
+
+void ATDBase::TDCalculateElementChangeCost_Implementation(FBuyCost& _cost, EElements _element)
+{
+    EElements spawnedElement = ITDInterface::Execute_TDGetElementComponent(UTDGameData::TDGetPlayerRef())->TDGetSpawnedElement();
+    UTDGameData::TDGetCostManager()->TDCalculateElementChange(_cost, _element, spawnedElement);
+}
 
 int ATDBase::TGGApplyEffect_Implementation()
 {

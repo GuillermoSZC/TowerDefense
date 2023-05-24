@@ -10,7 +10,7 @@ UTDDamageHeroCalculation::UTDDamageHeroCalculation()
 {
     RelevantAttributesToCapture.Add(structAbilities.healthTargetDef);
     RelevantAttributesToCapture.Add(structAbilities.attackDamageSourceDef);
-    RelevantAttributesToCapture.Add(structAbilities.levelSourceDef);
+    RelevantAttributesToCapture.Add(structAbilities.DamageLevelSourceDef);
 }
 
 
@@ -38,7 +38,7 @@ void UTDDamageHeroCalculation::Execute_Implementation(const FGameplayEffectCusto
         ensure(ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(structAbilities.healthTargetDef, evaluationParameters, enemyHealth));
 
         float level = 0.f;
-        ensure(ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(structAbilities.levelSourceDef, evaluationParameters, level));
+        ensure(ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(structAbilities.DamageLevelSourceDef, evaluationParameters, level));
 
         UTDElementComponent* SourceElementComponent = ITDInterface::Execute_TDGetElementComponent(sourceActor);
         UTDElementComponent* TargetElementComponent = ITDInterface::Execute_TDGetElementComponent(targetActor);

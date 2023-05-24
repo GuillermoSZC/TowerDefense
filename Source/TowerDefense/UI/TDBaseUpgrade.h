@@ -21,6 +21,11 @@ public:
     virtual void NativePreConstruct() override;
     virtual void NativeConstruct() override;
 
+
+
+
+
+
 public:
 #pragma region UI_COMPONENTS
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
@@ -65,6 +70,7 @@ public:
 
 protected:
 
+    void TDUpdateCost() override;
 
 private:
 #pragma region BUTTONS_IMPLEMENTATION
@@ -92,10 +98,13 @@ private:
 
     UFUNCTION()
         void TDSetElement(EElements _element);
-
-    UFUNCTION()
-        void TDLevelUp();
+// 
+//     UFUNCTION()
+//         void TDLevelUp();
 
     UFUNCTION()
         void TDSetGameplayEffect(TSubclassOf<UGameplayEffect> _gameplayEffect);
+
+    void TDOnVisibilityChange(ESlateVisibility _visible) override;
+
 };

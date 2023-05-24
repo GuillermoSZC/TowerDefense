@@ -60,6 +60,10 @@ protected:
     FDelegateHandle TowerPeriodAttackChangedDelegateHandle;
 #pragma endregion
 
+    
+    UPROPERTY(EditDefaultsOnly)
+    TEnumAsByte<ELootItems> BPToUprgade;
+
 private:
     UPROPERTY()
         float timer;
@@ -69,6 +73,7 @@ private:
 
     UPROPERTY(Transient)
         const UTDDamageAttributeSet* TowerAttributes;
+
 
 
 public:
@@ -100,14 +105,19 @@ public:
     UFUNCTION(BlueprintNativeEvent)
         void TDOnElementChange(EElements _newElement);
 
+ 
+
 
     UFUNCTION(BlueprintCallable)
         UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
-    void TDCalcultateCost_Implementation(FBuyCost& _cost, ELootItems _item) override;
+    void TDCalcultateCost_Implementation(FBuyCost& _cost) override;
 
     void TDCalculateElementChangeCost_Implementation(FBuyCost& _cost,EElements _element) override;
 
+
+       UFUNCTION(BlueprintPure)
+    ELootItems TDGetItemToUpgrade();
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;

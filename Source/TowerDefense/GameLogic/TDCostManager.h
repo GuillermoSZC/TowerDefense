@@ -40,7 +40,7 @@ public:
 
 
     UFUNCTION(BlueprintNativeEvent)
-    void TDCalculateTowerUpgradeCost(FBuyCost& _cost, ELootItems _Item, int32 _actualLevel);
+    void TDCalculateUpgradeCost(FBuyCost& _cost, ELootItems _Item, int32 _actualLevel);
 
        UFUNCTION(BlueprintNativeEvent)
     void TDCalculateElementChange(FBuyCost& _cost, EElements _Element, EElements _actualElement);

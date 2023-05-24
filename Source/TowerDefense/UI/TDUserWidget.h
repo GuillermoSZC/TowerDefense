@@ -4,6 +4,9 @@
 #include "Blueprint/UserWidget.h"
 #include "TDUserWidget.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FUICostUpdateSignature);
+
+
 class UTDWidgetShopComponent;
 
 UCLASS()
@@ -22,6 +25,9 @@ protected:
     UPROPERTY(Transient)
         UTDWidgetShopComponent* owner;
 
+    UPROPERTY()
+        FUICostUpdateSignature FUICostUpdateDelegate;
+
 private:
 
 public:
@@ -33,6 +39,9 @@ public:
 
     UFUNCTION()
     virtual void TDOnVisibilityChange(ESlateVisibility _visible);
+
+    UFUNCTION()
+    virtual void TDUpdateCost();
     
   UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
         void TDFadeIn();

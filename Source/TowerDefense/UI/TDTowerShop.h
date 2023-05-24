@@ -24,6 +24,9 @@ public:
 
   
 
+
+    
+
 public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDComposedButton* balisticButton;
@@ -55,7 +58,7 @@ public:
     void TDOnVisibilityChange(ESlateVisibility _visible) override;
 
 protected:
-
+void TDUpdateCost() override;
 private:
 #pragma region BUTTON_IMPLEMENTATION
     UFUNCTION()

@@ -79,7 +79,11 @@ public:
     UFUNCTION()
         int TGGApplyEffect_Implementation();
 
-    void TDCalcultateCost_Implementation(FBuyCost& _cost,ELootItems _item) override;
+      UFUNCTION()
+    void TDCalcultateCostWithLoot_Implementation(FBuyCost& _cost,ELootItems _item) override;
+
+        UFUNCTION()
+    void TDCalculateElementChangeCost_Implementation(FBuyCost& _cost, EElements _element) override;
 
 
 protected:

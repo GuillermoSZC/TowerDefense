@@ -38,12 +38,13 @@ bool ATDCostManager::TDCanAffordBuy(ELootItems _BPItem)
     return false;
 }
 
-void ATDCostManager::TDCalculateTowerUpgradeCost_Implementation(FBuyCost& _cost, ELootItems _Item, int32 _actualLevel)
+void ATDCostManager::TDCalculateUpgradeCost_Implementation(FBuyCost& _cost, ELootItems _Item, int32 _actualLevel)
 {
     
 
     if (_Item == ELootItems::Plasma || _Item == ELootItems::Ice || _Item == ELootItems::Fire)
     {
+        _cost = FBuyCost();
         return;
     }
 
@@ -58,6 +59,7 @@ void ATDCostManager::TDCalculateElementChange_Implementation(FBuyCost& _cost, EE
 
     if (_Element == _actualElement)
     {
+        _cost = FBuyCost();
         return;
     }
 

@@ -38,13 +38,13 @@ void ATDTower::TDCalculateElementChangeCost_Implementation(FBuyCost& _cost, EEle
     UTDGameData::TDGetCostManager()->TDCalculateElementChange(_cost, _element, spawnedElement);
 }
 
-void ATDTower::TDCalcultateCost_Implementation(FBuyCost& _cost, ELootItems _item)
+void ATDTower::TDCalcultateCost_Implementation(FBuyCost& _cost)
 {
     
     bool found = false;
     float level = abilitySystem->GetGameplayAttributeValue(UTDLevelAttributeSet::GetlevelAttribute(), found);
     ensure(found);
-    UTDGameData::TDGetCostManager()->TDCalculateTowerUpgradeCost(_cost,_item,level);
+    UTDGameData::TDGetCostManager()->TDCalculateUpgradeCost(_cost,BPToUprgade,level);
 }
 
 bool ATDTower::TDIsDebugActive_Implementation() const
@@ -109,6 +109,11 @@ void ATDTower::TDInitialize()
 UAbilitySystemComponent* ATDTower::GetAbilitySystemComponent() const
 {
     return abilitySystem;
+}
+
+ELootItems ATDTower::TDGetItemToUpgrade()
+{
+    return BPToUprgade;
 }
 
 // Called every frame

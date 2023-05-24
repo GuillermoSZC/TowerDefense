@@ -41,7 +41,7 @@ public:
     UFUNCTION(BlueprintCallable)
         void TDTowerSpawn(ETowers _tower);
 
-    void TDCalcultateCost_Implementation(FBuyCost& _cost, ELootItems _item) override;
+    void TDCalcultateCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item) override;
 
 protected:
     virtual void BeginPlay() override;

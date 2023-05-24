@@ -18,14 +18,14 @@ struct TDAttributeCaptureDamageHero
 {
     TDDECLARE_ATTRIBUTE_CAPTUREDEF(health, Target);
     TDDECLARE_ATTRIBUTE_CAPTUREDEF(attackDamage, Source);
-    TDDECLARE_ATTRIBUTE_CAPTUREDEF(level, Source);
+    TDDECLARE_ATTRIBUTE_CAPTUREDEF(DamageLevel, Source);
 
 
     TDAttributeCaptureDamageHero()
     {
         TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDHealthAttributeSet, health, Target, false);
         TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDDamageAttributeSet, attackDamage, Source, false);
-        TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDLevelAttributeSet, level, Source, false);
+        TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDLevelAttributeSet, DamageLevel, Source, false);
 
     }
 };

@@ -22,6 +22,7 @@ void UTDUserWidget::NativeConstruct()
 
 
     OnVisibilityChanged.AddDynamic(this, &UTDUserWidget::TDOnVisibilityChange);
+    FUICostUpdateDelegate.AddDynamic(this, &UTDUserWidget::TDUpdateCost);
         
 }
 
@@ -36,6 +37,11 @@ void UTDUserWidget::TDSetOwner(UTDWidgetShopComponent* _owner)
 }
 
 void UTDUserWidget::TDOnVisibilityChange(ESlateVisibility _visible)
+{
+
+}
+
+void UTDUserWidget::TDUpdateCost()
 {
 
 }

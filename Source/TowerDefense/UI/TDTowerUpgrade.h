@@ -19,6 +19,12 @@ public:
     virtual void NativePreConstruct() override;
     virtual void NativeConstruct() override;
 
+
+ 
+
+
+
+
 public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDComposedButton* plasmaUpgrade;
@@ -44,7 +50,7 @@ private:
 public:
 
 protected:
-
+    void TDUpdateCost() override;
 
 private:
 #pragma region BUTTONS_IMPLEMENTATION
@@ -66,4 +72,9 @@ private:
 
     UFUNCTION()
         void TDSetElement(EElements _element);
+
+    
+    void TDOnVisibilityChange(ESlateVisibility _visible) override;
+
 };
+

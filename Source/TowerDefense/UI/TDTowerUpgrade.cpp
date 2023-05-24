@@ -37,19 +37,52 @@ void UTDTowerUpgrade::NativeConstruct()
     exit->OnClicked.AddDynamic(this, &UTDTowerUpgrade::TDCloseUI);
 }
 
+void UTDTowerUpgrade::TDUpdateCost()
+{
+    FBuyCost cost = FBuyCost();
+    ITDCostInterface::Execute_TDCalcultateCost(owner->GetOwner(), cost);
+    levelUp->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
+    levelUp->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
+
+
+    ITDCostInterface::Execute_TDCalculateElementChangeCost(owner->GetOwner(), cost, EElements::Fire);
+    fireUpgrade->gems->TDSetText(UTDGameData::TDConvertIntToFText(cost.GemCost));
+
+    ITDCostInterface::Execute_TDCalculateElementChangeCost(owner->GetOwner(), cost, EElements::Freeze);
+    iceUpgrade->gems->TDSetText(UTDGameData::TDConvertIntToFText(cost.GemCost));
+
+    ITDCostInterface::Execute_TDCalculateElementChangeCost(owner->GetOwner(), cost, EElements::Plasma);
+    plasmaUpgrade->gems->TDSetText(UTDGameData::TDConvertIntToFText(cost.GemCost));
+}
+
+void UTDTowerUpgrade::TDOnVisibilityChange(ESlateVisibility _visible)
+{
+
+    if (_visible == ESlateVisibility::Visible)
+    {
+        FUICostUpdateDelegate.Broadcast();        
+    }
+}
+
 void UTDTowerUpgrade::TDPlasmaUpgrade()
 {
     TDSetElement(EElements::Plasma);
+    FUICostUpdateDelegate.Broadcast();
+
 }
 
 void UTDTowerUpgrade::TDFireUpgrade()
 {
     TDSetElement(EElements::Fire);
+    FUICostUpdateDelegate.Broadcast();
+
 }
 
 void UTDTowerUpgrade::TDIceUpgrade()
 {
     TDSetElement(EElements::Freeze);
+    FUICostUpdateDelegate.Broadcast();
+
 }
 
 void UTDTowerUpgrade::TDLevelUp()
@@ -63,6 +96,9 @@ void UTDTowerUpgrade::TDLevelUp()
     staticEffect->Modifiers.Add(modif);
     Cast<ATDTower>(owner->GetOwner())->GetAbilitySystemComponent()->ApplyGameplayEffectToSelf(staticEffect, 1, FGameplayEffectContextHandle());
     staticEffect->ConditionalBeginDestroy();
+
+    FUICostUpdateDelegate.Broadcast();
+
 }
 
 void UTDTowerUpgrade::TDCloseUI()

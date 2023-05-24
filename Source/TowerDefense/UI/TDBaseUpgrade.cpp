@@ -11,6 +11,7 @@
 #include "Interfaces/TDInterface.h"
 #include "Utilities/TDComposedButton.h"
 #include "Utilities/TDBaseButton.h"
+#include "Utilities/TDTextWithImage.h"
 
 
 bool UTDBaseUpgrade::Initialize()
@@ -40,37 +41,82 @@ void UTDBaseUpgrade::NativeConstruct()
     exit->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDCloseUI);
 }
 
+void UTDBaseUpgrade::TDUpdateCost()
+{
+    FBuyCost cost = FBuyCost();
+
+    ITDCostInterface::Execute_TDCalcultateCostWithLoot(owner->GetOwner(), cost, ELootItems::ArmorBP);
+    healthUpgrade->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
+    healthUpgrade->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
+
+    ITDCostInterface::Execute_TDCalcultateCostWithLoot(owner->GetOwner(), cost, ELootItems::BootsBP);
+    speedUpgrade->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
+    speedUpgrade->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
+
+    ITDCostInterface::Execute_TDCalcultateCostWithLoot(owner->GetOwner(), cost, ELootItems::SwordBP);
+    damageUpgrade->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
+    damageUpgrade->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
+
+    ITDCostInterface::Execute_TDCalculateElementChangeCost(owner->GetOwner(), cost, EElements::Fire);
+    fireUpgrade->gems->TDSetText(UTDGameData::TDConvertIntToFText(cost.GemCost));
+
+    ITDCostInterface::Execute_TDCalculateElementChangeCost(owner->GetOwner(), cost, EElements::Plasma);
+    plasmaUpgrade->gems->TDSetText(UTDGameData::TDConvertIntToFText(cost.GemCost));
+
+    ITDCostInterface::Execute_TDCalculateElementChangeCost(owner->GetOwner(), cost, EElements::Freeze);
+    iceUpgrade->gems->TDSetText(UTDGameData::TDConvertIntToFText(cost.GemCost));
+}
+
+void UTDBaseUpgrade::TDOnVisibilityChange(ESlateVisibility _visible)
+{
+
+    if (_visible == ESlateVisibility::Visible)
+    {
+        FUICostUpdateDelegate.Broadcast();
+    }
+}
+
 void UTDBaseUpgrade::TDPlasmaUpgrade()
 {
     TDSetElement(EElements::Plasma);
-    TDLevelUp();
+    FUICostUpdateDelegate.Broadcast();
+
+   
 }
 
 void UTDBaseUpgrade::TDFireUpgrade()
 {
     TDSetElement(EElements::Fire);
-    TDLevelUp();
+    FUICostUpdateDelegate.Broadcast();
+
 }
 
 void UTDBaseUpgrade::TDIceUpgrade()
 {
     TDSetElement(EElements::Freeze);
-    TDLevelUp();
+    FUICostUpdateDelegate.Broadcast();
+
 }
 
 void UTDBaseUpgrade::TDHealthUpgrade()
 {
     TDSetGameplayEffect(healthEffect);
+    FUICostUpdateDelegate.Broadcast();
+
 }
 
 void UTDBaseUpgrade::TDSpeedUpgrade()
 {
     TDSetGameplayEffect(speedEffect);
+    FUICostUpdateDelegate.Broadcast();
+
 }
 
 void UTDBaseUpgrade::TDDamageUpgrade()
 {
     TDSetGameplayEffect(damageEffect);
+    FUICostUpdateDelegate.Broadcast();
+
 }
 
 void UTDBaseUpgrade::TDCloseUI()
@@ -89,18 +135,18 @@ void UTDBaseUpgrade::TDSetElement(EElements _element)
     temp->TDSetSpawnedElement(_element);
 }
 
-void UTDBaseUpgrade::TDLevelUp()
-{
-    UGameplayEffect* staticEffect = NewObject<UGameplayEffect>();
-    staticEffect->Modifiers.Empty();
-    FGameplayModifierInfo modif = FGameplayModifierInfo();
-    modif.ModifierOp = EGameplayModOp::Additive;
-    modif.Attribute = UTDLevelAttributeSet::GetlevelAttribute();
-    modif.ModifierMagnitude = FGameplayEffectModifierMagnitude(FScalableFloat(1));
-    staticEffect->Modifiers.Add(modif);
-    UTDGameData::TDGetPlayerRef()->abilitySystem->ApplyGameplayEffectToSelf(staticEffect, 1, FGameplayEffectContextHandle());
-    staticEffect->ConditionalBeginDestroy();
-}
+// void UTDBaseUpgrade::TDLevelUp()
+// {
+//     UGameplayEffect* staticEffect = NewObject<UGameplayEffect>();
+//     staticEffect->Modifiers.Empty();
+//     FGameplayModifierInfo modif = FGameplayModifierInfo();
+//     modif.ModifierOp = EGameplayModOp::Additive;
+//     modif.Attribute = UTDLevelAttributeSet::GetlevelAttribute();
+//     modif.ModifierMagnitude = FGameplayEffectModifierMagnitude(FScalableFloat(1));
+//     staticEffect->Modifiers.Add(modif);
+//     UTDGameData::TDGetPlayerRef()->abilitySystem->ApplyGameplayEffectToSelf(staticEffect, 1, FGameplayEffectContextHandle());
+//     staticEffect->ConditionalBeginDestroy();
+// }
 
 void UTDBaseUpgrade::TDSetGameplayEffect(TSubclassOf<UGameplayEffect> _gameplayEffect)
 {
