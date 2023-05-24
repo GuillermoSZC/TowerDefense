@@ -31,31 +31,107 @@ ATDTower::ATDTower()
 
 }
 
-bool ATDTower::TDCanAffordElementChange_Implementation(FBuyCost& _cost, ELootItems _item)
-{
-   return UTDGameData::TDGetCostManager()->TDCanAffordElementChange(_cost, _item);
-}
 
-bool ATDTower::TDCanAffordCost_Implementation(FBuyCost& _cost)
-{
-    return UTDGameData::TDGetCostManager()->TDCanAffordBuy(_cost, BPToUprgade);
-}
 
-void ATDTower::TDCalculateElementChangeCost_Implementation(FBuyCost& _cost, EElements _element)
+//Blueprints cost
+void ATDTower::TDCalcultateCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item /*= ELootItems::None*/)
 {
-    
-    EElements spawnedElement = elementComponent->TDGetSpawnedElement();
-    UTDGameData::TDGetCostManager()->TDCalculateElementChange(_cost, _element, spawnedElement);
-}
-
-void ATDTower::TDCalcultateCost_Implementation(FBuyCost& _cost)
-{
-    
     bool found = false;
     float level = abilitySystem->GetGameplayAttributeValue(UTDLevelAttributeSet::GetlevelAttribute(), found);
+    _cost.BPItem = BPToUprgade;
     ensure(found);
-    UTDGameData::TDGetCostManager()->TDCalculateUpgradeCost(_cost,BPToUprgade,level);
+    UTDGameData::TDGetCostManager()->TDCalculateUpgradeCost(_cost, level);
 }
+
+
+bool ATDTower::TDCanAffordCostWithLoot_Implementation(FBuyCost& _cost)
+{
+    return UTDGameData::TDGetCostManager()->TDCanAffordBuy(_cost);
+}
+
+bool ATDTower::TDCommitBuyUpgrade_Implementation(ELootItems _item)
+{
+    FBuyCost cost = FBuyCost();
+
+    if (_item == ELootItems::None)
+    {
+        cost.BPItem = BPToUprgade;
+        ITDCostInterface::Execute_TDCalcultateCostWithLoot(this, cost,cost.BPItem);
+        
+        if (!ITDCostInterface::Execute_TDCanAffordCostWithLoot(this, cost))
+        {
+            return false;
+        }
+
+        UTDGameData::TDGetCostManager()->TDCommitResources(cost);
+        return true;
+    }
+
+
+    if (_item == ELootItems::Fire || _item == ELootItems::Ice || _item == ELootItems::Plasma)
+    {
+
+        ITDCostInterface::Execute_TDCalculateElementChangeCost(this, cost, _item);
+        if (!ITDCostInterface::Execute_TDCanAffordCostWithLoot(this, cost))
+        {
+            return false;
+        }
+
+        UTDGameData::TDGetCostManager()->TDCommitResources(cost);
+        return true;
+
+    }
+
+    
+     
+
+    return false;
+
+}
+
+
+
+//Gem Cost
+
+void ATDTower::TDCalculateElementChangeCost_Implementation(FBuyCost& _cost, ELootItems _itemElement)
+{
+
+    EElements spawnedElement = elementComponent->TDGetSpawnedElement();
+    EElements elementToSwitch = EElements::None;
+    _cost.GemItem = _itemElement;
+
+    switch (_itemElement)
+    {
+    case ELootItems::Fire:
+    {
+        
+        elementToSwitch = EElements::Fire;
+    }
+    break;
+
+    case ELootItems::Ice:
+    {
+        elementToSwitch = EElements::Freeze;   
+    }
+    break;
+
+    case ELootItems::Plasma:
+    {
+        elementToSwitch = EElements::Plasma; 
+    }
+    break;
+
+    default:
+    {
+    }
+    break;
+    }
+
+    UTDGameData::TDGetCostManager()->TDCalculateElementChange(_cost, elementToSwitch, spawnedElement);
+}
+
+
+
 
 bool ATDTower::TDIsDebugActive_Implementation() const
 {
@@ -85,8 +161,6 @@ void ATDTower::BeginPlay()
     {
         elementComponent->OnElementChangeDelegate.AddUniqueDynamic(this, &ATDTower::TDOnElementChange);
     }
-
-
 }
 
 void ATDTower::TDInitialize()

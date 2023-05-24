@@ -43,13 +43,13 @@ void UTDBaseUpgrade::NativeConstruct()
 
 void UTDBaseUpgrade::TDUpdateCost()
 {
-    TDUpdateTowerBuyCost(healthUpgrade, ELootItems::ArmorBP);
-    TDUpdateTowerBuyCost(speedUpgrade, ELootItems::BootsBP);
-    TDUpdateTowerBuyCost(damageUpgrade, ELootItems::SwordBP);
+    TDUpdateBPCostWithItem(healthUpgrade, ELootItems::ArmorBP);
+    TDUpdateBPCostWithItem(speedUpgrade, ELootItems::BootsBP);
+    TDUpdateBPCostWithItem(damageUpgrade, ELootItems::SwordBP);
 
-    TDUpdateGemCost(fireUpgrade, EElements::Fire, ELootItems::Fire);
-    TDUpdateGemCost(fireUpgrade, EElements::Freeze, ELootItems::Ice);
-    TDUpdateGemCost(fireUpgrade, EElements::Plasma, ELootItems::Plasma);
+    TDUpdateGemCost(fireUpgrade, ELootItems::Fire);
+    TDUpdateGemCost(iceUpgrade, ELootItems::Ice);
+    TDUpdateGemCost(plasmaUpgrade, ELootItems::Plasma);
 
 }
 
@@ -64,45 +64,56 @@ void UTDBaseUpgrade::TDOnVisibilityChange(ESlateVisibility _visible)
 
 void UTDBaseUpgrade::TDPlasmaUpgrade()
 {
-    TDSetElement(EElements::Plasma);
-    FUICostUpdateDelegate.Broadcast();
-
-   
+    if (ITDCostInterface::Execute_TDCommitBuyUpgrade(owner->GetOwner(), ELootItems::Plasma))
+    {
+        TDSetElement(EElements::Plasma);
+        FUICostUpdateDelegate.Broadcast();
+    }
 }
 
 void UTDBaseUpgrade::TDFireUpgrade()
 {
-    TDSetElement(EElements::Fire);
-    FUICostUpdateDelegate.Broadcast();
-
+    if (ITDCostInterface::Execute_TDCommitBuyUpgrade(owner->GetOwner(), ELootItems::Fire))
+    {
+        TDSetElement(EElements::Fire);
+        FUICostUpdateDelegate.Broadcast();
+    }
 }
 
 void UTDBaseUpgrade::TDIceUpgrade()
 {
-    TDSetElement(EElements::Freeze);
-    FUICostUpdateDelegate.Broadcast();
-
+    if (ITDCostInterface::Execute_TDCommitBuyUpgrade(owner->GetOwner(), ELootItems::Ice))
+    {
+        TDSetElement(EElements::Freeze);
+        FUICostUpdateDelegate.Broadcast();
+    }
 }
 
 void UTDBaseUpgrade::TDHealthUpgrade()
 {
-    TDSetGameplayEffect(healthEffect);
-    FUICostUpdateDelegate.Broadcast();
-
+    if (ITDCostInterface::Execute_TDCommitBuyUpgrade(owner->GetOwner(), ELootItems::ArmorBP))
+    {
+        TDSetGameplayEffect(healthEffect);
+        FUICostUpdateDelegate.Broadcast();
+    }
 }
 
 void UTDBaseUpgrade::TDSpeedUpgrade()
 {
-    TDSetGameplayEffect(speedEffect);
-    FUICostUpdateDelegate.Broadcast();
-
+    if (ITDCostInterface::Execute_TDCommitBuyUpgrade(owner->GetOwner(), ELootItems::BootsBP))
+    {
+        TDSetGameplayEffect(speedEffect);
+        FUICostUpdateDelegate.Broadcast();
+    }
 }
 
 void UTDBaseUpgrade::TDDamageUpgrade()
 {
-    TDSetGameplayEffect(damageEffect);
-    FUICostUpdateDelegate.Broadcast();
-
+    if (ITDCostInterface::Execute_TDCommitBuyUpgrade(owner->GetOwner(), ELootItems::SwordBP))
+    {
+        TDSetGameplayEffect(damageEffect);
+        FUICostUpdateDelegate.Broadcast();
+    }
 }
 
 void UTDBaseUpgrade::TDCloseUI()
@@ -110,7 +121,7 @@ void UTDBaseUpgrade::TDCloseUI()
     if (owner)
     {
         owner->TDHideUI();
-    }    
+    }
 }
 
 void UTDBaseUpgrade::TDSetElement(EElements _element)
@@ -142,24 +153,3 @@ void UTDBaseUpgrade::TDSetGameplayEffect(TSubclassOf<UGameplayEffect> _gameplayE
 }
 
 
-void UTDBaseUpgrade::TDUpdateTowerBuyCost(UTDComposedButton* _button, ELootItems _item)
-{
-    FBuyCost cost = FBuyCost();
-    bool canAfford = false;
-    ITDCostInterface::Execute_TDCalcultateCostWithLoot(owner->GetOwner(), cost, _item);
-    _button->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
-    _button->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
-    canAfford = ITDCostInterface::Execute_TDCanAffordCostWithLoot(owner->GetOwner(), cost, _item);
-    _button->TDCanAfford(canAfford);
-
-}
-
-void UTDBaseUpgrade::TDUpdateGemCost(UTDComposedButton* _button, EElements _element, ELootItems _item)
-{
-    FBuyCost cost = FBuyCost();
-    bool canAfford = false;
-    ITDCostInterface::Execute_TDCalculateElementChangeCost(owner->GetOwner(), cost, _element);
-    _button->gems->TDSetText(UTDGameData::TDConvertIntToFText(cost.GemCost));
-    canAfford = ITDCostInterface::Execute_TDCanAffordElementChange(owner->GetOwner(), cost, _item);
-    _button->TDCanAfford(canAfford);
-}

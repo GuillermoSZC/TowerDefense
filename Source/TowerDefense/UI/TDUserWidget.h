@@ -8,6 +8,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FUICostUpdateSignature);
 
 
 class UTDWidgetShopComponent;
+class UTDComposedButton;
 
 UCLASS()
 class TOWERDEFENSE_API UTDUserWidget : public UUserWidget
@@ -48,6 +49,9 @@ public:
 
 protected:
 
+    void TDUpdateGemCost(UTDComposedButton* _button, ELootItems _item );
+    //void TDUpdateBPCost(UTDComposedButton* _button);
+    void TDUpdateBPCostWithItem(UTDComposedButton* _button, ELootItems _item = ELootItems::None);
   
 private:
 

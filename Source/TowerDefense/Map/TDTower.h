@@ -27,13 +27,8 @@ public:
     ATDTower();
 
 
-  
 
-
-
-
-
-
+   
 
 public:
 
@@ -114,15 +109,18 @@ public:
     UFUNCTION(BlueprintCallable)
         UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
-    void TDCalcultateCost_Implementation(FBuyCost& _cost) override;
+    //Gems
+    void TDCalculateElementChangeCost_Implementation(FBuyCost& _cost,ELootItems _itemElement) override;
 
-    void TDCalculateElementChangeCost_Implementation(FBuyCost& _cost,EElements _element) override;
+    //BPs
+    void TDCalcultateCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item = ELootItems::None) override;
+
+    bool TDCanAffordCostWithLoot_Implementation(FBuyCost& _cost) override;
+
+    bool TDCommitBuyUpgrade_Implementation(ELootItems _item = ELootItems::None) override;
 
 
-    bool TDCanAffordCost_Implementation(FBuyCost& _cost) override;
-
-
-    bool TDCanAffordElementChange_Implementation(FBuyCost& _cost, ELootItems _item) override;
+  
 
 
        UFUNCTION(BlueprintPure)

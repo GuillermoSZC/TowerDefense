@@ -23,24 +23,24 @@ class TOWERDEFENSE_API ITDCostInterface
 
         // Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
+    //TowerCost, TowerUpgrade and Player Upgrades
+    UFUNCTION(BlueprintNativeEvent)
+        void TDCalcultateCostWithLoot(FBuyCost& _cost, ELootItems _item = ELootItems::None);
+
+    //GemCost 
+    UFUNCTION(BlueprintNativeEvent)
+        void TDCalculateElementChangeCost(FBuyCost& _cost, ELootItems _itemElement);
+
+    //TowerCost, TowerUpgrade and Player Upgrades
+    UFUNCTION(BlueprintNativeEvent)
+        bool TDCanAffordCostWithLoot(FBuyCost& _cost);
+
 
     UFUNCTION(BlueprintNativeEvent)
-        void TDCalcultateCostWithLoot(FBuyCost& _cost, ELootItems _item);
+        bool TDCommitBuyUpgrade(ELootItems _item = ELootItems::None);
 
-    UFUNCTION(BlueprintNativeEvent)
-        void TDCalcultateCost(FBuyCost& _cost);
 
-    UFUNCTION(BlueprintNativeEvent)
-        void TDCalculateElementChangeCost(FBuyCost& _cost, EElements _element);
 
-    UFUNCTION(BlueprintNativeEvent)
-        bool TDCanAffordCostWithLoot(FBuyCost& _cost, ELootItems _item);
-
-    UFUNCTION(BlueprintNativeEvent)
-        bool TDCanAffordCost(FBuyCost& _cost);
-
-     UFUNCTION(BlueprintNativeEvent)
-    bool TDCanAffordElementChange(FBuyCost& _cost, ELootItems _item);
 
     //Este solo se puede implementar en BP
 //     UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)

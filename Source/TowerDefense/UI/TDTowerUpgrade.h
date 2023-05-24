@@ -71,13 +71,12 @@ private:
         void TDLevelUp();
 
     UFUNCTION()
-        void TDSetElement(EElements _element);
+        void TDBuyElement(EElements _element);
 
     
     void TDOnVisibilityChange(ESlateVisibility _visible) override;
 
-    void TDUpdateGemCost(UTDComposedButton* _button, EElements _element, ELootItems _item);
-    void TDUpdateTowerLevelUpCost(UTDComposedButton* _button);
+
 
 };
 

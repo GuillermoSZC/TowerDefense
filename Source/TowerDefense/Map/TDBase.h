@@ -30,6 +30,9 @@ public:
 
 
 
+
+
+
 public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
         UDataTable* healthDatatable;
@@ -86,13 +89,14 @@ public:
         void TDCalcultateCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item) override;
 
     UFUNCTION()
-        void TDCalculateElementChangeCost_Implementation(FBuyCost& _cost, EElements _element) override;
+        void TDCalculateElementChangeCost_Implementation(FBuyCost& _cost, ELootItems _item) override;
 
     UFUNCTION()
-        bool TDCanAffordCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item) override;
+        bool TDCanAffordCostWithLoot_Implementation(FBuyCost& _cost) override;
 
     UFUNCTION()
-        bool TDCanAffordElementChange_Implementation(FBuyCost& _cost, ELootItems _item) override;
+        bool TDCommitBuyUpgrade_Implementation(ELootItems _item = ELootItems::None) override;
+
 
 protected:
     // Called when the game starts or when spawned

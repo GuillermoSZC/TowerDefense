@@ -32,22 +32,28 @@ private:
 
 public:
 
-    UFUNCTION(BlueprintNativeEvent)
-        void TDCalculateTowerBuyCost(FBuyCost& _cost, ELootItems _Item);
-
-    //Only use for tower buy and Upgrades
-    UFUNCTION()
-        bool TDCanAffordBuy(FBuyCost& _cost, ELootItems _Item);
-
-
-    bool TDCanAffordElementChange(FBuyCost& _cost, ELootItems _Item);
+//     UFUNCTION(BlueprintNativeEvent)
+//         void TDCalculateTowerBuyCost(FBuyCost& _cost);
+ 
 
     UFUNCTION(BlueprintNativeEvent)
-    void TDCalculateUpgradeCost(FBuyCost& _cost, ELootItems _Item, int32 _actualLevel);
+    void TDCalculateUpgradeCost(FBuyCost& _cost, int32 _actualLevel);
+
+    
+
 
        UFUNCTION(BlueprintNativeEvent)
     void TDCalculateElementChange(FBuyCost& _cost, EElements _Element, EElements _actualElement);
 
+       
+    //Only use for tower buy and Upgrades
+    UFUNCTION()
+        bool TDCanAffordBuy(FBuyCost& _cost);
+
+
+    void TDCommitResources(FBuyCost& _cost);
+
+      // bool TDCanAffordElementChange(FBuyCost& _cost, ELootItems _Item);
 
 protected:
 

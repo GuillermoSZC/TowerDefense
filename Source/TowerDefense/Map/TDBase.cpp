@@ -34,14 +34,44 @@ ATDBase::ATDBase(const FObjectInitializer& ObjectInitializer)
 
 }
 
-bool ATDBase::TDCanAffordElementChange_Implementation(FBuyCost& _cost, ELootItems _item)
-{
-    return UTDGameData::TDGetCostManager()->TDCanAffordElementChange(_cost, _item);
-}
 
-bool ATDBase::TDCanAffordCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item)
+
+void ATDBase::TDCalculateElementChangeCost_Implementation(FBuyCost& _cost, ELootItems _item)
 {
-    return UTDGameData::TDGetCostManager()->TDCanAffordBuy(_cost, _item);
+    EElements spawnedElement = ITDInterface::Execute_TDGetElementComponent(UTDGameData::TDGetPlayerRef())->TDGetSpawnedElement();
+    EElements elementToBuy = EElements::None;
+    _cost.GemItem = _item;
+
+    switch (_item)
+    {
+    case ELootItems::Fire:
+    {
+        elementToBuy = EElements::Fire;
+    }
+    break;
+
+    case ELootItems::Ice:
+    {
+        elementToBuy = EElements::Freeze;
+
+    }
+    break;
+
+    case ELootItems::Plasma:
+    {
+        elementToBuy = EElements::Plasma;
+
+    }
+    break;
+
+    default:
+    {
+    }
+    break;
+    }
+
+
+    UTDGameData::TDGetCostManager()->TDCalculateElementChange(_cost, elementToBuy, spawnedElement);
 }
 
 void ATDBase::TDCalcultateCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item)
@@ -75,15 +105,56 @@ void ATDBase::TDCalcultateCostWithLoot_Implementation(FBuyCost& _cost, ELootItem
 
     default:
     {
+
     }
     break;
     }
 
     ensure(found);
 
+    _cost.BPItem = _item;
+    UTDGameData::TDGetCostManager()->TDCalculateUpgradeCost(_cost, level);
 
-    UTDGameData::TDGetCostManager()->TDCalculateUpgradeCost(_cost, _item, level);
+}
 
+bool ATDBase::TDCanAffordCostWithLoot_Implementation(FBuyCost& _cost)
+{
+    return UTDGameData::TDGetCostManager()->TDCanAffordBuy(_cost);
+}
+
+bool ATDBase::TDCommitBuyUpgrade_Implementation(ELootItems _item /*= ELootItems::None*/)
+{
+    FBuyCost cost = FBuyCost();
+
+    if (_item == ELootItems::Fire || _item == ELootItems::Ice || _item == ELootItems::Plasma)
+    {
+
+        ITDCostInterface::Execute_TDCalculateElementChangeCost(this, cost, _item);
+        if (!ITDCostInterface::Execute_TDCanAffordCostWithLoot(this, cost))
+        {
+            return false;
+        }
+
+        UTDGameData::TDGetCostManager()->TDCommitResources(cost);
+        return true;
+
+    }
+
+    if (_item == ELootItems::ArmorBP || _item == ELootItems::BootsBP || _item == ELootItems::SwordBP)
+    {
+        cost.BPItem = _item;
+        ITDCostInterface::Execute_TDCalcultateCostWithLoot(this, cost, cost.BPItem);
+
+        if (!ITDCostInterface::Execute_TDCanAffordCostWithLoot(this, cost))
+        {
+            return false;
+        }
+
+        UTDGameData::TDGetCostManager()->TDCommitResources(cost);
+        return true;
+    }
+
+    return false;
 }
 
 // Called when the game starts or when spawned
@@ -124,11 +195,7 @@ UAbilitySystemComponent* ATDBase::GetAbilitySystemComponent() const
 
 
 
-void ATDBase::TDCalculateElementChangeCost_Implementation(FBuyCost& _cost, EElements _element)
-{
-    EElements spawnedElement = ITDInterface::Execute_TDGetElementComponent(UTDGameData::TDGetPlayerRef())->TDGetSpawnedElement();
-    UTDGameData::TDGetCostManager()->TDCalculateElementChange(_cost, _element, spawnedElement);
-}
+
 
 int ATDBase::TGGApplyEffect_Implementation()
 {

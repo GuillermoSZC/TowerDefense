@@ -79,13 +79,22 @@ int32 ATDPlayerCharacter::TDAddItemToInventory(ELootItems _item, int32 _amount /
     uint32 temp = 0;
     if (PlayerInventory.Contains(_item))
     {
-        FString ObjectTypesTemp = UEnum::GetValueAsString(_item);
-        GEngine->AddOnScreenDebugMessage(0, 5.f, FColor::Green, ObjectTypesTemp);
+        //FString ObjectTypesTemp = UEnum::GetValueAsString(_item);
+        //GEngine->AddOnScreenDebugMessage(0, 5.f, FColor::Green, ObjectTypesTemp);
         temp = PlayerInventory[_item];
         temp += _amount;
         PlayerInventory.Add(_item, temp);
     }
     return temp;
+}
+
+void ATDPlayerCharacter::TDOverrideItemInInventory(ELootItems _item, int32 _newValue)
+{
+    if (PlayerInventory.Contains(_item))
+    {
+        
+        PlayerInventory.Add(_item, _newValue);
+    }
 }
 
 TMap<ELootItems, int32>& ATDPlayerCharacter::TDGetPlayerInventory()

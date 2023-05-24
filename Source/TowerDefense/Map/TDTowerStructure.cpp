@@ -28,15 +28,35 @@ ATDTowerStructure::ATDTowerStructure()
     towerMap.Add(ETowers::Speed, nullptr);
 }
 
-bool ATDTowerStructure::TDCanAffordCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item)
-{
-    return UTDGameData::TDGetCostManager()->TDCanAffordBuy(_cost, _item);
-}
-
 void ATDTowerStructure::TDCalcultateCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item)
 {
-    UTDGameData::TDGetCostManager()->TDCalculateTowerBuyCost(_cost, _item);
+    _cost.BPItem = _item;
+    UTDGameData::TDGetCostManager()->TDCalculateUpgradeCost(_cost,1);
 }
+
+bool ATDTowerStructure::TDCanAffordCostWithLoot_Implementation(FBuyCost& _cost)
+{
+    return UTDGameData::TDGetCostManager()->TDCanAffordBuy(_cost);
+}
+
+bool ATDTowerStructure::TDCommitBuyUpgrade_Implementation(ELootItems _item)
+{
+    FBuyCost cost = FBuyCost();
+
+    cost.BPItem = _item;
+
+    ITDCostInterface::Execute_TDCalcultateCostWithLoot(this,cost, cost.BPItem);
+
+    if (!ITDCostInterface::Execute_TDCanAffordCostWithLoot(this, cost))
+    {
+        return false;
+    }
+
+    UTDGameData::TDGetCostManager()->TDCommitResources(cost);
+    return true;
+}
+
+
 
 void ATDTowerStructure::BeginPlay()
 {

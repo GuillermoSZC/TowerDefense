@@ -48,11 +48,11 @@ void UTDTowerShop::NativeConstruct()
 
 void UTDTowerShop::TDUpdateCost()
 {
-    TDUpdateTowerBuyCost(balisticButton, ELootItems::BalisticBP);
-    TDUpdateTowerBuyCost(sonicButton, ELootItems::SonicBP);
-    TDUpdateTowerBuyCost(deadRayButton, ELootItems::DeathRayBP);
-    TDUpdateTowerBuyCost(movementButton, ELootItems::SpeedTowerBP);
-    TDUpdateTowerBuyCost(attackButton, ELootItems::AttackTowerBP);
+    TDUpdateBPCostWithItem(balisticButton, ELootItems::BalisticBP);
+    TDUpdateBPCostWithItem(sonicButton, ELootItems::SonicBP);
+    TDUpdateBPCostWithItem(deadRayButton, ELootItems::DeathRayBP);
+    TDUpdateBPCostWithItem(movementButton, ELootItems::SpeedTowerBP);
+    TDUpdateBPCostWithItem(attackButton, ELootItems::AttackTowerBP);
 }
 
 void UTDTowerShop::TDOnVisibilityChange(ESlateVisibility _visible)
@@ -65,27 +65,42 @@ void UTDTowerShop::TDOnVisibilityChange(ESlateVisibility _visible)
 
 void UTDTowerShop::TDBalisticSpawn()
 {
-    TDSpawnLogic(ETowers::Balistic);
+    if (ITDCostInterface::Execute_TDCommitBuyUpgrade(owner->GetOwner(), ELootItems::BalisticBP))
+    {
+        TDSpawnLogic(ETowers::Balistic);
+    }
 }
 
 void UTDTowerShop::TDSonicSpawn()
 {
-    TDSpawnLogic(ETowers::Sonic);
+    if (ITDCostInterface::Execute_TDCommitBuyUpgrade(owner->GetOwner(), ELootItems::SonicBP))
+    {
+        TDSpawnLogic(ETowers::Sonic);
+    }
 }
 
 void UTDTowerShop::TDDeadRaySpawn()
 {
-    TDSpawnLogic(ETowers::DeathRay);
+    if (ITDCostInterface::Execute_TDCommitBuyUpgrade(owner->GetOwner(), ELootItems::DeathRayBP))
+    {
+        TDSpawnLogic(ETowers::DeathRay);
+    }
 }
 
 void UTDTowerShop::TDMovementSpawn()
 {
-    TDSpawnLogic(ETowers::Speed);
+    if (ITDCostInterface::Execute_TDCommitBuyUpgrade(owner->GetOwner(), ELootItems::SpeedTowerBP))
+    {
+        TDSpawnLogic(ETowers::Speed);
+    }
 }
 
 void UTDTowerShop::TDAttackSpawn()
 {
-    TDSpawnLogic(ETowers::Attack);
+    if (ITDCostInterface::Execute_TDCommitBuyUpgrade(owner->GetOwner(), ELootItems::AttackTowerBP))
+    {
+        TDSpawnLogic(ETowers::Attack);
+    }
 }
 
 void UTDTowerShop::TDCloseUI()
@@ -115,14 +130,3 @@ void UTDTowerShop::TDEndSpawnLogic()
     }
 }
 
-void UTDTowerShop::TDUpdateTowerBuyCost(UTDComposedButton* _button, ELootItems _item)
-{
-    FBuyCost cost = FBuyCost();
-    bool canAfford = false;
-    ITDCostInterface::Execute_TDCalcultateCostWithLoot(owner->GetOwner(), cost, _item);
-    _button->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
-    _button->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
-    canAfford = ITDCostInterface::Execute_TDCanAffordCostWithLoot(owner->GetOwner(), cost, _item);
-    _button->TDCanAfford(canAfford);
-
-}

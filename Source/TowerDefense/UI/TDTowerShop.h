@@ -86,6 +86,6 @@ private:
     UFUNCTION()
         void TDEndSpawnLogic();
 
-    void TDUpdateTowerBuyCost(UTDComposedButton* _button, ELootItems _item);
+
 
 };

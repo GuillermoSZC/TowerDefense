@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "TDLootEnum.h"
 #include "TDBuyStruct.generated.h"
 
 
@@ -12,13 +13,25 @@ struct FBuyCost
     GENERATED_BODY()
 
 
-        UPROPERTY(EditAnywhere,BlueprintReadWrite)
+        UPROPERTY(EditAnywhere, BlueprintReadWrite)
         int32 scrapCost;
-        UPROPERTY(EditAnywhere,BlueprintReadWrite)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        ELootItems BPItem;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
         int32 BPCost;
-        UPROPERTY(EditAnywhere,BlueprintReadWrite)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        ELootItems GemItem;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
         int32 GemCost;
 
+    FBuyCost()
+    {
+        scrapCost = 0;
+        BPCost = 0;
+        GemCost = 0;
+        BPItem = ELootItems::None;
+        GemItem = ELootItems::None;
+    }
 
 
 };

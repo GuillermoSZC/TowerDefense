@@ -75,6 +75,9 @@ public:
     UFUNCTION(BlueprintCallable)
         int32 TDAddItemToInventory(ELootItems _item, int32 _amount = 1);
 
+     UFUNCTION(BlueprintCallable)
+        void TDOverrideItemInInventory(ELootItems _item, int32 _newValue);
+
 
     UFUNCTION(BlueprintPure)
     TMap<ELootItems, int32>& TDGetPlayerInventory();
