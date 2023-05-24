@@ -252,9 +252,8 @@ void UTDGameData::TDSetCostManager(ATDCostManager* _ref)
 }
 
 FText UTDGameData::TDConvertIntToFText(int32 _num)
-{
-    FString StringTemp = FString::FromInt(_num);
-    FText texttemp = FText::FromString(StringTemp);
+{ 
+    FText texttemp = FText::FromString(TEXT("<Black>"+ FString::FromInt(_num)+"</>"));
     return texttemp;
 }
 

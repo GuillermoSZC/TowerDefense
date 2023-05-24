@@ -32,6 +32,11 @@ ATDBase::ATDBase(const FObjectInitializer& ObjectInitializer)
 
 }
 
+void ATDBase::TDCalcultateCost_Implementation(FBuyCost& _cost, ELootItems _item)
+{
+   UTDGameData::TDGetCostManager()->TDCalculateTowerBuyCost(_cost,_item); 
+}
+
 // Called when the game starts or when spawned
 void ATDBase::BeginPlay()
 {
