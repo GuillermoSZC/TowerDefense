@@ -5,35 +5,62 @@
 
 ATDCostManager::ATDCostManager()
 {
-    TowerBuyCost.Add(ETowers::Balistic, FBuyCost());
-    TowerBuyCost.Add(ETowers::Sonic, FBuyCost());
-    TowerBuyCost.Add(ETowers::DeathRay, FBuyCost());
-    TowerBuyCost.Add(ETowers::Speed, FBuyCost());
-    TowerBuyCost.Add(ETowers::Attack, FBuyCost());
+    TowerBuyCost.Add(ELootItems::BalisticBP, FBuyCost());
+    TowerBuyCost.Add(ELootItems::SonicBP, FBuyCost());
+    TowerBuyCost.Add(ELootItems::DeathRayBP, FBuyCost());
+    TowerBuyCost.Add(ELootItems::SpeedTowerBP, FBuyCost());
+    TowerBuyCost.Add(ELootItems::AttackTowerBP, FBuyCost());
 }
 
-FBuyCost ATDCostManager::TDCalculateTowerBuyCost_Implementation(ELootItems _Item)
+void ATDCostManager::TDCalculateTowerBuyCost_Implementation(FBuyCost& _cost, ELootItems _Item)
 {
-    return FBuyCost();
+    _cost = TowerBuyCost[_Item];
 }
 
 bool ATDCostManager::TDCanAffordBuy(ELootItems _BPItem)
 {
-    FBuyCost costTemp = TDCalculateTowerBuyCost_Implementation(_BPItem);
+//     FBuyCost costTemp = TDCalculateTowerBuyCost_Implementation(_cost,_BPItem);
+// 
+//     TMap<ELootItems, int32> PlayerInventory;
+// 
+//     PlayerInventory = UTDGameData::TDGetPlayerRef()->TDGetPlayerInventory();
+// 
+//     int32 PlayerScrap = PlayerInventory[ELootItems::Scrap];
+//     int32 PlayerBP = PlayerInventory[_BPItem];
+// 
+// 
+//     if (PlayerScrap >= costTemp.scrapCost && PlayerBP >= costTemp.BPCost)
+//     {
+//         return true;
+//     }
+// 
+//     return false;
+    return false;
+}
 
-    TMap<ELootItems, int32> PlayerInventory;
+void ATDCostManager::TDCalculateTowerUpgradeCost_Implementation(FBuyCost& _cost, ELootItems _Item, int32 _actualLevel)
+{
+    
 
-    PlayerInventory = UTDGameData::TDGetPlayerRef()->TDGetPlayerInventory();
-
-    int32 PlayerScrap = PlayerInventory[ELootItems::Scrap];
-    int32 PlayerBP = PlayerInventory[_BPItem];
-
-
-    if (PlayerScrap >= costTemp.scrapCost && PlayerBP >= costTemp.BPCost)
+    if (_Item == ELootItems::Plasma || _Item == ELootItems::Ice || _Item == ELootItems::Fire)
     {
-        return true;
+        return;
     }
 
-    return false;
+    _cost.scrapCost = 3 + (_actualLevel - 1);
+    _cost.BPCost = 1 + ((_actualLevel - 1) / 10);
+
+
+}
+
+void ATDCostManager::TDCalculateElementChange_Implementation(FBuyCost& _cost, EElements _Element, EElements _actualElement)
+{ 
+
+    if (_Element == _actualElement)
+    {
+        return;
+    }
+
+    _cost.GemCost = 1;
 }
 

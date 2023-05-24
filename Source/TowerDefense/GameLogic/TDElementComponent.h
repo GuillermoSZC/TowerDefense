@@ -60,6 +60,8 @@ public:
     UFUNCTION(BlueprintPure)
         float TDGetDamageMultiplier(EElements _element);
 
+    UFUNCTION(BlueprintPure)
+    EElements TDGetSpawnedElement();
 
 protected:
     // Called when the game starts

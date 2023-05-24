@@ -24,7 +24,7 @@ public:
 
 public:
     UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-        TMap<ETowers, FBuyCost> TowerBuyCost;
+        TMap<ELootItems, FBuyCost> TowerBuyCost;
 
 protected:
 
@@ -33,12 +33,17 @@ private:
 public:
 
     UFUNCTION(BlueprintNativeEvent)
-        FBuyCost TDCalculateTowerBuyCost(ELootItems _Item);
+        void TDCalculateTowerBuyCost(FBuyCost& _cost, ELootItems _Item);
 
     UFUNCTION()
         bool TDCanAffordBuy(ELootItems _Item);
 
 
+    UFUNCTION(BlueprintNativeEvent)
+    void TDCalculateTowerUpgradeCost(FBuyCost& _cost, ELootItems _Item, int32 _actualLevel);
+
+       UFUNCTION(BlueprintNativeEvent)
+    void TDCalculateElementChange(FBuyCost& _cost, EElements _Element, EElements _actualElement);
 
 
 protected:

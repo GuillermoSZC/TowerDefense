@@ -78,3 +78,8 @@ float UTDElementComponent::TDGetDamageMultiplier(EElements _element)
 
 }
 
+EElements UTDElementComponent::TDGetSpawnedElement()
+{
+    return SpawnedElementData->ownerElement;
+}
+

@@ -51,10 +51,27 @@ void UTDTowerShop::TDOnVisibilityChange(ESlateVisibility _visible)
     if (_visible == ESlateVisibility::Visible)
     {
         FBuyCost cost = FBuyCost();
-        cost = UTDGameData::TDGetCostManager()->TDCalculateTowerBuyCost(ELootItems::BalisticBP);
+        ITDCostInterface::Execute_TDCalcultateCost(owner->GetOwner(),cost, ELootItems::BalisticBP);       
 
-        // BalisticCostText->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
-        // SonicCostText->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
+         balisticButton->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
+         balisticButton->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
+
+         ITDCostInterface::Execute_TDCalcultateCost(owner->GetOwner(), cost, ELootItems::SonicBP);
+
+         sonicButton->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
+         sonicButton->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
+
+         ITDCostInterface::Execute_TDCalcultateCost(owner->GetOwner(), cost, ELootItems::SonicBP);
+         deadRayButton->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
+         deadRayButton->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
+
+         ITDCostInterface::Execute_TDCalcultateCost(owner->GetOwner(), cost, ELootItems::SonicBP);
+         movementButton->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
+         movementButton->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
+
+         ITDCostInterface::Execute_TDCalcultateCost(owner->GetOwner(), cost, ELootItems::SonicBP);
+         attackButton->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
+         attackButton->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
 
     }
 }

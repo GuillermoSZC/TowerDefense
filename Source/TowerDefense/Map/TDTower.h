@@ -9,6 +9,7 @@
 #include "GameplayEffectTypes.h"
 #include "Delegates/TDDeclareDelegates.h"
 #include "InputCoreTypes.h"
+#include "Interfaces/TDCostInterface.h"
 #include "TDTower.generated.h"
 
 class UTDTowerAttributeSet;
@@ -17,13 +18,19 @@ class UTDDamageAttributeSet;
 class UTDTowerUpgrade;
 
 UCLASS()
-class TOWERDEFENSE_API ATDTower : public AActor, public ITDInterface, public IAbilitySystemInterface
+class TOWERDEFENSE_API ATDTower : public AActor, public ITDInterface, public IAbilitySystemInterface ,public ITDCostInterface
 {
     GENERATED_BODY()
 
 public:
     // Sets default values for this actor's properties
     ATDTower();
+
+
+  
+
+
+
 
 public:
 
@@ -96,6 +103,10 @@ public:
 
     UFUNCTION(BlueprintCallable)
         UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+    void TDCalcultateCost_Implementation(FBuyCost& _cost, ELootItems _item) override;
+
+    void TDCalculateElementChangeCost_Implementation(FBuyCost& _cost,EElements _element) override;
 
 protected:
     // Called when the game starts or when spawned

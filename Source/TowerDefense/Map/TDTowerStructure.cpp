@@ -28,6 +28,11 @@ ATDTowerStructure::ATDTowerStructure()
     towerMap.Add(ETowers::Speed, nullptr);
 }
 
+void ATDTowerStructure::TDCalcultateCost_Implementation(FBuyCost& _cost, ELootItems _item)
+{
+       UTDGameData::TDGetCostManager()->TDCalculateTowerBuyCost(_cost,_item);       
+}
+
 void ATDTowerStructure::BeginPlay()
 {
     Super::BeginPlay();

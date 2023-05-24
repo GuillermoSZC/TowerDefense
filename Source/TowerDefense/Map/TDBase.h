@@ -5,6 +5,7 @@
 #include "Interfaces/TDInterface.h"
 #include "AbilitySystemInterface.h"
 #include "Delegates/TDDeclareDelegates.h"
+#include "Interfaces/TDCostInterface.h"
 #include "TDBase.generated.h"
 
 
@@ -17,12 +18,14 @@ class UTDHealthAttributeSet;
 class UTDBaseUpgrade;
 
 UCLASS()
-class TOWERDEFENSE_API ATDBase : public AActor, public ITDInterface, public IAbilitySystemInterface
+class TOWERDEFENSE_API ATDBase : public AActor, public ITDInterface, public IAbilitySystemInterface, public ITDCostInterface
 {
     GENERATED_BODY()
 
 public:
     ATDBase(const FObjectInitializer& ObjectInitializer);
+
+
 
 public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
@@ -76,6 +79,7 @@ public:
     UFUNCTION()
         int TGGApplyEffect_Implementation();
 
+    void TDCalcultateCost_Implementation(FBuyCost& _cost,ELootItems _item) override;
 
 
 protected:
