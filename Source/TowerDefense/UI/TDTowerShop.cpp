@@ -48,31 +48,11 @@ void UTDTowerShop::NativeConstruct()
 
 void UTDTowerShop::TDUpdateCost()
 {
-    FBuyCost cost = FBuyCost();
-    ITDCostInterface::Execute_TDCalcultateCostWithLoot(owner->GetOwner(), cost, ELootItems::BalisticBP);
-    balisticButton->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
-    balisticButton->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
-
-
-    ITDCostInterface::Execute_TDCalcultateCostWithLoot(owner->GetOwner(), cost, ELootItems::SonicBP);
-    sonicButton->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
-    sonicButton->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
-
-
-    ITDCostInterface::Execute_TDCalcultateCostWithLoot(owner->GetOwner(), cost, ELootItems::SonicBP);
-    deadRayButton->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
-    deadRayButton->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
-
-
-    ITDCostInterface::Execute_TDCalcultateCostWithLoot(owner->GetOwner(), cost, ELootItems::SonicBP);
-    movementButton->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
-    movementButton->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
-
-
-    ITDCostInterface::Execute_TDCalcultateCostWithLoot(owner->GetOwner(), cost, ELootItems::SonicBP);
-    attackButton->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
-    attackButton->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
-
+    TDUpdateTowerBuyCost(balisticButton, ELootItems::BalisticBP);
+    TDUpdateTowerBuyCost(sonicButton, ELootItems::SonicBP);
+    TDUpdateTowerBuyCost(deadRayButton, ELootItems::DeathRayBP);
+    TDUpdateTowerBuyCost(movementButton, ELootItems::SpeedTowerBP);
+    TDUpdateTowerBuyCost(attackButton, ELootItems::AttackTowerBP);
 }
 
 void UTDTowerShop::TDOnVisibilityChange(ESlateVisibility _visible)
@@ -133,4 +113,16 @@ void UTDTowerShop::TDEndSpawnLogic()
         owner->TDHideUI();
         owner->GetOwner()->OnClicked.Clear();
     }
+}
+
+void UTDTowerShop::TDUpdateTowerBuyCost(UTDComposedButton* _button, ELootItems _item)
+{
+    FBuyCost cost = FBuyCost();
+    bool canAfford = false;
+    ITDCostInterface::Execute_TDCalcultateCostWithLoot(owner->GetOwner(), cost, _item);
+    _button->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
+    _button->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
+    canAfford = ITDCostInterface::Execute_TDCanAffordCostWithLoot(owner->GetOwner(), cost, _item);
+    _button->TDCanAfford(canAfford);
+
 }

@@ -31,6 +31,16 @@ ATDTower::ATDTower()
 
 }
 
+bool ATDTower::TDCanAffordElementChange_Implementation(FBuyCost& _cost, ELootItems _item)
+{
+   return UTDGameData::TDGetCostManager()->TDCanAffordElementChange(_cost, _item);
+}
+
+bool ATDTower::TDCanAffordCost_Implementation(FBuyCost& _cost)
+{
+    return UTDGameData::TDGetCostManager()->TDCanAffordBuy(_cost, BPToUprgade);
+}
+
 void ATDTower::TDCalculateElementChangeCost_Implementation(FBuyCost& _cost, EElements _element)
 {
     

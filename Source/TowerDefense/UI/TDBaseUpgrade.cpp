@@ -43,28 +43,14 @@ void UTDBaseUpgrade::NativeConstruct()
 
 void UTDBaseUpgrade::TDUpdateCost()
 {
-    FBuyCost cost = FBuyCost();
+    TDUpdateTowerBuyCost(healthUpgrade, ELootItems::ArmorBP);
+    TDUpdateTowerBuyCost(speedUpgrade, ELootItems::BootsBP);
+    TDUpdateTowerBuyCost(damageUpgrade, ELootItems::SwordBP);
 
-    ITDCostInterface::Execute_TDCalcultateCostWithLoot(owner->GetOwner(), cost, ELootItems::ArmorBP);
-    healthUpgrade->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
-    healthUpgrade->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
+    TDUpdateGemCost(fireUpgrade, EElements::Fire, ELootItems::Fire);
+    TDUpdateGemCost(fireUpgrade, EElements::Freeze, ELootItems::Ice);
+    TDUpdateGemCost(fireUpgrade, EElements::Plasma, ELootItems::Plasma);
 
-    ITDCostInterface::Execute_TDCalcultateCostWithLoot(owner->GetOwner(), cost, ELootItems::BootsBP);
-    speedUpgrade->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
-    speedUpgrade->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
-
-    ITDCostInterface::Execute_TDCalcultateCostWithLoot(owner->GetOwner(), cost, ELootItems::SwordBP);
-    damageUpgrade->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
-    damageUpgrade->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
-
-    ITDCostInterface::Execute_TDCalculateElementChangeCost(owner->GetOwner(), cost, EElements::Fire);
-    fireUpgrade->gems->TDSetText(UTDGameData::TDConvertIntToFText(cost.GemCost));
-
-    ITDCostInterface::Execute_TDCalculateElementChangeCost(owner->GetOwner(), cost, EElements::Plasma);
-    plasmaUpgrade->gems->TDSetText(UTDGameData::TDConvertIntToFText(cost.GemCost));
-
-    ITDCostInterface::Execute_TDCalculateElementChangeCost(owner->GetOwner(), cost, EElements::Freeze);
-    iceUpgrade->gems->TDSetText(UTDGameData::TDConvertIntToFText(cost.GemCost));
 }
 
 void UTDBaseUpgrade::TDOnVisibilityChange(ESlateVisibility _visible)
@@ -153,4 +139,27 @@ void UTDBaseUpgrade::TDSetGameplayEffect(TSubclassOf<UGameplayEffect> _gameplayE
     UGameplayEffect* staticEffect = Cast<UGameplayEffect>(_gameplayEffect->GetDefaultObject());
     UTDGameData::TDGetPlayerRef()->abilitySystem->ApplyGameplayEffectToSelf(staticEffect, 1, FGameplayEffectContextHandle());
     staticEffect->ConditionalBeginDestroy();
+}
+
+
+void UTDBaseUpgrade::TDUpdateTowerBuyCost(UTDComposedButton* _button, ELootItems _item)
+{
+    FBuyCost cost = FBuyCost();
+    bool canAfford = false;
+    ITDCostInterface::Execute_TDCalcultateCostWithLoot(owner->GetOwner(), cost, _item);
+    _button->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
+    _button->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
+    canAfford = ITDCostInterface::Execute_TDCanAffordCostWithLoot(owner->GetOwner(), cost, _item);
+    _button->TDCanAfford(canAfford);
+
+}
+
+void UTDBaseUpgrade::TDUpdateGemCost(UTDComposedButton* _button, EElements _element, ELootItems _item)
+{
+    FBuyCost cost = FBuyCost();
+    bool canAfford = false;
+    ITDCostInterface::Execute_TDCalculateElementChangeCost(owner->GetOwner(), cost, _element);
+    _button->gems->TDSetText(UTDGameData::TDConvertIntToFText(cost.GemCost));
+    canAfford = ITDCostInterface::Execute_TDCanAffordElementChange(owner->GetOwner(), cost, _item);
+    _button->TDCanAfford(canAfford);
 }

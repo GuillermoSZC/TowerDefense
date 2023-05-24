@@ -28,9 +28,14 @@ ATDTowerStructure::ATDTowerStructure()
     towerMap.Add(ETowers::Speed, nullptr);
 }
 
+bool ATDTowerStructure::TDCanAffordCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item)
+{
+    return UTDGameData::TDGetCostManager()->TDCanAffordBuy(_cost, _item);
+}
+
 void ATDTowerStructure::TDCalcultateCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item)
 {
-       UTDGameData::TDGetCostManager()->TDCalculateTowerBuyCost(_cost,_item);       
+    UTDGameData::TDGetCostManager()->TDCalculateTowerBuyCost(_cost, _item);
 }
 
 void ATDTowerStructure::BeginPlay()
@@ -53,6 +58,6 @@ void ATDTowerStructure::TDTowerSpawn(ETowers _tower)
     GetWorld()->SpawnActor(towerMap[_tower], &location, &FRotator::ZeroRotator);
 
     //TDHideUI();
-    
+
     /*isTowerSpawned = true;*/
 }

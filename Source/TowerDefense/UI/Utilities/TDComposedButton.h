@@ -57,11 +57,20 @@ public:
     UPROPERTY(EditAnywhere, Category = "Resources|Config")
         TEnumAsByte<ETDResources> resources;
 
+    UPROPERTY(EditDefaultsOnly, Category = "Resources|Config")
+        FLinearColor AvalibleBuyColor;
+
+    UPROPERTY(EditDefaultsOnly, Category = "Resources|Config")
+        FLinearColor NotAvalibleBuyColor;
+
 protected:
 
 private:
 
 public:
+
+    UFUNCTION()
+        void TDCanAfford(bool _CanAfford);
 
 protected:
 

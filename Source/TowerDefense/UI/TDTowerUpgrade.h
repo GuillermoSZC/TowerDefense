@@ -76,5 +76,8 @@ private:
     
     void TDOnVisibilityChange(ESlateVisibility _visible) override;
 
+    void TDUpdateGemCost(UTDComposedButton* _button, EElements _element, ELootItems _item);
+    void TDUpdateTowerLevelUpCost(UTDComposedButton* _button);
+
 };
 

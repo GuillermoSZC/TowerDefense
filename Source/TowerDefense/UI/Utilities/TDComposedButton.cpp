@@ -1,6 +1,7 @@
 #include "UI/Utilities/TDComposedButton.h"
 #include <UMG/Public/Blueprint/WidgetLayoutLibrary.h>
 #include "TDTextWithImage.h"
+#include "UMG/Public/Components/Border.h"
 
 bool UTDComposedButton::Initialize()
 {
@@ -36,6 +37,10 @@ void UTDComposedButton::NativePreConstruct()
             break;
         }
     }
+
+    AvalibleBuyColor = FLinearColor(0.55f, 0.2f, 0, 1.f);
+    NotAvalibleBuyColor = FLinearColor(1.f, 0.f, 0.02f, 1.f);
+
 }
 
 void UTDComposedButton::NativeConstruct()
@@ -46,6 +51,18 @@ void UTDComposedButton::NativeConstruct()
 
 }
 
+void UTDComposedButton::TDCanAfford(bool _CanAfford)
+{
+    if (_CanAfford)
+    {
+        borderBase->SetBrushColor(AvalibleBuyColor);
+    }
+    else
+    {
+        borderBase->SetBrushColor(NotAvalibleBuyColor);
+
+    }
+}
 
 
 

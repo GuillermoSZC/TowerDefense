@@ -25,16 +25,22 @@ class TOWERDEFENSE_API ITDCostInterface
 public:
 
     UFUNCTION(BlueprintNativeEvent)
-    void TDCalcultateCostWithLoot(FBuyCost& _cost, ELootItems _item);
+        void TDCalcultateCostWithLoot(FBuyCost& _cost, ELootItems _item);
+
+    UFUNCTION(BlueprintNativeEvent)
+        void TDCalcultateCost(FBuyCost& _cost);
+
+    UFUNCTION(BlueprintNativeEvent)
+        void TDCalculateElementChangeCost(FBuyCost& _cost, EElements _element);
+
+    UFUNCTION(BlueprintNativeEvent)
+        bool TDCanAffordCostWithLoot(FBuyCost& _cost, ELootItems _item);
+
+    UFUNCTION(BlueprintNativeEvent)
+        bool TDCanAffordCost(FBuyCost& _cost);
 
      UFUNCTION(BlueprintNativeEvent)
-    void TDCalcultateCost(FBuyCost& _cost);
-
-
-        UFUNCTION(BlueprintNativeEvent)
-    void TDCalculateElementChangeCost(FBuyCost& _cost, EElements _element);
-
-
+    bool TDCanAffordElementChange(FBuyCost& _cost, ELootItems _item);
 
     //Este solo se puede implementar en BP
 //     UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)

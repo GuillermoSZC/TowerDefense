@@ -34,6 +34,16 @@ ATDBase::ATDBase(const FObjectInitializer& ObjectInitializer)
 
 }
 
+bool ATDBase::TDCanAffordElementChange_Implementation(FBuyCost& _cost, ELootItems _item)
+{
+    return UTDGameData::TDGetCostManager()->TDCanAffordElementChange(_cost, _item);
+}
+
+bool ATDBase::TDCanAffordCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item)
+{
+    return UTDGameData::TDGetCostManager()->TDCanAffordBuy(_cost, _item);
+}
+
 void ATDBase::TDCalcultateCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item)
 {
     int level = 0;

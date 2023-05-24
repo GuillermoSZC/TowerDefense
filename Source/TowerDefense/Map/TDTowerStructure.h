@@ -21,6 +21,9 @@ public:
 
    
 
+
+   
+
 public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
         UStaticMeshComponent* towerStructure;
@@ -42,6 +45,8 @@ public:
         void TDTowerSpawn(ETowers _tower);
 
     void TDCalcultateCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item) override;
+
+    bool TDCanAffordCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item) override;
 
 protected:
     virtual void BeginPlay() override;

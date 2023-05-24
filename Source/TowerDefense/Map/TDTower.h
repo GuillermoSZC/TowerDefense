@@ -32,6 +32,9 @@ public:
 
 
 
+
+
+
 public:
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
@@ -116,11 +119,18 @@ public:
     void TDCalculateElementChangeCost_Implementation(FBuyCost& _cost,EElements _element) override;
 
 
+    bool TDCanAffordCost_Implementation(FBuyCost& _cost) override;
+
+
+    bool TDCanAffordElementChange_Implementation(FBuyCost& _cost, ELootItems _item) override;
+
+
        UFUNCTION(BlueprintPure)
     ELootItems TDGetItemToUpgrade();
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
+
 
 private:
 

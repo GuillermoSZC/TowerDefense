@@ -39,20 +39,12 @@ void UTDTowerUpgrade::NativeConstruct()
 
 void UTDTowerUpgrade::TDUpdateCost()
 {
-    FBuyCost cost = FBuyCost();
-    ITDCostInterface::Execute_TDCalcultateCost(owner->GetOwner(), cost);
-    levelUp->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
-    levelUp->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
 
+    TDUpdateTowerLevelUpCost(levelUp);
+    TDUpdateGemCost(fireUpgrade, EElements::Fire,ELootItems::Fire);
+    TDUpdateGemCost(iceUpgrade, EElements::Freeze,ELootItems::Ice);
+    TDUpdateGemCost(plasmaUpgrade, EElements::Plasma,ELootItems::Plasma);
 
-    ITDCostInterface::Execute_TDCalculateElementChangeCost(owner->GetOwner(), cost, EElements::Fire);
-    fireUpgrade->gems->TDSetText(UTDGameData::TDConvertIntToFText(cost.GemCost));
-
-    ITDCostInterface::Execute_TDCalculateElementChangeCost(owner->GetOwner(), cost, EElements::Freeze);
-    iceUpgrade->gems->TDSetText(UTDGameData::TDConvertIntToFText(cost.GemCost));
-
-    ITDCostInterface::Execute_TDCalculateElementChangeCost(owner->GetOwner(), cost, EElements::Plasma);
-    plasmaUpgrade->gems->TDSetText(UTDGameData::TDConvertIntToFText(cost.GemCost));
 }
 
 void UTDTowerUpgrade::TDOnVisibilityChange(ESlateVisibility _visible)
@@ -62,6 +54,27 @@ void UTDTowerUpgrade::TDOnVisibilityChange(ESlateVisibility _visible)
     {
         FUICostUpdateDelegate.Broadcast();        
     }
+}
+
+void UTDTowerUpgrade::TDUpdateGemCost(UTDComposedButton* _button, EElements _element, ELootItems _item)
+{
+    FBuyCost cost = FBuyCost();
+    bool canAfford = false;
+    ITDCostInterface::Execute_TDCalculateElementChangeCost(owner->GetOwner(), cost, _element);
+    _button->gems->TDSetText(UTDGameData::TDConvertIntToFText(cost.GemCost));
+    canAfford = ITDCostInterface::Execute_TDCanAffordElementChange(owner->GetOwner(), cost, _item);
+    _button->TDCanAfford(canAfford);
+}
+
+void UTDTowerUpgrade::TDUpdateTowerLevelUpCost(UTDComposedButton* _button)
+{
+    FBuyCost cost = FBuyCost();
+    bool canAfford = false;
+    ITDCostInterface::Execute_TDCalcultateCost(owner->GetOwner(), cost);
+    _button->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
+    _button->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
+    canAfford = ITDCostInterface::Execute_TDCanAffordCost(owner->GetOwner(), cost);
+    levelUp->TDCanAfford(canAfford);
 }
 
 void UTDTowerUpgrade::TDPlasmaUpgrade()
