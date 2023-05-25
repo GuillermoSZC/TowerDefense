@@ -16,6 +16,12 @@ bool UTDTowerUpgrade::Initialize()
 {
     Super::Initialize();
 
+
+
+
+
+
+
     return true;
 }
 
@@ -23,12 +29,14 @@ void UTDTowerUpgrade::NativePreConstruct()
 {
     Super::NativePreConstruct();
 
-    TowersIcons.Add(ELootItems::BalisticBP, nullptr);
-    TowersIcons.Add(ELootItems::SonicBP, nullptr);
-    TowersIcons.Add(ELootItems::DeathRayBP, nullptr);
-    TowersIcons.Add(ELootItems::SpeedTowerBP, nullptr);
-    TowersIcons.Add(ELootItems::AttackTowerBP, nullptr);
-
+    if (TowersIcons.IsEmpty())
+    {
+        TowersIcons.Add(ELootItems::BalisticBP);
+        TowersIcons.Add(ELootItems::SonicBP);
+        TowersIcons.Add(ELootItems::DeathRayBP);
+        TowersIcons.Add(ELootItems::SpeedTowerBP);
+        TowersIcons.Add(ELootItems::AttackTowerBP);
+    }  
 }
 
 void UTDTowerUpgrade::NativeConstruct()
