@@ -22,7 +22,7 @@ public class TowerDefense : ModuleRules
 			"Niagara"
         });
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 
 
 		PrivateIncludePaths.AddRange(new string[] { "TowerDefense" });

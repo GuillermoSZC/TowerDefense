@@ -2,6 +2,7 @@
 #include <UMG/Public/Blueprint/WidgetLayoutLibrary.h>
 #include "TDTextWithImage.h"
 #include "UMG/Public/Components/Border.h"
+#include <UMG/Public/Components/Image.h>
 
 bool UTDComposedButton::Initialize()
 {
@@ -16,6 +17,8 @@ void UTDComposedButton::NativePreConstruct()
 
     bps->TDSetTexture(bpTexture);
     gems->TDSetTexture(gemTexture);
+
+    TDSetButtonTexture(buttonTexture);
 
     if (scrap && bps && gems)
     {
@@ -60,15 +63,36 @@ void UTDComposedButton::TDCanAfford(bool _CanAfford)
     {
         SetVisibility(ESlateVisibility::Visible);
         borderBase->SetBrushColor(AvalibleBuyColor);
+        upgrade->SetVisibility(ESlateVisibility::HitTestInvisible);
     }
     else
     {
         borderBase->SetBrushColor(NotAvalibleBuyColor);
         SetVisibility(ESlateVisibility::HitTestInvisible);
-
+        upgrade->SetVisibility(ESlateVisibility::Collapsed);
 
     }
 }
 
+void UTDComposedButton::TDSetButtonTexture(UTexture2D* _texture)
+{
+    if (IsValid(imgButton) && IsValid(_texture))
+    {
+        buttonTexture = _texture;
+
+        FButtonStyle& ButtonStyle = imgButton->WidgetStyle;
+
+        FSlateBrush& NormalBrush = ButtonStyle.Normal;
+        NormalBrush.SetResourceObject(_texture);
+
+        FSlateBrush& HoveredBrush = ButtonStyle.Hovered;
+        HoveredBrush.SetResourceObject(_texture);
+
+        FSlateBrush& PressedBrush = ButtonStyle.Pressed;
+        PressedBrush.SetResourceObject(_texture);
+
+        imgButton->SetStyle(ButtonStyle);
+    }
+}
 
 
