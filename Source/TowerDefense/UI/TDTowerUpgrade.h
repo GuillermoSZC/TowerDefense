@@ -53,11 +53,15 @@ public:
         UTDTextWithImage* ice;
 #pragma endregion
 
+    UPROPERTY(EditAnywhere,BlueprintReadWrite)
+    TMap<ELootItems, UTexture2D*> TowersIcons;
+
 protected:
 
 
 private:
 
+    ATDTower* towerOwner = nullptr;
 
 public:
 
@@ -88,7 +92,7 @@ private:
 
     void TDOnVisibilityChange(ESlateVisibility _visible) override;
 
-
+    void TDUpdateTowerBP(UTDTextWithImage* _text);
 
 };
 

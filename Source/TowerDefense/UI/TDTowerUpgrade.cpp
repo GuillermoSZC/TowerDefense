@@ -23,6 +23,11 @@ void UTDTowerUpgrade::NativePreConstruct()
 {
     Super::NativePreConstruct();
 
+    TowersIcons.Add(ELootItems::BalisticBP, nullptr);
+    TowersIcons.Add(ELootItems::SonicBP, nullptr);
+    TowersIcons.Add(ELootItems::DeathRayBP, nullptr);
+    TowersIcons.Add(ELootItems::SpeedTowerBP, nullptr);
+    TowersIcons.Add(ELootItems::AttackTowerBP, nullptr);
 
 }
 
@@ -46,9 +51,8 @@ void UTDTowerUpgrade::TDUpdateCost()
     TDUpdateGemCost(iceUpgrade, ELootItems::Ice);
     TDUpdateGemCost(plasmaUpgrade, ELootItems::Plasma);
 
-
+    TDUpdateTowerBP(blueprint);
     TDUpdateInventoryToText(scrap, ELootItems::Scrap);
-    TDUpdateInventoryToText(blueprint, ELootItems::BalisticBP);
     TDUpdateInventoryToText(fire, ELootItems::Fire);
     TDUpdateInventoryToText(plasma, ELootItems::Plasma);
     TDUpdateInventoryToText(ice, ELootItems::Ice);
@@ -60,10 +64,18 @@ void UTDTowerUpgrade::TDOnVisibilityChange(ESlateVisibility _visible)
 
     if (_visible == ESlateVisibility::Visible)
     {
+        towerOwner = owner->GetOwner<ATDTower>();
         FUICostUpdateDelegate.Broadcast();        
     }
 }
 
+
+void UTDTowerUpgrade::TDUpdateTowerBP(UTDTextWithImage* _text)
+{
+    _text->TDSetTexture(TowersIcons[towerOwner->TDGetItemToUpgrade()]);
+    TDUpdateInventoryToText(_text, towerOwner->TDGetItemToUpgrade());
+
+}
 
 void UTDTowerUpgrade::TDPlasmaUpgrade()
 {

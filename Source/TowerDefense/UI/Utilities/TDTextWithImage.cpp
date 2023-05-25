@@ -80,7 +80,10 @@ int32 UTDTextWithImage::TDGetQuantity()
 
 void UTDTextWithImage::TDSetTexture(UTexture2D* _texture)
 {
-    customTexture = _texture;
+    if (_texture != nullptr)
+    {
+        customTexture = _texture;
+    }
 }
 
 UTexture2D* UTDTextWithImage::TDGetTexture(UTexture2D* _texture)
