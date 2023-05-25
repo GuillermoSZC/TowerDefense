@@ -21,8 +21,6 @@ ATDTower::ATDTower()
     // Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
     PrimaryActorTick.bCanEverTick = true;
 
-    //TowerAttributes = CreateDefaultSubobject<UTDTowerAttributeSet>(TEXT("Attributes"));
-
     timer = 0.f;
 
 

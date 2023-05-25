@@ -17,11 +17,6 @@ bool UTDTowerUpgrade::Initialize()
     Super::Initialize();
 
 
-
-
-
-
-
     return true;
 }
 

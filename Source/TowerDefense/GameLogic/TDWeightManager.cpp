@@ -177,33 +177,40 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable
 
 
     //GAS
-//     _enemyRef->healthDatatable = Row.EnemyStatsDataAsset->healthDataTable;
-//     _enemyRef->damageDatatable = Row.EnemyStatsDataAsset->damageDataTable;
-//     _enemyRef->movementDatatable = Row.EnemyStatsDataAsset->movementDataTable;
     _enemyRef->movementVariation = Row.movementVariation;
     _enemyRef->abiliyList = Row.abiliyAsset->abiliyList;
     _enemyRef->enemyAttribute = Row.enemyAttribute;
 
     //Weapon
-    if (Row.WeaponAsset)
+    if (!Row.WeaponAssetArray.IsEmpty())
     {
+        int32 x = FMath::Rand() % Row.WeaponAssetArray.Num();
+        UTDweaponDataAsset* WeaponAsset = Row.WeaponAssetArray[x];
+
         FAttachmentTransformRules rules = FAttachmentTransformRules(EAttachmentRule::KeepRelative, false);
 
-        if (Row.WeaponAsset->assetClass == AssetType::SkeletalMesh)
+        if (WeaponAsset->assetClass == AssetType::SkeletalMesh)
         {
-            _enemyRef->skeletalWeaponComponent->SetSkeletalMesh(Row.WeaponAsset->skeletalWeaponMesh.LoadSynchronous());
-            _enemyRef->skeletalWeaponComponent->AttachToComponent(_enemyRef->GetMesh(), rules, Row.WeaponAsset->SocketName);
+            _enemyRef->skeletalWeaponComponent->Activate();
+            _enemyRef->skeletalWeaponComponent->SetSkeletalMesh(WeaponAsset->skeletalWeaponMesh.LoadSynchronous());
+            _enemyRef->skeletalWeaponComponent->AttachToComponent(_enemyRef->GetMesh(), rules, WeaponAsset->SocketName);
         }
-        else if (Row.WeaponAsset->assetClass == AssetType::StaticMesh)
+        else if (WeaponAsset->assetClass == AssetType::StaticMesh)
         {
-            _enemyRef->StaticWeaponComponent->SetStaticMesh(Row.WeaponAsset->StaticWeaponMesh.LoadSynchronous());
-            _enemyRef->StaticWeaponComponent->AttachToComponent(_enemyRef->GetMesh(), rules, Row.WeaponAsset->SocketName);
+            _enemyRef->StaticWeaponComponent->Activate();
+            _enemyRef->StaticWeaponComponent->SetStaticMesh(WeaponAsset->StaticWeaponMesh.LoadSynchronous());
+            _enemyRef->StaticWeaponComponent->AttachToComponent(_enemyRef->GetMesh(), rules, WeaponAsset->SocketName);
         }
 
-        if (Row.WeaponAsset->weaponAbility)
+        if (WeaponAsset->weaponAbility)
         {
-            _enemyRef->abilitySystem->GiveAbility(FGameplayAbilitySpec(Row.WeaponAsset->weaponAbility.GetDefaultObject(), 1, 0));
+            _enemyRef->abilitySystem->GiveAbility(FGameplayAbilitySpec(WeaponAsset->weaponAbility.GetDefaultObject(), 1, 0));
         }
+    }
+    else
+    {
+        _enemyRef->skeletalWeaponComponent->Deactivate();
+        _enemyRef->StaticWeaponComponent->Deactivate();
     }
 
     //Weight
