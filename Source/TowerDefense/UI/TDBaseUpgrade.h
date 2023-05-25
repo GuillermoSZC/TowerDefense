@@ -11,6 +11,7 @@
 class ATDBase;
 class UTDComposedButton;
 class UTDBaseButton;
+class UTDTextWithImage;
 
 UCLASS()
 class TOWERDEFENSE_API UTDBaseUpgrade : public UTDUserWidget
@@ -20,11 +21,6 @@ public:
     virtual bool Initialize() override;
     virtual void NativePreConstruct() override;
     virtual void NativeConstruct() override;
-
-
-
-
-
 
 public:
 #pragma region UI_COMPONENTS
@@ -48,6 +44,30 @@ public:
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDBaseButton* exit;
+#pragma endregion
+
+#pragma region RESOURCES
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* scrap;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* health;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* boots;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* damage;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* fire;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* plasma;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* ice;
+
 #pragma endregion
 
     UPROPERTY(EditDefaultsOnly)
@@ -98,9 +118,9 @@ private:
 
     UFUNCTION()
         void TDSetElement(EElements _element);
-// 
-//     UFUNCTION()
-//         void TDLevelUp();
+    // 
+    //     UFUNCTION()
+    //         void TDLevelUp();
 
     UFUNCTION()
         void TDSetGameplayEffect(TSubclassOf<UGameplayEffect> _gameplayEffect);

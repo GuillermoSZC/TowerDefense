@@ -64,45 +64,7 @@ public:
         class UTDHealthBar* healthBar;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-    class UTDText* healthNumber;
-
-#pragma region HUD_INVENTORY
-//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-//         class UTDTextWithImage* scrap;
-// 
-//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-//         class UTDTextWithImage* swordBlueprint;
-// 
-//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-//         class UTDTextWithImage* armorBlueprint;
-// 
-//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-//         class UTDTextWithImage* bootsBlueprint;
-// 
-//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-//         class UTDTextWithImage* ballistaBlueprint;
-// 
-//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-//         class UTDTextWithImage* sonicTowerBlueprint;
-// 
-//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-//         class UTDTextWithImage* deathRayTowerBlueprint;
-// 
-//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-//         class UTDTextWithImage* speedTowerBlueprint;
-// 
-//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-//         class UTDTextWithImage* damageTowerBlueprint;
-// 
-//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-//         class UTDTextWithImage* fireGem;
-// 
-//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-//         class UTDTextWithImage* iceGem;
-// 
-//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-//         class UTDTextWithImage* plasmaGem;
-#pragma endregion
+        class UTDText* healthNumber;
 
 
 protected:
@@ -118,7 +80,7 @@ public:
 
 
     UFUNCTION(BlueprintCallable)
-    void TDInitialize();
+        void TDInitialize();
 
 
 protected:
@@ -140,17 +102,10 @@ private:
     UFUNCTION()
         void TDSetPlayerElement(EElements _element);
 
-        UFUNCTION()
+    UFUNCTION()
         void TDSetEnemyCounter(int32 _counter);
 
-        UFUNCTION()
+    UFUNCTION()
         void TDUpdateHealthNumber(float _num);
 
-
-        UFUNCTION()
-        void TDUpdateInventory();
-
-
-        UFUNCTION()
-        FText TDGetTextFromItem(ELootItems _item);
 };

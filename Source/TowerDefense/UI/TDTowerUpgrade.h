@@ -9,6 +9,7 @@
 class ATDTower;
 class UTDComposedButton;
 class UTDBaseButton;
+class UTDTextWithImage;
 
 UCLASS()
 class TOWERDEFENSE_API UTDTowerUpgrade : public UTDUserWidget
@@ -18,12 +19,6 @@ public:
     virtual bool Initialize() override;
     virtual void NativePreConstruct() override;
     virtual void NativeConstruct() override;
-
-
- 
-
-
-
 
 public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
@@ -40,6 +35,23 @@ public:
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDBaseButton* exit;
+
+#pragma region RESOURCES
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* scrap;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* blueprint;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* fire;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* plasma;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* ice;
+#pragma endregion
 
 protected:
 
@@ -73,7 +85,7 @@ private:
     UFUNCTION()
         void TDBuyElement(EElements _element);
 
-    
+
     void TDOnVisibilityChange(ESlateVisibility _visible) override;
 
 

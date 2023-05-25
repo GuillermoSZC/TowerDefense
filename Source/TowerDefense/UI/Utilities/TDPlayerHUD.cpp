@@ -85,9 +85,6 @@ void UTDPlayerHUD::TDSetCombatUI(int32 _value)
     phase->TDSetCustomText(FText::FromString("Combat Phase"));
     roundNum->TDSetCustomText(FText::FromString(FString::FromInt(_value)));
     TDSetElementsVisibility(ESlateVisibility::Collapsed);
-
-    
-
 }
 
 void UTDPlayerHUD::TDSetBuyUI(int32 _value)
@@ -95,7 +92,6 @@ void UTDPlayerHUD::TDSetBuyUI(int32 _value)
     phase->TDSetCustomText(FText::FromString("Buy Phase"));
     roundNum->TDSetCustomText(FText::FromString(FString::FromInt(_value)));
     TDSetElementsVisibility(ESlateVisibility::Visible);
-    TDUpdateInventory();
 }
 
 void UTDPlayerHUD::TDSetElementsUI(TArray<EElements>& _elements)
@@ -117,8 +113,6 @@ void UTDPlayerHUD::TDSetElementsUI(TArray<EElements>& _elements)
     }
 }
 
-
-
 void UTDPlayerHUD::TDSetElementsVisibility(ESlateVisibility _visibility)
 {
     timer->SetVisibility(_visibility); // @TODO: Quitar funcion (?)
@@ -133,27 +127,9 @@ void UTDPlayerHUD::TDSetPlayerElement(EElements _element)
 void UTDPlayerHUD::TDSetEnemyCounter(int32 _counter)
 {
     enemyCounter->TDSetCustomText(FText::FromString(FString::FromInt(_counter)));
-
 }
 
 void UTDPlayerHUD::TDUpdateHealthNumber(float _num)
 {
     healthNumber->TDSetCustomText(FText::FromString(FString::SanitizeFloat(_num)));
-
-}
-
-void UTDPlayerHUD::TDUpdateInventory()
-{
-        // @TODO: Borrar funcion
-}
-
-FText UTDPlayerHUD::TDGetTextFromItem(ELootItems _item) // @TODO: Cambiar funcion a otro lado?
-{
-    ATDPlayerCharacter* playerRef = UTDGameData::TDGetPlayerRef();
-    int32 inttemp = playerRef->TDGetAmountItemByItem(_item);
-    FString StringTemp = FString::FromInt(inttemp);
-    FText texttemp = FText::FromString(StringTemp);
-
-    return texttemp;
-
 }

@@ -40,20 +40,23 @@ public:
         void TDSetOwner(UTDWidgetShopComponent* _owner);
 
     UFUNCTION()
-    virtual void TDOnVisibilityChange(ESlateVisibility _visible);
+        virtual void TDOnVisibilityChange(ESlateVisibility _visible);
 
     UFUNCTION()
-    virtual void TDUpdateCost();
-    
-  UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+        virtual void TDUpdateCost();
+
+    UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
         void TDFadeIn();
 
 protected:
 
-    void TDUpdateGemCost(UTDComposedButton* _button, ELootItems _item );
+    void TDUpdateGemCost(UTDComposedButton* _button, ELootItems _item);
     //void TDUpdateBPCost(UTDComposedButton* _button);
     void TDUpdateBPCostWithItem(UTDComposedButton* _button, ELootItems _item = ELootItems::None);
-  
+
+    UFUNCTION()
+        FText TDGetTextFromItem(ELootItems _item);
+
 private:
 
 

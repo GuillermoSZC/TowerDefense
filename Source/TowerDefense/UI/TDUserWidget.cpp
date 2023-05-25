@@ -5,6 +5,7 @@
 #include "Interfaces/TDCostInterface.h"
 #include "Utilities/TDTextWithImage.h"
 #include "GameLogic/TDGameData.h"
+#include "Character/TDPlayerCharacter.h"
 
 
 bool UTDUserWidget::Initialize()
@@ -61,17 +62,6 @@ void UTDUserWidget::TDUpdateGemCost(UTDComposedButton* _button, ELootItems _item
     _button->TDCanAfford(canAfford);
 }
 
-// void UTDUserWidget::TDUpdateBPCost(UTDComposedButton* _button)
-// {
-//     FBuyCost cost = FBuyCost();
-//     bool canAfford = false;
-//     ITDCostInterface::Execute_TDCalcultateCost(owner->GetOwner(), cost);
-//     _button->scrap->TDSetText(UTDGameData::TDConvertIntToFText(cost.scrapCost));
-//     _button->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
-//     canAfford = ITDCostInterface::Execute_TDCanAffordCost(owner->GetOwner(), cost);
-//     _button->TDCanAfford(canAfford);
-// }
-
 void UTDUserWidget::TDUpdateBPCostWithItem(UTDComposedButton* _button, ELootItems _item)
 {
     FBuyCost cost = FBuyCost();
@@ -82,4 +72,14 @@ void UTDUserWidget::TDUpdateBPCostWithItem(UTDComposedButton* _button, ELootItem
     _button->bps->TDSetText(UTDGameData::TDConvertIntToFText(cost.BPCost));
     canAfford = ITDCostInterface::Execute_TDCanAffordCostWithLoot(owner->GetOwner(), cost);
     _button->TDCanAfford(canAfford);
+}
+
+FText UTDUserWidget::TDGetTextFromItem(ELootItems _item)
+{
+    ATDPlayerCharacter* playerRef = UTDGameData::TDGetPlayerRef();
+    int32 inttemp = playerRef->TDGetAmountItemByItem(_item);
+    FString StringTemp = FString::FromInt(inttemp);
+    FText textTemp = FText::FromString(StringTemp);
+
+    return textTemp;
 }

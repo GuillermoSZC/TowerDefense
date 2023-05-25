@@ -21,12 +21,6 @@ public:
     virtual void NativePreConstruct() override;
     virtual void NativeConstruct() override;
 
-
-  
-
-
-    
-
 public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDComposedButton* balisticButton;
@@ -46,6 +40,26 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDBaseButton* exitButton;
 
+#pragma region RESOURCES
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* scrap;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* bpBalistic;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* bpSonic;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* bpDeadRay;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* bpMovement;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDTextWithImage* bpDamage;
+#pragma endregion
+
     UPROPERTY(EditDefaultsOnly)
         TMap<ETowers, TSubclassOf<ATDTower>> towerMap;
 
@@ -58,7 +72,8 @@ public:
     void TDOnVisibilityChange(ESlateVisibility _visible) override;
 
 protected:
-void TDUpdateCost() override;
+    void TDUpdateCost() override;
+
 private:
 #pragma region BUTTON_IMPLEMENTATION
     UFUNCTION()

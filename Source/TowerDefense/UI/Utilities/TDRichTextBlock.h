@@ -6,9 +6,7 @@
 #include "Components/RichTextBlock.h"
 #include "TDRichTextBlock.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class TOWERDEFENSE_API UTDRichTextBlock : public URichTextBlock
 {
