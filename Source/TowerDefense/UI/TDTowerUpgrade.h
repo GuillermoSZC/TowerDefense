@@ -92,7 +92,7 @@ private:
 
     void TDOnVisibilityChange(ESlateVisibility _visible) override;
 
-    void TDUpdateTowerBP(UTDTextWithImage* _text);
+    void TDUpdateTowerBP(UTDTextWithImage* _text, UTDComposedButton* _button);
 
 };
 

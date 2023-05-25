@@ -59,7 +59,7 @@ void UTDTowerUpgrade::TDUpdateCost()
     TDUpdateGemCost(iceUpgrade, ELootItems::Ice);
     TDUpdateGemCost(plasmaUpgrade, ELootItems::Plasma);
 
-    TDUpdateTowerBP(blueprint);
+    TDUpdateTowerBP(blueprint, levelUp);
     TDUpdateInventoryToText(scrap, ELootItems::Scrap);
     TDUpdateInventoryToText(fire, ELootItems::Fire);
     TDUpdateInventoryToText(plasma, ELootItems::Plasma);
@@ -78,9 +78,10 @@ void UTDTowerUpgrade::TDOnVisibilityChange(ESlateVisibility _visible)
 }
 
 
-void UTDTowerUpgrade::TDUpdateTowerBP(UTDTextWithImage* _text)
+void UTDTowerUpgrade::TDUpdateTowerBP(UTDTextWithImage* _text, UTDComposedButton* _button)
 {
     _text->TDSetTexture(TowersIcons[towerOwner->TDGetItemToUpgrade()]);
+    _button->bps->TDSetTexture(TowersIcons[towerOwner->TDGetItemToUpgrade()]);
     TDUpdateInventoryToText(_text, towerOwner->TDGetItemToUpgrade());
 
 }
