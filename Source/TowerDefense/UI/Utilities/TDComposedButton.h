@@ -9,6 +9,7 @@ class UTDTextWithImage;
 class UVerticalBox;
 class UCanvasPanel;
 class UBorder;
+class UImage;
 
 UENUM()
 enum ETDResources
@@ -33,11 +34,17 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDBaseButton* imgButton;
 
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UImage* upgrade;
+
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Custom properties")
         class UTexture2D* bpTexture = nullptr;
 
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Custom properties")
         class UTexture2D* gemTexture = nullptr;
+
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Custom properties")
+        class UTexture2D* buttonTexture = nullptr;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDTextWithImage* scrap;
@@ -74,9 +81,11 @@ protected:
 private:
 
 public:
-
     UFUNCTION()
         void TDCanAfford(bool _CanAfford);
+
+    UFUNCTION()
+        void TDSetButtonTexture(UTexture2D* _texture);
 
 protected:
 
