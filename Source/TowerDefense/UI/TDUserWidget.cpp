@@ -1,6 +1,10 @@
 #include "UI/TDUserWidget.h"
 #include "Components/TDWidgetShopComponent.h"
 #include "Utilities/TDComposedButton.h"
+#include "GameLogic/TDBuyStruct.h"
+#include "Interfaces/TDCostInterface.h"
+#include "Utilities/TDTextWithImage.h"
+#include "GameLogic/TDGameData.h"
 
 
 bool UTDUserWidget::Initialize()
@@ -50,7 +54,7 @@ void UTDUserWidget::TDUpdateCost()
 void UTDUserWidget::TDUpdateGemCost(UTDComposedButton* _button, ELootItems _item)
 {
     FBuyCost cost = FBuyCost();
-    bool canAfford = false;
+    bool canAfford = false; 
     ITDCostInterface::Execute_TDCalculateElementChangeCost(owner->GetOwner(), cost, _item);
     _button->gems->TDSetText(UTDGameData::TDConvertIntToFText(cost.GemCost));
     canAfford = ITDCostInterface::Execute_TDCanAffordCostWithLoot(owner->GetOwner(), cost);

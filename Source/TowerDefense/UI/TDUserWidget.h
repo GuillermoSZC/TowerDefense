@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "GameLogic/TDLootEnum.h"
 #include "TDUserWidget.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FUICostUpdateSignature);

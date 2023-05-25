@@ -113,7 +113,6 @@ void UTDPlayerHUD::TDSetElementsUI(TArray<EElements>& _elements)
         else
         {
             elementsArray[i]->SetVisibility(ESlateVisibility::Collapsed);
-
         }
     }
 }
@@ -122,19 +121,7 @@ void UTDPlayerHUD::TDSetElementsUI(TArray<EElements>& _elements)
 
 void UTDPlayerHUD::TDSetElementsVisibility(ESlateVisibility _visibility)
 {
-    timer->SetVisibility(_visibility);
-    scrap->SetVisibility(_visibility);
-    swordBlueprint->SetVisibility(_visibility);
-    armorBlueprint->SetVisibility(_visibility);
-    bootsBlueprint->SetVisibility(_visibility);
-    ballistaBlueprint->SetVisibility(_visibility);
-    sonicTowerBlueprint->SetVisibility(_visibility);
-    deathRayTowerBlueprint->SetVisibility(_visibility);
-    speedTowerBlueprint->SetVisibility(_visibility);
-    damageTowerBlueprint->SetVisibility(_visibility);
-    fireGem->SetVisibility(_visibility);
-    iceGem->SetVisibility(_visibility);
-    plasmaGem->SetVisibility(_visibility);
+    timer->SetVisibility(_visibility); // @TODO: Quitar funcion (?)
 }
 
 void UTDPlayerHUD::TDSetPlayerElement(EElements _element)
@@ -157,26 +144,16 @@ void UTDPlayerHUD::TDUpdateHealthNumber(float _num)
 
 void UTDPlayerHUD::TDUpdateInventory()
 {
-        scrap->TDSetText(TDGetTextFromItem(ELootItems::Scrap));        
-        swordBlueprint->TDSetText(TDGetTextFromItem(ELootItems::SwordBP));
-        armorBlueprint->TDSetText(TDGetTextFromItem(ELootItems::ArmorBP));
-        bootsBlueprint->TDSetText(TDGetTextFromItem(ELootItems::BootsBP));
-        ballistaBlueprint->TDSetText(TDGetTextFromItem(ELootItems::BalisticBP));
-        sonicTowerBlueprint->TDSetText(TDGetTextFromItem(ELootItems::SonicBP));
-        deathRayTowerBlueprint->TDSetText(TDGetTextFromItem(ELootItems::DeathRayBP));
-        speedTowerBlueprint->TDSetText(TDGetTextFromItem(ELootItems::SpeedTowerBP));
-        damageTowerBlueprint->TDSetText(TDGetTextFromItem(ELootItems::AttackTowerBP));
-        fireGem->TDSetText(TDGetTextFromItem(ELootItems::Fire));
-        iceGem->TDSetText(TDGetTextFromItem(ELootItems::Ice));
-        plasmaGem->TDSetText(TDGetTextFromItem(ELootItems::Plasma));
+        // @TODO: Borrar funcion
 }
 
-FText UTDPlayerHUD::TDGetTextFromItem(ELootItems _item)
+FText UTDPlayerHUD::TDGetTextFromItem(ELootItems _item) // @TODO: Cambiar funcion a otro lado?
 {
     ATDPlayerCharacter* playerRef = UTDGameData::TDGetPlayerRef();
     int32 inttemp = playerRef->TDGetAmountItemByItem(_item);
     FString StringTemp = FString::FromInt(inttemp);
     FText texttemp = FText::FromString(StringTemp);
+
     return texttemp;
 
 }

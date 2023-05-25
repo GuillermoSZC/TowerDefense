@@ -67,41 +67,41 @@ public:
     class UTDText* healthNumber;
 
 #pragma region HUD_INVENTORY
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDTextWithImage* scrap;
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDTextWithImage* swordBlueprint;
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDTextWithImage* armorBlueprint;
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDTextWithImage* bootsBlueprint;
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDTextWithImage* ballistaBlueprint;
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDTextWithImage* sonicTowerBlueprint;
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDTextWithImage* deathRayTowerBlueprint;
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDTextWithImage* speedTowerBlueprint;
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDTextWithImage* damageTowerBlueprint;
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDTextWithImage* fireGem;
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDTextWithImage* iceGem;
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDTextWithImage* plasmaGem;
+//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+//         class UTDTextWithImage* scrap;
+// 
+//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+//         class UTDTextWithImage* swordBlueprint;
+// 
+//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+//         class UTDTextWithImage* armorBlueprint;
+// 
+//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+//         class UTDTextWithImage* bootsBlueprint;
+// 
+//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+//         class UTDTextWithImage* ballistaBlueprint;
+// 
+//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+//         class UTDTextWithImage* sonicTowerBlueprint;
+// 
+//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+//         class UTDTextWithImage* deathRayTowerBlueprint;
+// 
+//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+//         class UTDTextWithImage* speedTowerBlueprint;
+// 
+//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+//         class UTDTextWithImage* damageTowerBlueprint;
+// 
+//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+//         class UTDTextWithImage* fireGem;
+// 
+//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+//         class UTDTextWithImage* iceGem;
+// 
+//     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+//         class UTDTextWithImage* plasmaGem;
 #pragma endregion
 
 
