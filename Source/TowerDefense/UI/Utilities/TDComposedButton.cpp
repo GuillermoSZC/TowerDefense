@@ -55,11 +55,14 @@ void UTDComposedButton::TDCanAfford(bool _CanAfford)
 {
     if (_CanAfford)
     {
+        SetVisibility(ESlateVisibility::Visible);
         borderBase->SetBrushColor(AvalibleBuyColor);
     }
     else
     {
         borderBase->SetBrushColor(NotAvalibleBuyColor);
+        SetVisibility(ESlateVisibility::HitTestInvisible);
+
 
     }
 }
