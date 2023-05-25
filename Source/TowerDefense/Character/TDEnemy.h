@@ -19,13 +19,13 @@ class TOWERDEFENSE_API ATDEnemy : public ATDCharacter
 public:
     ATDEnemy();
 
-   
-  
+
+
 public:
 
 
-      UPROPERTY(BlueprintReadOnly)
-    FString DebugString;
+    UPROPERTY(BlueprintReadOnly)
+        FString DebugString;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
         TArray<TSubclassOf<UGameplayAbility>> abiliyList;
@@ -34,7 +34,8 @@ public:
     UPROPERTY(VisibleAnywhere)
         TArray<ATDPathPoint*> PathPointsArray;
 
-     
+    UPROPERTY(EditAnywhere, Category = "Spawn Configuration")
+        TSubclassOf<UTDCalculateEnemyAttributes> enemyAttribute;
 
     UPROPERTY(EditAnywhere, Category = "Spawn Configuration")
         float movementVariation = 100.f;
@@ -43,11 +44,11 @@ public:
         int unitWeight = 1.f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    USkeletalMeshComponent* skeletalWeaponComponent;
+        USkeletalMeshComponent* skeletalWeaponComponent;
 
-    
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    UStaticMeshComponent* StaticWeaponComponent;
+        UStaticMeshComponent* StaticWeaponComponent;
 
 
 protected:
@@ -68,10 +69,10 @@ private:
         bool isActive = false;
 
     UPROPERTY(Transient)
-    UDataTable* lootDataTable;
+        UDataTable* lootDataTable;
 
-        UPROPERTY(EditAnywhere)
-    UDataTable* chanceDataTable;
+    UPROPERTY(EditAnywhere)
+        UDataTable* chanceDataTable;
 
     UPROPERTY(Transient)
         UAnimMontage* montageRef = nullptr;
@@ -108,7 +109,7 @@ public:
         void TDSetDisable();
 
     UFUNCTION(BlueprintPure)
-    const bool TDGetActiveState();
+        const bool TDGetActiveState();
 
     virtual void TDCharacterDeath_Implementation() override;
 
@@ -119,16 +120,16 @@ public:
         class UWidgetComponent* TDGetHealthWidgetComponent();
 
     UFUNCTION(BlueprintPure)
-    UDataTable* TDGetLootDataTable() const;
+        UDataTable* TDGetLootDataTable() const;
 
     UFUNCTION(BlueprintCallable)
-    void TDSetLootDataTable(UDataTable* val);
+        void TDSetLootDataTable(UDataTable* val);
 
-        UFUNCTION(BlueprintPure)
-    UDataTable* TDGetChanceDataTable() const;
+    UFUNCTION(BlueprintPure)
+        UDataTable* TDGetChanceDataTable() const;
 
     UFUNCTION(BlueprintCallable)
-    void TDSetChanceDataTable(UDataTable* val);
+        void TDSetChanceDataTable(UDataTable* val);
 
 
 
@@ -140,9 +141,9 @@ protected:
 
 private:
 
-   
 
 
+    void TDCreateAndApplyGE();
 
 
 

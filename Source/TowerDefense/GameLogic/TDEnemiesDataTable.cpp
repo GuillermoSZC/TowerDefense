@@ -5,8 +5,7 @@
 
 FTDEnemiesDataTable::FTDEnemiesDataTable() :
     enemyMesh(nullptr),
-    weight(0),
-    EnemyStatsDataAsset(nullptr)
+    weight(0)
 {
 }
 

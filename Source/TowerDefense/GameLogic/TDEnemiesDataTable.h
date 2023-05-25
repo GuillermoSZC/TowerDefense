@@ -5,6 +5,7 @@
 #include "TDEnemyStats.h"
 #include "TDAbilitiesDataAsset.h"
 #include "TDweaponDataAsset.h"
+#include "Gas/Calculations/TDCalculateEnemyAttributes.h"
 #include "TDEnemiesDataTable.generated.h"
 
 /**
@@ -71,9 +72,13 @@ public:
 #pragma endregion
 
 #pragma region GAS_VALUES
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Ability System Values")
+//     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Ability System Values")
+// 
+//         UTDEnemyStats* EnemyStatsDataAsset;
 
-        UTDEnemyStats* EnemyStatsDataAsset;
+    
+    UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Gameplay Ability System Values")
+        TSubclassOf<UTDCalculateEnemyAttributes> enemyAttribute;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Ability System Values")
         float movementVariation;

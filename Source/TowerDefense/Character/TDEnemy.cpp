@@ -154,6 +154,7 @@ void ATDEnemy::TDSetActive_Implementation()
     GetMesh()->SetVisibility(true, true);
     GetCapsuleComponent()->SetCollisionProfileName(FName(TEXT("EnemyPawn")));
     GetCharacterMovement()->GravityScale = 1.f;
+    SetActorTickEnabled(true);
 
     if (healthBar)
     {
@@ -165,7 +166,7 @@ void ATDEnemy::TDSetActive_Implementation()
 void ATDEnemy::TDSetDisable_Implementation()
 {
     isActive = false;
-
+    SetActorTickEnabled(false);
     FGameplayTagContainer tags;
     TArray<FActiveGameplayEffectHandle> effectsActive;
     effectsActive = abilitySystem->GetActiveEffectsWithAllTags(tags);
@@ -226,6 +227,7 @@ void ATDEnemy::TDSetChanceDataTable(UDataTable* val)
 void ATDEnemy::BeginPlay()
 {
     Super::BeginPlay();
+    SetActorTickEnabled(false);
 
     if (widgetComponent)
     {
@@ -242,24 +244,39 @@ void ATDEnemy::TDInitialize()
 {
     Super::TDInitialize();
 
-    const UAttributeSet* attributesInit1 = abilitySystem->InitStats(UTDHealthAttributeSet::StaticClass(), healthDatatable);
+
+
+    const UAttributeSet* attributesInit1 = abilitySystem->InitStats(UTDHealthAttributeSet::StaticClass(),nullptr);
+
     healthAttributes = Cast<UTDHealthAttributeSet>(attributesInit1);
 
-    const UAttributeSet* attributesInit2 = abilitySystem->InitStats(UTDDamageAttributeSet::StaticClass(), damageDatatable);
+    const UAttributeSet* attributesInit2 = abilitySystem->InitStats(UTDDamageAttributeSet::StaticClass(), nullptr);
     damageAttributes = Cast<UTDDamageAttributeSet>(attributesInit2);
 
-    const UAttributeSet* attributesInit3 = abilitySystem->InitStats(UTDMovementAttributeSet::StaticClass(), movementDatatable);
+    const UAttributeSet* attributesInit3 = abilitySystem->InitStats(UTDMovementAttributeSet::StaticClass(), nullptr);
     movementAttributes = Cast<UTDMovementAttributeSet>(attributesInit3);
 
+    TDCreateAndApplyGE();
 
     for (size_t i = 0; i < abiliyList.Num(); ++i)
     {
         FGameplayAbilitySpecHandle specHandle = abilitySystem->GiveAbility(FGameplayAbilitySpec(abiliyList[i].GetDefaultObject(), 1, 0));
     }
     float randomValue = FMath::FRandRange(-movementVariation, movementVariation);
+
     GetCharacterMovement()->MaxWalkSpeed = movementAttributes->GetmovementSpeed() + randomValue;
 
     TDActivateDelegates();
 }
 
+void ATDEnemy::TDCreateAndApplyGE()
+{
+    UGameplayEffect* staticEffect = NewObject<UGameplayEffect>();
+    
+    FGameplayEffectExecutionDefinition modif;
+    modif.CalculationClass = enemyAttribute;
+    staticEffect->Executions.Add(modif);
+    abilitySystem->ApplyGameplayEffectToTarget(staticEffect, abilitySystem);
+    staticEffect->ConditionalBeginDestroy();
+}
 
