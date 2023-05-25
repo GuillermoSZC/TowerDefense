@@ -5,6 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GameLogic/TDTowerEnum.h"
+#include "GameLogic/TDBuyStruct.h"
+#include "GameLogic/TDLootEnum.h"
+#include "Interfaces/TDCostInterface.h"
 #include "TDTowerStructure.generated.h"
 
 class UStaticMeshComponent;

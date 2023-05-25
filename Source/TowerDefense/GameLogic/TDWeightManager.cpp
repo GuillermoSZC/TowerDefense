@@ -177,11 +177,12 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable
 
 
     //GAS
-    _enemyRef->healthDatatable = Row.EnemyStatsDataAsset->healthDataTable;
-    _enemyRef->damageDatatable = Row.EnemyStatsDataAsset->damageDataTable;
-    _enemyRef->movementDatatable = Row.EnemyStatsDataAsset->movementDataTable;
+//     _enemyRef->healthDatatable = Row.EnemyStatsDataAsset->healthDataTable;
+//     _enemyRef->damageDatatable = Row.EnemyStatsDataAsset->damageDataTable;
+//     _enemyRef->movementDatatable = Row.EnemyStatsDataAsset->movementDataTable;
     _enemyRef->movementVariation = Row.movementVariation;
     _enemyRef->abiliyList = Row.abiliyAsset->abiliyList;
+    _enemyRef->enemyAttribute = Row.enemyAttribute;
 
     //Weapon
     if (Row.WeaponAsset)

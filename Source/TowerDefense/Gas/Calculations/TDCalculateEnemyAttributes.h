@@ -50,25 +50,25 @@ public:
 
 public:
 
-	UPROPERTY(EditAnywhere, Category = "")
+	UPROPERTY(EditAnywhere, Category = "TDAtributes | Health")
 	float healthBaseValue;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "TDAtributes | Health")
 	float healthRoundMultiplier;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "TDAtributes | Attack")
 	float AttackDamageBaseValue;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "TDAtributes | Attack")
 	float AttackDamageRoundMultiplier;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "TDAtributes | Attack")
 	float AttackSpeedBaseValue;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "TDAtributes | Attack")
 	float AttackRangeBaseValue;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "TDAtributes | Movement")
 	float SpeedBaseValue;
 
 
