@@ -83,6 +83,7 @@ void UTDTextWithImage::TDSetTexture(UTexture2D* _texture)
     if (_texture != nullptr)
     {
         customTexture = _texture;
+        ownerImage->SetBrushFromTexture(customTexture);
     }
 }
 
