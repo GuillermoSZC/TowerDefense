@@ -33,6 +33,12 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDBaseButton* imgButton;
 
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Custom properties")
+        class UTexture2D* bpTexture = nullptr;
+
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Custom properties")
+        class UTexture2D* gemTexture = nullptr;
+
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDTextWithImage* scrap;
 

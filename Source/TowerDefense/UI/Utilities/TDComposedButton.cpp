@@ -14,6 +14,9 @@ void UTDComposedButton::NativePreConstruct()
 {
     Super::NativePreConstruct();
 
+    bps->TDSetTexture(bpTexture);
+    gems->TDSetTexture(gemTexture);
+
     if (scrap && bps && gems)
     {
         scrap->TDSetText(FText::FromString("<Black>123</>"));
