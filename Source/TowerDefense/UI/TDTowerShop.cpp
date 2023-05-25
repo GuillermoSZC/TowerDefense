@@ -53,6 +53,15 @@ void UTDTowerShop::TDUpdateCost()
     TDUpdateBPCostWithItem(deadRayButton, ELootItems::DeathRayBP);
     TDUpdateBPCostWithItem(movementButton, ELootItems::SpeedTowerBP);
     TDUpdateBPCostWithItem(attackButton, ELootItems::AttackTowerBP);
+
+
+    TDUpdateInventoryToText(scrap, ELootItems::Scrap);
+    TDUpdateInventoryToText(bpBalistic, ELootItems::BalisticBP);
+    TDUpdateInventoryToText(bpSonic, ELootItems::SonicBP);
+    TDUpdateInventoryToText(bpDeadRay, ELootItems::DeathRayBP);
+    TDUpdateInventoryToText(bpMovement, ELootItems::SpeedTowerBP);
+    TDUpdateInventoryToText(bpDamage, ELootItems::AttackTowerBP);
+
 }
 
 void UTDTowerShop::TDOnVisibilityChange(ESlateVisibility _visible)

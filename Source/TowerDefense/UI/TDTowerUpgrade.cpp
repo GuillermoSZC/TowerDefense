@@ -46,6 +46,13 @@ void UTDTowerUpgrade::TDUpdateCost()
     TDUpdateGemCost(iceUpgrade, ELootItems::Ice);
     TDUpdateGemCost(plasmaUpgrade, ELootItems::Plasma);
 
+
+    TDUpdateInventoryToText(scrap, ELootItems::Scrap);
+    TDUpdateInventoryToText(blueprint, ELootItems::BalisticBP);
+    TDUpdateInventoryToText(fire, ELootItems::Fire);
+    TDUpdateInventoryToText(plasma, ELootItems::Plasma);
+    TDUpdateInventoryToText(ice, ELootItems::Ice);
+
 }
 
 void UTDTowerUpgrade::TDOnVisibilityChange(ESlateVisibility _visible)

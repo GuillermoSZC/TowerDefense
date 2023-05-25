@@ -83,3 +83,8 @@ FText UTDUserWidget::TDGetTextFromItem(ELootItems _item)
 
     return textTemp;
 }
+
+void UTDUserWidget::TDUpdateInventoryToText(UTDTextWithImage* _text, ELootItems _item)
+{
+    _text->TDSetText(TDGetTextFromItem(_item));
+}

@@ -57,6 +57,10 @@ protected:
     UFUNCTION()
         FText TDGetTextFromItem(ELootItems _item);
 
+    UFUNCTION()
+    void TDUpdateInventoryToText(UTDTextWithImage* _text, ELootItems _item);
+
+
 private:
 
 

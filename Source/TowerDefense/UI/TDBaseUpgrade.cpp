@@ -51,6 +51,13 @@ void UTDBaseUpgrade::TDUpdateCost()
     TDUpdateGemCost(iceUpgrade, ELootItems::Ice);
     TDUpdateGemCost(plasmaUpgrade, ELootItems::Plasma);
 
+    TDUpdateInventoryToText(scrap, ELootItems::Scrap);
+    TDUpdateInventoryToText(health, ELootItems::ArmorBP);
+    TDUpdateInventoryToText(boots, ELootItems::BootsBP);
+    TDUpdateInventoryToText(damage, ELootItems::SwordBP);
+    TDUpdateInventoryToText(fire, ELootItems::Fire);
+    TDUpdateInventoryToText(plasma, ELootItems::Plasma);
+    TDUpdateInventoryToText(ice, ELootItems::Ice);
 }
 
 void UTDBaseUpgrade::TDOnVisibilityChange(ESlateVisibility _visible)
