@@ -50,8 +50,8 @@ public:
     UNiagaraComponent* swordCover;
 
 protected:
-
-        UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Loot Inventory")
+    //@ToDo cambiar a visible
+        UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Loot Inventory")
     TMap<ELootItems, int32> PlayerInventory;
 
 

@@ -44,9 +44,16 @@ ATDPlayerCharacter::ATDPlayerCharacter()
 
 void ATDPlayerCharacter::TDOnElementChange_Implementation(EElements _newElement)
 {
+    if (ElementsVFX.Contains(_newElement))
+    {
+        actualVFXAsset = ElementsVFX[_newElement];
+        swordCover->SetAsset(actualVFXAsset->StaticSwordEffect);
+    }
+    else
+    {
+        actualVFXAsset = nullptr;
+    }
 
-    actualVFXAsset = ElementsVFX[_newElement];
-    swordCover->SetAsset(actualVFXAsset->StaticSwordEffect);
 }
 
 void ATDPlayerCharacter::PostInitializeComponents()

@@ -23,11 +23,15 @@ UFXSystemComponent* UTDPlayVFXFromDataAsset::SpawnEffect(USkeletalMeshComponent*
         if (Template != UTDGameData::TDGetPlayerRef()->TDGetActualElementVFXAsset()->TDGetVFXType(VFXtype))
         {
             Template = UTDGameData::TDGetPlayerRef()->TDGetActualElementVFXAsset()->TDGetVFXType(VFXtype);
+            Super::SpawnEffect(MeshComp, Animation);
         }
     }
+    else
+    {
+        Template = nullptr;
+    }
 
-
-    Super::SpawnEffect(MeshComp, Animation);
+  
 
     return SpawnedEffect;
 }
