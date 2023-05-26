@@ -46,7 +46,7 @@ void UTDDamageTowerCalculation::Execute_Implementation(const FGameplayEffectCust
         float elementMultiplier = SourceElementComponent->TDGetDamageMultiplier(TargetElementComponent->TDGetOwnerElement());
 
 
-        float TotalDamage = elementMultiplier * baseDamage * (1 + (0.1f * level));
+        float TotalDamage = elementMultiplier * baseDamage * (1 + (damageLevelMultiplier * level));
 
 
         FGameplayModifierEvaluatedData TargetHealthModification = FGameplayModifierEvaluatedData(structAbilities.healthTargetProperty, EGameplayModOp::Additive, -TotalDamage);

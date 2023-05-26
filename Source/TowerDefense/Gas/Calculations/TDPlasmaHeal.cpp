@@ -7,6 +7,7 @@ UTDPlasmaHeal::UTDPlasmaHeal()
 {
     RelevantAttributesToCapture.Add(structAbilities.healthTargetDef);
     RelevantAttributesToCapture.Add(structAbilities.attackDamageSourceDef);
+    RelevantAttributesToCapture.Add(structAbilities.levelSourceDef);
     valueMultiplier = 0.001f;
 
 }
@@ -33,9 +34,13 @@ void UTDPlasmaHeal::Execute_Implementation(const FGameplayEffectCustomExecutionP
         float playerHealth = 0.f;
         ensure(ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(structAbilities.healthTargetDef, evaluationParameters, playerHealth));
 
+        float actualLevel = 0.f;
+        ensure(ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(structAbilities.levelSourceDef, evaluationParameters, actualLevel));
+
+
 
         //cambiar actual Round por el nivel de la torre
-        float TotalHealth = valueMultiplier * baseDamage * 1;
+        float TotalHealth = valueMultiplier * baseDamage * actualLevel;
 
 
         FGameplayModifierEvaluatedData TargetHealthModification = FGameplayModifierEvaluatedData(structAbilities.healthTargetProperty, EGameplayModOp::Additive, TotalHealth);

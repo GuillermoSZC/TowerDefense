@@ -41,6 +41,10 @@ public:
 
 public:
 
+    UPROPERTY(EditAnywhere)
+    float damageLevelMultiplier = 0.1f;
+
+
 protected:
 
 private:
