@@ -50,7 +50,7 @@ public:
         UPROPERTY(EditDefaultsOnly)
        float WeaponRange;
 
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly, meta = (EditCondition = "assetClass==AssetType::StaticMesh || assetClass==AssetType::SkeletalMesh ", EditConditionHides))
         FName SocketName;
 
     UPROPERTY(EditDefaultsOnly)
