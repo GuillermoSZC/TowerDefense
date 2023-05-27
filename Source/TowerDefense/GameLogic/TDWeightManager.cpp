@@ -186,7 +186,7 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable
     {
         int32 x = FMath::Rand() % Row.WeaponAssetArray.Num();
         UTDweaponDataAsset* WeaponAsset = Row.WeaponAssetArray[x];
-
+        _enemyRef->weaponAssetRef = WeaponAsset;
         FAttachmentTransformRules rules = FAttachmentTransformRules(EAttachmentRule::KeepRelative, false);
 
         if (WeaponAsset->assetClass == AssetType::SkeletalMesh)

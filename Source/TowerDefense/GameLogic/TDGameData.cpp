@@ -12,6 +12,7 @@
 #include "Map/TDTowerStructure.h"
 #include "Map/TDTower.h"
 #include "Map/TDBase.h"
+#include "AbilitySystemComponent.h"
 
 
 UWorld* UTDGameData::gameWorld = nullptr;
@@ -260,5 +261,18 @@ FText UTDGameData::TDConvertIntToFText(int32 _num)
 void UTDGameData::TDSpawnEnemyDebug()
 {
     weightManagerRef->TDSpawnEnemy();
+}
+
+void UTDGameData::TDCreateAndApplyGE(UAbilitySystemComponent* _ASC, FGameplayAttribute _attribute, EGameplayModOp::Type _modType, float _value)
+{
+    UGameplayEffect* staticEffect = NewObject<UGameplayEffect>();
+    staticEffect->Modifiers.Empty();
+    FGameplayModifierInfo modif = FGameplayModifierInfo();
+    modif.ModifierOp = _modType;
+    modif.Attribute = _attribute;
+    modif.ModifierMagnitude = FGameplayEffectModifierMagnitude(FScalableFloat(_value));
+    staticEffect->Modifiers.Add(modif);
+    _ASC->ApplyGameplayEffectToSelf(staticEffect, 1, FGameplayEffectContextHandle());
+    staticEffect->ConditionalBeginDestroy();
 }
 

@@ -19,16 +19,20 @@ bool UTDCheckDistance::CalculateRawConditionValue(UBehaviorTreeComponent& OwnerC
 {
     Super::CalculateRawConditionValue(OwnerComp, NodeMemory);
 
+    ATDEnemyController* enemyController = Cast<ATDEnemyController>(OwnerComp.GetOwner());
+    ATDEnemy* enemy = enemyController->GetPawn<ATDEnemy>();
+    UBlackboardComponent* blackboard = OwnerComp.GetBlackboardComponent();
+
+    bool vfound;
+    float fGreaterDistance = enemy->abilitySystem->GetGameplayAttributeValue(GreaterDistance,vfound);
 
     float shortDistanceSquared;
     float GreaterDistanceSquared;
 
     shortDistanceSquared = shortDistance * shortDistance;
-    GreaterDistanceSquared = GreaterDistance * GreaterDistance;
+    GreaterDistanceSquared = fGreaterDistance * fGreaterDistance;
 
-    ATDEnemyController* enemyController = Cast<ATDEnemyController>(OwnerComp.GetOwner());
-    ATDEnemy* enemy = enemyController->GetPawn<ATDEnemy>();
-    UBlackboardComponent* blackboard = OwnerComp.GetBlackboardComponent();
+   
 
     TSubclassOf<UBlackboardKeyType> tempkey = blackboard->GetKeyType(blackboard->GetKeyID(BlackboardKey.SelectedKeyName));
 

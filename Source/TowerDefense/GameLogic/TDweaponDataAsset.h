@@ -47,7 +47,8 @@ public:
        UPROPERTY(EditDefaultsOnly, meta = (EditCondition = "assetClass==AssetType::StaticMesh", EditConditionHides))
         TSoftObjectPtr<UStaticMesh> StaticWeaponMesh;
 
-
+        UPROPERTY(EditDefaultsOnly)
+       float WeaponRange;
 
     UPROPERTY(EditDefaultsOnly)
         FName SocketName;

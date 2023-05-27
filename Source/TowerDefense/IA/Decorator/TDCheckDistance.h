@@ -38,8 +38,12 @@ public:
 	UPROPERTY(EditAnywhere)
 	float shortDistance;
 
+// 	UPROPERTY(EditAnywhere)
+// 	float GreaterDistance;
+
 	UPROPERTY(EditAnywhere)
-	float GreaterDistance;
+		FGameplayAttribute GreaterDistance;
+
 
 	UPROPERTY(EditAnywhere)
 	TArray<FBlackboardKeySelector> KeysToLook;

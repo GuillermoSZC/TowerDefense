@@ -50,6 +50,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
         UStaticMeshComponent* StaticWeaponComponent;
 
+    UTDweaponDataAsset* weaponAssetRef;
 
 protected:
     UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "HUD")

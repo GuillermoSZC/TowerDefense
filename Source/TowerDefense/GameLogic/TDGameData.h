@@ -4,12 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "GameplayEffectTypes.h"
+#include "AttributeSet.h"
+
 #include "TDGameData.generated.h"
 
 class UWorld;
 class ATDEnemy;
 class UTDGameplayEventData;
 class UTDWeightManager;
+class UAbilitySystemComponent;
 
 
 
@@ -162,5 +166,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	static void TDSpawnEnemyDebug();
 
+	static void TDCreateAndApplyGE(UAbilitySystemComponent* _ASC, FGameplayAttribute _attribute, EGameplayModOp::Type _modType, float _value);
 
 };

@@ -246,7 +246,7 @@ void ATDEnemy::TDInitialize()
 
 
 
-    const UAttributeSet* attributesInit1 = abilitySystem->InitStats(UTDHealthAttributeSet::StaticClass(),nullptr);
+    const UAttributeSet* attributesInit1 = abilitySystem->InitStats(UTDHealthAttributeSet::StaticClass(), nullptr);
 
     healthAttributes = Cast<UTDHealthAttributeSet>(attributesInit1);
 
@@ -264,6 +264,11 @@ void ATDEnemy::TDInitialize()
     }
     float randomValue = FMath::FRandRange(-movementVariation, movementVariation);
 
+    if (weaponAssetRef && weaponAssetRef->WeaponRange != 0.f)
+    {
+        UTDGameData::TDCreateAndApplyGE(abilitySystem, UTDDamageAttributeSet::GetattackRangeAttribute(), EGameplayModOp::Override, weaponAssetRef->WeaponRange);
+    }
+
     GetCharacterMovement()->MaxWalkSpeed = movementAttributes->GetmovementSpeed() + randomValue;
 
     TDActivateDelegates();
@@ -272,7 +277,7 @@ void ATDEnemy::TDInitialize()
 void ATDEnemy::TDCreateAndApplyGE()
 {
     UGameplayEffect* staticEffect = NewObject<UGameplayEffect>();
-    
+
     FGameplayEffectExecutionDefinition modif;
     modif.CalculationClass = enemyAttribute;
     staticEffect->Executions.Add(modif);
