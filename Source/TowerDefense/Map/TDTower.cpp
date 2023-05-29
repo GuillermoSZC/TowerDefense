@@ -287,6 +287,7 @@ void ATDTower::TDActivateDelegates()
     TowerDamageChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetattackDamageAttribute()).AddUObject(this, &ATDTower::TDDamageChanged);
     TowerRangeChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetattackRangeAttribute()).AddUObject(this, &ATDTower::TDRangeChanged);
     TowerPeriodAttackChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetattackSpeedAttribute()).AddUObject(this, &ATDTower::TDPeriodAttackChanged);
+    LevelUpChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(UTDLevelAttributeSet::GetlevelAttribute()).AddUObject(this, &ATDTower::TDLevelUpChanged);
 }
 
 void ATDTower::TDDamageChanged(const FOnAttributeChangeData& Data)
@@ -306,4 +307,14 @@ void ATDTower::TDPeriodAttackChanged(const FOnAttributeChangeData& Data)
     periodAttack = periodAttack - temp;
 }
 
+void ATDTower::TDLevelUpChanged(const FOnAttributeChangeData& Data)
+{
+    if (((int)Data.NewValue - 1) % UpgradeEveryXLevel == 0)
+    {
+        UGameplayEffect* effectRef = Cast<UGameplayEffect>(levelUpgrade->GetDefaultObject());
+        FGameplayEffectContextHandle context;
+        abilitySystem->ApplyGameplayEffectToSelf(effectRef, 0, context);
+        effectRef->ConditionalBeginDestroy();
+    }
+}
 

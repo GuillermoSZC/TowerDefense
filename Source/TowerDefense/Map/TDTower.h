@@ -18,7 +18,7 @@ class UTDDamageAttributeSet;
 class UTDTowerUpgrade;
 
 UCLASS()
-class TOWERDEFENSE_API ATDTower : public AActor, public ITDInterface, public IAbilitySystemInterface ,public ITDCostInterface
+class TOWERDEFENSE_API ATDTower : public AActor, public ITDInterface, public IAbilitySystemInterface, public ITDCostInterface
 {
     GENERATED_BODY()
 
@@ -28,10 +28,10 @@ public:
 
 
 
-   
 
 
-   
+
+
 
 public:
 
@@ -47,15 +47,22 @@ public:
     UPROPERTY(BlueprintAssignable)
         FOnAttackRangeChangeSignature FOnAttackRangeChangeDelegate;
 
-    
+
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
-    FGameplayTag TagClass;
+        FGameplayTag TagClass;
 
 
+    UPROPERTY(EditDefaultsOnly, Category = "Ability System", meta = (DisplayName = "Upgrade Every X Level"))
+        int32 UpgradeEveryXLevel;
+
+    UPROPERTY(EditDefaultsOnly, Category = "Ability System")
+        TSubclassOf<UGameplayEffect> levelUpgrade;
 protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
         UAbilitySystemComponent* abilitySystem;
+
+
 
 #pragma region DELEGATES
 
@@ -63,11 +70,12 @@ protected:
     FDelegateHandle TowerRangeChangedDelegateHandle;
     FDelegateHandle TowerDamageChangedDelegateHandle;
     FDelegateHandle TowerPeriodAttackChangedDelegateHandle;
+    FDelegateHandle LevelUpChangedDelegateHandle;
 #pragma endregion
 
-    
+
     UPROPERTY(EditDefaultsOnly)
-    TEnumAsByte<ELootItems> BPToUprgade;
+        TEnumAsByte<ELootItems> BPToUprgade;
 
 private:
     UPROPERTY()
@@ -110,14 +118,14 @@ public:
     UFUNCTION(BlueprintNativeEvent)
         void TDOnElementChange(EElements _newElement);
 
- 
+
 
 
     UFUNCTION(BlueprintCallable)
         UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
     //Gems
-    void TDCalculateElementChangeCost_Implementation(FBuyCost& _cost,ELootItems _itemElement) override;
+    void TDCalculateElementChangeCost_Implementation(FBuyCost& _cost, ELootItems _itemElement) override;
 
     //BPs
     void TDCalcultateCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item = ELootItems::None) override;
@@ -127,11 +135,11 @@ public:
     bool TDCommitBuyUpgrade_Implementation(ELootItems _item = ELootItems::None) override;
 
     UFUNCTION()
-    FGameplayTag TDGetTagClass_Implementation() override;
+        FGameplayTag TDGetTagClass_Implementation() override;
 
 
-       UFUNCTION(BlueprintPure)
-    ELootItems TDGetItemToUpgrade();
+    UFUNCTION(BlueprintPure)
+        ELootItems TDGetItemToUpgrade();
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
@@ -149,6 +157,8 @@ private:
     void TDRangeChanged(const FOnAttributeChangeData& Data);
 
     void TDPeriodAttackChanged(const FOnAttributeChangeData& Data);
+
+    void TDLevelUpChanged(const FOnAttributeChangeData& Data);
 
 
 };

@@ -84,7 +84,7 @@ void ATDRoundManager::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
 
-    if (actualPhase == GamePhase::CombatPhase )
+    if (actualPhase == GamePhase::CombatPhase)
     {
         if (timeRound >= timeperSpawn)
         {
@@ -97,11 +97,15 @@ void ATDRoundManager::Tick(float DeltaSeconds)
 
     if (actualPhase == GamePhase::BuyPhase)
     {
-        if (timeRound <= 0.f)
+        if (!timePaused)
         {
-            TDStartCombatPhase();
+            if (timeRound <= 0.f)
+            {
+                TDStartCombatPhase();
+            }
+            timeRound -= DeltaSeconds;
         }
-        timeRound -= DeltaSeconds;
+
     }
 }
 
@@ -173,4 +177,14 @@ ATDEnemy* ATDRoundManager::TDCreateEnemy(FName enemyName, AActor* _instigator)
 GamePhase ATDRoundManager::TDGetActualPhase()
 {
     return actualPhase;
+}
+
+void ATDRoundManager::TDSetTimePaused(bool _newState)
+{
+    timePaused = _newState;
+}
+
+void ATDRoundManager::TDModifyBuyPhaseTime(float _time)
+{
+    timeRound += _time;
 }

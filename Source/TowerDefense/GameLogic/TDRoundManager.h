@@ -70,7 +70,7 @@ private:
 
     GamePhase actualPhase = GamePhase::BuyPhase;
 
-
+    bool timePaused = false;
 
 
 public:
@@ -110,6 +110,11 @@ public:
     UFUNCTION(BlueprintPure)
         GamePhase TDGetActualPhase();
 
+    UFUNCTION(BlueprintCallable)
+        void TDSetTimePaused(bool _newState);
+
+    UFUNCTION(BlueprintCallable)
+        void TDModifyBuyPhaseTime(float _time);
 protected:
 
     virtual void BeginPlay() override;
