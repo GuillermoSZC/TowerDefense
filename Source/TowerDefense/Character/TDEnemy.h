@@ -52,6 +52,11 @@ public:
 
     UTDweaponDataAsset* weaponAssetRef;
 
+
+
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UMaterialInstanceDynamic* DynamicMaterial;
+
 protected:
     UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "HUD")
         class UWidgetComponent* widgetComponent;
