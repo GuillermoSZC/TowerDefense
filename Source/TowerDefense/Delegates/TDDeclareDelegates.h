@@ -13,6 +13,9 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttackRangeChangeSignature, float
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnElementChangeSignature, EElements, _element);
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnTowerSpawnSignature, ATDTower*, _tower);
+
+
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTickSignature, float, elapsedTime, float, DeltaTime);
 

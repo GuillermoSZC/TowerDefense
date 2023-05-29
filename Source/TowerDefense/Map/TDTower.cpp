@@ -31,6 +31,11 @@ ATDTower::ATDTower()
 
 
 
+FGameplayTag ATDTower::TDGetTagClass_Implementation()
+{
+    return TagClass;
+}
+
 //Blueprints cost
 void ATDTower::TDCalcultateCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item /*= ELootItems::None*/)
 {
@@ -54,8 +59,8 @@ bool ATDTower::TDCommitBuyUpgrade_Implementation(ELootItems _item)
     if (_item == ELootItems::None)
     {
         cost.BPItem = BPToUprgade;
-        ITDCostInterface::Execute_TDCalcultateCostWithLoot(this, cost,cost.BPItem);
-        
+        ITDCostInterface::Execute_TDCalcultateCostWithLoot(this, cost, cost.BPItem);
+
         if (!ITDCostInterface::Execute_TDCanAffordCostWithLoot(this, cost))
         {
             return false;
@@ -80,8 +85,8 @@ bool ATDTower::TDCommitBuyUpgrade_Implementation(ELootItems _item)
 
     }
 
-    
-     
+
+
 
     return false;
 
@@ -102,20 +107,20 @@ void ATDTower::TDCalculateElementChangeCost_Implementation(FBuyCost& _cost, ELoo
     {
     case ELootItems::Fire:
     {
-        
+
         elementToSwitch = EElements::Fire;
     }
     break;
 
     case ELootItems::Ice:
     {
-        elementToSwitch = EElements::Freeze;   
+        elementToSwitch = EElements::Freeze;
     }
     break;
 
     case ELootItems::Plasma:
     {
-        elementToSwitch = EElements::Plasma; 
+        elementToSwitch = EElements::Plasma;
     }
     break;
 
@@ -297,7 +302,8 @@ void ATDTower::TDRangeChanged(const FOnAttributeChangeData& Data)
 
 void ATDTower::TDPeriodAttackChanged(const FOnAttributeChangeData& Data)
 {
-    periodAttack = Data.NewValue;
+    float temp = (periodAttack * Data.NewValue) / 100.f;
+    periodAttack = periodAttack - temp;
 }
 
 

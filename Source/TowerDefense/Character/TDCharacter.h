@@ -30,7 +30,8 @@ public:
 
 
 
-    void PostInitializeComponents() override;
+
+
 
 public:
 
@@ -49,8 +50,14 @@ public:
            UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
         UDataTable* movementDatatable;
 
+
+                UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
+           FGameplayTag ClassTag;
+
            UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
            TArray<FGameplayTag> TagsToAdd;
+
+
 
     FOnHealthChangeSignature FOnHealthChangeDelegate;
     
@@ -110,6 +117,14 @@ public:
 
          UFUNCTION(BlueprintNativeEvent)
      void TDOnElementChange(EElements _newElement);
+
+         UFUNCTION()
+         FGameplayTag TDGetTagClass_Implementation() override;
+
+
+
+         void PostInitializeComponents() override;
+
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;

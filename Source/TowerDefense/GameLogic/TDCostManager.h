@@ -8,6 +8,8 @@
 #include "TDBuyStruct.h"
 #include "TDCostManager.generated.h"
 
+class ATDTower;
+
 /**
  *
  */
@@ -25,6 +27,11 @@ public:
 public:
     UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
         TMap<ELootItems, FBuyCost> TowerBuyCost;
+
+
+
+    UPROPERTY(BlueprintAssignable)
+        FOnTowerSpawnSignature FOnTowerSpawnDelegate;
 
 protected:
 
@@ -54,6 +61,8 @@ public:
     void TDCommitResources(FBuyCost& _cost);
 
       // bool TDCanAffordElementChange(FBuyCost& _cost, ELootItems _Item);
+
+    void TDTowerSpawn(ATDTower* _tower);
 
 protected:
 

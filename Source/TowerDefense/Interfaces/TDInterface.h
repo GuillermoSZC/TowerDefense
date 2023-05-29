@@ -61,6 +61,10 @@ public:
         FVector TDGetShootPosition();
 
 
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+    FGameplayTag TDGetTagClass();
+
+
     //Este solo se puede implementar en BP
 //     UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 //         const bool TGGApplyEffect2() const;

@@ -34,6 +34,11 @@ void ATDCharacter::PostInitializeComponents()
 
 }
 
+FGameplayTag ATDCharacter::TDGetTagClass_Implementation()
+{
+    return ClassTag;
+}
+
 UTDElementComponent* ATDCharacter::TDGetElementComponent_Implementation()
 {
     return elementComponent;

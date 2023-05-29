@@ -61,6 +61,11 @@ void ATDCostManager::TDCommitResources(FBuyCost& _cost)
 
 }
 
+void ATDCostManager::TDTowerSpawn(ATDTower* _tower)
+{
+    FOnTowerSpawnDelegate.Broadcast(_tower);
+}
+
 bool ATDCostManager::TDCanAffordBuy(FBuyCost& _cost)
 {  
     TMap<ELootItems, int32> PlayerInventory;

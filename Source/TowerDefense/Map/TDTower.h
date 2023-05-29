@@ -30,6 +30,9 @@ public:
 
    
 
+
+   
+
 public:
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
@@ -44,6 +47,10 @@ public:
     UPROPERTY(BlueprintAssignable)
         FOnAttackRangeChangeSignature FOnAttackRangeChangeDelegate;
 
+    
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
+    FGameplayTag TagClass;
 
 
 protected:
@@ -119,8 +126,8 @@ public:
 
     bool TDCommitBuyUpgrade_Implementation(ELootItems _item = ELootItems::None) override;
 
-
-  
+    UFUNCTION()
+    FGameplayTag TDGetTagClass_Implementation() override;
 
 
        UFUNCTION(BlueprintPure)
