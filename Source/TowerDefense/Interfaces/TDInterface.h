@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
 #include <GameplayTagContainer.h>
+#include "GameLogic/TDElementComponent.h"
 #include "TDInterface.generated.h"
 
 // This class does not need to be modified.
