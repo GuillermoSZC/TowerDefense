@@ -16,7 +16,7 @@ public:
 
 public:
     UPROPERTY(EditDefaultsOnly)
-        int childCount;
+        int childCount = 2;
 protected:
 
 private:

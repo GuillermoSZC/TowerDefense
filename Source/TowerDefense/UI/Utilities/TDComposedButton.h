@@ -90,6 +90,9 @@ public:
     UFUNCTION()
         void TDSetButtonBackground(FLinearColor _color);
 
+    UFUNCTION()
+        void TDOnHovered();
+
 protected:
 
 private:

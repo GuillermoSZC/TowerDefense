@@ -87,25 +87,26 @@ void UTDComposedButton::TDSetButtonTexture(UTexture2D* _texture)
 
 void UTDComposedButton::TDSetButtonBackground(FLinearColor _color)
 {
-
     //  *****************  CAMBIAR IMAGEN DE UN UBUTTON **********************
-    
-        FButtonStyle& ButtonStyle = imgButton->WidgetStyle;
 
-        FSlateBrush& NormalBrush = ButtonStyle.Normal;
-        NormalBrush.TintColor = _color;
-        // NormalBrush.SetResourceObject(_texture);
-        
+    FButtonStyle& ButtonStyle = imgButton->WidgetStyle;
 
+    FSlateBrush& NormalBrush = ButtonStyle.Normal;
+    NormalBrush.TintColor = _color;
+    // NormalBrush.SetResourceObject(_texture); // imagen
 
-        FSlateBrush& HoveredBrush = ButtonStyle.Hovered;
-        HoveredBrush.TintColor = FLinearColor::Black;
-        // HoveredBrush.SetResourceObject(_texture);
+    FSlateBrush& HoveredBrush = ButtonStyle.Hovered;
+    HoveredBrush.TintColor = _color;
+    // HoveredBrush.SetResourceObject(_texture); // imagen
 
-        FSlateBrush& PressedBrush = ButtonStyle.Pressed;
-        PressedBrush.TintColor = _color;
-        // PressedBrush.SetResourceObject(_texture);
+    FSlateBrush& PressedBrush = ButtonStyle.Pressed;
+    PressedBrush.TintColor = _color;
+    // PressedBrush.SetResourceObject(_texture); // imagen
 
-        imgButton->SetStyle(ButtonStyle);
+    imgButton->SetStyle(ButtonStyle);
 }
 
+void UTDComposedButton::TDOnHovered()
+{
+
+}
