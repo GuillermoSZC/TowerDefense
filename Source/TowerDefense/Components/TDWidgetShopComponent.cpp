@@ -4,7 +4,7 @@
 #include "GameLogic/TDGameMode.h"
 #include "Character/TDPlayerController.h"
 #include "Character/TDPlayerCharacter.h"
-#include "UI/TDUserWidget.h"
+#include "UI/TDCostWidget.h"
 
 UTDWidgetShopComponent::UTDWidgetShopComponent()
 {

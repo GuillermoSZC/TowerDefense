@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "Character/TDCharacter.h"
 #include "GameplayEffectTypes.h"
+#include "Gas/Calculations/TDCalculateEnemyAttributes.h"
 
 #include "TDEnemy.generated.h"
 

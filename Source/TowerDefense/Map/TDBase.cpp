@@ -9,6 +9,9 @@
 #include "GameLogic/TDRoundManager.h"
 #include "Interfaces/TDInterface.h"
 #include "AttributesSets/TDLevelAttributeSet.h"
+#include "GameLogic/ElementsEnum.h"
+#include "GameLogic/TDCostManager.h"
+#include "Character/TDPlayerCharacter.h"
 //#include "Character/TDPlayerCharacter.h"
 //#include "Character/TDPlayerController.h"
 
@@ -36,7 +39,7 @@ ATDBase::ATDBase(const FObjectInitializer& ObjectInitializer)
 
 
 
-void ATDBase::TDCalculateElementChangeCost_Implementation(FBuyCost& _cost, ELootItems _item)
+void ATDBase::TDCalculateElementChangeCost_Implementation(FBuyCost& _cost, ELootItems _item) 
 {
     EElements spawnedElement = ITDInterface::Execute_TDGetElementComponent(UTDGameData::TDGetPlayerRef())->TDGetSpawnedElement();
     EElements elementToBuy = EElements::None;
@@ -71,7 +74,7 @@ void ATDBase::TDCalculateElementChangeCost_Implementation(FBuyCost& _cost, ELoot
     }
 
 
-    UTDGameData::TDGetCostManager()->TDCalculateElementChange(_cost, elementToBuy, spawnedElement);
+    UTDGameData::TDGetCostManager()->TDCalculateElementChange(_cost, elementToBuy, spawnedElement); 
 }
 
 void ATDBase::TDCalcultateCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item)

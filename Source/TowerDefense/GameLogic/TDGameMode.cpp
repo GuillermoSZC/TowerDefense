@@ -68,9 +68,9 @@ void ATDGameMode::InitGame(const FString& MapName, const FString& Options, FStri
     UTDGameData::TDSetCostManager(CostManagerRef);
 
 
-    UTDUserWidget* uiTowerShop = TDAddToViewport(towerShopClass);
-    UTDUserWidget* uiTowerUpgrade = TDAddToViewport(towerUpgradeClass);
-    UTDUserWidget* uiBaseUpgrade = TDAddToViewport(baseUpgradeClass);
+    UTDCostWidget* uiTowerShop = TDAddToViewport(towerShopClass);
+    UTDCostWidget* uiTowerUpgrade = TDAddToViewport(towerUpgradeClass);
+    UTDCostWidget* uiBaseUpgrade = TDAddToViewport(baseUpgradeClass);
 
     widgetMap.Add(towerShopClass, uiTowerShop);
     widgetMap.Add(towerUpgradeClass, uiTowerUpgrade);
@@ -88,7 +88,7 @@ UDataTable* ATDGameMode::TDGetDataLootFromElement(EElements _keyElement)
     return elementsDataLoot[_keyElement];
 }
 
-UTDUserWidget* ATDGameMode::TDGetWidgetFromClass(TSubclassOf<UTDUserWidget> _class)
+UTDCostWidget* ATDGameMode::TDGetWidgetFromClass(TSubclassOf<UTDCostWidget> _class)
 {
     return widgetMap[_class];
 }
@@ -114,10 +114,10 @@ void ATDGameMode::Reset()
     widgetMap.Empty();
 }
 
-UTDUserWidget* ATDGameMode::TDAddToViewport(TSubclassOf<UTDUserWidget> _widgetClass)
+UTDCostWidget* ATDGameMode::TDAddToViewport(TSubclassOf<UTDCostWidget> _widgetClass)
 {
-    UTDUserWidget* _widget = nullptr;
-    _widget = CreateWidget<UTDUserWidget>(GetWorld(), _widgetClass);
+    UTDCostWidget* _widget = nullptr;
+    _widget = CreateWidget<UTDCostWidget>(GetWorld(), _widgetClass);
     _widget->AddToViewport();
     _widget->SetVisibility(ESlateVisibility::Collapsed);
     return _widget;

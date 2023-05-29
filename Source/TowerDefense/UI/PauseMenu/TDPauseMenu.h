@@ -1,13 +1,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
-#include "TDUserWidget.generated.h"
+#include "UI/TDUserWidget.h"
+#include "TDPauseMenu.generated.h"
 
 UCLASS()
-class TOWERDEFENSE_API UTDUserWidget : public UUserWidget
+class TOWERDEFENSE_API UTDPauseMenu : public UTDUserWidget
 {
-    GENERATED_BODY()
+	GENERATED_BODY()
 public:
     virtual bool Initialize() override;
     virtual void NativePreConstruct() override;
@@ -15,13 +15,18 @@ public:
 
 public:
 
+
 protected:
+
 
 private:
 
+
 public:
 
+
 protected:
+
 
 private:
 

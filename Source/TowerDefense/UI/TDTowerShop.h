@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "TDUserWidget.h"
+#include "TDCostWidget.h"
 #include "GameLogic/TDTowerEnum.h"
 #include "Map/TDTower.h"
 #include "TDTowerShop.generated.h"
@@ -11,7 +11,7 @@ class UTDComposedButton;
 class UTDBaseButton;
 
 UCLASS()
-class TOWERDEFENSE_API UTDTowerShop : public UTDUserWidget
+class TOWERDEFENSE_API UTDTowerShop : public UTDCostWidget
 {
     GENERATED_BODY()
 public:

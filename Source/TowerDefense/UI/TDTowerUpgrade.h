@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "TDUserWidget.h"
+#include "TDCostWidget.h"
 #include "TDTowerUpgrade.generated.h"
 
 class ATDTower;
@@ -12,7 +12,7 @@ class UTDBaseButton;
 class UTDTextWithImage;
 
 UCLASS()
-class TOWERDEFENSE_API UTDTowerUpgrade : public UTDUserWidget
+class TOWERDEFENSE_API UTDTowerUpgrade : public UTDCostWidget
 {
     GENERATED_BODY()
 public:

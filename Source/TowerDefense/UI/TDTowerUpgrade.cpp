@@ -10,6 +10,7 @@
 #include "Components/TDWidgetShopComponent.h"
 #include "Utilities/TDComposedButton.h"
 #include "Utilities/TDBaseButton.h"
+#include "Utilities/TDTextWithImage.h"
 
 
 bool UTDTowerUpgrade::Initialize()

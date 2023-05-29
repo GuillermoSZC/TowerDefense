@@ -1,9 +1,7 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
-#include "TDUserWidget.h"
+#include "TDCostWidget.h"
 #include <GameplayEffect.h>
 #include "GameLogic/ElementsEnum.h"
 #include "TDBaseUpgrade.generated.h"
@@ -14,7 +12,7 @@ class UTDBaseButton;
 class UTDTextWithImage;
 
 UCLASS()
-class TOWERDEFENSE_API UTDBaseUpgrade : public UTDUserWidget
+class TOWERDEFENSE_API UTDBaseUpgrade : public UTDCostWidget
 {
     GENERATED_BODY()
 public:

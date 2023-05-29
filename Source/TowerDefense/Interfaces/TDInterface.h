@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
+#include <GameplayTagContainer.h>
 #include "TDInterface.generated.h"
 
 // This class does not need to be modified.
@@ -62,7 +63,7 @@ public:
 
 
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-    FGameplayTag TDGetTagClass();
+        FGameplayTag TDGetTagClass();
 
 
     //Este solo se puede implementar en BP
