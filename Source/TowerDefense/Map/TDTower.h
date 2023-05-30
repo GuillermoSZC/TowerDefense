@@ -10,6 +10,7 @@
 #include "Delegates/TDDeclareDelegates.h"
 #include "InputCoreTypes.h"
 #include "Interfaces/TDCostInterface.h"
+#include <GameplayEffect.h>
 #include "TDTower.generated.h"
 
 class UTDTowerAttributeSet;

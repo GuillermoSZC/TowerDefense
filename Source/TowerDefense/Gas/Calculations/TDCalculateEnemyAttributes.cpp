@@ -2,6 +2,8 @@
 
 
 #include "Gas/Calculations/TDCalculateEnemyAttributes.h"
+#include "GameLogic/TDGameData.h"
+#include "GameLogic/TDRoundManager.h"
 
 
 

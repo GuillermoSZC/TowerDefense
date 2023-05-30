@@ -12,6 +12,7 @@
 #include <UMG/Public/Blueprint/WidgetBlueprintLibrary.h>
 #include "Character/TDPlayerController.h"
 #include "AttributesSets/TDLevelAttributeSet.h"
+#include "GameLogic/TDCostManager.h"
 
 
 
@@ -80,7 +81,7 @@ bool ATDTower::TDCommitBuyUpgrade_Implementation(ELootItems _item)
             return false;
         }
 
-        UTDGameData::TDGetCostManager()->TDCommitResources(cost);
+        UTDGameData::TDGetCostManager()->TDCommitResources(cost); 
         return true;
 
     }

@@ -3,6 +3,8 @@
 
 #include "Gas/Calculations/TDDamageTowerCalculation.h"
 #include "GameplayEffectExecutionCalculation.h"
+#include "GameLogic/TDElementComponent.h"
+#include "Interfaces/TDInterface.h"
 
 
 
