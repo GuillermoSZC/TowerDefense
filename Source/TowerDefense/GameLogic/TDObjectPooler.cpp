@@ -15,6 +15,15 @@ ATDEnemy* ATDObjectPooler::TDGetEnemyFromPool()
         activeEnemies.Add(enemyRef);
         return enemyRef;
     }
+    else
+    {
+        UWorld* actualWorld = UTDGameData::TDGetWorld();
+        ATDEnemy* enemyRef = actualWorld->SpawnActor<ATDEnemy>(enemiesClasses[0]);
+        enemyRef->TDSetDisable();
+        activeEnemies.Add(enemyRef);
+
+        return enemyRef;
+    }
     return nullptr;
 }
 
