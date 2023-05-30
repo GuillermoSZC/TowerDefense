@@ -158,6 +158,11 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable
 
     //Mesh and anim 
     _enemyRef->GetMesh()->SetSkeletalMesh(Row.enemyMesh.LoadSynchronous());
+    if (_enemyRef->DynamicMaterial)
+    {
+        _enemyRef->DynamicMaterial->ConditionalBeginDestroy();
+    }
+
     if (Row.material)
     {
         _enemyRef->GetMesh()->SetMaterial(0, Row.material);
@@ -195,13 +200,27 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable
         {
             _enemyRef->skeletalWeaponComponent->Activate();
             _enemyRef->skeletalWeaponComponent->SetSkeletalMesh(WeaponAsset->skeletalWeaponMesh.LoadSynchronous());
+            _enemyRef->StaticWeaponComponent->SetStaticMesh(nullptr);
             _enemyRef->skeletalWeaponComponent->AttachToComponent(_enemyRef->GetMesh(), rules, WeaponAsset->SocketName);
+            _enemyRef->StaticWeaponComponent->Deactivate();
+
         }
         else if (WeaponAsset->assetClass == AssetType::StaticMesh)
         {
             _enemyRef->StaticWeaponComponent->Activate();
             _enemyRef->StaticWeaponComponent->SetStaticMesh(WeaponAsset->StaticWeaponMesh.LoadSynchronous());
+            _enemyRef->skeletalWeaponComponent->SetSkeletalMesh(nullptr);
             _enemyRef->StaticWeaponComponent->AttachToComponent(_enemyRef->GetMesh(), rules, WeaponAsset->SocketName);
+            _enemyRef->skeletalWeaponComponent->Deactivate();
+
+        }
+        else
+        {
+            _enemyRef->StaticWeaponComponent->SetStaticMesh(nullptr);
+            _enemyRef->skeletalWeaponComponent->SetSkeletalMesh(nullptr);
+
+            _enemyRef->skeletalWeaponComponent->Deactivate();
+            _enemyRef->StaticWeaponComponent->Deactivate();
         }
 
         if (WeaponAsset->weaponAbility)
@@ -211,6 +230,8 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable
     }
     else
     {
+        _enemyRef->StaticWeaponComponent->SetStaticMesh(nullptr);
+        _enemyRef->skeletalWeaponComponent->SetSkeletalMesh(nullptr);
         _enemyRef->skeletalWeaponComponent->Deactivate();
         _enemyRef->StaticWeaponComponent->Deactivate();
     }
