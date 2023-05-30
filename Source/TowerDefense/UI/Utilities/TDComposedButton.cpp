@@ -62,12 +62,12 @@ void UTDComposedButton::TDCanAfford(bool _CanAfford)
     if (_CanAfford)
     {
         SetVisibility(ESlateVisibility::Visible);
-        borderBase->SetBrushColor(AvalibleBuyColor);
+        TDSetButtonBackground(AvalibleBuyColor);
         upgrade->SetVisibility(ESlateVisibility::HitTestInvisible);
     }
     else
     {
-        borderBase->SetBrushColor(NotAvalibleBuyColor);
+        TDSetButtonBackground(NotAvalibleBuyColor);
         SetVisibility(ESlateVisibility::HitTestInvisible);
         upgrade->SetVisibility(ESlateVisibility::Collapsed);
 
@@ -76,23 +76,37 @@ void UTDComposedButton::TDCanAfford(bool _CanAfford)
 
 void UTDComposedButton::TDSetButtonTexture(UTexture2D* _texture)
 {
-    if (IsValid(imgButton) && IsValid(_texture))
+    if (IsValid(customImage) && IsValid(_texture))
     {
         buttonTexture = _texture;
 
-        FButtonStyle& ButtonStyle = imgButton->WidgetStyle;
 
-        FSlateBrush& NormalBrush = ButtonStyle.Normal;
-        NormalBrush.SetResourceObject(_texture);
-
-        FSlateBrush& HoveredBrush = ButtonStyle.Hovered;
-        HoveredBrush.SetResourceObject(_texture);
-
-        FSlateBrush& PressedBrush = ButtonStyle.Pressed;
-        PressedBrush.SetResourceObject(_texture);
-
-        imgButton->SetStyle(ButtonStyle);
+        customImage->SetBrushFromTexture(buttonTexture);
     }
 }
 
+void UTDComposedButton::TDSetButtonBackground(FLinearColor _color)
+{
+    //  *****************  CAMBIAR IMAGEN DE UN UBUTTON **********************
 
+    FButtonStyle& ButtonStyle = imgButton->WidgetStyle;
+
+    FSlateBrush& NormalBrush = ButtonStyle.Normal;
+    NormalBrush.TintColor = _color;
+    // NormalBrush.SetResourceObject(_texture); // imagen
+
+    FSlateBrush& HoveredBrush = ButtonStyle.Hovered;
+    HoveredBrush.TintColor = _color;
+    // HoveredBrush.SetResourceObject(_texture); // imagen
+
+    FSlateBrush& PressedBrush = ButtonStyle.Pressed;
+    PressedBrush.TintColor = _color;
+    // PressedBrush.SetResourceObject(_texture); // imagen
+
+    imgButton->SetStyle(ButtonStyle);
+}
+
+void UTDComposedButton::TDOnHovered()
+{
+
+}

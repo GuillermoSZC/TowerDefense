@@ -4,6 +4,7 @@
 #include "Gas/Task/ShapesCastTask.h"
 #include "DrawDebugHelpers.h"
 #include "Engine/Private/KismetTraceUtils.h"
+#include "Interfaces/TDInterface.h"
 
 UShapesCastTask::UShapesCastTask()
 {

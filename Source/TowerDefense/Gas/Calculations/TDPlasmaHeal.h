@@ -7,6 +7,7 @@
 #include "TDMacros.h"
 #include "AttributesSets/TDHealthAttributeSet.h"
 #include "AttributesSets/TDDamageAttributeSet.h"
+#include "AttributesSets/TDLevelAttributeSet.h"
 #include "TDPlasmaHeal.generated.h"
 
 

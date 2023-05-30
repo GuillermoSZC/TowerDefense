@@ -4,7 +4,7 @@
 #include "Components/ActorComponent.h"
 #include "TDWidgetShopComponent.generated.h"
 
-class UTDUserWidget;
+class UTDCostWidget;
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnOpenUISignature, UWidget*, _widget);
@@ -22,7 +22,7 @@ public:
 
 
     UPROPERTY(EditDefaultsOnly, Category = "User Interface")
-        TSubclassOf<UTDUserWidget> widgetClass;
+        TSubclassOf<UTDCostWidget> widgetClass;
 
 
 
@@ -32,7 +32,7 @@ public:
 protected:
 
     UPROPERTY(VisibleAnywhere, Category = "User Interface")
-        UTDUserWidget* widgetRef;
+        UTDCostWidget* widgetRef;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "User Interface")
         bool isUIActive;

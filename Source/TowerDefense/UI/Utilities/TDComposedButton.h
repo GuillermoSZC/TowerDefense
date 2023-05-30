@@ -37,6 +37,9 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UImage* upgrade;
 
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UImage* customImage;
+
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Custom properties")
         class UTexture2D* bpTexture = nullptr;
 
@@ -54,9 +57,6 @@ public:
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDTextWithImage* bps;
-
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UBorder* borderBase;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UBorder* borderBckgText;
@@ -86,6 +86,12 @@ public:
 
     UFUNCTION()
         void TDSetButtonTexture(UTexture2D* _texture);
+
+    UFUNCTION()
+        void TDSetButtonBackground(FLinearColor _color);
+
+    UFUNCTION()
+        void TDOnHovered();
 
 protected:
 

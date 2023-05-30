@@ -3,6 +3,7 @@
 
 #include "Gas/Task/ConeShapeCastTask.h"
 #include "DrawDebugHelpers.h"
+#include "Interfaces/TDInterface.h"
 
 
 UConeShapeCastTask::UConeShapeCastTask()

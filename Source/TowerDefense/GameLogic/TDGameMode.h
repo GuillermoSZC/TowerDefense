@@ -16,7 +16,7 @@ class UDataTable;
 class UTDElement;
 class UTDWeightManager;
 class UTDGameplayEventData;
-class UTDUserWidget;
+class UTDCostWidget;
 class UTDTowerShop;
 class UTDTowerUpgrade;
 class UTDBaseUpgrade;
@@ -88,7 +88,7 @@ private:
         UTDWeightManager* weightManagerRef = nullptr;
 
      UPROPERTY()
-         TMap<TSubclassOf<UTDUserWidget>, UTDUserWidget*> widgetMap;
+         TMap<TSubclassOf<UTDCostWidget>, UTDCostWidget*> widgetMap;
 
      UPROPERTY(Transient)
          ATDCostManager* CostManagerRef = nullptr;
@@ -102,7 +102,7 @@ public:
 
     UDataTable* TDGetDataLootFromElement(EElements _keyElement);
 
-    UTDUserWidget* TDGetWidgetFromClass(TSubclassOf<UTDUserWidget> _class);
+    UTDCostWidget* TDGetWidgetFromClass(TSubclassOf<UTDCostWidget> _class);
 
 protected:
     void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;
@@ -117,7 +117,7 @@ protected:
 
 private:
      UFUNCTION()
-         UTDUserWidget* TDAddToViewport(TSubclassOf<UTDUserWidget> _widgetClass);
+         UTDCostWidget* TDAddToViewport(TSubclassOf<UTDCostWidget> _widgetClass);
 
 
 };

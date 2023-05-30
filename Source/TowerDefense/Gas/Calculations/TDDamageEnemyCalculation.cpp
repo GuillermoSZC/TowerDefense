@@ -3,6 +3,8 @@
 
 #include "Gas/Calculations/TDDamageEnemyCalculation.h"
 #include "GameplayEffectExecutionCalculation.h"
+#include "GameLogic/TDGameData.h"
+#include "GameLogic/TDRoundManager.h"
 
 
 
