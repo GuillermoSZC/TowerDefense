@@ -18,6 +18,8 @@ public:
     UTDElementComponent();
 
 public:
+
+    UPROPERTY(BlueprintAssignable)
     FOnElementChangeSignature OnElementChangeDelegate;
 
 protected:
