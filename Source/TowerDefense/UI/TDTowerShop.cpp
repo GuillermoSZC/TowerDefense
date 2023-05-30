@@ -61,7 +61,6 @@ void UTDTowerShop::TDUpdateCost()
     TDUpdateInventoryToText(bpDeadRay, ELootItems::DeathRayBP);
     TDUpdateInventoryToText(bpMovement, ELootItems::SpeedTowerBP);
     TDUpdateInventoryToText(bpDamage, ELootItems::AttackTowerBP);
-
 }
 
 void UTDTowerShop::TDOnVisibilityChange(ESlateVisibility _visible)

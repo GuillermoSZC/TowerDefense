@@ -1,4 +1,6 @@
 #include "UI/PauseMenu/TDInventory.h"
+#include "GameLogic/TDLootEnum.h"
+#include "TDResourceCard.h"
 
 bool UTDInventory::Initialize()
 {

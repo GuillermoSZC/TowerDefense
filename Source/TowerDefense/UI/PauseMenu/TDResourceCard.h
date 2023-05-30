@@ -2,10 +2,13 @@
 
 #include "CoreMinimal.h"
 #include "UI/TDUserWidget.h"
+#include "GameLogic/TDLootEnum.h"
 #include "TDResourceCard.generated.h"
 
 class UImage;
 class UTexture2D;
+class UTDRichTextBlock;
+class UBorder;
 
 UCLASS()
 class TOWERDEFENSE_API UTDResourceCard : public UTDUserWidget
@@ -23,6 +26,16 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
         UTexture2D* resourceTex;
 
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDRichTextBlock* resourceText;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UBorder* backgroundMain;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UBorder* backgroundSecondary;
+
+
 protected:
 
 
@@ -33,7 +46,16 @@ public:
     UFUNCTION()
         void TDSetImage(UTexture2D* _tex);
 
+    UFUNCTION()
+        void TDUpdateResource(ELootItems _item);
+
 protected:
+    UFUNCTION()
+        FText TDGetTextFromItem(ELootItems _item);
+
+    UFUNCTION()
+        void TDUpdateInventoryToText(UTDRichTextBlock* _text, ELootItems _item);
+
 
 
 private:

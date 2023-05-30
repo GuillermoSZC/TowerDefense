@@ -7,6 +7,7 @@
 class UCanvasPanel;
 class UTDTextWithImage;
 class UVerticalBox;
+class UTDResourceCard;
 
 UCLASS()
 class TOWERDEFENSE_API UTDInventory : public UTDUserWidget

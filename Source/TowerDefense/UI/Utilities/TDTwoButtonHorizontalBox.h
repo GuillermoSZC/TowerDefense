@@ -23,7 +23,7 @@ private:
 
 public:
     UFUNCTION(BlueprintCallable)
-        void TDAddButton(UTDComposedButton* _button);
+        void TDAddButton(UUserWidget* _component);
 
 protected:
 
