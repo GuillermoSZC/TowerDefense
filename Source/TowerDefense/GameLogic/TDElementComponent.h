@@ -38,6 +38,9 @@ private:
         UTDElement* TemporalElementData;
 
 
+    TMap<AActor*, EElements> heapTemporalElements;
+
+
 public:
     // Called every frame
     virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
@@ -47,10 +50,10 @@ public:
         void TDSetSpawnedElement(EElements _element);
  
     UFUNCTION(BlueprintCallable)
-        void TDSetTemporalElement(EElements _element);
+        void TDSetTemporalElement(AActor* _instigator,EElements _element);
 
     UFUNCTION(BlueprintCallable)
-        void TDRemoveTemporalElement();
+        void TDRemoveTemporalElement(AActor* _instigator);
 
     UFUNCTION(BlueprintPure)
         EElements TDGetOwnerElement();

@@ -47,11 +47,13 @@ void ATDPlayerCharacter::TDOnElementChange_Implementation(EElements _newElement)
     if (ElementsVFX.Contains(_newElement))
     {
         actualVFXAsset = ElementsVFX[_newElement];
+        swordCover->Activate(true);
         swordCover->SetAsset(actualVFXAsset->StaticSwordEffect);
     }
     else
     {
         actualVFXAsset = nullptr;
+        swordCover->Deactivate();
     }
 
 }

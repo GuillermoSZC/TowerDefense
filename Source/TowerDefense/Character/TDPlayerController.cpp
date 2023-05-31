@@ -11,6 +11,8 @@
 #include "UMG/Public/Blueprint/WidgetBlueprintLibrary.h"
 #include <Abilities/GameplayAbilityTypes.h>
 #include <AbilitySystemBlueprintLibrary.h>
+#include "GameLogic/TDRoundManager.h"
+#include "GameLogic/TDGameData.h"
 
 
 ATDPlayerController::ATDPlayerController()

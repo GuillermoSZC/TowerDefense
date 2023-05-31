@@ -36,18 +36,38 @@ void UTDElementComponent::TDSetSpawnedElement(EElements _element)
     OnElementChangeDelegate.Broadcast(ownerElement);
 }
 
-void UTDElementComponent::TDSetTemporalElement(EElements _element)
+void UTDElementComponent::TDSetTemporalElement(AActor* _instigator,EElements _element)
 {
     TemporalElementData = UTDGameData::TDGetGameMode()->TDGetDataAssetFromElement(_element);
     ownerElement = TemporalElementData->ownerElement;
+    heapTemporalElements.Add(_instigator, _element);
     OnElementChangeDelegate.Broadcast(ownerElement);
+
+
 }
 
-void UTDElementComponent::TDRemoveTemporalElement()
+void UTDElementComponent::TDRemoveTemporalElement(AActor* _instigator)
 {
-    TemporalElementData = nullptr;
-    ownerElement = SpawnedElementData->ownerElement;
-    OnElementChangeDelegate.Broadcast(ownerElement);
+    heapTemporalElements.Remove(_instigator);
+
+    if (heapTemporalElements.IsEmpty())
+    {
+        TemporalElementData = nullptr;
+        ownerElement = SpawnedElementData->ownerElement;
+        OnElementChangeDelegate.Broadcast(ownerElement);
+    }
+    else
+    {
+        TArray<AActor*>  keys;
+        heapTemporalElements.GetKeys(keys);
+        EElements NextHeapElement = heapTemporalElements[keys[0]];        
+        TemporalElementData = UTDGameData::TDGetGameMode()->TDGetDataAssetFromElement(NextHeapElement);
+        ownerElement = TemporalElementData->ownerElement;
+        OnElementChangeDelegate.Broadcast(ownerElement);
+
+    }
+
+   
 }
 
 EElements UTDElementComponent::TDGetOwnerElement()
