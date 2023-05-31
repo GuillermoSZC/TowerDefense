@@ -13,7 +13,7 @@ UTDCalculateEnemyAttributes::UTDCalculateEnemyAttributes()
     RelevantAttributesToCapture.Add(structAbilities.maxHealthTargetDef);
     RelevantAttributesToCapture.Add(structAbilities.healthTargetDef);
     RelevantAttributesToCapture.Add(structAbilities.attackDamageTargetDef);
-    RelevantAttributesToCapture.Add(structAbilities.attackSpeedTargetDef);
+    RelevantAttributesToCapture.Add(structAbilities.BaseAttackSpeedTargetDef);
     RelevantAttributesToCapture.Add(structAbilities.attackRangeTargetDef);
     RelevantAttributesToCapture.Add(structAbilities.movementSpeedTargetDef);
 
@@ -41,7 +41,7 @@ void UTDCalculateEnemyAttributes::Execute_Implementation(const FGameplayEffectCu
 
     FGameplayModifierEvaluatedData TargetMaxHealthModification = FGameplayModifierEvaluatedData(structAbilities.maxHealthTargetProperty, EGameplayModOp::Override, newHealth);
     FGameplayModifierEvaluatedData TargetHealthModification = FGameplayModifierEvaluatedData(structAbilities.healthTargetProperty, EGameplayModOp::Override, newHealth);
-    FGameplayModifierEvaluatedData TargetAttackSpeedModification = FGameplayModifierEvaluatedData(structAbilities.attackSpeedTargetProperty, EGameplayModOp::Override, newAttackSpeed);
+    FGameplayModifierEvaluatedData TargetAttackSpeedModification = FGameplayModifierEvaluatedData(structAbilities.BaseAttackSpeedTargetProperty, EGameplayModOp::Override, newAttackSpeed);
     FGameplayModifierEvaluatedData TargetAttackDamageModification = FGameplayModifierEvaluatedData(structAbilities.attackDamageTargetProperty, EGameplayModOp::Override, newAttackDamage);
     FGameplayModifierEvaluatedData TargetAttackRangeModification = FGameplayModifierEvaluatedData(structAbilities.attackRangeTargetProperty, EGameplayModOp::Override, newAttackRange);
     FGameplayModifierEvaluatedData TargetSpeedModification = FGameplayModifierEvaluatedData(structAbilities.movementSpeedTargetProperty, EGameplayModOp::Override, newMoveSpeed);

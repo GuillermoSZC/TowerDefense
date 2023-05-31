@@ -172,7 +172,8 @@ void ATDTower::TDInitialize()
 
     const UAttributeSet* attributesInit = abilitySystem->InitStats(UTDDamageAttributeSet::StaticClass(), damageDatatable);
     TowerAttributes = Cast<UTDDamageAttributeSet>(attributesInit);
-    periodAttack = TowerAttributes->GetattackSpeed();
+    periodAttack = TowerAttributes->GetBaseAttackSpeed();
+    abilitySystem->ApplyModToAttribute(TowerAttributes->GetattackSpeedAttribute(), EGameplayModOp::Type::Override, TowerAttributes->GetBaseAttackSpeed());
 
     for (size_t i = 0; i < abiliyList.Num(); ++i)
     {
@@ -288,6 +289,8 @@ void ATDTower::TDActivateDelegates()
     TowerDamageChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetattackDamageAttribute()).AddUObject(this, &ATDTower::TDDamageChanged);
     TowerRangeChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetattackRangeAttribute()).AddUObject(this, &ATDTower::TDRangeChanged);
     TowerPeriodAttackChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetattackSpeedAttribute()).AddUObject(this, &ATDTower::TDPeriodAttackChanged);
+    TowerBaseAttackSpeedChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetBaseAttackSpeedAttribute()).AddUObject(this, &ATDTower::TDPercentageSpeedChanged);
+    TowerPercentageAttackSpeedChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(TowerAttributes->GetPercentageAttackSpeedAttribute()).AddUObject(this, &ATDTower::TDBaseAttackSpeedChanged);
     LevelUpChangedDelegateHandle = abilitySystem->GetGameplayAttributeValueChangeDelegate(UTDLevelAttributeSet::GetlevelAttribute()).AddUObject(this, &ATDTower::TDLevelUpChanged);
 }
 
@@ -304,8 +307,9 @@ void ATDTower::TDRangeChanged(const FOnAttributeChangeData& Data)
 
 void ATDTower::TDPeriodAttackChanged(const FOnAttributeChangeData& Data)
 {
-    float temp = (periodAttack * Data.NewValue) / 100.f;
-    periodAttack = periodAttack - temp;
+    
+    periodAttack = abilitySystem->GetNumericAttribute(TowerAttributes->GetattackSpeedAttribute());
+
 }
 
 void ATDTower::TDLevelUpChanged(const FOnAttributeChangeData& Data)
@@ -317,5 +321,15 @@ void ATDTower::TDLevelUpChanged(const FOnAttributeChangeData& Data)
         abilitySystem->ApplyGameplayEffectToSelf(effectRef, 0, context);
         effectRef->ConditionalBeginDestroy();
     }
+}
+
+void ATDTower::TDPercentageSpeedChanged(const FOnAttributeChangeData& Data)
+{
+
+}
+
+void ATDTower::TDBaseAttackSpeedChanged(const FOnAttributeChangeData& Data)
+{
+
 }
 

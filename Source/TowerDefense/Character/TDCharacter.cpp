@@ -85,6 +85,8 @@ void ATDCharacter::TDActivateDelegates()
     abilitySystem->GetGameplayAttributeValueChangeDelegate(damageAttributes->GetattackDamageAttribute()).AddUObject(this, &ATDCharacter::TDAttackDamageChanged);
     abilitySystem->GetGameplayAttributeValueChangeDelegate(damageAttributes->GetattackRangeAttribute()).AddUObject(this, &ATDCharacter::TDAttackRangeChanged);
     abilitySystem->GetGameplayAttributeValueChangeDelegate(damageAttributes->GetattackSpeedAttribute()).AddUObject(this, &ATDCharacter::TDAttackSpeedChanged);
+    abilitySystem->GetGameplayAttributeValueChangeDelegate(damageAttributes->GetBaseAttackSpeedAttribute()).AddUObject(this, &ATDCharacter::TDBaseAttackSpeedChanged);
+    abilitySystem->GetGameplayAttributeValueChangeDelegate(damageAttributes->GetPercentageAttackSpeedAttribute()).AddUObject(this, &ATDCharacter::TDPercentageSpeedChanged);
     abilitySystem->GetGameplayAttributeValueChangeDelegate(movementAttributes->GetmovementSpeedAttribute()).AddUObject(this, &ATDCharacter::TDMovementSpeedChanged);
 }
 
@@ -127,6 +129,16 @@ void ATDCharacter::TDAttackRangeChanged(const FOnAttributeChangeData& Data)
 }
 
 void ATDCharacter::TDAttackSpeedChanged(const FOnAttributeChangeData& Data)
+{
+
+}
+
+void ATDCharacter::TDBaseAttackSpeedChanged(const FOnAttributeChangeData& Data)
+{
+
+}
+
+void ATDCharacter::TDPercentageSpeedChanged(const FOnAttributeChangeData& Data)
 {
 
 }

@@ -19,7 +19,7 @@ struct TDAtrributeCaptureEnemy
 	TDDECLARE_ATTRIBUTE_CAPTUREDEF(maxHealth, Target);
 	TDDECLARE_ATTRIBUTE_CAPTUREDEF(health, Target);
 	TDDECLARE_ATTRIBUTE_CAPTUREDEF(attackDamage, Target);
-	TDDECLARE_ATTRIBUTE_CAPTUREDEF(attackSpeed, Target);
+	TDDECLARE_ATTRIBUTE_CAPTUREDEF(BaseAttackSpeed, Target);
 	TDDECLARE_ATTRIBUTE_CAPTUREDEF(attackRange, Target);
 	TDDECLARE_ATTRIBUTE_CAPTUREDEF(movementSpeed, Target);
 
@@ -29,7 +29,7 @@ struct TDAtrributeCaptureEnemy
 		TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDHealthAttributeSet, maxHealth, Target, false);
 		TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDHealthAttributeSet, health, Target, false);
 		TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDDamageAttributeSet, attackDamage, Target, false);
-		TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDDamageAttributeSet, attackSpeed, Target, false);
+		TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDDamageAttributeSet, BaseAttackSpeed, Target, false);
 		TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDDamageAttributeSet, attackRange, Target, false);
 		TDDEFINE_ATTRIBUTE_CAPTUREDEF(UTDMovementAttributeSet, movementSpeed, Target, false);
 

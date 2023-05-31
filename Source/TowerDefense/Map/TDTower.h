@@ -71,6 +71,8 @@ protected:
     FDelegateHandle TowerRangeChangedDelegateHandle;
     FDelegateHandle TowerDamageChangedDelegateHandle;
     FDelegateHandle TowerPeriodAttackChangedDelegateHandle;
+    FDelegateHandle TowerBaseAttackSpeedChangedDelegateHandle;
+    FDelegateHandle TowerPercentageAttackSpeedChangedDelegateHandle;
     FDelegateHandle LevelUpChangedDelegateHandle;
 #pragma endregion
 
@@ -161,5 +163,8 @@ private:
 
     void TDLevelUpChanged(const FOnAttributeChangeData& Data);
 
+    void TDPercentageSpeedChanged(const FOnAttributeChangeData& Data);
+
+    void TDBaseAttackSpeedChanged(const FOnAttributeChangeData& Data);
 
 };

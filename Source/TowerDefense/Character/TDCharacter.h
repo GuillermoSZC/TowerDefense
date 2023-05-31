@@ -70,6 +70,8 @@ protected:
     FDelegateHandle AttackRangeChangedDelegateHandle;
     FDelegateHandle AttackSpeedChangedDelegateHandle;
     FDelegateHandle MovementSpeedChangedDelegateHandle;
+    FDelegateHandle BaseAttackSpeedChangedDelegateHandle;
+    FDelegateHandle PercentageAttackSpeedChangedDelegateHandle;
 
 #pragma endregion
 
@@ -144,6 +146,8 @@ private:
     void TDAttackDamageChanged(const FOnAttributeChangeData& Data);
     void TDAttackRangeChanged(const FOnAttributeChangeData& Data);
     void TDAttackSpeedChanged(const FOnAttributeChangeData& Data);
+    void TDBaseAttackSpeedChanged(const FOnAttributeChangeData& Data);
+    void TDPercentageSpeedChanged(const FOnAttributeChangeData& Data);
     void TDMovementSpeedChanged(const FOnAttributeChangeData& Data);
 
 };
