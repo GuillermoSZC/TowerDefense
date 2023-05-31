@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "TDTowerEnum.h"
 #include "TDBuyStruct.h"
+#include "Delegates/TDDeclareDelegates.h"
 #include "TDCostManager.generated.h"
 
 class ATDTower;

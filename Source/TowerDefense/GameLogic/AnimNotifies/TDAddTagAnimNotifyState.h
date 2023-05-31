@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Animation/AnimNotifies/AnimNotifyState.h"
+#include <GameplayTagContainer.h>
 #include "TDAddTagAnimNotifyState.generated.h"
 
 /**
