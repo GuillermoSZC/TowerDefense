@@ -48,6 +48,8 @@ public:
     UPROPERTY(BlueprintAssignable)
         FOnAttackRangeChangeSignature FOnAttackRangeChangeDelegate;
 
+    UPROPERTY(BlueprintAssignable)
+    FOnLevelUpChangeSignature FOnLevelUpChangeDelegate;
 
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")

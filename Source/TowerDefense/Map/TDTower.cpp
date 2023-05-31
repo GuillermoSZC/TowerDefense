@@ -156,7 +156,7 @@ void ATDTower::TDResetAttackTimer_Implementation()
 void ATDTower::BeginPlay()
 {
     Super::BeginPlay();
-
+   
     TDInitialize();
 
     UTDGameData::TDGetRoundManager()->FOnBuyPhaseStartDelegate.AddDynamic(this, &ATDTower::TDUpdateRoundValues);
@@ -165,6 +165,7 @@ void ATDTower::BeginPlay()
     {
         elementComponent->OnElementChangeDelegate.AddUniqueDynamic(this, &ATDTower::TDOnElementChange);
     }
+    UTDGameData::TDGetCostManager()->TDTowerSpawn(this);
 }
 
 void ATDTower::TDInitialize()
@@ -172,8 +173,8 @@ void ATDTower::TDInitialize()
 
     const UAttributeSet* attributesInit = abilitySystem->InitStats(UTDDamageAttributeSet::StaticClass(), damageDatatable);
     TowerAttributes = Cast<UTDDamageAttributeSet>(attributesInit);
-    periodAttack = TowerAttributes->GetBaseAttackSpeed();
-    abilitySystem->ApplyModToAttribute(TowerAttributes->GetattackSpeedAttribute(), EGameplayModOp::Type::Override, TowerAttributes->GetBaseAttackSpeed());
+    periodAttack = TowerAttributes->GetattackSpeed();
+    //abilitySystem->ApplyModToAttribute(TowerAttributes->GetattackSpeedAttribute(), EGameplayModOp::Type::Override, TowerAttributes->GetBaseAttackSpeed());
 
     for (size_t i = 0; i < abiliyList.Num(); ++i)
     {
@@ -314,6 +315,7 @@ void ATDTower::TDPeriodAttackChanged(const FOnAttributeChangeData& Data)
 
 void ATDTower::TDLevelUpChanged(const FOnAttributeChangeData& Data)
 {
+    
     if (((int)Data.NewValue - 1) % UpgradeEveryXLevel == 0)
     {
         UGameplayEffect* effectRef = Cast<UGameplayEffect>(levelUpgrade->GetDefaultObject());
@@ -321,6 +323,7 @@ void ATDTower::TDLevelUpChanged(const FOnAttributeChangeData& Data)
         abilitySystem->ApplyGameplayEffectToSelf(effectRef, 0, context);
         effectRef->ConditionalBeginDestroy();
     }
+    FOnLevelUpChangeDelegate.Broadcast(Data.NewValue);
 }
 
 void ATDTower::TDPercentageSpeedChanged(const FOnAttributeChangeData& Data)
