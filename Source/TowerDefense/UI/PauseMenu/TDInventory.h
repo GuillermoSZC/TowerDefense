@@ -8,6 +8,9 @@ class UCanvasPanel;
 class UTDTextWithImage;
 class UVerticalBox;
 class UTDResourceCard;
+class UTDTwoButtonHorizontalBox;
+class UDataTable;
+class UWidgetTree;
 
 UCLASS()
 class TOWERDEFENSE_API UTDInventory : public UTDUserWidget
@@ -34,6 +37,9 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UVerticalBox* gems;
 
+    UPROPERTY(EditDefaultsOnly)
+        UDataTable* resourcesDataTable;
+
 protected:
 
 
@@ -41,11 +47,19 @@ private:
 
 
 public:
-
+    UFUNCTION(BlueprintImplementableEvent)
+        UTDResourceCard* TDCreateCard(TSubclassOf<UTDResourceCard> _resourceCard);
 
 protected:
 
 
 private:
+    UFUNCTION()
+    void TDInitComponents();
 
+    UFUNCTION()
+    void TDAddResourceCard(UTDResourceCard* _card, UVerticalBox* _verticalBox);
+
+    UFUNCTION()
+    void TDFillStructures();
 };

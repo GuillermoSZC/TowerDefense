@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "UI/TDUserWidget.h"
 #include "GameLogic/TDLootEnum.h"
+#include "GameLogic/Structs/TDResourceCardParameters.h"
 #include "TDResourceCard.generated.h"
 
 class UImage;
@@ -15,6 +16,8 @@ class TOWERDEFENSE_API UTDResourceCard : public UTDUserWidget
 {
     GENERATED_BODY()
 public:
+    UTDResourceCard();
+
     virtual bool Initialize() override;
     virtual void NativePreConstruct() override;
     virtual void NativeConstruct() override;
@@ -36,11 +39,12 @@ public:
         UBorder* backgroundSecondary;
 
 
+
 protected:
 
 
 private:
-
+    FMargin padding;
 
 public:
     UFUNCTION()
@@ -48,6 +52,12 @@ public:
 
     UFUNCTION()
         void TDUpdateResource(ELootItems _item);
+
+    UFUNCTION()
+        void TDSetPadding(FMargin _padding);
+
+    UFUNCTION()
+        static void TDGetResourceClassFromRow(FTDResourceCardParameters& _row, UTDResourceCard* _card);
 
 protected:
     UFUNCTION()

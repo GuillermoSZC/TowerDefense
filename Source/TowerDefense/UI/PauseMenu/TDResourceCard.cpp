@@ -4,6 +4,13 @@
 #include "Character/TDPlayerCharacter.h"
 #include "GameLogic/TDGameData.h"
 #include "UI/Utilities/TDRichTextBlock.h"
+#include <UMG/Public/Components/Border.h>
+
+UTDResourceCard::UTDResourceCard()
+{
+    resourceImage = CreateDefaultSubobject<UImage>("Image");
+    backgroundMain = CreateDefaultSubobject<UBorder>("Border");
+}
 
 bool UTDResourceCard::Initialize()
 {
@@ -17,6 +24,10 @@ void UTDResourceCard::NativePreConstruct()
     Super::NativePreConstruct();
 
     TDSetImage(resourceTex);
+    
+
+
+    SetPadding(padding);
 }
 
 void UTDResourceCard::NativeConstruct()
@@ -37,6 +48,19 @@ void UTDResourceCard::TDSetImage(UTexture2D* _tex)
 void UTDResourceCard::TDUpdateResource(ELootItems _item)
 {
     TDUpdateInventoryToText(resourceText, _item);
+}
+
+void UTDResourceCard::TDSetPadding(FMargin _padding)
+{
+    padding = _padding;
+    SetPadding(padding);
+}
+
+void UTDResourceCard::TDGetResourceClassFromRow(FTDResourceCardParameters& _row, UTDResourceCard* _card)
+{
+    _card->TDSetImage(_row.image);
+    _card->backgroundMain->SetBrushColor(_row.color);
+    _card->TDSetPadding(_row.padding);
 }
 
 FText UTDResourceCard::TDGetTextFromItem(ELootItems _item)
