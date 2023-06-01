@@ -44,7 +44,7 @@ protected:
 
 
 private:
-
+    TArray<UTDResourceCard*> cartitas;
 
 public:
     UFUNCTION(BlueprintImplementableEvent)

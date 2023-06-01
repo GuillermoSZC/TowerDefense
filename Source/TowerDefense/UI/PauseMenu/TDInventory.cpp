@@ -20,6 +20,12 @@ void UTDInventory::NativePreConstruct()
 {
     Super::NativePreConstruct();
 
+    for (UTDResourceCard* iter : cartitas)
+    {
+        iter->ConditionalBeginDestroy();
+    }
+    cartitas.Empty();
+
     TDInitComponents();
 }
 
@@ -42,7 +48,7 @@ void UTDInventory::TDAddResourceCard(UTDResourceCard* _card, UVerticalBox* _vert
 
     if (_verticalBox->GetChildrenCount() == 0)
     {
-        UTDTwoButtonHorizontalBox* horizontalTemp = NewObject<UTDTwoButtonHorizontalBox>(UTDTwoButtonHorizontalBox::StaticClass(), TEXT("HorizontalBox"));
+        UTDTwoButtonHorizontalBox* horizontalTemp = NewObject<UTDTwoButtonHorizontalBox>(_verticalBox,UTDTwoButtonHorizontalBox::StaticClass(), TEXT("HorizontalBox"));
 
         _verticalBox->AddChildToVerticalBox(horizontalTemp);
 
@@ -56,7 +62,7 @@ void UTDInventory::TDAddResourceCard(UTDResourceCard* _card, UVerticalBox* _vert
 
         if (IsValid(horizontalTemp) && !horizontalTemp->TDAddButton(_card))
         {
-            horizontalTemp = NewObject<UTDTwoButtonHorizontalBox>(UTDTwoButtonHorizontalBox::StaticClass(), TEXT("HorizontalBox"));
+            horizontalTemp = NewObject<UTDTwoButtonHorizontalBox>(_verticalBox, UTDTwoButtonHorizontalBox::StaticClass(), TEXT("HorizontalBox"));
 
             _verticalBox->AddChildToVerticalBox(horizontalTemp);
 
@@ -76,8 +82,9 @@ void UTDInventory::TDFillStructures()
         for (FName name : rowNames)
         {
             row = resourcesDataTable->FindRow<FTDResourceCardParameters>(name, context);
-            UTDResourceCard* resourceCard = TDCreateCard(row->resourceClass);
-            UTDResourceCard::TDGetResourceClassFromRow(*row, resourceCard);
+            UTDResourceCard* resourceCard = CreateWidget<UTDResourceCard>(this, *row->resourceClass);  
+            UTDResourceCard::TDSetResourceCardAttributes(*row, resourceCard);
+            cartitas.Add(resourceCard);
 
             switch (row->column)
             {
