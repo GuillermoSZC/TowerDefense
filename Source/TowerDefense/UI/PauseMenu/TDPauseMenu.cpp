@@ -3,9 +3,13 @@
 #include "GameLogic/TDLootEnum.h"
 #include "TDResourceCard.h"
 
+UTDPauseMenu* UTDPauseMenu::owner = nullptr;
+
 bool UTDPauseMenu::Initialize()
 {
     Super::Initialize();
+
+    owner = this;
 
     return true;
 }
@@ -22,21 +26,19 @@ void UTDPauseMenu::NativeConstruct()
 
 
     OnVisibilityChanged.AddDynamic(this, &UTDPauseMenu::TDOnVisibilityChange);
-    FUIUpdateResourcesDelegate.AddDynamic(this, &UTDPauseMenu::TDUpdateCards);
+
+}
+
+UTDPauseMenu* UTDPauseMenu::TDGetPauseMenuRef()
+{
+    return owner;
 }
 
 void UTDPauseMenu::TDOnVisibilityChange(ESlateVisibility _visible)
 {
     if (_visible == ESlateVisibility::Visible)
     {
-        FUIUpdateResourcesDelegate.Broadcast();
+
     }
 }
 
-void UTDPauseMenu::TDUpdateCards()
-{
-    if (inventory)
-    {
-        // inventory->healthCard->TDUpdateResource(ELootItems::ArmorBP);
-    }
-}

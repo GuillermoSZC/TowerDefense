@@ -20,12 +20,6 @@ void UTDInventory::NativePreConstruct()
 {
     Super::NativePreConstruct();
 
-    for (UTDResourceCard* iter : cartitas)
-    {
-        iter->ConditionalBeginDestroy();
-    }
-    cartitas.Empty();
-
     TDInitComponents();
 }
 
@@ -44,11 +38,11 @@ void UTDInventory::TDInitComponents()
 void UTDInventory::TDAddResourceCard(UTDResourceCard* _card, UVerticalBox* _verticalBox)
 {
     UButton* button = NewObject<UButton>(UButton::StaticClass(), "Button");
-    UTDTwoButtonHorizontalBox* horizontalTemp;
+
 
     if (_verticalBox->GetChildrenCount() == 0)
     {
-        UTDTwoButtonHorizontalBox* horizontalTemp = NewObject<UTDTwoButtonHorizontalBox>(_verticalBox,UTDTwoButtonHorizontalBox::StaticClass(), TEXT("HorizontalBox"));
+        UTDTwoButtonHorizontalBox* horizontalTemp = NewObject<UTDTwoButtonHorizontalBox>(_verticalBox, UTDTwoButtonHorizontalBox::StaticClass(), TEXT("HorizontalBox"));
 
         _verticalBox->AddChildToVerticalBox(horizontalTemp);
 
@@ -58,7 +52,7 @@ void UTDInventory::TDAddResourceCard(UTDResourceCard* _card, UVerticalBox* _vert
     {
         int arraySize = _verticalBox->GetChildrenCount();
 
-        horizontalTemp = Cast<UTDTwoButtonHorizontalBox>(_verticalBox->GetChildAt(arraySize - 1));
+        UTDTwoButtonHorizontalBox* horizontalTemp = Cast<UTDTwoButtonHorizontalBox>(_verticalBox->GetChildAt(arraySize - 1));
 
         if (IsValid(horizontalTemp) && !horizontalTemp->TDAddButton(_card))
         {
@@ -69,6 +63,8 @@ void UTDInventory::TDAddResourceCard(UTDResourceCard* _card, UVerticalBox* _vert
             horizontalTemp->TDAddButton(_card);
         }
     }
+
+
 }
 
 void UTDInventory::TDFillStructures()
@@ -82,9 +78,8 @@ void UTDInventory::TDFillStructures()
         for (FName name : rowNames)
         {
             row = resourcesDataTable->FindRow<FTDResourceCardParameters>(name, context);
-            UTDResourceCard* resourceCard = CreateWidget<UTDResourceCard>(this, *row->resourceClass);  
+            UTDResourceCard* resourceCard = CreateWidget<UTDResourceCard>(this, *row->resourceClass);
             UTDResourceCard::TDSetResourceCardAttributes(*row, resourceCard);
-            cartitas.Add(resourceCard);
 
             switch (row->column)
             {

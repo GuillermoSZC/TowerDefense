@@ -44,7 +44,11 @@ protected:
 
 
 private:
-    FMargin padding;
+    UPROPERTY()
+        FMargin customPadding;
+
+    UPROPERTY()
+        ELootItems item;
 
 public:
     UFUNCTION()
@@ -59,6 +63,15 @@ public:
     UFUNCTION()
         static void TDSetResourceCardAttributes(FTDResourceCardParameters& _row, UTDResourceCard* _card);
 
+    UFUNCTION()
+        void TDOnVisibilityChange(ESlateVisibility _visibility);
+
+    UFUNCTION()
+        void TDSetItem(ELootItems _item);
+
+    UFUNCTION()
+        ELootItems TDGetItem() const;
+
 protected:
     UFUNCTION()
         FText TDGetTextFromItem(ELootItems _item);
@@ -66,7 +79,6 @@ protected:
     UFUNCTION()
         void TDUpdateInventoryToText(UTDRichTextBlock* _text, ELootItems _item);
 
-
-
 private:
+
 };

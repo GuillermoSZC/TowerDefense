@@ -44,7 +44,7 @@ protected:
 
 
 private:
-    TArray<UTDResourceCard*> cartitas;
+
 
 public:
 
@@ -61,4 +61,5 @@ private:
 
     UFUNCTION()
     void TDFillStructures();
+
 };
