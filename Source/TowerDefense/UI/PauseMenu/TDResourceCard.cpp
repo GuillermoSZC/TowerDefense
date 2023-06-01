@@ -56,7 +56,7 @@ void UTDResourceCard::TDSetPadding(FMargin _padding)
     SetPadding(padding);
 }
 
-void UTDResourceCard::TDGetResourceClassFromRow(FTDResourceCardParameters& _row, UTDResourceCard* _card)
+void UTDResourceCard::TDSetResourceCardAttributes(FTDResourceCardParameters& _row, UTDResourceCard* _card)
 {
     _card->TDSetImage(_row.image);
     _card->backgroundMain->SetBrushColor(_row.color);

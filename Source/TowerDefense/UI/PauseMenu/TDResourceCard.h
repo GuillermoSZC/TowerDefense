@@ -57,7 +57,7 @@ public:
         void TDSetPadding(FMargin _padding);
 
     UFUNCTION()
-        static void TDGetResourceClassFromRow(FTDResourceCardParameters& _row, UTDResourceCard* _card);
+        static void TDSetResourceCardAttributes(FTDResourceCardParameters& _row, UTDResourceCard* _card);
 
 protected:
     UFUNCTION()

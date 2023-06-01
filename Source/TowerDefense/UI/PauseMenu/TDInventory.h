@@ -47,8 +47,7 @@ private:
     TArray<UTDResourceCard*> cartitas;
 
 public:
-    UFUNCTION(BlueprintImplementableEvent)
-        UTDResourceCard* TDCreateCard(TSubclassOf<UTDResourceCard> _resourceCard);
+
 
 protected:
 

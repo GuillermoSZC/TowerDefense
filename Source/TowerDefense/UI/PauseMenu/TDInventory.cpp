@@ -44,7 +44,7 @@ void UTDInventory::TDInitComponents()
 void UTDInventory::TDAddResourceCard(UTDResourceCard* _card, UVerticalBox* _verticalBox)
 {
     UButton* button = NewObject<UButton>(UButton::StaticClass(), "Button");
-
+    UTDTwoButtonHorizontalBox* horizontalTemp;
 
     if (_verticalBox->GetChildrenCount() == 0)
     {
@@ -58,7 +58,7 @@ void UTDInventory::TDAddResourceCard(UTDResourceCard* _card, UVerticalBox* _vert
     {
         int arraySize = _verticalBox->GetChildrenCount();
 
-        UTDTwoButtonHorizontalBox* horizontalTemp = Cast<UTDTwoButtonHorizontalBox>(_verticalBox->GetChildAt(arraySize - 1));
+        horizontalTemp = Cast<UTDTwoButtonHorizontalBox>(_verticalBox->GetChildAt(arraySize - 1));
 
         if (IsValid(horizontalTemp) && !horizontalTemp->TDAddButton(_card))
         {
