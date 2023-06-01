@@ -2,15 +2,23 @@
 
 #include "CoreMinimal.h"
 #include <Engine/DataTable.h>
+#include "GameLogic/TDInventoryEnum.h"
+#include "GameLogic/TDLootEnum.h"
 #include "TDResourceCardParameters.generated.h"
+
+class UTDResourceCard;
+
 
 USTRUCT(BlueprintType)
 struct FTDResourceCardParameters : public FTableRowBase
 {
     GENERATED_BODY()
 
+        UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        ETDInventoryEnum column;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-        FText resourceText;
+        ELootItems resource;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
         UTexture2D* image;
@@ -19,12 +27,20 @@ struct FTDResourceCardParameters : public FTableRowBase
         FLinearColor color;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-        FVector2D cardSize;
+        FMargin padding;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-        float verticalPadding;
+        TSubclassOf<UTDResourceCard> resourceClass;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-        float horizontalPadding;
+    FTDResourceCardParameters()
+    {
+        color = FLinearColor::White;
+
+        padding.Bottom = 10;
+        padding.Top = 10;
+        padding.Left = 10;
+        padding.Right = 10;
+    }
+
 
 };

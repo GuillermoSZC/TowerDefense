@@ -4,7 +4,7 @@
 #include "UI/TDUserWidget.h"
 #include "TDPauseMenu.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FUIUpdateResourcesSignature);
+
 
 class UTDInventory;
 
@@ -21,14 +21,16 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDInventory* inventory;
 
+
 protected:
-    FUIUpdateResourcesSignature FUIUpdateResourcesDelegate;
 
 private:
-
+    static UPROPERTY(Transient)
+        UTDPauseMenu* owner;
 
 public:
-
+    UFUNCTION()
+        static UTDPauseMenu* TDGetPauseMenuRef();
 
 protected:
     UFUNCTION()
@@ -36,7 +38,6 @@ protected:
 
 
 private:
-    UFUNCTION()
-        void TDUpdateCards();
+
 
 };

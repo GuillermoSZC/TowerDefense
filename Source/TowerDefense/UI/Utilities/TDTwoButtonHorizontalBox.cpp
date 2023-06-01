@@ -3,13 +3,17 @@
 #include <UMG/Public/Blueprint/UserWidget.h>
 
 
-void UTDTwoButtonHorizontalBox::TDAddButton(UUserWidget* _button)
+bool UTDTwoButtonHorizontalBox::TDAddButton(UUserWidget* _component)
 {
-    if (IsValid(_button))
+    if (IsValid(_component))
     {
         if (GetChildrenCount() < childCount)
         {
-            AddChild(_button);
+            AddChildToHorizontalBox(_component);
+
+            return true;
         }
     }
+
+    return false;
 }

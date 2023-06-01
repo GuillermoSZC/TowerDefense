@@ -2,6 +2,8 @@
 
 
 #include "GameLogic/TDCostManager.h"
+#include "Character/TDPlayerCharacter.h"
+#include "TDGameData.h"
 
 ATDCostManager::ATDCostManager()
 {
