@@ -113,24 +113,28 @@ void ATDPlayerController::TDPauseMenuLogic(ESlateVisibility _visibility, bool _v
 {
     if (pauseMenuRef)
     {
-        pauseMenuRef->SetVisibility(_visibility);
         UGameplayStatics::SetGamePaused(GetWorld(), _value);
 
-        bShowMouseCursor = UTDGameData::TDGetRoundManager()->TDGetActualPhase() == GamePhase::BuyPhase ? true : false;
+        if (_value)
+        {
+            FInputModeGameAndUI inputMode;
+            inputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+            inputMode.SetWidgetToFocus(pauseMenuRef->TakeWidget());
+            inputMode.SetHideCursorDuringCapture(false);
+            SetInputMode(inputMode);
+            bShowMouseCursor = true;
+            bEnableClickEvents = false;
+            bEnableTouchEvents = false;
+        }
+        else
+        {
+            FInputModeGameOnly inputMode;
+            SetInputMode(inputMode);
 
-//         if (_value)
-//         {
-//             FInputModeGameAndUI inputMode;
-//             inputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-//             inputMode.SetWidgetToFocus(pauseMenuRef->TakeWidget());
-//             inputMode.SetHideCursorDuringCapture(false);
-//             SetInputMode(inputMode);
-//         }
-//         else
-//         {
-//             FInputModeGameAndUI inputMode;
-//             SetInputMode(inputMode);
-//         }
+            UTDGameData::TDGetRoundManager()->TDGetActualPhase() == GamePhase::BuyPhase ? TDOnBuyPhaseStart(0) : TDOnCombatPhaseStart(0);
+        }
+
+        pauseMenuRef->SetVisibility(_visibility);
     }
 }
 
