@@ -4,9 +4,9 @@
 #include "UI/TDUserWidget.h"
 #include "TDPauseMenu.generated.h"
 
-
-
 class UTDInventory;
+class UWidgetSwitcher;
+class UTDBaseButton;
 
 UCLASS()
 class TOWERDEFENSE_API UTDPauseMenu : public UTDUserWidget
@@ -19,8 +19,13 @@ public:
 
 public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDInventory* inventory;
+        UWidgetSwitcher* MainSwitcher;
 
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDInventory* inventory;
+            
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDBaseButton* closeButton;
 
 protected:
 

@@ -11,6 +11,7 @@ class UInputMappingContext;
 class UInputAction;
 class ATDCharacter;
 class UTDPauseMenu;
+class UTDCostWidget;
 
 /**
  *
@@ -22,11 +23,9 @@ class TOWERDEFENSE_API ATDPlayerController : public APlayerController
 
 
 public:
-
     ATDPlayerController();
 
 public:
-
     UPROPERTY(EditDefaultsOnly)
         UInputMappingContext* DefaultMappingContext;
 
@@ -46,37 +45,48 @@ public:
         TSubclassOf<UTDPauseMenu> pauseMenuClass;
 
 protected:
-    UPROPERTY()
+    UPROPERTY(Transient)
         UTDPauseMenu* pauseMenuRef;
 
 private:
-
     UPROPERTY(Transient)
         ATDCharacter* playerPawn;
 
-public:
+    UPROPERTY(Transient)
+        UTDCostWidget* costWidgetRef;
 
+
+public:
     UFUNCTION()
-        void TDOnOpenUI(UWidget* _widgetRef);
+        void TDOnOpenUI(UTDCostWidget* _widgetRef);
+
     UFUNCTION()
         void TDOnCloseUI();
 
 
 
 protected:
-
-
-
     virtual void BeginPlay() override;
 
 
 private:
+    UFUNCTION()
+        void TDMoveForwardAction(const FInputActionValue& _value);
 
+    UFUNCTION()
+        void TDMoveSideAction(const FInputActionValue& _value);
 
-    void TDMoveForwardAction(const FInputActionValue& _value);
-    void TDMoveSideAction(const FInputActionValue& _value);
-    void TDHitAction(const FInputActionValue& _value);
-    void TDOpenPauseMenu(const FInputActionValue& _value);
+    UFUNCTION()
+        void TDHitAction(const FInputActionValue& _value);
+
+    UFUNCTION()
+        void TDChangePauseMenuVisibility(const FInputActionValue& _value);
+
+    UFUNCTION()
+        void TDClosePauseMenu();
+
+    UFUNCTION()
+        void TDPauseMenuLogic(ESlateVisibility _visibility, bool _value);
 
     UFUNCTION()
         void TDOnBuyPhaseStart(int32 _num);

@@ -7,7 +7,7 @@
 class UTDCostWidget;
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnOpenUISignature, UWidget*, _widget);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnOpenUISignature, UTDCostWidget*, _widget);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCloseUISignature);
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))

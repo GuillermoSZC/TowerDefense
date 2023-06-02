@@ -6,6 +6,11 @@
 #include "GameLogic/TDRoundManager.h"
 #include "NiagaraComponent.h"
 #include "GameLogic/TDElementVFXDataAsset.h"
+#include "AttributesSets/TDHealthAttributeSet.h"
+#include "AttributesSets/TDDamageAttributeSet.h"
+#include "AttributesSets/TDMovementAttributeSet.h"
+#include <GameplayAbilitySpecHandle.h>
+#include <GameFramework/CharacterMovementComponent.h>
 
 ATDPlayerCharacter::ATDPlayerCharacter()
 {

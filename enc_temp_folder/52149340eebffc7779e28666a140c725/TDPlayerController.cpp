@@ -15,9 +15,6 @@
 #include "GameLogic/TDGameData.h"
 #include "UI/PauseMenu/TDPauseMenu.h"
 #include <Kismet/GameplayStatics.h>
-#include "UI/Utilities/TDBaseButton.h"
-#include "UI/TDCostWidget.h"
-#include "Components/TDWidgetShopComponent.h"
 
 
 ATDPlayerController::ATDPlayerController()
@@ -46,7 +43,8 @@ void ATDPlayerController::BeginPlay()
     InputEnhanced->BindAction(HitActionInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDHitAction);
     InputEnhanced->BindAction(MoveSideInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDMoveSideAction);
     InputEnhanced->BindAction(MoveForwardInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDMoveForwardAction);
-    InputEnhanced->BindAction(PauseInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDChangePauseMenuVisibility);
+    InputEnhanced->BindAction(PauseInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDOpenPauseMenu);
+    PauseInputAction->bTriggerWhenPaused = true;
 
     if (pauseMenuClass)
     {
@@ -56,8 +54,7 @@ void ATDPlayerController::BeginPlay()
         {
             pauseMenuRef->AddToViewport(1);
             pauseMenuRef->SetVisibility(ESlateVisibility::Collapsed);
-            pauseMenuRef->closeButton->OnClicked.AddDynamic(this, &ATDPlayerController::TDClosePauseMenu);
-        }        
+        }
     }
 }
 
@@ -100,14 +97,8 @@ void ATDPlayerController::TDHitAction(const FInputActionValue& _value)
     UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(playerPawn, GET_GAMEPLAY_TAG(ABILITY1_TRIGGER_TAG), abilityData);
 }
 
-void ATDPlayerController::TDChangePauseMenuVisibility(const FInputActionValue& _value)
+void ATDPlayerController::TDOpenPauseMenu(const FInputActionValue& _value)
 {
-    if (costWidgetRef)
-    {
-        costWidgetRef->TDGetOwner()->TDHideUI();
-        return;
-    }
-
     if (pauseMenuRef->GetVisibility() == ESlateVisibility::Collapsed)
     {
         TDPauseMenuLogic(ESlateVisibility::Visible, true);
@@ -118,37 +109,28 @@ void ATDPlayerController::TDChangePauseMenuVisibility(const FInputActionValue& _
     }
 }
 
-void ATDPlayerController::TDClosePauseMenu()
-{
-    TDPauseMenuLogic(ESlateVisibility::Collapsed, false);
-}
-
 void ATDPlayerController::TDPauseMenuLogic(ESlateVisibility _visibility, bool _value)
 {
     if (pauseMenuRef)
     {
+        pauseMenuRef->SetVisibility(_visibility);
         UGameplayStatics::SetGamePaused(GetWorld(), _value);
 
-        if (_value)
-        {
-            FInputModeGameAndUI inputMode;
-            inputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-            inputMode.SetWidgetToFocus(pauseMenuRef->TakeWidget());
-            inputMode.SetHideCursorDuringCapture(false);
-            SetInputMode(inputMode);
-            bShowMouseCursor = true;
-            bEnableClickEvents = false;
-            bEnableTouchEvents = false;
-        }
-        else
-        {
-            FInputModeGameOnly inputMode;
-            SetInputMode(inputMode);
+        bShowMouseCursor = UTDGameData::TDGetRoundManager()->TDGetActualPhase() == GamePhase::BuyPhase ? true : false;
 
-            UTDGameData::TDGetRoundManager()->TDGetActualPhase() == GamePhase::BuyPhase ? TDOnBuyPhaseStart(0) : TDOnCombatPhaseStart(0);
-        }
-
-        pauseMenuRef->SetVisibility(_visibility);
+//         if (_value)
+//         {
+//             FInputModeGameAndUI inputMode;
+//             inputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+//             inputMode.SetWidgetToFocus(pauseMenuRef->TakeWidget());
+//             inputMode.SetHideCursorDuringCapture(false);
+//             SetInputMode(inputMode);
+//         }
+//         else
+//         {
+//             FInputModeGameAndUI inputMode;
+//             SetInputMode(inputMode);
+//         }
     }
 }
 
@@ -166,18 +148,16 @@ void ATDPlayerController::TDOnCombatPhaseStart(int32 _num)
     bEnableTouchEvents = false;
 }
 
-void ATDPlayerController::TDOnOpenUI(UTDCostWidget* _widgetRef)
+void ATDPlayerController::TDOnOpenUI(UWidget* _widgetRef)
 {
-    costWidgetRef = _widgetRef;
-
     SetIgnoreMoveInput(true);
     SetIgnoreLookInput(true);
+
 }
 
 void ATDPlayerController::TDOnCloseUI()
 {
-    costWidgetRef = nullptr;
-
     SetIgnoreMoveInput(false);
     SetIgnoreLookInput(false);
 }
+
