@@ -10,6 +10,7 @@
 class UInputMappingContext;
 class UInputAction;
 class ATDCharacter;
+class UTDPauseMenu;
 
 /**
  *
@@ -32,28 +33,33 @@ public:
     UPROPERTY(EditDefaultsOnly)
         UInputAction* MoveForwardInputAction;
 
-
     UPROPERTY(EditDefaultsOnly)
         UInputAction* MoveSideInputAction;
 
     UPROPERTY(EditDefaultsOnly)
         UInputAction* HitActionInputAction;
 
+    UPROPERTY(EditDefaultsOnly)
+        UInputAction* PauseInputAction;
+
+    UPROPERTY(EditDefaultsOnly)
+        TSubclassOf<UTDPauseMenu> pauseMenuClass;
+
 protected:
-
-
+    UPROPERTY()
+        UTDPauseMenu* pauseMenuRef;
 
 private:
 
     UPROPERTY(Transient)
-    ATDCharacter* playerPawn;
+        ATDCharacter* playerPawn;
 
 public:
 
-     UFUNCTION()
-    void TDOnOpenUI(UWidget* _widgetRef);
     UFUNCTION()
-    void TDOnCloseUI();
+        void TDOnOpenUI(UWidget* _widgetRef);
+    UFUNCTION()
+        void TDOnCloseUI();
 
 
 
@@ -70,10 +76,11 @@ private:
     void TDMoveForwardAction(const FInputActionValue& _value);
     void TDMoveSideAction(const FInputActionValue& _value);
     void TDHitAction(const FInputActionValue& _value);
+    void TDOpenPauseMenu(const FInputActionValue& _value);
 
-   UFUNCTION()
-    void TDOnBuyPhaseStart(int32 _num);
+    UFUNCTION()
+        void TDOnBuyPhaseStart(int32 _num);
 
-   UFUNCTION()
-    void TDOnCombatPhaseStart(int32 _num);
+    UFUNCTION()
+        void TDOnCombatPhaseStart(int32 _num);
 };

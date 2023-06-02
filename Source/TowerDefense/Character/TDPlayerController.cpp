@@ -13,6 +13,7 @@
 #include <AbilitySystemBlueprintLibrary.h>
 #include "GameLogic/TDRoundManager.h"
 #include "GameLogic/TDGameData.h"
+#include "UI/PauseMenu/TDPauseMenu.h"
 
 
 ATDPlayerController::ATDPlayerController()
@@ -41,6 +42,19 @@ void ATDPlayerController::BeginPlay()
     InputEnhanced->BindAction(HitActionInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDHitAction);
     InputEnhanced->BindAction(MoveSideInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDMoveSideAction);
     InputEnhanced->BindAction(MoveForwardInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDMoveForwardAction);
+    InputEnhanced->BindAction(PauseInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDOpenPauseMenu);
+
+
+    if (pauseMenuClass)
+    {
+        pauseMenuRef = CreateWidget<UTDPauseMenu>(this, pauseMenuClass);
+
+        if (pauseMenuRef)
+        {
+            pauseMenuRef->AddToViewport(1);
+            pauseMenuRef->SetVisibility(ESlateVisibility::Collapsed);
+        }
+    }
 }
 
 void ATDPlayerController::TDMoveForwardAction(const FInputActionValue& _value)
@@ -78,10 +92,20 @@ void ATDPlayerController::TDMoveSideAction(const FInputActionValue& _value)
 
 void ATDPlayerController::TDHitAction(const FInputActionValue& _value)
 {
-
-
     FGameplayEventData abilityData;
     UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(playerPawn, GET_GAMEPLAY_TAG(ABILITY1_TRIGGER_TAG), abilityData);
+}
+
+void ATDPlayerController::TDOpenPauseMenu(const FInputActionValue& _value)
+{
+    if (pauseMenuRef->GetVisibility() == ESlateVisibility::Collapsed)
+    {
+        pauseMenuRef->SetVisibility(ESlateVisibility::Visible);
+    }
+    else
+    {
+        pauseMenuRef->SetVisibility(ESlateVisibility::Collapsed);
+    }
 }
 
 void ATDPlayerController::TDOnBuyPhaseStart(int32 _num)
