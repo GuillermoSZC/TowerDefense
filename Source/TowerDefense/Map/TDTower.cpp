@@ -163,7 +163,9 @@ void ATDTower::BeginPlay()
 
     if (elementComponent)
     {
+
         elementComponent->OnElementChangeDelegate.AddUniqueDynamic(this, &ATDTower::TDOnElementChange);
+
     }
     UTDGameData::TDGetCostManager()->TDTowerSpawn(this);
 }

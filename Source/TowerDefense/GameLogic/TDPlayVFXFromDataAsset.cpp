@@ -15,6 +15,7 @@ UFXSystemComponent* UTDPlayVFXFromDataAsset::SpawnEffect(USkeletalMeshComponent*
     if (SpawnedEffect && IsValid(SpawnedEffect))
     {
         SpawnedEffect->Deactivate();
+
         SpawnedEffect->ConditionalBeginDestroy();
     }
 

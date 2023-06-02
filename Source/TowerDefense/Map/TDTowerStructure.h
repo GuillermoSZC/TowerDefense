@@ -21,15 +21,6 @@ class TOWERDEFENSE_API ATDTowerStructure : public AActor , public ITDCostInterfa
 public:
     ATDTowerStructure();
 
-
-   
-
-
-   
-
-
-
-
 public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
         UStaticMeshComponent* towerStructure;
@@ -42,7 +33,7 @@ private:
 
 
     UPROPERTY(EditDefaultsOnly)
-        TMap<TEnumAsByte<ETowers>, TSubclassOf<ATDTower>> towerMap;
+        TMap<ETowers, TSubclassOf<ATDTower>> towerMap;
 
 public:
     virtual void Tick(float DeltaTime) override;

@@ -80,7 +80,7 @@ protected:
 
 
     UPROPERTY(EditDefaultsOnly)
-        TEnumAsByte<ELootItems> BPToUprgade;
+        ELootItems BPToUprgade;
 
 private:
     UPROPERTY()
