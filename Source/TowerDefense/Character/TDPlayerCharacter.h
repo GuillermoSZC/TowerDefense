@@ -10,28 +10,17 @@
 class UNiagaraComponent;
 
 /**
- * 
+ *
  */
 UCLASS()
 class TOWERDEFENSE_API ATDPlayerCharacter : public ATDCharacter
 {
-	GENERATED_BODY()
-	
+    GENERATED_BODY()
+
 public:
+    ATDPlayerCharacter();
 
-	ATDPlayerCharacter();
-
-
- 
-
-
-
-
-
- 
 public:
-
-
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
         UDataTable* statsDatatable;
 
@@ -39,27 +28,26 @@ public:
         TArray<TSubclassOf<UGameplayAbility>> abiliyList;
 
 
-    UPROPERTY(EditAnywhere,BlueprintReadWrite)
-    UStaticMeshComponent* SwordMesh;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        UStaticMeshComponent* SwordMesh;
 
 
-    UPROPERTY(EditDefaultsOnly,BlueprintReadOnly, Category = "Element VFX")
-    TMap<EElements, UTDElementVFXDataAsset*> ElementsVFX;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Element VFX")
+        TMap<EElements, UTDElementVFXDataAsset*> ElementsVFX;
 
-    UPROPERTY(EditAnywhere,BlueprintReadWrite)
-    UNiagaraComponent* swordCover;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        UNiagaraComponent* swordCover;
 
 protected:
-    //@ToDo cambiar a visible
-        UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Loot Inventory")
-    TMap<ELootItems, int32> PlayerInventory;
+    //@TODO: cambiar a visible
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Loot Inventory")
+        TMap<ELootItems, int32> PlayerInventory;
 
 
-        UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Element VFX")
-            UTDElementVFXDataAsset* actualVFXAsset = nullptr;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Element VFX")
+        UTDElementVFXDataAsset* actualVFXAsset = nullptr;
 
 private:
-
 
 
 public:
@@ -67,20 +55,20 @@ public:
     virtual void Tick(float DeltaTime) override;
 
     UFUNCTION()
-    void TDUpdateRoundValues(int32 _Rounds);
+        void TDUpdateRoundValues(int32 _Rounds);
 
     UFUNCTION(BlueprintPure)
-    int32 TDGetAmountItemByItem(ELootItems _item);
+        int32 TDGetAmountItemByItem(ELootItems _item);
 
     UFUNCTION(BlueprintCallable)
         int32 TDAddItemToInventory(ELootItems _item, int32 _amount = 1);
 
-     UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable)
         void TDOverrideItemInInventory(ELootItems _item, int32 _newValue);
 
 
     UFUNCTION(BlueprintPure)
-    TMap<ELootItems, int32>& TDGetPlayerInventory();
+        TMap<ELootItems, int32>& TDGetPlayerInventory();
 
 
     UFUNCTION(BlueprintPure)
@@ -91,12 +79,12 @@ protected:
 
     virtual void BeginPlay() override;
 
-   
+
     void TDInitialize();
 
     void TDOnElementChange_Implementation(EElements _newElement) override;
 
-    
+
 
 private:
 
