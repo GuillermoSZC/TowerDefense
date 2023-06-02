@@ -34,9 +34,18 @@ UTDPauseMenu* UTDPauseMenu::TDGetPauseMenuRef()
     return owner;
 }
 
+void UTDPauseMenu::TDFadeIn_Implementation()
+{
+    
+}
+
 void UTDPauseMenu::TDOnVisibilityChange(ESlateVisibility _visible)
 {
     if (_visible == ESlateVisibility::Visible)
+    {
+        TDFadeIn();
+    }
+    else
     {
 
     }

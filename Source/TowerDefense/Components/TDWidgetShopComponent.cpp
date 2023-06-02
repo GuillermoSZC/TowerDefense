@@ -132,6 +132,7 @@ void UTDWidgetShopComponent::TDSetPlayerHUDVisibility(ESlateVisibility _visibili
     if (controller)
     {
         controller->TDGetPlayerHUD()->healthBar->SetVisibility(_visibility);
+        controller->TDGetPlayerHUD()->healthNumber->SetVisibility(_visibility);
         controller->TDGetPlayerHUD()->enemyCounter->SetVisibility(_visibility);
         controller->TDGetPlayerHUD()->enemyText->SetVisibility(_visibility);
         controller->TDGetPlayerHUD()->roundText->SetVisibility(_visibility);

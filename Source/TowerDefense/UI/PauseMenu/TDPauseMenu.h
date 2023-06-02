@@ -23,7 +23,7 @@ public:
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDInventory* inventory;
-            
+
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDBaseButton* closeButton;
 
@@ -36,6 +36,9 @@ private:
 public:
     UFUNCTION()
         static UTDPauseMenu* TDGetPauseMenuRef();
+
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+        void TDFadeIn();
 
 protected:
     UFUNCTION()
