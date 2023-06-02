@@ -135,19 +135,22 @@ protected:
 
     virtual void TDInitialize();
 
+
+
+    virtual void TDmaxHealthChanged(const FOnAttributeChangeData& Data);
+    virtual void TDHealthChanged(const FOnAttributeChangeData& Data);
+    virtual void TDAttackDamageChanged(const FOnAttributeChangeData& Data);
+    virtual void TDAttackRangeChanged(const FOnAttributeChangeData& Data);
+    virtual void TDAttackSpeedChanged(const FOnAttributeChangeData& Data);
+    virtual void TDBaseAttackSpeedChanged(const FOnAttributeChangeData& Data);
+    virtual void TDPercentageSpeedChanged(const FOnAttributeChangeData& Data);
+    virtual void TDMovementSpeedChanged(const FOnAttributeChangeData& Data);
+
+
 private:
 
 
     
 
-
-    void TDmaxHealthChanged(const FOnAttributeChangeData& Data);
-    void TDHealthChanged(const FOnAttributeChangeData& Data);
-    void TDAttackDamageChanged(const FOnAttributeChangeData& Data);
-    void TDAttackRangeChanged(const FOnAttributeChangeData& Data);
-    void TDAttackSpeedChanged(const FOnAttributeChangeData& Data);
-    void TDBaseAttackSpeedChanged(const FOnAttributeChangeData& Data);
-    void TDPercentageSpeedChanged(const FOnAttributeChangeData& Data);
-    void TDMovementSpeedChanged(const FOnAttributeChangeData& Data);
 
 };

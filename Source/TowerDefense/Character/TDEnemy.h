@@ -88,6 +88,9 @@ private:
 
 
 
+
+   
+
 public:
     // Called every frame
     virtual void Tick(float DeltaTime) override;
@@ -146,6 +149,8 @@ protected:
     virtual void BeginPlay() override;
 
     virtual void TDInitialize() override;
+
+    void TDHealthChanged(const FOnAttributeChangeData& Data) override;
 
 private:
 

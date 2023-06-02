@@ -52,6 +52,17 @@ UAnimMontage* ATDEnemy::TDGetSketalMeshMontage_Implementation()
     return montageRef;
 }
 
+void ATDEnemy::TDHealthChanged(const FOnAttributeChangeData& Data)
+{
+    Super::TDHealthChanged(Data);
+
+    if (Data.NewValue <=0.f)
+    {
+        healthBar->SetVisibility(ESlateVisibility::Collapsed);
+    }
+
+}
+
 void ATDEnemy::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
@@ -148,9 +159,6 @@ void ATDEnemy::TDSetActive_Implementation()
     UTDGameData::TDAddEnmemyToArray(this);
     ATDEnemyController* controllerRef = GetController<ATDEnemyController>();
     controllerRef->GetBrainComponent()->StartLogic();
-    //ATDPlayerCharacter* temp = nullptr;
-    //temp = UTDGameData::TDGetPlayerRef();
-    //controllerRef->GetBlackboardComponent()->SetValueAsObject(FName(TEXT("PlayerActor")),temp);
     GetMesh()->SetVisibility(true, true);
     GetCapsuleComponent()->SetCollisionProfileName(FName(TEXT("EnemyPawn")));
     GetCharacterMovement()->GravityScale = 1.f;
