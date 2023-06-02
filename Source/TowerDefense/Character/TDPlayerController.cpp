@@ -15,6 +15,9 @@
 #include "GameLogic/TDGameData.h"
 #include "UI/PauseMenu/TDPauseMenu.h"
 #include <Kismet/GameplayStatics.h>
+#include "UI/Utilities/TDBaseButton.h"
+#include "UI/TDCostWidget.h"
+#include "Components/TDWidgetShopComponent.h"
 
 
 ATDPlayerController::ATDPlayerController()
@@ -43,8 +46,7 @@ void ATDPlayerController::BeginPlay()
     InputEnhanced->BindAction(HitActionInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDHitAction);
     InputEnhanced->BindAction(MoveSideInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDMoveSideAction);
     InputEnhanced->BindAction(MoveForwardInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDMoveForwardAction);
-    InputEnhanced->BindAction(PauseInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDOpenPauseMenu);
-    PauseInputAction->bTriggerWhenPaused = true;
+    InputEnhanced->BindAction(PauseInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDChangePauseMenuVisibility);
 
     if (pauseMenuClass)
     {
@@ -54,7 +56,8 @@ void ATDPlayerController::BeginPlay()
         {
             pauseMenuRef->AddToViewport(1);
             pauseMenuRef->SetVisibility(ESlateVisibility::Collapsed);
-        }
+            pauseMenuRef->closeButton->OnClicked.AddDynamic(this, &ATDPlayerController::TDClosePauseMenu);
+        }        
     }
 }
 
@@ -97,8 +100,14 @@ void ATDPlayerController::TDHitAction(const FInputActionValue& _value)
     UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(playerPawn, GET_GAMEPLAY_TAG(ABILITY1_TRIGGER_TAG), abilityData);
 }
 
-void ATDPlayerController::TDOpenPauseMenu(const FInputActionValue& _value)
+void ATDPlayerController::TDChangePauseMenuVisibility(const FInputActionValue& _value)
 {
+    if (costWidgetRef)
+    {
+        costWidgetRef->TDGetOwner()->TDHideUI();
+        return;
+    }
+
     if (pauseMenuRef->GetVisibility() == ESlateVisibility::Collapsed)
     {
         TDPauseMenuLogic(ESlateVisibility::Visible, true);
@@ -107,6 +116,11 @@ void ATDPlayerController::TDOpenPauseMenu(const FInputActionValue& _value)
     {
         TDPauseMenuLogic(ESlateVisibility::Collapsed, false);
     }
+}
+
+void ATDPlayerController::TDClosePauseMenu()
+{
+    TDPauseMenuLogic(ESlateVisibility::Collapsed, false);
 }
 
 void ATDPlayerController::TDPauseMenuLogic(ESlateVisibility _visibility, bool _value)
@@ -152,16 +166,18 @@ void ATDPlayerController::TDOnCombatPhaseStart(int32 _num)
     bEnableTouchEvents = false;
 }
 
-void ATDPlayerController::TDOnOpenUI(UWidget* _widgetRef)
+void ATDPlayerController::TDOnOpenUI(UTDCostWidget* _widgetRef)
 {
+    costWidgetRef = _widgetRef;
+
     SetIgnoreMoveInput(true);
     SetIgnoreLookInput(true);
-
 }
 
 void ATDPlayerController::TDOnCloseUI()
 {
+    costWidgetRef = nullptr;
+
     SetIgnoreMoveInput(false);
     SetIgnoreLookInput(false);
 }
-
