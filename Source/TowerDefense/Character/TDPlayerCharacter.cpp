@@ -45,6 +45,61 @@ ATDPlayerCharacter::ATDPlayerCharacter()
 
 }
 
+void ATDPlayerCharacter::PostInitializeComponents()
+{
+    Super::PostInitializeComponents();
+    UTDGameData::TDSetPlayerRef(this);
+
+}
+
+
+
+void ATDPlayerCharacter::BeginPlay()
+{
+    Super::BeginPlay();
+
+    TDInitialize();
+    UTDGameData::TDGetRoundManager()->FOnBuyPhaseStartDelegate.AddDynamic(this, &ATDPlayerCharacter::TDUpdateRoundValues);
+}
+
+
+
+void ATDPlayerCharacter::TDInitialize()
+{
+    Super::TDInitialize();
+
+    const UAttributeSet* attributesInit1 = abilitySystem->InitStats(UTDHealthAttributeSet::StaticClass(), healthDatatable);
+    healthAttributes = Cast<UTDHealthAttributeSet>(attributesInit1);
+
+    const UAttributeSet* attributesInit2 = abilitySystem->InitStats(UTDDamageAttributeSet::StaticClass(), damageDatatable);
+    damageAttributes = Cast<UTDDamageAttributeSet>(attributesInit2);
+
+    const UAttributeSet* attributesInit3 = abilitySystem->InitStats(UTDMovementAttributeSet::StaticClass(), movementDatatable);
+    movementAttributes = Cast<UTDMovementAttributeSet>(attributesInit3);
+
+    for (size_t i = 0; i < abiliyList.Num(); ++i)
+    {
+        FGameplayAbilitySpecHandle specHandle = abilitySystem->GiveAbility(FGameplayAbilitySpec(abiliyList[i].GetDefaultObject(), 1, 0));
+    }
+    GetCharacterMovement()->MaxWalkSpeed = movementAttributes->GetmovementSpeed();
+
+
+    if (EffectClass)
+    {
+        effectRef = Cast<UGameplayEffect>(EffectClass->GetDefaultObject());
+    }
+
+
+    TDActivateDelegates();
+}
+
+
+void ATDPlayerCharacter::Tick(float DeltaTime)
+{
+    Super::Tick(DeltaTime);
+
+
+}
 
 
 void ATDPlayerCharacter::TDOnElementChange_Implementation(EElements _newElement)
@@ -63,23 +118,17 @@ void ATDPlayerCharacter::TDOnElementChange_Implementation(EElements _newElement)
 
 }
 
-void ATDPlayerCharacter::PostInitializeComponents()
-{
-    Super::PostInitializeComponents();
-    UTDGameData::TDSetPlayerRef(this);
-
-}
-
-void ATDPlayerCharacter::Tick(float DeltaTime)
-{
-    Super::Tick(DeltaTime);
-
-
-}
 
 void ATDPlayerCharacter::TDUpdateRoundValues(int32 _Rounds)
 {
     //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Player Update"));
+    if (effectRef)
+    {
+        FGameplayEffectContextHandle context;
+        abilitySystem->ApplyGameplayEffectToSelf(effectRef, 1, context);
+    }
+
+
 }
 
 int32 ATDPlayerCharacter::TDGetAmountItemByItem(ELootItems _item)
@@ -125,35 +174,6 @@ UTDElementVFXDataAsset* ATDPlayerCharacter::TDGetActualElementVFXAsset()
     return nullptr;
 }
 
-void ATDPlayerCharacter::BeginPlay()
-{
-    Super::BeginPlay();
 
-    TDInitialize();
-    UTDGameData::TDGetRoundManager()->FOnBuyPhaseStartDelegate.AddDynamic(this, &ATDPlayerCharacter::TDUpdateRoundValues);
-}
-
-
-void ATDPlayerCharacter::TDInitialize()
-{
-    Super::TDInitialize();
-
-    const UAttributeSet* attributesInit1 = abilitySystem->InitStats(UTDHealthAttributeSet::StaticClass(), healthDatatable);
-    healthAttributes = Cast<UTDHealthAttributeSet>(attributesInit1);
-
-    const UAttributeSet* attributesInit2 = abilitySystem->InitStats(UTDDamageAttributeSet::StaticClass(), damageDatatable);
-    damageAttributes = Cast<UTDDamageAttributeSet>(attributesInit2);
-
-    const UAttributeSet* attributesInit3 = abilitySystem->InitStats(UTDMovementAttributeSet::StaticClass(), movementDatatable);
-    movementAttributes = Cast<UTDMovementAttributeSet>(attributesInit3);
-
-    for (size_t i = 0; i < abiliyList.Num(); ++i)
-    {
-        FGameplayAbilitySpecHandle specHandle = abilitySystem->GiveAbility(FGameplayAbilitySpec(abiliyList[i].GetDefaultObject(), 1, 0));
-    }
-    GetCharacterMovement()->MaxWalkSpeed = movementAttributes->GetmovementSpeed();
-
-    TDActivateDelegates();
-}
 
 

@@ -29,7 +29,7 @@ class TOWERDEFENSE_API UTDweaponDataAsset : public UDataAsset
 public:
 
 
-    void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
+
 
 public:
 

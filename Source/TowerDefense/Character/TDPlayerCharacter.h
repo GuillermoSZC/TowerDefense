@@ -27,6 +27,9 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")
         TArray<TSubclassOf<UGameplayAbility>> abiliyList;
 
+        UPROPERTY(EditDefaultsOnly, Category = "Ability System",meta =( DisplayName = "Effect To Apply at the end of Combat Phase"))
+        TSubclassOf<UGameplayEffect> EffectClass;
+
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
         UStaticMeshComponent* SwordMesh;
@@ -37,6 +40,7 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
         UNiagaraComponent* swordCover;
+
 
 protected:
     //@TODO: cambiar a visible
@@ -49,6 +53,8 @@ protected:
 
 private:
 
+    UPROPERTY(Transient)
+    UGameplayEffect* effectRef;
 
 public:
 
