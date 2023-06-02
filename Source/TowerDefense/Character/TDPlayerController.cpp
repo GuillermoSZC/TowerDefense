@@ -14,6 +14,7 @@
 #include "GameLogic/TDRoundManager.h"
 #include "GameLogic/TDGameData.h"
 #include "UI/PauseMenu/TDPauseMenu.h"
+#include <Kismet/GameplayStatics.h>
 
 
 ATDPlayerController::ATDPlayerController()
@@ -43,7 +44,7 @@ void ATDPlayerController::BeginPlay()
     InputEnhanced->BindAction(MoveSideInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDMoveSideAction);
     InputEnhanced->BindAction(MoveForwardInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDMoveForwardAction);
     InputEnhanced->BindAction(PauseInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDOpenPauseMenu);
-
+    PauseInputAction->bExecuteWhenPaused = true;
 
     if (pauseMenuClass)
     {
@@ -100,11 +101,33 @@ void ATDPlayerController::TDOpenPauseMenu(const FInputActionValue& _value)
 {
     if (pauseMenuRef->GetVisibility() == ESlateVisibility::Collapsed)
     {
-        pauseMenuRef->SetVisibility(ESlateVisibility::Visible);
+        TDPauseMenuLogic(ESlateVisibility::Visible, true);
     }
     else
     {
-        pauseMenuRef->SetVisibility(ESlateVisibility::Collapsed);
+        TDPauseMenuLogic(ESlateVisibility::Collapsed, false);
+    }
+}
+
+void ATDPlayerController::TDPauseMenuLogic(ESlateVisibility _visibility, bool _value)
+{
+    if (pauseMenuRef)
+    {
+        pauseMenuRef->SetVisibility(_visibility);
+        UGameplayStatics::SetGamePaused(GetWorld(), _value);
+        bShowMouseCursor = _value;
+
+        if (_value)
+        {
+            FInputModeUIOnly inputMode;
+            inputMode.SetWidgetToFocus(pauseMenuRef->TakeWidget());
+            SetInputMode(inputMode);
+        }
+        else
+        {
+            FInputModeGameOnly inputMode;
+            SetInputMode(inputMode);
+        }
     }
 }
 

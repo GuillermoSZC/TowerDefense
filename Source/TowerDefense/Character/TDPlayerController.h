@@ -46,7 +46,7 @@ public:
         TSubclassOf<UTDPauseMenu> pauseMenuClass;
 
 protected:
-    UPROPERTY()
+    UPROPERTY(Transient)
         UTDPauseMenu* pauseMenuRef;
 
 private:
@@ -64,23 +64,19 @@ public:
 
 
 protected:
-
-
-
     virtual void BeginPlay() override;
 
 
 private:
-
-
     void TDMoveForwardAction(const FInputActionValue& _value);
     void TDMoveSideAction(const FInputActionValue& _value);
     void TDHitAction(const FInputActionValue& _value);
     void TDOpenPauseMenu(const FInputActionValue& _value);
 
     UFUNCTION()
+        void TDPauseMenuLogic(ESlateVisibility _visibility, bool _value);
+    UFUNCTION()
         void TDOnBuyPhaseStart(int32 _num);
-
     UFUNCTION()
         void TDOnCombatPhaseStart(int32 _num);
 };
