@@ -57,6 +57,11 @@ void ATDRoundManager::TDPrepareCombatRound()
 {
     ++actualRound;
 
+    if (actualRound > 99)
+    {
+        GEngine->AddOnScreenDebugMessage(0, 10.f, FColor::Red, "Ronda 100");
+        return;
+    }
 
     actualRoundElements.Empty();
 
