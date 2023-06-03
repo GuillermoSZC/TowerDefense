@@ -200,6 +200,15 @@ UAbilitySystemComponent* ATDBase::GetAbilitySystemComponent() const
 
 
 
+void ATDBase::TDUpdateRoundValues(int32 _Rounds)
+{
+    if (effectRef)
+    {
+        FGameplayEffectContextHandle context;
+        AbilitySystem->ApplyGameplayEffectToSelf(effectRef, 1, context);
+    }
+}
+
 int ATDBase::TGGApplyEffect_Implementation()
 {
     //GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("BaseApplyEffect_Implementation"));
@@ -218,12 +227,19 @@ void ATDBase::TDInitialize()
         FGameplayAbilitySpecHandle specHandle = AbilitySystem->GiveAbility(FGameplayAbilitySpec(AbiliyList[i].GetDefaultObject(), 1, 0));
     }
 
+    if (EffectClass)
+    {
+        effectRef = Cast<UGameplayEffect>(EffectClass->GetDefaultObject());
+    }
+
+
     TDActivateDelegates();
 }
 
 void ATDBase::TDActivateDelegates()
 {
     BaseHealthChangedDelegateHandle = AbilitySystem->GetGameplayAttributeValueChangeDelegate(BaseAttributes->GethealthAttribute()).AddUObject(this, &ATDBase::TDHealthChanged);
+    UTDGameData::TDGetRoundManager()->FOnBuyPhaseStartDelegate.AddDynamic(this, &ATDBase::TDUpdateRoundValues);
 }
 
 void ATDBase::TDHealthChanged(const FOnAttributeChangeData& Data)

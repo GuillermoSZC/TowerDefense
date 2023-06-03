@@ -43,7 +43,8 @@ public:
 
     FOnHealthChangeSignature FOnHealthChangeDelegate;
 
-
+            UPROPERTY(EditDefaultsOnly, Category = "Ability System",meta =( DisplayName = "Effect To Apply at the end of Combat Phase"))
+        TSubclassOf<UGameplayEffect> EffectClass;
 
 protected:
 
@@ -73,6 +74,9 @@ private:
 
     static FName StaticMeshName;
 
+    UPROPERTY(Transient)
+    UGameplayEffect* effectRef;
+
 #pragma endregion
 
     UPROPERTY(Transient)
@@ -96,6 +100,9 @@ public:
 
     UFUNCTION()
         bool TDCommitBuyUpgrade_Implementation(ELootItems _item = ELootItems::None) override;
+
+        UFUNCTION()
+        void TDUpdateRoundValues(int32 _Rounds);
 
 
 protected:
