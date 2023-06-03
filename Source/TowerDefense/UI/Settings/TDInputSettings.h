@@ -2,13 +2,10 @@
 
 #include "CoreMinimal.h"
 #include "UI/TDUserWidget.h"
-#include "TDGraphics.generated.h"
+#include "TDInputSettings.generated.h"
 
-/**
- * 
- */
 UCLASS()
-class TOWERDEFENSE_API UTDGraphics : public UTDUserWidget
+class TOWERDEFENSE_API UTDInputSettings : public UTDUserWidget
 {
 	GENERATED_BODY()
 public:
@@ -32,5 +29,6 @@ protected:
 
 
 private:
+
 
 };
