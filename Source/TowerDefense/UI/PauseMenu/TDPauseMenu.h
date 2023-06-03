@@ -7,6 +7,10 @@
 class UTDInventory;
 class UWidgetSwitcher;
 class UTDBaseButton;
+class UTDGraphicSettings;
+class UTDSoundSettings;
+class UTDInputSettings;
+class UTDButton;
 
 UCLASS()
 class TOWERDEFENSE_API UTDPauseMenu : public UTDUserWidget
@@ -25,7 +29,28 @@ public:
         UTDInventory* inventory;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDButton* inventoryButton;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDButton* graphicsButton;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDButton* soundButton;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDButton* inputButton;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDBaseButton* closeButton;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDGraphicSettings* graphics;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDSoundSettings* sound;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDInputSettings* input;
 
 protected:
 
@@ -46,6 +71,19 @@ protected:
 
 
 private:
+    UFUNCTION()
+        void TDOnInventory();
 
+    UFUNCTION()
+        void TDOnGraphics();
+
+    UFUNCTION()
+        void TDOnSound();
+
+    UFUNCTION()
+        void TDOnInput();
+
+    UFUNCTION()
+        void TDSetWidgetSwitcherIndex(int _value);
 
 };

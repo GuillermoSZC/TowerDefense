@@ -1,8 +1,3 @@
-MENU PAUSA:
-
-FUNCIONALIDAD DE LOS BOTONES PARA NAVEGAR POR EL WSWITCHER
-
--------------------------------------------------------------------
 HUD:
 
 PONER BARRA DE VIDA CON NUMERO DE VIDA TOTAL EN VEZ DE 0-1
@@ -17,8 +12,8 @@ MIRAR BUG DE MENU PRINCIPAL QUE NO DEJA ABRIR TIENDAS
 ------------------------------------------------------
 UI GENERAL:
 
-OPCIONES GRAFICAS (?)
-OPCIONES SONIDO(?)
+OPCIONES GRAFICAS - FALTA IMPLEMENTACION
+OPCIONES SONIDO - FALTA IMPLEMENTACION
 
 -------------------------------------------------------------------
 IMPLEMENTAR FINAL DE LA RONDA 99
