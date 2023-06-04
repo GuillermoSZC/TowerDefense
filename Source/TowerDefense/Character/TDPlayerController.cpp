@@ -18,6 +18,7 @@
 #include "UI/Utilities/TDBaseButton.h"
 #include "UI/TDCostWidget.h"
 #include "Components/TDWidgetShopComponent.h"
+#include "UI/Utilities/TDPlayerHUD.h"
 
 
 ATDPlayerController::ATDPlayerController()
@@ -58,6 +59,18 @@ void ATDPlayerController::BeginPlay()
             pauseMenuRef->SetVisibility(ESlateVisibility::Collapsed);
             pauseMenuRef->closeButton->OnClicked.AddDynamic(this, &ATDPlayerController::TDClosePauseMenu);
         }        
+    }
+
+    if (playerHUDClass)
+    {
+        playerHUDRef = CreateWidget<UTDPlayerHUD>(this, playerHUDClass);
+
+        if (playerHUDRef)
+        {
+            playerHUDRef->AddToViewport(0);
+            playerHUDRef->SetVisibility(ESlateVisibility::Visible);
+            bShowMouseCursor = true;
+        }
     }
 }
 
@@ -139,11 +152,13 @@ void ATDPlayerController::TDPauseMenuLogic(ESlateVisibility _visibility, bool _v
             bShowMouseCursor = true;
             bEnableClickEvents = false;
             bEnableTouchEvents = false;
+            playerHUDRef->SetVisibility(ESlateVisibility::Collapsed);
         }
         else
         {
             FInputModeGameOnly inputMode;
             SetInputMode(inputMode);
+            playerHUDRef->SetVisibility(ESlateVisibility::Visible);
 
             UTDGameData::TDGetRoundManager()->TDGetActualPhase() == GamePhase::BuyPhase ? TDOnBuyPhaseStart(0) : TDOnCombatPhaseStart(0);
         }
@@ -180,4 +195,9 @@ void ATDPlayerController::TDOnCloseUI()
 
     SetIgnoreMoveInput(false);
     SetIgnoreLookInput(false);
+}
+
+UTDPlayerHUD* ATDPlayerController::TDGetPlayerHUD()
+{
+    return playerHUDRef;
 }
