@@ -5,6 +5,9 @@
 #include "Character/TDPlayerController.h"
 #include "Character/TDPlayerCharacter.h"
 #include "UI/TDCostWidget.h"
+#include "UI/Utilities/TDPlayerHUD.h"
+#include "UI/Utilities/TDText.h"
+#include "UI/Utilities/TDHealthBar.h"
 
 UTDWidgetShopComponent::UTDWidgetShopComponent()
 {
@@ -41,7 +44,7 @@ void UTDWidgetShopComponent::TickComponent(float DeltaTime, ELevelTick TickType,
     if (isUIActive && !TDCheckPlayerInRange())
     {
         TDHideUI();
-    }    
+    }
 }
 
 void UTDWidgetShopComponent::TDHideUI_Implementation()
@@ -51,6 +54,7 @@ void UTDWidgetShopComponent::TDHideUI_Implementation()
     if (widgetRef)
     {
         widgetRef->SetVisibility(ESlateVisibility::Collapsed);
+        TDSetPlayerHUDVisibility(ESlateVisibility::Visible);
         FOnCloseUIDelegate.Broadcast();
     }
 }
@@ -64,6 +68,7 @@ void UTDWidgetShopComponent::TDVisibleUI_Implementation()
         widgetRef->TDSetOwner(this);
         widgetRef->SetVisibility(ESlateVisibility::Visible);
         widgetRef->TDFadeIn();
+        TDSetPlayerHUDVisibility(ESlateVisibility::Collapsed);
         FOnOpenUIDelegate.Broadcast(widgetRef);
     }
 }
@@ -117,5 +122,20 @@ void UTDWidgetShopComponent::TDOnCombatPhaseStart(int32 _value)
     if (isUIActive)
     {
         TDHideUI();
+    }
+}
+
+void UTDWidgetShopComponent::TDSetPlayerHUDVisibility(ESlateVisibility _visibility)
+{
+    ATDPlayerController* controller = UTDGameData::TDGetPlayerRef()->GetController<ATDPlayerController>();
+
+    if (controller)
+    {
+        controller->TDGetPlayerHUD()->healthBar->SetVisibility(_visibility);
+        controller->TDGetPlayerHUD()->healthNumber->SetVisibility(_visibility);
+        controller->TDGetPlayerHUD()->enemyCounter->SetVisibility(_visibility);
+        controller->TDGetPlayerHUD()->enemyText->SetVisibility(_visibility);
+        controller->TDGetPlayerHUD()->roundText->SetVisibility(_visibility);
+        controller->TDGetPlayerHUD()->roundNum->SetVisibility(_visibility);
     }
 }

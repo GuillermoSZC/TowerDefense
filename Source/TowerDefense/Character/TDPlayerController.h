@@ -12,6 +12,7 @@ class UInputAction;
 class ATDCharacter;
 class UTDPauseMenu;
 class UTDCostWidget;
+class UTDPlayerHUD;
 
 /**
  *
@@ -44,9 +45,15 @@ public:
     UPROPERTY(EditDefaultsOnly)
         TSubclassOf<UTDPauseMenu> pauseMenuClass;
 
+    UPROPERTY(EditDefaultsOnly)
+        TSubclassOf<UTDPlayerHUD> playerHUDClass;
+
 protected:
     UPROPERTY(Transient)
         UTDPauseMenu* pauseMenuRef;
+
+    UPROPERTY(Transient)
+        UTDPlayerHUD* playerHUDRef;
 
 private:
     UPROPERTY(Transient)
@@ -62,6 +69,9 @@ public:
 
     UFUNCTION()
         void TDOnCloseUI();
+
+    UFUNCTION()
+        UTDPlayerHUD* TDGetPlayerHUD();
 
 
 
