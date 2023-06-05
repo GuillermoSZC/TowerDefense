@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Character/TDCharacter.h"
 #include "GameLogic/TDLootEnum.h"
+#include <GameplayEffect.h>
 #include "TDPlayerCharacter.generated.h"
 
 class UNiagaraComponent;
