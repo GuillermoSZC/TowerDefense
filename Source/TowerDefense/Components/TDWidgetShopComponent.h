@@ -75,6 +75,7 @@ private:
     UFUNCTION()
         void TDOnCombatPhaseStart(int32 _value);
 
+
     UFUNCTION()
         void TDSetPlayerHUDVisibility(ESlateVisibility _visibility);
 };

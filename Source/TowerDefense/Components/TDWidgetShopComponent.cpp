@@ -54,7 +54,7 @@ void UTDWidgetShopComponent::TDHideUI_Implementation()
     if (widgetRef)
     {
         widgetRef->SetVisibility(ESlateVisibility::Collapsed);
-        TDSetPlayerHUDVisibility(ESlateVisibility::Visible);
+        TDSetPlayerHUDVisibility(ESlateVisibility::HitTestInvisible);
         FOnCloseUIDelegate.Broadcast();
     }
 }
@@ -125,17 +125,13 @@ void UTDWidgetShopComponent::TDOnCombatPhaseStart(int32 _value)
     }
 }
 
+
 void UTDWidgetShopComponent::TDSetPlayerHUDVisibility(ESlateVisibility _visibility)
 {
     ATDPlayerController* controller = UTDGameData::TDGetPlayerRef()->GetController<ATDPlayerController>();
 
     if (controller)
     {
-        controller->TDGetPlayerHUD()->healthBar->SetVisibility(_visibility);
-        controller->TDGetPlayerHUD()->healthNumber->SetVisibility(_visibility);
-        controller->TDGetPlayerHUD()->enemyCounter->SetVisibility(_visibility);
-        controller->TDGetPlayerHUD()->enemyText->SetVisibility(_visibility);
-        controller->TDGetPlayerHUD()->roundText->SetVisibility(_visibility);
-        controller->TDGetPlayerHUD()->roundNum->SetVisibility(_visibility);
+        controller->TDGetPLayerHUD()->TDVisibilityToShopUIs(_visibility);
     }
 }

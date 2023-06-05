@@ -68,10 +68,10 @@ void ATDPlayerController::BeginPlay()
         if (playerHUDRef)
         {
             playerHUDRef->AddToViewport(0);
-            playerHUDRef->SetVisibility(ESlateVisibility::Visible);
-            bShowMouseCursor = true;
+
         }
     }
+
 }
 
 void ATDPlayerController::TDMoveForwardAction(const FInputActionValue& _value)
@@ -152,13 +152,21 @@ void ATDPlayerController::TDPauseMenuLogic(ESlateVisibility _visibility, bool _v
             bShowMouseCursor = true;
             bEnableClickEvents = false;
             bEnableTouchEvents = false;
-            playerHUDRef->SetVisibility(ESlateVisibility::Collapsed);
+            if (playerHUDRef)
+            {
+                playerHUDRef->SetVisibility(ESlateVisibility::Collapsed);
+
+            }
         }
         else
         {
             FInputModeGameOnly inputMode;
             SetInputMode(inputMode);
-            playerHUDRef->SetVisibility(ESlateVisibility::Visible);
+            if (playerHUDRef)
+            {
+                playerHUDRef->SetVisibility(ESlateVisibility::HitTestInvisible);
+
+            }
 
             UTDGameData::TDGetRoundManager()->TDGetActualPhase() == GamePhase::BuyPhase ? TDOnBuyPhaseStart(0) : TDOnCombatPhaseStart(0);
         }
@@ -197,7 +205,7 @@ void ATDPlayerController::TDOnCloseUI()
     SetIgnoreLookInput(false);
 }
 
-UTDPlayerHUD* ATDPlayerController::TDGetPlayerHUD()
+UTDPlayerHUD* ATDPlayerController::TDGetPLayerHUD()
 {
     return playerHUDRef;
 }

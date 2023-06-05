@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "InputActionValue.h"
+
 #include "TDPlayerController.generated.h"
 
 class UInputMappingContext;
@@ -45,15 +46,17 @@ public:
     UPROPERTY(EditDefaultsOnly)
         TSubclassOf<UTDPauseMenu> pauseMenuClass;
 
-    UPROPERTY(EditDefaultsOnly)
+        UPROPERTY(EditDefaultsOnly)
         TSubclassOf<UTDPlayerHUD> playerHUDClass;
+
 
 protected:
     UPROPERTY(Transient)
         UTDPauseMenu* pauseMenuRef;
 
-    UPROPERTY(Transient)
-        UTDPlayerHUD* playerHUDRef;
+        UPROPERTY(Transient)
+    UTDPlayerHUD* playerHUDRef;
+
 
 private:
     UPROPERTY(Transient)
@@ -61,6 +64,7 @@ private:
 
     UPROPERTY(Transient)
         UTDCostWidget* costWidgetRef;
+
 
 
 public:
@@ -71,9 +75,7 @@ public:
         void TDOnCloseUI();
 
     UFUNCTION()
-        UTDPlayerHUD* TDGetPlayerHUD();
-
-
+    UTDPlayerHUD* TDGetPLayerHUD();
 
 protected:
     virtual void BeginPlay() override;

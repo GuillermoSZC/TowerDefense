@@ -82,6 +82,9 @@ public:
     UFUNCTION(BlueprintCallable)
         void TDInitialize();
 
+    UFUNCTION()
+        void TDVisibilityToShopUIs(ESlateVisibility _visibility);
+
 
 protected:
 
