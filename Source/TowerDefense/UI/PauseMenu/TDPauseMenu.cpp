@@ -80,7 +80,7 @@ void UTDPauseMenu::TDOnInput()
 
 void UTDPauseMenu::TDSetWidgetSwitcherIndex(int _value)
 {
-    if (IsValid(MainSwitcher) && _value > 0 && _value < MainSwitcher->GetNumWidgets() - 1)
+    if (IsValid(MainSwitcher) && _value >= 0 && _value < MainSwitcher->GetNumWidgets())
     {
         MainSwitcher->SetActiveWidgetIndex(_value);
     }
