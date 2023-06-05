@@ -28,6 +28,7 @@ void UTDPauseMenu::NativeConstruct()
 
 
     OnVisibilityChanged.AddDynamic(this, &UTDPauseMenu::TDOnVisibilityChange);
+    OnVisibilityChanged.AddDynamic(inventory, &UTDInventory::TDUpdateScrap);
 
     // OnClicked Events
     inventoryButton->ownerButton->OnClicked.AddDynamic(this, &UTDPauseMenu::TDOnInventory);

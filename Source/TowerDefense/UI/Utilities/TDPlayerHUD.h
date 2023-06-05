@@ -86,6 +86,9 @@ public:
         void TDVisibilityToShopUIs(ESlateVisibility _visibility);
 
 
+ 
+       
+
 protected:
 
 
@@ -109,6 +112,8 @@ private:
         void TDSetEnemyCounter(int32 _counter);
 
     UFUNCTION()
-        void TDUpdateHealthNumber(float _num);
+        void TDUpdateHealthNumber(float _percentage, float _actualHp);
+
+
 
 };

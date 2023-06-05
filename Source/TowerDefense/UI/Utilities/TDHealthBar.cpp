@@ -22,11 +22,11 @@ void UTDHealthBar::NativeConstruct()
     Super::NativeConstruct();
 }
 
-void UTDHealthBar::TDSetBarPercentage(float _value)
+void UTDHealthBar::TDSetBarPercentage(float _percentage, float _actualHP)
 {
     if (healthBar)
     {
-        healthBar->SetPercent(_value);
+        healthBar->SetPercent(_percentage);
     }
 }
 

@@ -29,7 +29,7 @@ private:
 
 public:
     UFUNCTION(BlueprintCallable)
-        void TDSetBarPercentage(float _value);
+        void TDSetBarPercentage(float _percentage, float _actualHP);
 
 
     UFUNCTION(BlueprintCallable)

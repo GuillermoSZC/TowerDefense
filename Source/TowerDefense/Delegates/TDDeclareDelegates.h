@@ -7,7 +7,7 @@
 #include "TDDeclareDelegates.generated.h"
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangeSignature, float, _newValue);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnHealthChangeSignature, float, _percentage, float, _actualHP);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttackRangeChangeSignature, float, _newValue);
 

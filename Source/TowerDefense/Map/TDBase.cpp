@@ -248,7 +248,7 @@ void ATDBase::TDHealthChanged(const FOnAttributeChangeData& Data)
 
     float MaxHealth = BaseAttributes->GetmaxHealth();
     float healthPercent = Data.NewValue / MaxHealth;
-    FOnHealthChangeDelegate.Broadcast(healthPercent);
+    FOnHealthChangeDelegate.Broadcast(healthPercent,0.f);
 
     if (Data.NewValue <= 0.f)
     {

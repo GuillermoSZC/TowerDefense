@@ -102,7 +102,7 @@ void ATDCharacter::TDmaxHealthChanged(const FOnAttributeChangeData& Data)
 {
     float actualhealth = healthAttributes->Gethealth();
     float healthPercent = actualhealth / Data.NewValue;
-    FOnHealthChangeDelegate.Broadcast(healthPercent);
+    FOnHealthChangeDelegate.Broadcast(healthPercent,actualhealth);
 }
 
 void ATDCharacter::TDHealthChanged(const FOnAttributeChangeData& Data)
@@ -115,7 +115,7 @@ void ATDCharacter::TDHealthChanged(const FOnAttributeChangeData& Data)
 
     float MaxHealth = healthAttributes->GetmaxHealth();
     float healthPercent = Data.NewValue / MaxHealth;
-    FOnHealthChangeDelegate.Broadcast(healthPercent);
+    FOnHealthChangeDelegate.Broadcast(healthPercent,Data.NewValue);
 }
 
 void ATDCharacter::TDAttackDamageChanged(const FOnAttributeChangeData& Data)

@@ -1,6 +1,3 @@
-HUD:
-
-PONER BARRA DE VIDA CON NUMERO DE VIDA TOTAL EN VEZ DE 0-1
 
 -----------------------------------------------------------------
 MENU PRINCIPAL:

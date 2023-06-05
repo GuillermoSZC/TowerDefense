@@ -48,6 +48,8 @@ private:
 
 public:
 
+    UFUNCTION()
+    void TDUpdateScrap(ESlateVisibility _visibility);
 
 protected:
 

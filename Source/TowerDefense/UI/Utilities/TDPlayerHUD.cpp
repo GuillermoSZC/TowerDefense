@@ -129,9 +129,9 @@ void UTDPlayerHUD::TDSetEnemyCounter(int32 _counter)
     enemyCounter->TDSetCustomText(FText::FromString(FString::FromInt(_counter)));
 }
 
-void UTDPlayerHUD::TDUpdateHealthNumber(float _num)
+void UTDPlayerHUD::TDUpdateHealthNumber(float _percentage, float _actualHp)
 {
-    healthNumber->TDSetCustomText(FText::FromString(FString::SanitizeFloat(_num)));
+    healthNumber->TDSetCustomText(FText::FromString(FString::SanitizeFloat(_actualHp)));
 }
 
 

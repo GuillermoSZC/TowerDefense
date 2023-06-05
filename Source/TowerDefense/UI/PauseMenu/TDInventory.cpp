@@ -8,6 +8,7 @@
 #include <Engine/DataTable.h>
 #include <UMG/Public/Blueprint/WidgetTree.h>
 #include <UMG/Public/Components/Button.h>
+#include "UI/Utilities/TDTextWithImage.h"
 
 bool UTDInventory::Initialize()
 {
@@ -26,8 +27,18 @@ void UTDInventory::NativePreConstruct()
 void UTDInventory::NativeConstruct()
 {
     Super::NativeConstruct();
+}
 
-
+void UTDInventory::TDUpdateScrap(ESlateVisibility _visibility)
+{
+    if (_visibility == ESlateVisibility::Visible)
+    {
+        ATDPlayerCharacter* playerRef = UTDGameData::TDGetPlayerRef();
+        int32 inttemp = playerRef->TDGetAmountItemByItem(ELootItems::Scrap);
+        FString StringTemp = FString::FromInt(inttemp);
+        FText textTemp = FText::FromString(StringTemp);
+        scrapText->TDSetText(textTemp);
+    }
 }
 
 void UTDInventory::TDInitComponents()
