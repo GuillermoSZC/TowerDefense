@@ -32,7 +32,7 @@ public:
         FVector MeshScale = FVector(1.f);
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Mesh")
-        UMaterialInterface* material;
+        UMaterialInterface* material = nullptr;
 
 #pragma endregion
 
@@ -65,10 +65,10 @@ public:
         int32 weight;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Round Values")
-        int32 firstPossibleApperance;
+        int32 firstPossibleApperance = 0;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Round Values")
-        int32 limitEnemiesPerRound;
+        int32 limitEnemiesPerRound = 0;
 #pragma endregion
 
 #pragma region GAS_VALUES
@@ -77,10 +77,10 @@ public:
         TSubclassOf<UTDCalculateEnemyAttributes> enemyAttribute;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Ability System Values")
-        float movementVariation;
+        float movementVariation = 0.f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Gameplay Ability System Values")
-        UTDAbilitiesDataAsset* abiliyAsset;
+        UTDAbilitiesDataAsset* abiliyAsset = nullptr;
   
 
     UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Gameplay Ability System Values")
@@ -97,7 +97,7 @@ public:
 #pragma  region LOOT
 
     UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = "Loot")
-    UDataTable* chanceDataTable;
+    UDataTable* chanceDataTable = nullptr;
 
 #pragma endregion
 

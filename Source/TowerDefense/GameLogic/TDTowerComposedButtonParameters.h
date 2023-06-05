@@ -19,11 +19,11 @@ struct FTDTowerComposedButtonParameters : public FTableRowBase
         TSubclassOf<ATDTower> tower;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-        UTexture2D* image;
+        UTexture2D* image = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-        int scrapCost;
+        int scrapCost = 0;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-        int bpCost;
+        int bpCost = 0;
 };
