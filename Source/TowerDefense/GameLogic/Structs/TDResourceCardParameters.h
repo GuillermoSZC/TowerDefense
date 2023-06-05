@@ -15,13 +15,13 @@ struct FTDResourceCardParameters : public FTableRowBase
     GENERATED_BODY()
 
         UPROPERTY(EditAnywhere, BlueprintReadWrite)
-        ETDInventoryEnum column;
+        ETDInventoryEnum column = ETDInventoryEnum::None;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-        ELootItems resource;
+        ELootItems resource = ELootItems::None;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-        UTexture2D* image;
+        UTexture2D* image = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
         FLinearColor color;
