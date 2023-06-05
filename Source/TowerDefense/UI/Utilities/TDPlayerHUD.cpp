@@ -133,3 +133,14 @@ void UTDPlayerHUD::TDUpdateHealthNumber(float _num)
 {
     healthNumber->TDSetCustomText(FText::FromString(FString::SanitizeFloat(_num)));
 }
+
+
+void UTDPlayerHUD::TDVisibilityToShopUIs(ESlateVisibility _visibility)
+{
+    healthBar->SetVisibility(_visibility);
+    healthNumber->SetVisibility(_visibility);
+    enemyCounter->SetVisibility(_visibility);
+    enemyText->SetVisibility(_visibility);
+    roundText->SetVisibility(_visibility);
+    roundNum->SetVisibility(_visibility);
+}
