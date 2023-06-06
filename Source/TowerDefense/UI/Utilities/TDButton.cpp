@@ -3,6 +3,7 @@
 #include "Components/Button.h"
 #include "TDRichTextBlock.h"
 
+
 bool UTDButton::Initialize()
 {
     Super::Initialize();
@@ -22,11 +23,24 @@ void UTDButton::NativePreConstruct()
             richText->SetTextStyleSet(textStyleData);
         }
     }
+
+    TDSetButtonStyle(ButtonStyle);
+
 }
 
 void UTDButton::NativeConstruct()
 {
     Super::NativeConstruct();
-    
 
+
+}
+
+void UTDButton::TDSetButtonStyle(FButtonStyle& _buttonStyle)
+{
+    ButtonStyle = _buttonStyle;
+
+    if (ownerButton)
+    {
+        ownerButton->SetStyle(ButtonStyle);
+    }
 }

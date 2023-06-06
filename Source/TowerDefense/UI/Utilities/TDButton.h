@@ -36,12 +36,14 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Button Settings|Visual", meta = (ToolTip = "Edits text style data.", EditCondition = "useCustomTextStyleData"))
         UDataTable* textStyleData;
 
+    UPROPERTY(EditAnywhere, Category = "Appearance|Button Settings|Visual")
+        FButtonStyle ButtonStyle;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Button Settings|Data", meta = (InlineEditConditionToggle))
         bool useButtonText;
 
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Button Settings|Data", meta = (ToolTip = "Edits button text.", EditCondition = "useButtonText"))
         FText buttonText;
-
 
 protected:
 
@@ -50,7 +52,8 @@ private:
 
 
 public:
-
+    UFUNCTION()
+        void TDSetButtonStyle(FButtonStyle& _buttonStyle);
 
 protected:
 

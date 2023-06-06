@@ -4,9 +4,6 @@
 #include "Blueprint/UserWidget.h"
 #include "TDMainMenu.generated.h"
 
-/**
- *
- */
 UCLASS()
 class TOWERDEFENSE_API UTDMainMenu : public UUserWidget
 {
@@ -20,7 +17,22 @@ public:
 
 public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDButton* playButton;
+        class UTDButton* normalMode;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        class UTDButton* infiniteMode;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        class UTDButton* graphics;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        class UTDButton* sound;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        class UTDButton* input;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        class UTDButton* exit; 
 
 protected:
 

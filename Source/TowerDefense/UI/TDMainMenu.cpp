@@ -19,5 +19,5 @@ void UTDMainMenu::NativeConstruct()
 {
     Super::NativeConstruct();
 
-    playButton->ownerButton->OnClicked.AddUniqueDynamic(this, &UTDMainMenu::TDOpenLevel);
+    // playButton->ownerButton->OnClicked.AddDynamic(this, &UTDMainMenu::TDOpenLevel);
 }
