@@ -43,7 +43,8 @@ public:
     UPROPERTY(EditDefaultsOnly)
         int32 timeBuyPhase = 20.f;
 
-
+    UPROPERTY(EditDefaultsOnly)
+    float MaxGameRound = 99;
 
     //Delegates
     FOnBuyPhaseStartSignature FOnBuyPhaseStartDelegate;
@@ -115,6 +116,10 @@ public:
 
     UFUNCTION(BlueprintCallable)
         void TDModifyBuyPhaseTime(float _time);
+
+    UFUNCTION(BlueprintImplementableEvent)
+        void TDEndGameAction();
+
 protected:
 
     virtual void BeginPlay() override;

@@ -57,9 +57,9 @@ void ATDRoundManager::TDPrepareCombatRound()
 {
     ++actualRound;
 
-    if (actualRound > 99)
+    if (actualRound > MaxGameRound)
     {
-        GEngine->AddOnScreenDebugMessage(0, 10.f, FColor::Red, "Ronda 100");
+        TDEndGameAction();
         return;
     }
 
