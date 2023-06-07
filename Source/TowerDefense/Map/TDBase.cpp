@@ -38,6 +38,9 @@ ATDBase::ATDBase(const FObjectInitializer& ObjectInitializer)
 
 
     widgetShopRef = CreateDefaultSubobject<UTDWidgetShopComponent>("TDWidgetShop");
+    AddOwnedComponent(widgetShopRef);
+
+
 
 }
 
@@ -173,6 +176,8 @@ bool ATDBase::TDCommitBuyUpgrade_Implementation(ELootItems _item /*= ELootItems:
 void ATDBase::BeginPlay()
 {
     Super::BeginPlay();
+
+ 
 
     UTDGameData::TDSetBaseActor(this);
 

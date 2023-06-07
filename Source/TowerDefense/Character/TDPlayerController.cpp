@@ -35,6 +35,8 @@ void ATDPlayerController::BeginPlay()
     UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
     if (Subsystem)
     {
+
+        Subsystem->ClearAllMappings();
         Subsystem->AddMappingContext(BuyPhaseMappingContext, 0);
 
     }
@@ -48,7 +50,7 @@ void ATDPlayerController::BeginPlay()
     InputEnhanced->BindAction(MoveSideInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDMoveSideAction);
     InputEnhanced->BindAction(MoveForwardInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDMoveForwardAction);
     InputEnhanced->BindAction(PauseInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDChangePauseMenuVisibility);
-    InputEnhanced->BindAction(TraceInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDTraceFromCameraToOpenUI);
+    InputEnhanced->BindAction(TraceInputAction, ETriggerEvent::Completed, this, &ATDPlayerController::TDTraceFromCameraToOpenUI);
 
     if (pauseMenuClass)
     {
