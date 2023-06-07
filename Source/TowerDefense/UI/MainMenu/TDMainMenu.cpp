@@ -1,5 +1,4 @@
-#include "UI/TDMainMenu.h"
-#include "Utilities/TDButton.h"
+#include "UI/MainMenu/TDMainMenu.h"
 
 bool UTDMainMenu::Initialize()
 {
@@ -19,5 +18,5 @@ void UTDMainMenu::NativeConstruct()
 {
     Super::NativeConstruct();
 
-    // playButton->ownerButton->OnClicked.AddDynamic(this, &UTDMainMenu::TDOpenLevel);
+    
 }

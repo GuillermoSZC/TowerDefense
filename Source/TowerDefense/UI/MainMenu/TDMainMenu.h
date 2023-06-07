@@ -1,11 +1,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
+#include "UI/TDUserWidget.h"
 #include "TDMainMenu.generated.h"
 
+class UTDButton;
+
 UCLASS()
-class TOWERDEFENSE_API UTDMainMenu : public UUserWidget
+class TOWERDEFENSE_API UTDMainMenu : public UTDUserWidget
 {
     GENERATED_BODY()
 
@@ -14,25 +16,24 @@ public:
     virtual void NativePreConstruct() override;
     virtual void NativeConstruct() override;
 
-
 public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDButton* normalMode;
+        UTDButton* normalMode;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDButton* infiniteMode;
+        UTDButton* infiniteMode;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDButton* graphics;
+        UTDButton* graphics;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDButton* sound;
+        UTDButton* sound;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDButton* input;
+        UTDButton* input;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        class UTDButton* exit; 
+        UTDButton* exit; 
 
 protected:
 
