@@ -7,6 +7,7 @@
 #include "TDTower.h"
 #include <UMG/Public/Blueprint/WidgetBlueprintLibrary.h>
 #include "Character/TDPlayerController.h"
+#include "Components/TDWidgetShopComponent.h"
 
 
 FName ATDTowerStructure::StaticMeshName(TEXT("StructureMesh"));
@@ -17,6 +18,7 @@ ATDTowerStructure::ATDTowerStructure()
 
     towerStructure = CreateDefaultSubobject<UStaticMeshComponent>(ATDTowerStructure::StaticMeshName);
 
+    widgetShopRef = CreateDefaultSubobject<UTDWidgetShopComponent>("TDWidgetShop");
     RootComponent = towerStructure;
 
     //isTowerSpawned = false;
@@ -28,10 +30,15 @@ ATDTowerStructure::ATDTowerStructure()
     towerMap.Add(ETowers::Speed, nullptr);
 }
 
+void ATDTowerStructure::TDTriggerOpenUI()
+{
+    OnClicked.Broadcast(this,FKey());
+}
+
 void ATDTowerStructure::TDCalcultateCostWithLoot_Implementation(FBuyCost& _cost, ELootItems _item)
 {
     _cost.BPItem = _item;
-    UTDGameData::TDGetCostManager()->TDCalculateUpgradeCost(_cost,1);
+    UTDGameData::TDGetCostManager()->TDCalculateUpgradeCost(_cost, 1);
 }
 
 bool ATDTowerStructure::TDCanAffordCostWithLoot_Implementation(FBuyCost& _cost)
@@ -45,7 +52,7 @@ bool ATDTowerStructure::TDCommitBuyUpgrade_Implementation(ELootItems _item)
 
     cost.BPItem = _item;
 
-    ITDCostInterface::Execute_TDCalcultateCostWithLoot(this,cost, cost.BPItem);
+    ITDCostInterface::Execute_TDCalcultateCostWithLoot(this, cost, cost.BPItem);
 
     if (!ITDCostInterface::Execute_TDCanAffordCostWithLoot(this, cost))
     {

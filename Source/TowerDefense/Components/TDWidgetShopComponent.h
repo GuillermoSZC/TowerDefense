@@ -21,7 +21,7 @@ public:
 public:
 
 
-    UPROPERTY(EditDefaultsOnly, Category = "User Interface")
+    UPROPERTY(EditAnywhere, Category = "User Interface")
         TSubclassOf<UTDCostWidget> widgetClass;
 
 
@@ -29,13 +29,16 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "User Interface")
         float distanceToUI;
 
-protected:
+
 
     UPROPERTY(VisibleAnywhere, Category = "User Interface")
         UTDCostWidget* widgetRef;
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "User Interface")
         bool isUIActive;
+
+protected:
+
 
 private:
     UPROPERTY()
@@ -55,7 +58,7 @@ public:
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
         void TDVisibleUI();
 
-    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+    UFUNCTION(BlueprintCallable)
         void TDOnClickedActor(AActor* Target, FKey ButtonPressed);
 
 protected:

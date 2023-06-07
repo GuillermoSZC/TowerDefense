@@ -13,6 +13,7 @@
 class UStaticMeshComponent;
 class UTDTowerShop;
 class ATDTower;
+class UTDWidgetShopComponent;
 
 UCLASS()
 class TOWERDEFENSE_API ATDTowerStructure : public AActor , public ITDCostInterface
@@ -21,9 +22,20 @@ class TOWERDEFENSE_API ATDTowerStructure : public AActor , public ITDCostInterfa
 public:
     ATDTowerStructure();
 
+
+
 public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
         UStaticMeshComponent* towerStructure;
+
+
+    
+    UPROPERTY(EditAnywhere, Category = "User Interface")
+    UTDWidgetShopComponent* widgetShopRef;
+
+
+
+
 
 protected:
 
@@ -46,6 +58,9 @@ public:
     bool TDCanAffordCostWithLoot_Implementation(FBuyCost& _cost) override;
 
     bool TDCommitBuyUpgrade_Implementation(ELootItems _item) override;
+
+    void TDTriggerOpenUI() override;
+
 
 protected:
     virtual void BeginPlay() override;

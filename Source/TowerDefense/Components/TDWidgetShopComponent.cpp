@@ -73,7 +73,7 @@ void UTDWidgetShopComponent::TDVisibleUI_Implementation()
     }
 }
 
-void UTDWidgetShopComponent::TDOnClickedActor_Implementation(AActor* Target, FKey ButtonPressed)
+void UTDWidgetShopComponent::TDOnClickedActor(AActor* Target, FKey ButtonPressed)
 {
     if (TDCanShowUI())
     {

@@ -17,6 +17,7 @@ class UTDTowerAttributeSet;
 class UDataTable;
 class UTDDamageAttributeSet;
 class UTDTowerUpgrade;
+class UTDWidgetShopComponent;
 
 UCLASS()
 class TOWERDEFENSE_API ATDTower : public AActor, public ITDInterface, public IAbilitySystemInterface, public ITDCostInterface
@@ -26,13 +27,6 @@ class TOWERDEFENSE_API ATDTower : public AActor, public ITDInterface, public IAb
 public:
     // Sets default values for this actor's properties
     ATDTower();
-
-
-
-
-
-
-
 
 public:
 
@@ -61,6 +55,11 @@ public:
 
     UPROPERTY(EditDefaultsOnly, Category = "Ability System")
         TSubclassOf<UGameplayEffect> levelUpgrade;
+
+
+    UPROPERTY(EditAnywhere)
+    UTDWidgetShopComponent* widgetShopRef;
+
 protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability System", meta = (AllowPrivateAccess = "true"))
         UAbilitySystemComponent* abilitySystem;
@@ -145,6 +144,10 @@ public:
 
     UFUNCTION(BlueprintPure)
         ELootItems TDGetItemToUpgrade();
+
+
+    void TDTriggerOpenUI() override;
+
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;

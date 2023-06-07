@@ -12,6 +12,7 @@
 #include "GameLogic/ElementsEnum.h"
 #include "GameLogic/TDCostManager.h"
 #include "Character/TDPlayerCharacter.h"
+#include "Components/TDWidgetShopComponent.h"
 //#include "Character/TDPlayerCharacter.h"
 //#include "Character/TDPlayerController.h"
 
@@ -35,9 +36,17 @@ ATDBase::ATDBase(const FObjectInitializer& ObjectInitializer)
     widgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComponent"));
     widgetComponent->SetupAttachment(RootComponent);
 
+
+    widgetShopRef = CreateDefaultSubobject<UTDWidgetShopComponent>("TDWidgetShop");
+
 }
 
 
+
+void ATDBase::TDTriggerOpenUI()
+{
+    OnClicked.Broadcast(this, FKey());
+}
 
 void ATDBase::TDCalculateElementChangeCost_Implementation(FBuyCost& _cost, ELootItems _item) 
 {

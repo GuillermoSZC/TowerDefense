@@ -40,6 +40,8 @@ public:
         bool TDCommitBuyUpgrade(ELootItems _item = ELootItems::None);
 
 
+    UFUNCTION()
+    virtual void TDTriggerOpenUI();
 
 
     //Este solo se puede implementar en BP

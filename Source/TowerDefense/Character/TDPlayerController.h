@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "InputActionValue.h"
+#include <EnhancedInputComponent.h>
 
 #include "TDPlayerController.generated.h"
 
@@ -29,7 +30,10 @@ public:
 
 public:
     UPROPERTY(EditDefaultsOnly)
-        UInputMappingContext* DefaultMappingContext;
+        UInputMappingContext* BuyPhaseMappingContext;
+
+      UPROPERTY(EditDefaultsOnly)
+        UInputMappingContext* CombatPhaseMappingContext;
 
     UPROPERTY(EditDefaultsOnly)
         UInputAction* MoveForwardInputAction;
@@ -43,6 +47,9 @@ public:
     UPROPERTY(EditDefaultsOnly)
         UInputAction* PauseInputAction;
 
+        UPROPERTY(EditDefaultsOnly)
+        UInputAction* TraceInputAction;
+
     UPROPERTY(EditDefaultsOnly)
         TSubclassOf<UTDPauseMenu> pauseMenuClass;
 
@@ -50,12 +57,20 @@ public:
         TSubclassOf<UTDPlayerHUD> playerHUDClass;
 
 
+        UPROPERTY(EditDefaultsOnly, Category = "Trace")
+        float lenghtTrace = 100000.f;
+
+        UPROPERTY(EditDefaultsOnly, Category = "Trace");
+        TEnumAsByte<ECollisionChannel> traceChannel;
+
 protected:
     UPROPERTY(Transient)
         UTDPauseMenu* pauseMenuRef;
 
         UPROPERTY(Transient)
     UTDPlayerHUD* playerHUDRef;
+
+        FInputActionBinding traceBind = FInputActionBinding();
 
 
 private:
@@ -103,6 +118,13 @@ private:
     UFUNCTION()
         void TDOnBuyPhaseStart(int32 _num);
 
+    void TDChangeToAvalibleTrace();
+    void TDChangeNotToAvalibleTrace();
+   
+
     UFUNCTION()
         void TDOnCombatPhaseStart(int32 _num);
+
+    UFUNCTION()
+    void TDTraceFromCameraToOpenUI(const FInputActionValue& _value);
 };

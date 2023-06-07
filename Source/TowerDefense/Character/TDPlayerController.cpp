@@ -35,7 +35,7 @@ void ATDPlayerController::BeginPlay()
     UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
     if (Subsystem)
     {
-        Subsystem->AddMappingContext(DefaultMappingContext, 0);
+        Subsystem->AddMappingContext(BuyPhaseMappingContext, 0);
 
     }
 
@@ -48,6 +48,7 @@ void ATDPlayerController::BeginPlay()
     InputEnhanced->BindAction(MoveSideInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDMoveSideAction);
     InputEnhanced->BindAction(MoveForwardInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDMoveForwardAction);
     InputEnhanced->BindAction(PauseInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDChangePauseMenuVisibility);
+    InputEnhanced->BindAction(TraceInputAction, ETriggerEvent::Triggered, this, &ATDPlayerController::TDTraceFromCameraToOpenUI);
 
     if (pauseMenuClass)
     {
@@ -58,7 +59,7 @@ void ATDPlayerController::BeginPlay()
             pauseMenuRef->AddToViewport(1);
             pauseMenuRef->SetVisibility(ESlateVisibility::Collapsed);
             pauseMenuRef->closeButton->OnClicked.AddDynamic(this, &ATDPlayerController::TDClosePauseMenu);
-        }        
+        }
     }
 
     if (playerHUDClass)
@@ -150,8 +151,7 @@ void ATDPlayerController::TDPauseMenuLogic(ESlateVisibility _visibility, bool _v
             inputMode.SetHideCursorDuringCapture(false);
             SetInputMode(inputMode);
             bShowMouseCursor = true;
-            bEnableClickEvents = false;
-            bEnableTouchEvents = false;
+            //TDChangeNotToAvalibleTrace();
             if (playerHUDRef)
             {
                 playerHUDRef->SetVisibility(ESlateVisibility::Collapsed);
@@ -175,23 +175,72 @@ void ATDPlayerController::TDPauseMenuLogic(ESlateVisibility _visibility, bool _v
     }
 }
 
+
+void ATDPlayerController::TDChangeToAvalibleTrace()
+{
+    UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
+    if (Subsystem)
+    {
+        Subsystem->RemoveMappingContext(CombatPhaseMappingContext);
+        Subsystem->AddMappingContext(BuyPhaseMappingContext, 0);
+    }
+
+}
+
+void ATDPlayerController::TDChangeNotToAvalibleTrace()
+{
+    UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
+    if (Subsystem)
+    {
+        Subsystem->RemoveMappingContext(BuyPhaseMappingContext);
+        Subsystem->AddMappingContext(CombatPhaseMappingContext, 0);
+
+    }
+}
+
 void ATDPlayerController::TDOnBuyPhaseStart(int32 _num)
 {
-    bEnableClickEvents = true;
     bShowMouseCursor = true;
-    bEnableTouchEvents = true;
+
+    TDChangeToAvalibleTrace();
 }
+
+
 
 void ATDPlayerController::TDOnCombatPhaseStart(int32 _num)
 {
-    bEnableClickEvents = false;
     bShowMouseCursor = false;
-    bEnableTouchEvents = false;
+
+    TDChangeNotToAvalibleTrace();
+}
+
+void ATDPlayerController::TDTraceFromCameraToOpenUI(const FInputActionValue& _value)
+{
+    FVector screenPos = FVector();
+    FVector screenDirection = FVector();
+    DeprojectMousePositionToWorld(screenPos, screenDirection);
+
+    FVector endPos = screenPos + (screenDirection * lenghtTrace);
+
+    FHitResult hitresult = FHitResult();
+
+    if (GetWorld()->LineTraceSingleByChannel(hitresult, screenPos, endPos, traceChannel))
+    {
+        ITDCostInterface* interace = Cast<ITDCostInterface>(hitresult.GetActor());
+        interace->TDTriggerOpenUI();
+        UKismetSystemLibrary::DrawDebugLine(GetWorld(), screenPos, endPos, FColor::Green, 2.f, 5.f);
+    }
+    else
+    {
+        UKismetSystemLibrary::DrawDebugLine(GetWorld(), screenPos, endPos, FColor::Red, 2.f, 5.f);
+    }
 }
 
 void ATDPlayerController::TDOnOpenUI(UTDCostWidget* _widgetRef)
 {
     costWidgetRef = _widgetRef;
+
+    TDChangeNotToAvalibleTrace();
 
     SetIgnoreMoveInput(true);
     SetIgnoreLookInput(true);
@@ -203,6 +252,10 @@ void ATDPlayerController::TDOnCloseUI()
 
     SetIgnoreMoveInput(false);
     SetIgnoreLookInput(false);
+   
+
+    UTDGameData::TDGetRoundManager()->TDGetActualPhase() == GamePhase::BuyPhase ? TDChangeToAvalibleTrace() : TDChangeNotToAvalibleTrace();
+
 }
 
 UTDPlayerHUD* ATDPlayerController::TDGetPLayerHUD()

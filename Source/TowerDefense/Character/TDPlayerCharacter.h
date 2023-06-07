@@ -44,8 +44,7 @@ public:
 
 
 protected:
-    //@TODO: cambiar a visible
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Loot Inventory")
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Loot Inventory")
         TMap<ELootItems, int32> PlayerInventory;
 
 

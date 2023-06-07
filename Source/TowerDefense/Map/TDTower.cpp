@@ -13,6 +13,7 @@
 #include "Character/TDPlayerController.h"
 #include "AttributesSets/TDLevelAttributeSet.h"
 #include "GameLogic/TDCostManager.h"
+#include "Components/TDWidgetShopComponent.h"
 
 
 
@@ -27,10 +28,16 @@ ATDTower::ATDTower()
 
     abilitySystem = CreateDefaultSubobject<UAbilitySystemComponent>("AbilityComponent");
     elementComponent = CreateDefaultSubobject<UTDElementComponent>("ElementComponent");
+    widgetShopRef = CreateDefaultSubobject<UTDWidgetShopComponent>("TDWidgetShop");
 
 }
 
 
+
+void ATDTower::TDTriggerOpenUI()
+{
+    OnClicked.Broadcast(this, FKey());
+}
 
 FGameplayTag ATDTower::TDGetTagClass_Implementation()
 {

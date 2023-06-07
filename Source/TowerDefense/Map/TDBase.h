@@ -16,6 +16,7 @@ class UDataTable;
 struct FOnAttributeChangeData;
 class UTDHealthAttributeSet;
 class UTDBaseUpgrade;
+class UTDWidgetShopComponent;
 
 UCLASS()
 class TOWERDEFENSE_API ATDBase : public AActor, public ITDInterface, public IAbilitySystemInterface, public ITDCostInterface
@@ -24,13 +25,6 @@ class TOWERDEFENSE_API ATDBase : public AActor, public ITDInterface, public IAbi
 
 public:
     ATDBase(const FObjectInitializer& ObjectInitializer);
-
-
-
-
-
-
-
 
 
 public:
@@ -45,6 +39,10 @@ public:
 
             UPROPERTY(EditDefaultsOnly, Category = "Ability System",meta =( DisplayName = "Effect To Apply at the end of Combat Phase"))
         TSubclassOf<UGameplayEffect> EffectClass;
+
+
+                UPROPERTY(EditAnywhere)
+    UTDWidgetShopComponent* widgetShopRef;
 
 protected:
 
@@ -83,6 +81,11 @@ private:
         const UTDHealthAttributeSet* BaseAttributes;
 
 public:
+
+
+
+    void TDTriggerOpenUI() override;
+
     UFUNCTION(BlueprintCallable)
         UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
