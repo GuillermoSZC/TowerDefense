@@ -45,7 +45,9 @@ void UTDLevelSelector::TDInitButtons()
         for (FName name : rowNames)
         {
             row = buttonsDataTable->FindRow<FTDLevelSelectorButtons>(name, context);
-            UTDButtonMap* tempButton = CreateWidget<UTDButtonMap>(buttonsContainer, *row->buttonClass);
+            UTDButtonMap* tempButton = nullptr;
+            //tempButton = NewObject<UTDButtonMap>(buttonsContainer, *row->buttonClass);
+            tempButton = CreateWidget<UTDButtonMap>(this, *row->buttonClass);
 
             tempButton->TDSetFont(row->fonts);
             tempButton->TDSetText(row->buttonName);

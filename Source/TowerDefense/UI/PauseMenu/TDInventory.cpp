@@ -48,7 +48,6 @@ void UTDInventory::TDInitComponents()
 
 void UTDInventory::TDAddResourceCard(UTDResourceCard* _card, UVerticalBox* _verticalBox)
 {
-    UButton* button = NewObject<UButton>(UButton::StaticClass(), "Button");
 
 
     if (_verticalBox->GetChildrenCount() == 0)

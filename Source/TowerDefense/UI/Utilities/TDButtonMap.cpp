@@ -6,23 +6,21 @@ bool UTDButtonMap::Initialize()
 {
     Super::Initialize();
 
+    if (ownerButton)
+    {
+        ownerButton->OnClicked.AddDynamic(this, &UTDButtonMap::TDOpenLevel);
+    }
     return true;
 }
 
 void UTDButtonMap::NativePreConstruct()
 {
     Super::NativePreConstruct();
-
 }
 
 void UTDButtonMap::NativeConstruct()
 {
-    Super::NativeConstruct();
-
-    if (ownerButton)
-    {
-        ownerButton->OnClicked.AddDynamic(this, &UTDButtonMap::TDOpenLevel);
-    }
+    Super::NativeConstruct();   
 }
 
 void UTDButtonMap::TDSetLevelReference(TSoftObjectPtr<UWorld> _levelReference)
