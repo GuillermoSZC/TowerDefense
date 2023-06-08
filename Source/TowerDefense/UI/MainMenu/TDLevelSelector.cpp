@@ -18,3 +18,8 @@ void UTDLevelSelector::NativeConstruct()
     Super::NativeConstruct();
 
 }
+
+void UTDLevelSelector::TDInitButtons()
+{
+
+}

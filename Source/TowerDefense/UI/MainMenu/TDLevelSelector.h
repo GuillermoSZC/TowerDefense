@@ -7,13 +7,16 @@
 UCLASS()
 class TOWERDEFENSE_API UTDLevelSelector : public UTDUserWidget
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 public:
     virtual bool Initialize() override;
     virtual void NativePreConstruct() override;
     virtual void NativeConstruct() override;
 
 public:
+    UPROPERTY(EditDefaultsOnly)
+        UDataTable* resourcesDataTable;
+
 
 protected:
 
@@ -24,5 +27,6 @@ public:
 protected:
 
 private:
-
+    UFUNCTION()
+        void TDInitButtons();
 };
