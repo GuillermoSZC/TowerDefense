@@ -25,6 +25,9 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TMap<EElements, UTexture2D*> elementsImage;
 
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<UWorld> worldRef;
+
 
 protected:
 
@@ -33,7 +36,8 @@ private:
 
 
 public:
-
+	UFUNCTION(BlueprintCallable)
+	void TDOpenMap(UObject* _world);
 
 protected:
 

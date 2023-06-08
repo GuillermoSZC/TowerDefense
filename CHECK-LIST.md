@@ -3,8 +3,6 @@
 MENU PRINCIPAL:
 
 HACERLO FUNCIONAL
-MIRAR BUG DE MENU PRINCIPAL QUE NO DEJA ABRIR TIENDAS
-
 ------------------------------------------------------
 UI GENERAL:
 

@@ -7,3 +7,8 @@ UTDGameInstance::UTDGameInstance()
 {
 
 }
+
+void UTDGameInstance::TDOpenMap(UObject* _world)
+{
+    UGameplayStatics::OpenLevelBySoftObjectPtr(_world, worldRef, true);
+}
