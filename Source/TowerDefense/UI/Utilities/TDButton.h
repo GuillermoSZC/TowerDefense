@@ -1,11 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "UMG/Public/Components/Button.h"
 #include "Engine/DataTable.h"
+#include <Layout/Margin.h>
 #include "TDButton.generated.h"
 
 class UTDRichTextBlock;
@@ -49,11 +48,25 @@ protected:
 
 
 private:
+    UPROPERTY()
+        FMargin ownPadding;
 
 
 public:
     UFUNCTION()
         void TDSetButtonStyle(FButtonStyle& _buttonStyle);
+
+    UFUNCTION()
+        void TDSetPadding(FMargin _padding);
+
+    UFUNCTION()
+        void TDSetText(FText _text);
+
+    UFUNCTION()
+        FText TDGetText() const;
+
+    UFUNCTION()
+        void TDSetFont(UDataTable* _font);
 
 protected:
 

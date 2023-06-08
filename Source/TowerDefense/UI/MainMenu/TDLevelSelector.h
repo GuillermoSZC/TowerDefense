@@ -4,6 +4,10 @@
 #include "UI/TDUserWidget.h"
 #include "TDLevelSelector.generated.h"
 
+class UDataTable;
+class UTDButton;
+class UVerticalBox;
+
 UCLASS()
 class TOWERDEFENSE_API UTDLevelSelector : public UTDUserWidget
 {
@@ -15,7 +19,10 @@ public:
 
 public:
     UPROPERTY(EditDefaultsOnly)
-        UDataTable* resourcesDataTable;
+        UDataTable* buttonsDataTable;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UVerticalBox* buttonsContainer;
 
 
 protected:
