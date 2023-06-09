@@ -36,7 +36,6 @@ public:
     ~ATDRoundManager();
 
 public:
-
     UPROPERTY(EditAnywhere, Instanced)
         TArray<UTDRoundElementsType*> RoundElements;
 
@@ -65,15 +64,13 @@ private:
 
     float timeperSpawn = 0.7f;
 
-
     TArray<EElements> actualRoundElements;
 
+    bool isInfinite = false;
 
     GamePhase actualPhase = GamePhase::BuyPhase;
 
     bool timePaused = false;
-
-    bool isInfinite = false;
 
 public:
 

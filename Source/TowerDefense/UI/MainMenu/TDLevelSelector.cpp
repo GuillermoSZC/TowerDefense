@@ -18,14 +18,10 @@ void UTDLevelSelector::NativePreConstruct()
 {
     Super::NativePreConstruct();
 
-    // buttonsContainer->ClearChildren();
-
     if (buttonsContainer->GetChildrenCount() == 0)
     {
         TDInitButtons();
     }
-
-
 }
 
 void UTDLevelSelector::NativeConstruct()
@@ -53,6 +49,7 @@ void UTDLevelSelector::TDInitButtons()
             tempButton->TDSetText(row->buttonName);
             tempButton->TDSetPadding(row->padding);
             tempButton->TDSetLevelReference(row->levelReference);
+            tempButton->TDSetIsInfinite(row->isInfinite);
 
             if (row->bCanModify)
             {

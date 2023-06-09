@@ -1,6 +1,8 @@
 #include "UI/Utilities/TDButtonMap.h"
 #include <Engine/World.h>
 #include <Kismet/GameplayStatics.h>
+#include "GameLogic/TDGameData.h"
+#include "GameLogic/TDGameInstance.h"
 
 bool UTDButtonMap::Initialize()
 {
@@ -36,6 +38,7 @@ TSoftObjectPtr<UWorld> UTDButtonMap::TDGetLevelReference() const
 
 void UTDButtonMap::TDOpenLevel()
 {
+    UTDGameData::TDGetGameInstance()->isInfiniteMap = isInfinite;
     UGameplayStatics::OpenLevelBySoftObjectPtr(this, levelReference, true);
 }
 

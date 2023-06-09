@@ -5,6 +5,8 @@
 #include "TDMainMenu.generated.h"
 
 class UTDButton;
+class UTDLevelSelector;
+class UWidgetSwitcher;
 
 UCLASS()
 class TOWERDEFENSE_API UTDMainMenu : public UTDUserWidget
@@ -33,7 +35,16 @@ public:
         UTDButton* input;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDButton* exit; 
+        UTDButton* exit;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UWidgetSwitcher* mainMenuSwitcher;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDLevelSelector* levelsSelector;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDLevelSelector* infiniteLevelsSelector;
 
 protected:
 
@@ -42,8 +53,23 @@ private:
 
 
 public:
-    UFUNCTION(BlueprintImplementableEvent)
-        void TDOpenLevel();
+    UFUNCTION()
+        void TDLevelsSelector();
+
+    UFUNCTION()
+        void TDInfiniteLevelsSelector();
+
+    UFUNCTION()
+        void TDGraphics();
+
+    UFUNCTION()
+        void TDSound();
+
+    UFUNCTION()
+        void TDInput();
+
+    UFUNCTION()
+        void TDExit();
 
 protected:
 
