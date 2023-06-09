@@ -73,6 +73,7 @@ private:
 
     bool timePaused = false;
 
+    bool isInfinite = false;
 
 public:
 
@@ -117,6 +118,12 @@ public:
     UFUNCTION(BlueprintCallable)
         void TDModifyBuyPhaseTime(float _time);
 
+    UFUNCTION(BlueprintPure)
+        bool TDGetIsInfinite() const;
+
+    UFUNCTION(BlueprintCallable)
+        void TDSetIsInfinite(bool _value);
+        
     UFUNCTION(BlueprintImplementableEvent)
         void TDEndGameAction();
 

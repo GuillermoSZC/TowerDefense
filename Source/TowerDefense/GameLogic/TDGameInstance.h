@@ -9,22 +9,29 @@
 #include "TDGameInstance.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class TOWERDEFENSE_API UTDGameInstance : public UGameInstance
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
 public:
 
-	UTDGameInstance();
-	
+    UTDGameInstance();
+
+
+    void Init() override;
+
 public:
 
-	UPROPERTY(EditDefaultsOnly)
-	TMap<EElements, UTexture2D*> elementsImage;
+    UPROPERTY(EditDefaultsOnly)
+        TMap<EElements, UTexture2D*> elementsImage;
 
+    UPROPERTY()
+        bool isInfiniteMap;
+
+    
 	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<UWorld> worldRef;
 

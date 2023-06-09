@@ -54,7 +54,7 @@ public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
         TMap<EElements, UTDElement*> elementsDataAssets;
 
-    
+
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
         TMap<EElements, UDataTable*> elementsDataLoot;
 
@@ -67,7 +67,7 @@ public:
     UPROPERTY(EditDefaultsOnly, Category = "Classes")
         TSubclassOf<UTDBaseUpgrade> baseUpgradeClass;
 
-        UPROPERTY(EditDefaultsOnly, Category = "Classes")
+    UPROPERTY(EditDefaultsOnly, Category = "Classes")
         TSubclassOf<ATDCostManager> CostManagerClass;
 
 protected:
@@ -87,12 +87,12 @@ private:
     UPROPERTY(Transient)
         UTDWeightManager* weightManagerRef = nullptr;
 
-     UPROPERTY()
-         TMap<TSubclassOf<UTDCostWidget>, UTDCostWidget*> widgetMap;
+    UPROPERTY()
+        TMap<TSubclassOf<UTDCostWidget>, UTDCostWidget*> widgetMap;
 
-     UPROPERTY(Transient)
-         ATDCostManager* CostManagerRef = nullptr;
-   
+    UPROPERTY(Transient)
+        ATDCostManager* CostManagerRef = nullptr;
+
 
 
 
@@ -116,8 +116,8 @@ protected:
 
 
 private:
-     UFUNCTION()
-         UTDCostWidget* TDAddToViewport(TSubclassOf<UTDCostWidget> _widgetClass);
+    UFUNCTION()
+        UTDCostWidget* TDAddToViewport(TSubclassOf<UTDCostWidget> _widgetClass);
 
 
 };

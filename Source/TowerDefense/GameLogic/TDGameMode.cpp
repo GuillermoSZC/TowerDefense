@@ -41,10 +41,6 @@ void ATDGameMode::InitGame(const FString& MapName, const FString& Options, FStri
 
     UTDGameData::TDSetGameMode(this);
 
-    UTDGameInstance* gameInstanceRef = Cast<UTDGameInstance>(GetGameInstance());
-    UTDGameData::TDSetGameInstance(gameInstanceRef);
-
-
     UWorld* world = GetWorld();
     UTDGameData::TDSetWorld(world);
 

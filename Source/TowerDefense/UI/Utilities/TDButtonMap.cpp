@@ -10,6 +10,7 @@ bool UTDButtonMap::Initialize()
     {
         ownerButton->OnClicked.AddDynamic(this, &UTDButtonMap::TDOpenLevel);
     }
+
     return true;
 }
 
@@ -36,4 +37,14 @@ TSoftObjectPtr<UWorld> UTDButtonMap::TDGetLevelReference() const
 void UTDButtonMap::TDOpenLevel()
 {
     UGameplayStatics::OpenLevelBySoftObjectPtr(this, levelReference, true);
+}
+
+bool UTDButtonMap::TDGetIsInfinite() const
+{
+    return isInfinite;
+}
+
+void UTDButtonMap::TDSetIsInfinite(bool _value)
+{
+    isInfinite = _value;
 }

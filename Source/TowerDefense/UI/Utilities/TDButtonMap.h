@@ -14,13 +14,16 @@ public:
     virtual void NativeConstruct() override;
 
 public:
-
+    
 protected:
 
 
 private:
     UPROPERTY()
         TSoftObjectPtr<UWorld> levelReference;
+
+    UPROPERTY()
+        bool isInfinite;
 
 
 public:
@@ -33,6 +36,11 @@ public:
     UFUNCTION()
         void TDOpenLevel();
 
+        UFUNCTION(BlueprintPure)
+            bool TDGetIsInfinite() const;
+
+        UFUNCTION(BlueprintCallable)
+            void TDSetIsInfinite(bool _value);
 
 
 protected:

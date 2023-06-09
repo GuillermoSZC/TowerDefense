@@ -36,6 +36,9 @@ struct FTDLevelSelectorButtons : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
         TSubclassOf<UTDButtonMap> buttonClass;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        bool isInfinite = false;
+
     FTDLevelSelectorButtons()
     {
         bCanModify = false;
