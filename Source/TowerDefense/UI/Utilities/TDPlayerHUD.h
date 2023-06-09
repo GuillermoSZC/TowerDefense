@@ -60,6 +60,9 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UImage* playerElement;
 
+            UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        class UImage* healthBarContainer;
+
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UTDHealthBar* healthBar;
 
