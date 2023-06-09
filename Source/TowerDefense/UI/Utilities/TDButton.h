@@ -1,11 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "UMG/Public/Components/Button.h"
 #include "Engine/DataTable.h"
+#include <Layout/Margin.h>
 #include "TDButton.generated.h"
 
 class UTDRichTextBlock;
@@ -36,21 +35,38 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Button Settings|Visual", meta = (ToolTip = "Edits text style data.", EditCondition = "useCustomTextStyleData"))
         UDataTable* textStyleData;
 
+    UPROPERTY(EditAnywhere, Category = "Appearance|Button Settings|Visual")
+        FButtonStyle ButtonStyle;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Button Settings|Data", meta = (InlineEditConditionToggle))
         bool useButtonText;
 
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Button Settings|Data", meta = (ToolTip = "Edits button text.", EditCondition = "useButtonText"))
         FText buttonText;
 
-
 protected:
 
 
 private:
+    UPROPERTY()
+        FMargin ownPadding;
 
 
 public:
+    UFUNCTION()
+        void TDSetButtonStyle(FButtonStyle& _buttonStyle);
 
+    UFUNCTION()
+        void TDSetPadding(FMargin _padding);
+
+    UFUNCTION()
+        void TDSetText(FText _text);
+
+    UFUNCTION()
+        FText TDGetText() const;
+
+    UFUNCTION()
+        void TDSetFont(UDataTable* _font);
 
 protected:
 

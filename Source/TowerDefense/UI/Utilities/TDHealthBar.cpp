@@ -15,6 +15,7 @@ void UTDHealthBar::NativePreConstruct()
 {
     Super::NativePreConstruct();
 
+    TDSetProgressBarStyle(ProgressBarStyle);
 }
 
 void UTDHealthBar::NativeConstruct()
@@ -35,5 +36,15 @@ void UTDHealthBar::TDSetHealthBarSize(FVector2D& _value)
     if (healthBar)
     {
         healthBar->SetRenderScale(_value);
+    }
+}
+
+void UTDHealthBar::TDSetProgressBarStyle(FProgressBarStyle& _progressBarStyle)
+{
+    ProgressBarStyle = _progressBarStyle;
+
+    if (healthBar)
+    {
+        healthBar->SetWidgetStyle(ProgressBarStyle);
     }
 }

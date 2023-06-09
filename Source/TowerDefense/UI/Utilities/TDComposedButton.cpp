@@ -47,6 +47,8 @@ void UTDComposedButton::NativePreConstruct()
     AvalibleBuyColor = FLinearColor(0.55f, 0.2f, 0, 1.f);
     NotAvalibleBuyColor = FLinearColor(1.f, 0.f, 0.02f, 1.f);
 
+
+
 }
 
 void UTDComposedButton::NativeConstruct()

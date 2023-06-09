@@ -57,7 +57,9 @@ void ATDRoundManager::TDPrepareCombatRound()
 {
     ++actualRound;
 
-    if (actualRound > MaxGameRound)
+    
+
+    if (!isInfinite && actualRound > MaxGameRound)
     {
         TDEndGameAction();
         return;
@@ -192,4 +194,14 @@ void ATDRoundManager::TDSetTimePaused(bool _newState)
 void ATDRoundManager::TDModifyBuyPhaseTime(float _time)
 {
     timeRound += _time;
+}
+
+bool ATDRoundManager::TDGetIsInfinite() const
+{
+    return isInfinite;
+}
+
+void ATDRoundManager::TDSetIsInfinite(bool _value)
+{
+    isInfinite = _value;
 }

@@ -36,7 +36,6 @@ public:
     ~ATDRoundManager();
 
 public:
-
     UPROPERTY(EditAnywhere, Instanced)
         TArray<UTDRoundElementsType*> RoundElements;
 
@@ -65,14 +64,13 @@ private:
 
     float timeperSpawn = 0.7f;
 
-
     TArray<EElements> actualRoundElements;
 
+    bool isInfinite = false;
 
     GamePhase actualPhase = GamePhase::BuyPhase;
 
     bool timePaused = false;
-
 
 public:
 
@@ -117,6 +115,12 @@ public:
     UFUNCTION(BlueprintCallable)
         void TDModifyBuyPhaseTime(float _time);
 
+    UFUNCTION(BlueprintPure)
+        bool TDGetIsInfinite() const;
+
+    UFUNCTION(BlueprintCallable)
+        void TDSetIsInfinite(bool _value);
+        
     UFUNCTION(BlueprintImplementableEvent)
         void TDEndGameAction();
 

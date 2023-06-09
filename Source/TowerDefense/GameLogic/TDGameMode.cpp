@@ -41,10 +41,6 @@ void ATDGameMode::InitGame(const FString& MapName, const FString& Options, FStri
 
     UTDGameData::TDSetGameMode(this);
 
-    UTDGameInstance* gameInstanceRef = Cast<UTDGameInstance>(GetGameInstance());
-    UTDGameData::TDSetGameInstance(gameInstanceRef);
-
-
     UWorld* world = GetWorld();
     UTDGameData::TDSetWorld(world);
 
@@ -58,6 +54,7 @@ void ATDGameMode::InitGame(const FString& MapName, const FString& Options, FStri
 
     RoundManagerRef = world->SpawnActor<ATDRoundManager>(RoundManagerClass);
     UTDGameData::TDSetRoundManager(RoundManagerRef);
+    RoundManagerRef->TDSetIsInfinite(UTDGameData::TDGetGameInstance()->isInfiniteMap);
 
     weightManagerRef = NewObject<UTDWeightManager>(UTDWeightManager::StaticClass(), FName(TEXT("WeightManager")), EObjectFlags::RF_MarkAsRootSet);
     UTDGameData::TDSetWeightManager(weightManagerRef);

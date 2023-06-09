@@ -1,31 +1,21 @@
-
------------------------------------------------------------------
-MENU PRINCIPAL:
-
-HACERLO FUNCIONAL
-------------------------------------------------------
-UI GENERAL:
+--UI GENERAL--
 
 OPCIONES GRAFICAS - FALTA IMPLEMENTACION
 OPCIONES SONIDO - FALTA IMPLEMENTACION
 LOG ITEMS
+ANIMACIONES GENERAL
 
 -------------------------------------------------------------------
-
-
 --BUILD/CHECK WARNINGS--
 
 CHECKEAR TODOS LOS @TODO:
 
 BUG DE ENEMIGOS NO ANDAN, CHECKEAR ( he probado cerca de 1h y pico y no ha ocurrido. Estar atento)
-
-BORDES MAPA ( PIEDRAS O VALLA)
-
 FADE OUT VFX SONIC SMETER ASSET ELEMENTO
 ENSEÑAR LV DE LAS COSAS
 
-
-SONIDOS
+--------------------------------------------------------------------------------------------------
+--SONIDOS--
 
 GOLPES ESPADA
 MUERTE ENEMIGOS
@@ -34,4 +24,3 @@ MUSICA (MENU PRINCIPAL, MAPA)
 SONIDO CONSTRUCCIÓN
 SONIDO MEJORA
 SONIDO EN BOTONES
-

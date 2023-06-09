@@ -29,8 +29,12 @@ ATDPlayerController::ATDPlayerController()
 void ATDPlayerController::BeginPlay()
 {
     Super::BeginPlay();
-
     playerPawn = GetPawn<ATDCharacter>();
+
+    FInputModeGameAndUI inputMode;
+    inputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+    inputMode.SetHideCursorDuringCapture(true);
+    SetInputMode(inputMode);
 
     UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
     if (Subsystem)
