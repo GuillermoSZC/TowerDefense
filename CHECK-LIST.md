@@ -1,8 +1,13 @@
+--LOG ITEMS--
+-CREAR UTILITY CON: UIMAGE, UBORDER, UTDTEXT
+CREAR ANIMACION EN LA UTILITY (DERECHA A IZQUIERDA Y ABAJO A ARRIBA)
+
+
+-------------------------------------------------------------------
 --UI GENERAL--
 
 OPCIONES GRAFICAS - FALTA IMPLEMENTACION
 OPCIONES SONIDO - FALTA IMPLEMENTACION
-LOG ITEMS
 ANIMACIONES GENERAL
 
 -------------------------------------------------------------------
