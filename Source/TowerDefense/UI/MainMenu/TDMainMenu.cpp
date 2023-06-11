@@ -17,9 +17,24 @@ bool UTDMainMenu::Initialize()
         infiniteMode->ownerButton->OnClicked.AddDynamic(this, &UTDMainMenu::TDInfiniteLevelsSelector);
     }
 
+    if (graphics)
+    {
+        graphics->ownerButton->OnClicked.AddDynamic(this, &UTDMainMenu::TDGraphics);
+    }
+
+    if (sound)
+    {
+        sound->ownerButton->OnClicked.AddDynamic(this, &UTDMainMenu::TDSound);
+    }
+
+    if (input)
+    {
+        input->ownerButton->OnClicked.AddDynamic(this, &UTDMainMenu::TDInput);
+    }
+
     if (exit)
     {
-        exit->ownerButton->OnClicked.AddDynamic(this, &UTDMainMenu::TDExit);        
+        exit->ownerButton->OnClicked.AddDynamic(this, &UTDMainMenu::TDExit);
     }
 
     return true;
@@ -41,28 +56,57 @@ void UTDMainMenu::NativeConstruct()
 
 void UTDMainMenu::TDLevelsSelector()
 {
+    infiniteMode->TDUnselected();
+    graphics->TDUnselected();
+    sound->TDUnselected();
+    input->TDUnselected();
+    normalMode->TDClickedToRight();
+
     mainMenuSwitcher->SetActiveWidgetIndex(1);
 }
 
 void UTDMainMenu::TDInfiniteLevelsSelector()
 {
+    normalMode->TDUnselected();
+    graphics->TDUnselected();
+    sound->TDUnselected();
+    input->TDUnselected();
+    infiniteMode->TDClickedToRight();
+
     mainMenuSwitcher->SetActiveWidgetIndex(2);
 }
 
 void UTDMainMenu::TDGraphics()
 {
+    normalMode->TDUnselected();
+    sound->TDUnselected();
+    input->TDUnselected();
+    infiniteMode->TDUnselected();
+    graphics->TDClickedToRight();
 
+    mainMenuSwitcher->SetActiveWidgetIndex(3);
 }
 
 void UTDMainMenu::TDSound()
 {
+    normalMode->TDUnselected();
+    graphics->TDUnselected();
+    input->TDUnselected();
+    infiniteMode->TDUnselected();
+    sound->TDClickedToRight();
 
+    mainMenuSwitcher->SetActiveWidgetIndex(4);
 }
 
 void UTDMainMenu::TDInput()
 {
+    normalMode->TDUnselected();
+    graphics->TDUnselected();
+    sound->TDUnselected();
+    infiniteMode->TDUnselected();
+    input->TDClickedToRight();
 
-
+    mainMenuSwitcher->SetActiveWidgetIndex(5);
 }
 void UTDMainMenu::TDExit()
 {
