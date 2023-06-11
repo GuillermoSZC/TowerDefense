@@ -1,5 +1,20 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "GameLogic/TDMainMenuController.h"
+#include "UI/MainMenu/TDMainMenu.h"
 
+void ATDMainMenuController::BeginPlay()
+{
+    Super::BeginPlay();
+
+    if (mainMenuClass)
+    {
+        mainMenuRef = CreateWidget<UTDMainMenu>(this, mainMenuClass);
+
+        if (mainMenuRef)
+        {
+            FInputModeGameAndUI inputMode;
+            mainMenuRef->AddToViewport(0);
+            SetInputMode(inputMode);
+            bShowMouseCursor = true;
+        }
+    }
+}

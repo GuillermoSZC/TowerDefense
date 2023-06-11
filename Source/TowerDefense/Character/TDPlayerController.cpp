@@ -19,6 +19,7 @@
 #include "UI/TDCostWidget.h"
 #include "Components/TDWidgetShopComponent.h"
 #include "UI/Utilities/TDPlayerHUD.h"
+#include "Interfaces/TDCostInterface.h"
 
 
 ATDPlayerController::ATDPlayerController()
