@@ -4,6 +4,9 @@
 #include "UI/TDUserWidget.h"
 #include "TDRow.generated.h"
 
+class UTDRichTextBlock;
+class USpacer;
+
 /**
     Row parent
  */
@@ -17,6 +20,14 @@ public:
     virtual void NativeConstruct() override;
 
 public:
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDRichTextBlock* richText;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        USpacer* customSpacer;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Properties")
+        FVector2D spacerSize = FVector2D(300.f, 1.f);
 
 protected:
 
