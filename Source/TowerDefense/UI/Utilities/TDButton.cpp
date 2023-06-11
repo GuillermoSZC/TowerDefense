@@ -69,3 +69,33 @@ void UTDButton::TDSetFont(UDataTable* _font)
     useCustomTextStyleData = true;
     textStyleData = _font;
 }
+
+bool UTDButton::TDGetButtonAnimated() const
+{
+    return hasBeenAnimated;
+}
+
+void UTDButton::TDButtonAnimated(bool _value)
+{
+    hasBeenAnimated = _value;
+}
+
+bool UTDButton::TDGetIsActive() const
+{
+    return isActive;
+}
+
+void UTDButton::TDSetIsActive(bool _value)
+{
+    isActive = _value;
+}
+
+void UTDButton::TDClickedToRight_Implementation()
+{
+
+}
+
+void UTDButton::TDUnselected_Implementation()
+{
+
+}

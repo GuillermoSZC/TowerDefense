@@ -51,6 +51,13 @@ private:
     UPROPERTY()
         FMargin ownPadding;
 
+#pragma region ANIM_PROPERTIES
+    UPROPERTY()
+        bool hasBeenAnimated = false;
+
+    UPROPERTY()
+        bool isActive = false;
+#pragma endregion
 
 public:
     UFUNCTION()
@@ -68,6 +75,26 @@ public:
     UFUNCTION()
         void TDSetFont(UDataTable* _font);
 
+#pragma region WIDGET_ANIMATIONS
+    UFUNCTION(BlueprintPure)
+        bool TDGetButtonAnimated() const;
+
+    UFUNCTION(BlueprintCallable)
+        void TDButtonAnimated(bool _value);
+
+    UFUNCTION(BlueprintPure)
+        bool TDGetIsActive() const;
+
+    UFUNCTION(BlueprintCallable)
+        void TDSetIsActive(bool _value);
+
+    UFUNCTION(BlueprintNativeEvent)
+        void TDClickedToRight();
+
+    UFUNCTION(BlueprintNativeEvent)
+        void TDUnselected();
+
+#pragma endregion
 protected:
 
 

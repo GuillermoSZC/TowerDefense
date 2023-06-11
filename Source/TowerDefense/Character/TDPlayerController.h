@@ -32,7 +32,7 @@ public:
     UPROPERTY(EditDefaultsOnly)
         UInputMappingContext* BuyPhaseMappingContext;
 
-      UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly)
         UInputMappingContext* CombatPhaseMappingContext;
 
     UPROPERTY(EditDefaultsOnly)
@@ -47,30 +47,30 @@ public:
     UPROPERTY(EditDefaultsOnly)
         UInputAction* PauseInputAction;
 
-        UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly)
         UInputAction* TraceInputAction;
 
     UPROPERTY(EditDefaultsOnly)
         TSubclassOf<UTDPauseMenu> pauseMenuClass;
 
-        UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(EditDefaultsOnly)
         TSubclassOf<UTDPlayerHUD> playerHUDClass;
 
 
-        UPROPERTY(EditDefaultsOnly, Category = "Trace")
+    UPROPERTY(EditDefaultsOnly, Category = "Trace")
         float lenghtTrace = 100000.f;
 
-        UPROPERTY(EditDefaultsOnly, Category = "Trace");
-        TEnumAsByte<ECollisionChannel> traceChannel;
+    UPROPERTY(EditDefaultsOnly, Category = "Trace");
+    TEnumAsByte<ECollisionChannel> traceChannel;
 
 protected:
     UPROPERTY(Transient)
         UTDPauseMenu* pauseMenuRef;
 
-        UPROPERTY(Transient)
-    UTDPlayerHUD* playerHUDRef;
+    UPROPERTY(Transient)
+        UTDPlayerHUD* playerHUDRef;
 
-        FInputActionBinding traceBind = FInputActionBinding();
+    FInputActionBinding traceBind = FInputActionBinding();
 
 
 private:
@@ -90,7 +90,7 @@ public:
         void TDOnCloseUI();
 
     UFUNCTION()
-    UTDPlayerHUD* TDGetPLayerHUD();
+        UTDPlayerHUD* TDGetPLayerHUD();
 
 protected:
     virtual void BeginPlay() override;
@@ -120,11 +120,11 @@ private:
 
     void TDChangeToAvalibleTrace();
     void TDChangeNotToAvalibleTrace();
-   
+
 
     UFUNCTION()
         void TDOnCombatPhaseStart(int32 _num);
 
     UFUNCTION()
-    void TDTraceFromCameraToOpenUI(const FInputActionValue& _value);
+        void TDTraceFromCameraToOpenUI(const FInputActionValue& _value);
 };
