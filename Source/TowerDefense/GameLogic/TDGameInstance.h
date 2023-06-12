@@ -23,6 +23,9 @@ public:
 
     void Init() override;
 
+
+
+
 public:
 
     UPROPERTY(EditDefaultsOnly)
@@ -41,10 +44,33 @@ protected:
 
 private:
 
+    float masterVolumen = 0.5f;
+
+    float musicVolumen = 0.5f;
+
+    float sfxVolumen = 0.5f;
+
+
 
 public:
 	UFUNCTION(BlueprintCallable)
 	void TDOpenMap(UObject* _world);
+
+
+
+    void TDSetMusicVolumen(float _newValue);
+    float TDGetMusicVolumen();
+
+    void TDSetSFXVolumen(float _newValue);
+    float TDGetSFXVolumen();
+
+
+    void TDSetMasterVolumen(float _newValue);
+    float TDGetMasterVolumen();
+
+    UFUNCTION()
+    void TDSaveSoundValues();
+
 
 protected:
 
