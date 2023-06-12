@@ -67,7 +67,7 @@ public:
         int32 TDGetAmountItemByItem(ELootItems _item);
 
     UFUNCTION(BlueprintCallable)
-        int32 TDAddItemToInventory(ELootItems _item, int32 _amount = 1);
+        void TDAddItemToInventory(ELootItems _item, int32 _amount);
 
     UFUNCTION(BlueprintCallable)
         void TDOverrideItemInInventory(ELootItems _item, int32 _newValue);

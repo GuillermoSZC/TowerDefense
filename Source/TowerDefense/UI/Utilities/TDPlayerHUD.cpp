@@ -10,6 +10,8 @@
 #include "TDText.h"
 #include "TDHealthBar.h"
 #include "Character/TDPlayerCharacter.h"
+#include "TDLogCard.h"
+
 
 
 bool UTDPlayerHUD::Initialize()
@@ -78,6 +80,9 @@ void UTDPlayerHUD::TDInitialize()
         phase->TDSetCustomText(FText::FromString("Buy Phase"));
     }
 
+
+
+
 }
 
 void UTDPlayerHUD::TDSetCombatUI(int32 _value)
@@ -145,3 +150,4 @@ void UTDPlayerHUD::TDVisibilityToShopUIs(ESlateVisibility _visibility)
     roundText->SetVisibility(_visibility);
     roundNum->SetVisibility(_visibility);
 }
+

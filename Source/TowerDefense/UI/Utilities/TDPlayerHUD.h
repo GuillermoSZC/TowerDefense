@@ -6,6 +6,8 @@
 #include "Blueprint/UserWidget.h"
 #include "TDPlayerHUD.generated.h"
 
+
+
 /**
  *
  */
@@ -42,6 +44,10 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UImage* thirdElement;
 
+
+      UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        class UTDLogWidget* LogWidget;
+
     UPROPERTY()
         TArray<UImage*> elementsArray;
 
@@ -70,6 +76,11 @@ public:
         class UTDText* healthNumber;
 
 
+    
+
+
+
+
 protected:
 
 
@@ -78,6 +89,10 @@ protected:
 private:
     UPROPERTY(Transient)
         class ATDRoundManager* roundManager;
+
+
+
+
 
 public:
 
@@ -89,8 +104,8 @@ public:
         void TDVisibilityToShopUIs(ESlateVisibility _visibility);
 
 
- 
-       
+
+
 
 protected:
 

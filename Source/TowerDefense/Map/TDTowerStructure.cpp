@@ -8,6 +8,7 @@
 #include <UMG/Public/Blueprint/WidgetBlueprintLibrary.h>
 #include "Character/TDPlayerController.h"
 #include "Components/TDWidgetShopComponent.h"
+#include "GameLogic/TDCostManager.h"
 
 
 FName ATDTowerStructure::StaticMeshName(TEXT("StructureMesh"));

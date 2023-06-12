@@ -7,9 +7,13 @@
 #include "TDObjectPooler.h"
 #include "ElementsEnum.h"
 #include "TDRoundManager.h"
-
-
+#include "Delegates/DelegateCombinations.h"
+#include "TDLootEnum.h"
 #include "TDGameMode.generated.h"
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FLootDropSignature, ELootItems, _item, int32, _amount);
+
+
 
 class ATDEnemy;
 class UDataTable;
@@ -69,6 +73,10 @@ public:
 
     UPROPERTY(EditDefaultsOnly, Category = "Classes")
         TSubclassOf<ATDCostManager> CostManagerClass;
+
+
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite,BlueprintCallable)
+    FLootDropSignature FLootDropDelegate;
 
 protected:
 

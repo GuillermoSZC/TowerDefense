@@ -1,6 +1,7 @@
 #include "UI/Settings/TDSoundSettings.h"
 #include "UI/Utilities/TDRowWithSlider.h"
 #include <UMG/Public/Components/Slider.h>
+#include "GameLogic/TDGameInstance.h"
 
 
 bool UTDSoundSettings::Initialize()

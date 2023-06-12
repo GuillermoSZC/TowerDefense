@@ -11,6 +11,7 @@
 #include "AttributesSets/TDMovementAttributeSet.h"
 #include <GameplayAbilitySpecHandle.h>
 #include <GameFramework/CharacterMovementComponent.h>
+#include "GameLogic/TDGameMode.h"
 
 ATDPlayerCharacter::ATDPlayerCharacter()
 {
@@ -60,6 +61,7 @@ void ATDPlayerCharacter::BeginPlay()
 
     TDInitialize();
     UTDGameData::TDGetRoundManager()->FOnBuyPhaseStartDelegate.AddDynamic(this, &ATDPlayerCharacter::TDUpdateRoundValues);
+    UTDGameData::TDGetGameMode()->FLootDropDelegate.AddDynamic(this, &ATDPlayerCharacter::TDAddItemToInventory);
 }
 
 
@@ -137,7 +139,7 @@ int32 ATDPlayerCharacter::TDGetAmountItemByItem(ELootItems _item)
     return inttemp;
 }
 
-int32 ATDPlayerCharacter::TDAddItemToInventory(ELootItems _item, int32 _amount /*= 1*/)
+void ATDPlayerCharacter::TDAddItemToInventory(ELootItems _item, int32 _amount)
 {
     uint32 temp = 0;
     if (PlayerInventory.Contains(_item))
@@ -148,7 +150,6 @@ int32 ATDPlayerCharacter::TDAddItemToInventory(ELootItems _item, int32 _amount /
         temp += _amount;
         PlayerInventory.Add(_item, temp);
     }
-    return temp;
 }
 
 void ATDPlayerCharacter::TDOverrideItemInInventory(ELootItems _item, int32 _newValue)
