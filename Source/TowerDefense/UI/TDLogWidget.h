@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UI/TDUserWidget.h"
+#include "GameLogic/Structs/TDItemStrcut.h"
 #include "TDLogWidget.generated.h"
 
 class UTDLogCard;
@@ -11,6 +12,8 @@ class UTDLogCard;
 /**
  *
  */
+
+
 UCLASS()
 class TOWERDEFENSE_API UTDLogWidget : public UTDUserWidget
 {
@@ -42,7 +45,7 @@ public:
 protected:
 
     UPROPERTY()
-        TArray<ELootItems> ItemsHeap;
+        TArray<FTDItemStruct> ItemsHeap;
 
 private:
 
@@ -52,7 +55,7 @@ private:
 public:
 
     UFUNCTION()
-        void TDAddLogItem(ELootItems _item, int32 amount);
+        void TDAddLogItem(ELootItems _item, FGameplayTag _category, int32 amount);
 
     UFUNCTION()
         void TDOnEndFadeInAnimation(UTDLogCard* _card);

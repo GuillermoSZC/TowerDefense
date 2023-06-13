@@ -139,7 +139,7 @@ int32 ATDPlayerCharacter::TDGetAmountItemByItem(ELootItems _item)
     return inttemp;
 }
 
-void ATDPlayerCharacter::TDAddItemToInventory(ELootItems _item, int32 _amount)
+void ATDPlayerCharacter::TDAddItemToInventory(ELootItems _item, FGameplayTag _category, int32 _amount)
 {
     uint32 temp = 0;
     if (PlayerInventory.Contains(_item))

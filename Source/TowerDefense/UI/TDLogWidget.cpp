@@ -9,6 +9,7 @@
 #include "UMG/Public/Components/CanvasPanelSlot.h"
 
 
+
 bool UTDLogWidget::Initialize()
 {
     Super::Initialize();
@@ -31,15 +32,18 @@ void UTDLogWidget::NativeConstruct()
     Super::NativeConstruct();
 }
 
-void UTDLogWidget::TDAddLogItem(ELootItems _item, int32 amount)
+void UTDLogWidget::TDAddLogItem(ELootItems _item, FGameplayTag _category, int32 amount)
 {
+
+    FTDItemStruct newItem = FTDItemStruct(_item, _category, amount);
+
     if (!ItemsHeap.IsEmpty())
     {
-        ItemsHeap.Add(_item);
+        ItemsHeap.Add(newItem);
         return;
     }
 
-    ItemsHeap.Add(_item);
+    ItemsHeap.Add(newItem);
     TDAddCardToUI();
 
 }
@@ -68,6 +72,8 @@ void UTDLogWidget::TDAddCardToUI()
     FAnchors anchor = FAnchors(1.f,0.5f);
     canvasSlotRef->SetAnchors(anchor);
     canvasSlotRef->SetAlignment(FVector2D(1.f,0.5f));
+    cardRef->SetRenderTranslation(FVector2D(0.f, 100.f));
+    cardRef->TDPrepareCard(ItemsHeap[0]);
     cardRef->TDPlayFadeInAnimation();
 
 }
@@ -92,15 +98,16 @@ void UTDLogWidget::TDOnEndFadeOutAnimation(UTDLogCard* _card)
 
     canvasPanelWidget->RemoveChild(_card);
     cardsArray.Remove(_card);
+
     _card->ConditionalBeginDestroy();
 }
 
 void UTDLogWidget::TDOnStartFadeInAnimation(UTDLogCard* _card)
 {
-
+    _card->FStartWidgetAnimationFadeInDelegate.Clear();
 }
 
 void UTDLogWidget::TDOnStartFadeOutAnimation(UTDLogCard* _card)
 {
-
+    _card->FStartWidgetAnimationFadeOutDelegate.Clear();
 }

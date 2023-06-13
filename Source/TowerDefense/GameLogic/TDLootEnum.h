@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 
 
+
 UENUM(BlueprintType)
 enum class ELootItems : uint8
 {
@@ -20,5 +21,9 @@ enum class ELootItems : uint8
     AttackTowerBP UMETA(ToolTip = "Rare Item"),
     Fire UMETA(ToolTip = "Rare Item"),
     Ice UMETA(ToolTip = "Rare Item"),
-    Plasma UMETA(ToolTip = "Rare Item")
+    Plasma UMETA(ToolTip = "Rare Item"),
+    Invalid UMETA(ToolTip = "Invalid"),
 };
+
+
+ENUM_RANGE_BY_COUNT(ELootItems, ELootItems::Invalid)

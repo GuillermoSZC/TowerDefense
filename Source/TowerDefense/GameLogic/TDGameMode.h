@@ -9,9 +9,10 @@
 #include "TDRoundManager.h"
 #include "Delegates/DelegateCombinations.h"
 #include "TDLootEnum.h"
+#include "GameplayTagContainer.h"
 #include "TDGameMode.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FLootDropSignature, ELootItems, _item, int32, _amount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FLootDropSignature, ELootItems, _item,FGameplayTag, _category, int32, _amount);
 
 
 

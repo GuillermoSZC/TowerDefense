@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "GameLogic/Structs/TDItemStrcut.h"
 #include "TDLogCard.generated.h"
 
 class UImage;
@@ -51,6 +52,14 @@ public:
         FActionWidgetAnimationSignature FEndWidgetAnimationFadeOutDelegate;
 
 
+
+    UPROPERTY(EditAnywhere)
+    TMap<ELootItems, UTexture2D*> ItemMapImage;
+
+    UPROPERTY(EditAnywhere)
+    TMap<FGameplayTag, FLinearColor> ColorBackgroundRarity;
+
+
 protected:
 
 private:
@@ -74,6 +83,9 @@ public:
     UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
         void TDPlayFadeOutAnimation();
 
+
+    UFUNCTION()
+    void TDPrepareCard(FTDItemStruct _item);
 protected:
 
 private:

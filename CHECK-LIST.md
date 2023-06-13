@@ -1,6 +1,5 @@
 --LOG ITEMS--
--CREAR UTILITY CON: UIMAGE, UBORDER, UTDTEXT
-CREAR ANIMACION EN LA UTILITY (DERECHA A IZQUIERDA Y ABAJO A ARRIBA)
+-Maquetar LogCard
 
 
 -------------------------------------------------------------------

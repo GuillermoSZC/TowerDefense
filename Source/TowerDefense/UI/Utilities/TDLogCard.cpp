@@ -16,6 +16,19 @@ bool UTDLogCard::Initialize()
 void UTDLogCard::NativePreConstruct()
 {
     Super::NativePreConstruct();
+
+    if (ItemMapImage.IsEmpty())
+    {
+        
+        for (ELootItems item : TEnumRange<ELootItems>())
+        {
+            if (item != ELootItems::None)
+            {
+                ItemMapImage.Add(item);
+            }
+        }
+    }
+
 }
 
 void UTDLogCard::NativeConstruct()
@@ -23,4 +36,13 @@ void UTDLogCard::NativeConstruct()
 
     Super::NativeConstruct();
 
+}
+
+void UTDLogCard::TDPrepareCard(FTDItemStruct _item)
+{
+
+    ownerImage->SetBrushFromTexture(ItemMapImage[_item.dropLoot]);
+    ownerBorder->SetBrushColor(ColorBackgroundRarity[_item.categoryLoot]);
+    ownerText->TDSetCustomText(FText::FromString("+" + FString::FromInt(_item.amountLoot)));
+   
 }
