@@ -7,8 +7,6 @@ ANIMACIONES GENERAL
 -------------------------------------------------------------------------------------------------
 --BUILD/CHECK WARNINGS--
 
-MUROS INVISIBLES
-
 CHECKEAR TODOS LOS @TODO:
 
 BUG DE ENEMIGOS NO ANDAN, CHECKEAR ( he probado cerca de 1h y pico y no ha ocurrido. Estar atento)
