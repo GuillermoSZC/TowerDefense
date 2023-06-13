@@ -10,6 +10,8 @@ class ATDTower;
 class UTDComposedButton;
 class UTDBaseButton;
 class UTDTextWithImage;
+class UTDRichTextBlock;
+class UImage;
 
 UCLASS()
 class TOWERDEFENSE_API UTDTowerUpgrade : public UTDCostWidget
@@ -36,6 +38,18 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDBaseButton* exit;
 
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDRichTextBlock* actualElementText;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UImage* actualElementImage;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDRichTextBlock* levelText;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UImage* actualText;
+
 #pragma region RESOURCES
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDTextWithImage* scrap;
@@ -53,8 +67,8 @@ public:
         UTDTextWithImage* ice;
 #pragma endregion
 
-    UPROPERTY(EditAnywhere,BlueprintReadWrite)
-    TMap<ELootItems, UTexture2D*> TowersIcons;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        TMap<ELootItems, UTexture2D*> TowersIcons;
 
 protected:
 

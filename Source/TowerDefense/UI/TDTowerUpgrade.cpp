@@ -111,8 +111,6 @@ void UTDTowerUpgrade::TDIceUpgrade()
         TDBuyElement(EElements::Freeze);
         FUICostUpdateDelegate.Broadcast();
     }
-
-
 }
 
 void UTDTowerUpgrade::TDLevelUp()
