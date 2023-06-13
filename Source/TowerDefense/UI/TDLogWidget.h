@@ -33,6 +33,7 @@ public:
     UPROPERTY(EditAnywhere)
         TSubclassOf<UTDLogCard> cardClass;
 
+    UPROPERTY(Transient)
     TArray<UTDLogCard*> cardsArray;
 
 
