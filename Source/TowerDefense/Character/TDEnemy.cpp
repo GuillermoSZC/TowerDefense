@@ -281,6 +281,10 @@ void ATDEnemy::TDInitialize()
         UTDGameData::TDCreateAndApplyGE(abilitySystem, UTDDamageAttributeSet::GetattackRangeAttribute(), EGameplayModOp::Override, weaponAssetRef->WeaponRange);
     }
 
+    abilitySystem->GiveAbility(FGameplayAbilitySpec(weaponAssetRef->weaponAbility.GetDefaultObject(), 1, 0));
+
+
+
     GetCharacterMovement()->MaxWalkSpeed = movementAttributes->GetmovementSpeed() + randomValue;
 
     TDActivateDelegates();

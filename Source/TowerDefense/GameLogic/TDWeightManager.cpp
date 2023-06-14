@@ -223,10 +223,10 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable
             _enemyRef->StaticWeaponComponent->Deactivate();
         }
 
-        if (WeaponAsset->weaponAbility)
-        {
-            _enemyRef->abilitySystem->GiveAbility(FGameplayAbilitySpec(WeaponAsset->weaponAbility.GetDefaultObject(), 1, 0));
-        }
+//         if (WeaponAsset->weaponAbility)
+//         {
+//             _enemyRef->abilitySystem->GiveAbility(FGameplayAbilitySpec(WeaponAsset->weaponAbility.GetDefaultObject(), 1, 0));
+//         }
     }
     else
     {
