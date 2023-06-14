@@ -77,6 +77,7 @@ ELootItems UTDResourceCard::TDGetItem() const
     return item;
 }
 
+
 FText UTDResourceCard::TDGetTextFromItem(ELootItems _item)
 {
     ATDPlayerCharacter* playerRef = UTDGameData::TDGetPlayerRef();

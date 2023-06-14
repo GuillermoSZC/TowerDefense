@@ -30,6 +30,8 @@ void UTDCostWidget::NativeConstruct()
     OnVisibilityChanged.AddDynamic(this, &UTDCostWidget::TDOnVisibilityChange);
     FUICostUpdateDelegate.AddDynamic(this, &UTDCostWidget::TDUpdateCost);
         
+    TDSetSoundToButtons();
+
 }
 
 UTDWidgetShopComponent* UTDCostWidget::TDGetOwner()
@@ -87,4 +89,12 @@ FText UTDCostWidget::TDGetTextFromItem(ELootItems _item)
 void UTDCostWidget::TDUpdateInventoryToText(UTDTextWithImage* _text, ELootItems _item)
 {
     _text->TDSetText(TDGetTextFromItem(_item));
+}
+
+void UTDCostWidget::TDSetSoundToButtons()
+{
+    for (UTDComposedButton* iter : buttonsArray)
+    {
+        iter->TDSetSound(Sound);
+    }
 }

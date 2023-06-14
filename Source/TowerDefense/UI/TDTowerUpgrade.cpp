@@ -37,6 +37,13 @@ void UTDTowerUpgrade::NativePreConstruct()
 
 void UTDTowerUpgrade::NativeConstruct()
 {
+
+    buttonsArray.Add(fireUpgrade);
+    buttonsArray.Add(plasmaUpgrade);
+    buttonsArray.Add(iceUpgrade);
+    buttonsArray.Add(levelUp);
+
+
     Super::NativeConstruct();
 
     plasmaUpgrade->imgButton->OnClicked.AddDynamic(this, &UTDTowerUpgrade::TDPlasmaUpgrade);

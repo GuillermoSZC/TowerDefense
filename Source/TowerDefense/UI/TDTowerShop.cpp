@@ -36,6 +36,13 @@ void UTDTowerShop::NativePreConstruct()
 
 void UTDTowerShop::NativeConstruct()
 {
+
+    buttonsArray.Add(attackButton);
+    buttonsArray.Add(balisticButton);
+    buttonsArray.Add(sonicButton);
+    buttonsArray.Add(deadRayButton);
+    buttonsArray.Add(movementButton);
+
     Super::NativeConstruct();
 
     balisticButton->imgButton->OnClicked.AddDynamic(this, &UTDTowerShop::TDBalisticSpawn);

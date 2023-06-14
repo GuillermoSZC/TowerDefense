@@ -30,6 +30,15 @@ void UTDBaseUpgrade::NativePreConstruct()
 
 void UTDBaseUpgrade::NativeConstruct()
 {
+
+
+    buttonsArray.Add(damageUpgrade);
+    buttonsArray.Add(healthUpgrade);
+    buttonsArray.Add(speedUpgrade);
+    buttonsArray.Add(fireUpgrade);
+    buttonsArray.Add(iceUpgrade);
+    buttonsArray.Add(plasmaUpgrade);
+
     Super::NativeConstruct();
 
     plasmaUpgrade->imgButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDPlasmaUpgrade);
@@ -39,6 +48,14 @@ void UTDBaseUpgrade::NativeConstruct()
     speedUpgrade->imgButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDSpeedUpgrade);
     damageUpgrade->imgButton->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDDamageUpgrade);
     exit->OnClicked.AddDynamic(this, &UTDBaseUpgrade::TDCloseUI);
+
+
+    healthUpgrade->TDSetSound(Sound);
+    speedUpgrade->TDSetSound(Sound);
+    damageUpgrade->TDSetSound(Sound);
+    fireUpgrade->TDSetSound(Sound);
+    iceUpgrade->TDSetSound(Sound);
+    plasmaUpgrade->TDSetSound(Sound);
 }
 
 void UTDBaseUpgrade::TDUpdateCost()

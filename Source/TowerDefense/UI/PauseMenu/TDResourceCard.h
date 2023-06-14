@@ -40,6 +40,7 @@ public:
 
 
 
+
 protected:
 
 
@@ -72,6 +73,8 @@ public:
     UFUNCTION()
         ELootItems TDGetItem() const;
 
+
+
 protected:
     UFUNCTION()
         FText TDGetTextFromItem(ELootItems _item);
@@ -80,5 +83,7 @@ protected:
         void TDUpdateInventoryToText(UTDRichTextBlock* _text, ELootItems _item);
 
 private:
+
+
 
 };

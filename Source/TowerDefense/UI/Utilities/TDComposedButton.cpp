@@ -112,3 +112,8 @@ void UTDComposedButton::TDOnHovered()
 {
 
 }
+
+void UTDComposedButton::TDSetSound(TObjectPtr<USoundBase> _Sound)
+{
+    Sound = _Sound;
+}

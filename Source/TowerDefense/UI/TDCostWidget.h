@@ -29,6 +29,11 @@ protected:
     UPROPERTY()
         FUICostUpdateSignature FUICostUpdateDelegate;
 
+        UPROPERTY(EditAnywhere)
+    TObjectPtr<USoundBase> Sound;
+
+        TArray<UTDComposedButton*> buttonsArray;
+
 private:
 
 public:
@@ -59,6 +64,7 @@ protected:
     UFUNCTION()
     void TDUpdateInventoryToText(UTDTextWithImage* _text, ELootItems _item);
 
+    void TDSetSoundToButtons();
 
 private:
 

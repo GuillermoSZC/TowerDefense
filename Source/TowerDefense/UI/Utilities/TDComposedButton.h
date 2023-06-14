@@ -76,6 +76,10 @@ public:
     UPROPERTY(EditDefaultsOnly, Category = "Resources|Config")
         FLinearColor NotAvalibleBuyColor;
 
+
+            UPROPERTY(BlueprintReadOnly)
+    TObjectPtr<USoundBase> Sound;
+
 protected:
 
 private:
@@ -92,6 +96,9 @@ public:
 
     UFUNCTION()
         void TDOnHovered();
+
+    void TDSetSound(TObjectPtr<USoundBase> _Sound);
+
 
 protected:
 
