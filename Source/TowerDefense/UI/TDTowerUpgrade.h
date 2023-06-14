@@ -48,7 +48,7 @@ public:
         UTDRichTextBlock* levelText;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UImage* actualText;
+        UTDRichTextBlock* actualText;
 
 #pragma region RESOURCES
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
@@ -108,5 +108,7 @@ private:
 
     void TDUpdateTowerBP(UTDTextWithImage* _text, UTDComposedButton* _button);
 
+
+    void TDUpdateLevelAndElement();
 };
 

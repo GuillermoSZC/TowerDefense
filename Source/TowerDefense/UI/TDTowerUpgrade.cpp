@@ -61,6 +61,9 @@ void UTDTowerUpgrade::TDUpdateCost()
     TDUpdateInventoryToText(plasma, ELootItems::Plasma);
     TDUpdateInventoryToText(ice, ELootItems::Ice);
 
+
+    TDUpdateLevelAndElement();
+
 }
 
 void UTDTowerUpgrade::TDOnVisibilityChange(ESlateVisibility _visible)
@@ -79,6 +82,19 @@ void UTDTowerUpgrade::TDUpdateTowerBP(UTDTextWithImage* _text, UTDComposedButton
     _text->TDSetTexture(TowersIcons[towerOwner->TDGetItemToUpgrade()]);
     _button->bps->TDSetTexture(TowersIcons[towerOwner->TDGetItemToUpgrade()]);
     TDUpdateInventoryToText(_text, towerOwner->TDGetItemToUpgrade());
+
+}
+
+void UTDTowerUpgrade::TDUpdateLevelAndElement()
+{
+
+    float actualLevel = towerOwner->GetAbilitySystemComponent()->GetNumericAttribute(UTDLevelAttributeSet::GetlevelAttribute());
+    int tempLevel = int(actualLevel);
+    actualText->SetText(FText::FromString(FString::FromInt(tempLevel)));
+    UTDElementComponent* TowerElementComponent = ITDInterface::Execute_TDGetElementComponent(towerOwner);
+    EElements actualElement = TowerElementComponent->TDGetOwnerElement();
+    UTexture2D* tempTexture = UTDGameData::TDGetGameInstance()->elementsImage[actualElement];
+    actualElementImage->SetBrushFromTexture(tempTexture);
 
 }
 

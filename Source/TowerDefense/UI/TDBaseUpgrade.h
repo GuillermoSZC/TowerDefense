@@ -10,6 +10,8 @@ class ATDBase;
 class UTDComposedButton;
 class UTDBaseButton;
 class UTDTextWithImage;
+class UTDRichTextBlock;
+class UImage;
 
 UCLASS()
 class TOWERDEFENSE_API UTDBaseUpgrade : public UTDCostWidget
@@ -39,6 +41,34 @@ public:
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDComposedButton* damageUpgrade;
+
+
+
+     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDRichTextBlock* actualElementText;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UImage* actualElementImage;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDRichTextBlock* levelspeedText;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDRichTextBlock* actualLevelspeedText;
+
+        UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDRichTextBlock* leveldamageText;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDRichTextBlock* actualLeveldamageText;
+
+        UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDRichTextBlock* levelhealthText;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDRichTextBlock* actualLevelhealthText;
+
+
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDBaseButton* exit;
@@ -125,6 +155,6 @@ private:
 
     void TDOnVisibilityChange(ESlateVisibility _visible) override;
 
-
+    void TDUpdateLevelsAndElement();
 
 };
