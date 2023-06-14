@@ -28,6 +28,9 @@ private:
 
 public:
 
+    UFUNCTION(BlueprintImplementableEvent)
+    void TDCreateMaterialDynamicAndParam();
+
 protected:
 
 private:

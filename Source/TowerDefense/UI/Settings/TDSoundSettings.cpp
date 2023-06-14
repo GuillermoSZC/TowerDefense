@@ -30,7 +30,9 @@ void UTDSoundSettings::NativeConstruct()
 
     TDLoadSoundConfig();
 
-
+    sfxRowSlider->TDCreateMaterialDynamicAndParam();
+    MusicRowSlider->TDCreateMaterialDynamicAndParam();
+    MasterRowSlider->TDCreateMaterialDynamicAndParam();
 
 
 }
@@ -44,6 +46,8 @@ void UTDSoundSettings::TDLoadSoundConfig()
     TDOnsfxVolumenChange(UTDGameData::TDGetGameInstance()->TDGetSFXVolumen());
     TDOnMusicVolumenChange(UTDGameData::TDGetGameInstance()->TDGetMusicVolumen());
     TDOnMasterVolumenChange(UTDGameData::TDGetGameInstance()->TDGetMasterVolumen());
+
+
 }
 
 void UTDSoundSettings::TDOnsfxVolumenChange(float _newValue)

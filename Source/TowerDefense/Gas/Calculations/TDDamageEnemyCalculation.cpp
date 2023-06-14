@@ -40,12 +40,6 @@ void UTDDamageEnemyCalculation::Execute_Implementation(const FGameplayEffectCust
         ensure(ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(structAbilities.healthTargetDef, evaluationParameters, enemyHealth));
 
 
-
-        //         UTDElementComponent* SourceElementComponent = ITDInterface::Execute_TDGetElementComponent(sourceActor);
-        //         UTDElementComponent* TargetElementComponent = ITDInterface::Execute_TDGetElementComponent(targetActor);
-        //        
-        //         float elementMultiplier = SourceElementComponent->TDGetDamageMultiplier(TargetElementComponent->TDGetOwnerElement());
-
         float wave = UTDGameData::TDGetRoundManager()->TDGetActualRound();
 
 
