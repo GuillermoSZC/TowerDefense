@@ -58,6 +58,10 @@ void UTDBaseUpgrade::TDUpdateCost()
     TDUpdateInventoryToText(fire, ELootItems::Fire);
     TDUpdateInventoryToText(plasma, ELootItems::Plasma);
     TDUpdateInventoryToText(ice, ELootItems::Ice);
+
+
+    TDUpdateLevelsAndElement();
+
 }
 
 void UTDBaseUpgrade::TDOnVisibilityChange(ESlateVisibility _visible)
@@ -67,6 +71,36 @@ void UTDBaseUpgrade::TDOnVisibilityChange(ESlateVisibility _visible)
     {
         FUICostUpdateDelegate.Broadcast();
     }
+}
+
+void UTDBaseUpgrade::TDUpdateLevelsAndElement()
+{
+    ATDPlayerCharacter* player = UTDGameData::TDGetPlayerRef();
+
+    float actualLevel = player->abilitySystem->GetNumericAttribute(UTDLevelAttributeSet::GetBootsLevelAttribute());
+    int tempLevel = int(actualLevel);
+    actualLevelspeedText->SetText(FText::FromString(FString::FromInt(tempLevel)));
+
+    actualLevel = player->abilitySystem->GetNumericAttribute(UTDLevelAttributeSet::GetArmorLevelAttribute());
+    tempLevel = int(actualLevel);
+    actualLevelhealthText->SetText(FText::FromString(FString::FromInt(tempLevel)));
+
+
+    actualLevel = player->abilitySystem->GetNumericAttribute(UTDLevelAttributeSet::GetDamageLevelAttribute());
+    tempLevel = int(actualLevel);
+    actualLeveldamageText->SetText(FText::FromString(FString::FromInt(tempLevel)));
+
+
+
+    UTDElementComponent* PlayerElementComponent = ITDInterface::Execute_TDGetElementComponent(player);
+    EElements actualElement = PlayerElementComponent->TDGetOwnerElement();
+    UTexture2D* tempTexture = UTDGameData::TDGetGameInstance()->elementsImage[actualElement];
+    actualElementImage->SetBrushFromTexture(tempTexture);
+
+
+
+
+
 }
 
 void UTDBaseUpgrade::TDPlasmaUpgrade()

@@ -1,7 +1,6 @@
 --UI GENERAL--
 
 OPCIONES GRAFICAS - FALTA IMPLEMENTACION
-CONTROLES - IMAGEN CON BOTONES
 ANIMACIONES GENERAL
 
 -------------------------------------------------------------------------------------------------
