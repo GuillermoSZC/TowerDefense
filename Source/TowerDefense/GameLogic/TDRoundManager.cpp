@@ -169,13 +169,21 @@ ATDEnemy* ATDRoundManager::TDCreateEnemy(FName enemyName, AActor* _instigator)
     ATDEnemyController* enemyController = actualEnemy->GetController<ATDEnemyController>();
     UBlackboardComponent* blackboard = enemyController->GetBlackboardComponent();
 
-    ATDPathPoint* firstWaypoint = enemyInstigator->PathPointsArray[0];
+    if (!enemyInstigator->PathPointsArray.IsEmpty())
+    {
+        ATDPathPoint* firstWaypoint = enemyInstigator->PathPointsArray[0];
 
-    blackboard->SetValueAsObject(FName(TEXT("WaypointActor")), firstWaypoint);
-    blackboard->SetValueAsVector(FName(TEXT("WaypointPosition")), firstWaypoint->GetActorLocation());
+        blackboard->SetValueAsObject(FName(TEXT("WaypointActor")), firstWaypoint);
+        blackboard->SetValueAsVector(FName(TEXT("WaypointPosition")), firstWaypoint->GetActorLocation());
+        actualEnemy->TDSetPath(firstWaypoint);
 
 
-    actualEnemy->TDSetPath(firstWaypoint);
+    }
+    else
+    {
+        blackboard->SetValueAsObject(FName(TEXT("BaseBuild")), UTDGameData::TDGetBaseActor());
+    }
+
     actualEnemy->TDSetActive();
 
     return actualEnemy;
