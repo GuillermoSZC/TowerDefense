@@ -6,19 +6,25 @@
 #include "TDItemStrcut.generated.h"
 
 /**
- * 
+ *
  */
 
 
 
-USTRUCT()
+USTRUCT(BlueprintType)
 struct FTDItemStruct
 {
     GENERATED_BODY()
 
-    ELootItems dropLoot;
-    FGameplayTag categoryLoot;
-    int32 amountLoot;
+
+        UPROPERTY(BlueprintReadOnly)
+        ELootItems dropLoot;
+
+    UPROPERTY(BlueprintReadOnly)
+        FGameplayTag categoryLoot;
+
+    UPROPERTY(BlueprintReadOnly)
+        int32 amountLoot;
 
     FTDItemStruct()
     {

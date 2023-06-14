@@ -10,6 +10,8 @@ bool UTDLogCard::Initialize()
 {
     Super::Initialize();
 
+    itemStruct = FTDItemStruct();
+
     return true;
 }
 
@@ -40,6 +42,7 @@ void UTDLogCard::NativeConstruct()
 
 void UTDLogCard::TDPrepareCard(FTDItemStruct _item)
 {
+    itemStruct = _item;
 
     ownerImage->SetBrushFromTexture(ItemMapImage[_item.dropLoot]);
     ownerBorder->SetBrushColor(ColorBackgroundRarity[_item.categoryLoot]);

@@ -36,7 +36,8 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDText* ownerText;
 
-
+    UPROPERTY(BlueprintReadOnly,VisibleAnywhere)
+    FTDItemStruct itemStruct;
 
         UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite)
         FActionWidgetAnimationSignature FStartWidgetAnimationFadeInDelegate;
