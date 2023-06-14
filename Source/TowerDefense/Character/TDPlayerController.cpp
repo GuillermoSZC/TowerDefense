@@ -31,11 +31,15 @@ void ATDPlayerController::BeginPlay()
 {
     Super::BeginPlay();
     playerPawn = GetPawn<ATDCharacter>();
+    
 
-    FInputModeGameAndUI inputMode;
-    inputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-    inputMode.SetHideCursorDuringCapture(true);
-    SetInputMode(inputMode);
+//     FInputModeGameAndUI inputMode;
+//     inputMode.SetLockMouseToViewportBehavior(EMouseLockMode::LockInFullscreen);
+//     inputMode.SetWidgetToFocus(nullptr);
+//     inputMode.SetHideCursorDuringCapture(true);
+//     SetInputMode(inputMode);
+    UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(this, nullptr, EMouseLockMode::LockAlways, false, false);
+
 
     UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
     if (Subsystem)
@@ -150,13 +154,16 @@ void ATDPlayerController::TDPauseMenuLogic(ESlateVisibility _visibility, bool _v
     {
         UGameplayStatics::SetGamePaused(GetWorld(), _value);
 
-        if (_value)
+        if (_value) //menu pausa activo
         {
-            FInputModeGameAndUI inputMode;
-            inputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-            inputMode.SetWidgetToFocus(pauseMenuRef->TakeWidget());
-            inputMode.SetHideCursorDuringCapture(false);
-            SetInputMode(inputMode);
+//             FInputModeGameAndUI inputMode;
+//             inputMode.SetLockMouseToViewportBehavior(EMouseLockMode::LockInFullscreen);
+//             inputMode.SetWidgetToFocus(pauseMenuRef->TakeWidget());
+//             inputMode.SetHideCursorDuringCapture(true);            
+//             SetInputMode(inputMode);
+
+            UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(this, pauseMenuRef, EMouseLockMode::LockAlways, false, false);
+
             bShowMouseCursor = true;
             //TDChangeNotToAvalibleTrace();
             if (playerHUDRef)
@@ -165,10 +172,16 @@ void ATDPlayerController::TDPauseMenuLogic(ESlateVisibility _visibility, bool _v
 
             }
         }
-        else
+        else //menu pausa desactivado
         {
-            FInputModeGameOnly inputMode;
-            SetInputMode(inputMode);
+//             FInputModeGameAndUI inputMode;
+//             inputMode.SetLockMouseToViewportBehavior(EMouseLockMode::LockInFullscreen);
+//             inputMode.SetWidgetToFocus(nullptr);
+//             inputMode.SetHideCursorDuringCapture(true);
+
+            UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(this, nullptr, EMouseLockMode::LockAlways, false, false);
+
+
             if (playerHUDRef)
             {
                 playerHUDRef->SetVisibility(ESlateVisibility::HitTestInvisible);
@@ -235,11 +248,11 @@ void ATDPlayerController::TDTraceFromCameraToOpenUI(const FInputActionValue& _va
     {
         ITDCostInterface* interace = Cast<ITDCostInterface>(hitresult.GetActor());
         interace->TDTriggerOpenUI();
-        UKismetSystemLibrary::DrawDebugLine(GetWorld(), screenPos, endPos, FColor::Green, 2.f, 5.f);
+        //UKismetSystemLibrary::DrawDebugLine(GetWorld(), screenPos, endPos, FColor::Green, 2.f, 5.f);
     }
     else
     {
-        UKismetSystemLibrary::DrawDebugLine(GetWorld(), screenPos, endPos, FColor::Red, 2.f, 5.f);
+        //UKismetSystemLibrary::DrawDebugLine(GetWorld(), screenPos, endPos, FColor::Red, 2.f, 5.f);
     }
 }
 

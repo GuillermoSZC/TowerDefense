@@ -175,15 +175,8 @@ void ATDEnemy::TDSetDisable_Implementation()
 {
     isActive = false;
     SetActorTickEnabled(false);
-    FGameplayTagContainer tags;
-    TArray<FActiveGameplayEffectHandle> effectsActive;
-    effectsActive = abilitySystem->GetActiveEffectsWithAllTags(tags);
-    for (FActiveGameplayEffectHandle iter : effectsActive)
-    {
-        abilitySystem->RemoveActiveGameplayEffect(iter);
-    }
-    abilitySystem->ClearAllAbilities();
-    abilitySystem->RemoveAllSpawnedAttributes();
+    
+
     ATDEnemyController* controllerRef = GetController<ATDEnemyController>();
     controllerRef->GetBrainComponent()->StopLogic(FString::SanitizeFloat(5.f));
     GetMesh()->SetVisibility(false, true);
@@ -252,6 +245,17 @@ void ATDEnemy::TDInitialize()
 {
     Super::TDInitialize();
 
+
+
+    FGameplayTagContainer tags;
+    TArray<FActiveGameplayEffectHandle> effectsActive;
+    effectsActive = abilitySystem->GetActiveEffectsWithAllTags(tags);
+    for (FActiveGameplayEffectHandle iter : effectsActive)
+    {
+        abilitySystem->RemoveActiveGameplayEffect(iter);
+    }
+    abilitySystem->ClearAllAbilities();
+    abilitySystem->RemoveAllSpawnedAttributes();
 
 
     const UAttributeSet* attributesInit1 = abilitySystem->InitStats(UTDHealthAttributeSet::StaticClass(), nullptr);
