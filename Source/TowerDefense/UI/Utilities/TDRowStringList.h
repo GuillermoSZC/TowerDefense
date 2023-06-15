@@ -26,6 +26,10 @@ public:
     UPROPERTY(EditAnywhere, Category = "Custom Properties")
         TArray<FString> customOptions;
 
+    //select the default number of the array to set
+        UPROPERTY(EditAnywhere, Category = "Custom Properties")
+        int32  defaultOption;
+
 protected:
 
 

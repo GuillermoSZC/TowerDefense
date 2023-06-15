@@ -22,7 +22,8 @@ void UTDRowStringList::NativePreConstruct()
 
         if (stringList->GetOptionCount() > 0)
         {
-            stringList->SetSelectedOption(stringList->GetOptionAtIndex(0));
+            stringList->SetSelectedOption(stringList->GetOptionAtIndex(defaultOption));
+            
         }
     }
 }
