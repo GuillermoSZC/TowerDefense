@@ -1,6 +1,6 @@
 --UI GENERAL--
 
-OPCIONES GRAFICAS - FALTA IMPLEMENTACION
+OPCIONES GRAFICAS - FALTA ACABARLO
     - Windowed
     - Resolution
     - Frame Cap

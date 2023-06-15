@@ -5,6 +5,7 @@
 #include "TDGraphicSettings.generated.h"
 
 class UTDRowStringList;
+class UGameUserSettings;
 
 UCLASS()
 class TOWERDEFENSE_API UTDGraphicSettings : public UTDUserWidget
@@ -31,7 +32,8 @@ protected:
 
 
 private:
-
+    UPROPERTY(Transient)
+        UGameUserSettings* gameUserSettings;
 
 public:
     UFUNCTION()
