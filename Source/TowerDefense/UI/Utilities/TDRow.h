@@ -6,6 +6,8 @@
 
 class UTDRichTextBlock;
 class USpacer;
+class USizeBox;
+class UBorder;
 
 /**
     Row parent
@@ -21,19 +23,30 @@ public:
 
 public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UTDRichTextBlock* richText;
+        USizeBox* rowBox;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Row Settings|Visual", meta = (InlineEditConditionToggle))
+        bool useOverridenWidth;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Appearance|Row Settings|Visual", meta = (ToolTip = "Overrides row width.", EditCondition = "useOverridenWidth", ClampMin = 500, ClampMax = 1920, UIMin = 500, UIMax = 1920))
+        float overridenWidth;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        USpacer* customSpacer;
+        UTDRichTextBlock* richText;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Properties")
-        FVector2D spacerSize = FVector2D(300.f, 1.f);
+    UPROPERTY(EditAnywhere, Category = "Custom Properties")
+        FText rowText;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UBorder* background;
 
 protected:
 
 private:
 
 public:
+    UFUNCTION()
+        void TDSetText(FText _text);
 
 protected:
 

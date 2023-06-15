@@ -1,6 +1,13 @@
 --UI GENERAL--
 
-OPCIONES GRAFICAS - FALTA IMPLEMENTACION
+OPCIONES GRAFICAS - FALTA ACABARLO
+    - Windowed
+    - Resolution
+    - Frame Cap
+    - Show FPS (?)
+
+MIRAR IMAGEN PAUSE MENU
+CAMBIAR IMAGEN DE LOS CURSORES
 ANIMACIONES GENERAL
 
 -------------------------------------------------------------------------------------------------
@@ -9,9 +16,6 @@ ANIMACIONES GENERAL
 CHECKEAR TODOS LOS @TODO:
 
 
-FADE OUT VFX SONIC SMETER ASSET ELEMENTO  (Guille Dis)
-
-CAMBIAR IMAGEN DE LOS CURSORES
 
 --------------------------------------------------------------------------------------------------
 --SONIDOS--
