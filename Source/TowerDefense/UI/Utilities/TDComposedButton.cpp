@@ -4,6 +4,7 @@
 #include "UMG/Public/Components/Border.h"
 #include <UMG/Public/Components/Image.h>
 
+
 bool UTDComposedButton::Initialize()
 {
     Super::Initialize();
@@ -72,7 +73,6 @@ void UTDComposedButton::TDCanAfford(bool _CanAfford)
         TDSetButtonBackground(NotAvalibleBuyColor);
         SetVisibility(ESlateVisibility::HitTestInvisible);
         upgrade->SetVisibility(ESlateVisibility::Collapsed);
-
     }
 }
 

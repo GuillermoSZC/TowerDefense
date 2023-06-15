@@ -63,10 +63,11 @@ void UTDGraphicSettings::TDOnResolutionChanged(FString _string, ESelectInfo::Typ
     FIntPoint screenResolution;
 
     if (_string == "1920x1080")
-    {
+    {        
         screenResolution.X = 1920;
         screenResolution.Y = 1080;
 
+        
         gameUserSettings->SetScreenResolution(screenResolution);
     }
     else if (_string == "1280x720")
@@ -85,6 +86,7 @@ void UTDGraphicSettings::TDOnResolutionChanged(FString _string, ESelectInfo::Typ
     }
 
     gameUserSettings->ApplyResolutionSettings(false);
+    gameUserSettings->ConfirmVideoMode();
 }
 
 void UTDGraphicSettings::TDOnFrameCapChanged(FString _string, ESelectInfo::Type _select)
