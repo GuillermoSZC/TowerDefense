@@ -7,7 +7,6 @@
 class UTDRichTextBlock;
 class USpacer;
 class USizeBox;
-class UBorder;
 
 /**
     Row parent
@@ -37,8 +36,9 @@ public:
     UPROPERTY(EditAnywhere)
         FText rowText;
 
-    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-        UBorder* background;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Custom Properties")
+        FVector2D spacerSize = FVector2D(300.f, 1.f);
+
 protected:
 
 private:
