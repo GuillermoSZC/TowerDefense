@@ -56,7 +56,7 @@ void ATDEnemy::TDHealthChanged(const FOnAttributeChangeData& Data)
 {
     Super::TDHealthChanged(Data);
 
-    if (Data.NewValue <=0.f)
+    if (Data.NewValue <= 0.f)
     {
         healthBar->SetVisibility(ESlateVisibility::Collapsed);
     }
@@ -167,7 +167,7 @@ void ATDEnemy::TDSetActive_Implementation()
     if (healthBar)
     {
         healthBar->SetVisibility(ESlateVisibility::Visible);
-        FOnHealthChangeDelegate.Broadcast(1.f,0.f);
+        FOnHealthChangeDelegate.Broadcast(1.f, 0.f);
     }
 }
 
@@ -175,7 +175,7 @@ void ATDEnemy::TDSetDisable_Implementation()
 {
     isActive = false;
     SetActorTickEnabled(false);
-    
+
 
     ATDEnemyController* controllerRef = GetController<ATDEnemyController>();
     controllerRef->GetBrainComponent()->StopLogic(FString::SanitizeFloat(5.f));
@@ -281,7 +281,11 @@ void ATDEnemy::TDInitialize()
         UTDGameData::TDCreateAndApplyGE(abilitySystem, UTDDamageAttributeSet::GetattackRangeAttribute(), EGameplayModOp::Override, weaponAssetRef->WeaponRange);
     }
 
-    abilitySystem->GiveAbility(FGameplayAbilitySpec(weaponAssetRef->weaponAbility.GetDefaultObject(), 1, 0));
+    if (weaponAssetRef)
+    {
+        abilitySystem->GiveAbility(FGameplayAbilitySpec(weaponAssetRef->weaponAbility.GetDefaultObject(), 1, 0));
+
+    }
 
 
 

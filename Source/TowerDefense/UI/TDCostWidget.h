@@ -32,6 +32,8 @@ protected:
         UPROPERTY(EditAnywhere)
     TObjectPtr<USoundBase> Sound;
 
+
+        UPROPERTY(Transient)
         TArray<UTDComposedButton*> buttonsArray;
 
 private:
