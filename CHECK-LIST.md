@@ -1,7 +1,13 @@
 --UI GENERAL--
 
 OPCIONES GRAFICAS - FALTA IMPLEMENTACION
+    - Windowed
+    - Resolution
+    - Frame Cap
+    - Show FPS (?)
+
 MIRAR IMAGEN PAUSE MENU
+CAMBIAR IMAGEN DE LOS CURSORES
 ANIMACIONES GENERAL
 
 -------------------------------------------------------------------------------------------------
@@ -9,7 +15,7 @@ ANIMACIONES GENERAL
 
 CHECKEAR TODOS LOS @TODO:
 
-CAMBIAR IMAGEN DE LOS CURSORES
+
 
 --------------------------------------------------------------------------------------------------
 --SONIDOS--

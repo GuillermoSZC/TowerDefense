@@ -34,11 +34,12 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDRichTextBlock* richText;
 
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, Category = "Custom Properties")
         FText rowText;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UBorder* background;
+
 protected:
 
 private:
