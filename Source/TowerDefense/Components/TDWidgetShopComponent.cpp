@@ -8,6 +8,7 @@
 #include "UI/Utilities/TDPlayerHUD.h"
 #include "UI/Utilities/TDText.h"
 #include "UI/Utilities/TDHealthBar.h"
+#include <GenericPlatform/ICursor.h>
 
 UTDWidgetShopComponent::UTDWidgetShopComponent()
 {
@@ -25,6 +26,9 @@ void UTDWidgetShopComponent::BeginPlay()
     distSquared = distanceToUI * distanceToUI;
 
     GetOwner()->OnClicked.AddDynamic(this, &UTDWidgetShopComponent::TDOnClickedActor);
+    GetOwner()->OnBeginCursorOver.AddDynamic(this, &UTDWidgetShopComponent::TDOnHoveredActor);
+    GetOwner()->OnEndCursorOver.AddDynamic(this, &UTDWidgetShopComponent::TDOnUnhoveredActor);
+
 
     UTDGameData::TDGetRoundManager()->FOnCombatPhaseStartDelegate.AddDynamic(this, &UTDWidgetShopComponent::TDOnCombatPhaseStart);
 
@@ -133,5 +137,25 @@ void UTDWidgetShopComponent::TDSetPlayerHUDVisibility(ESlateVisibility _visibili
     if (controller)
     {
         controller->TDGetPLayerHUD()->TDVisibilityToShopUIs(_visibility);
+    }
+}
+
+void UTDWidgetShopComponent::TDOnHoveredActor(AActor* _actor)
+{
+    TDChangeCursor(EMouseCursor::Type::Hand);
+}
+
+void UTDWidgetShopComponent::TDOnUnhoveredActor(AActor* _actor)
+{
+    TDChangeCursor(EMouseCursor::Type::Default);
+}
+
+void UTDWidgetShopComponent::TDChangeCursor(EMouseCursor::Type _cursor)
+{
+    ATDPlayerController* controller = UTDGameData::TDGetPlayerRef()->GetController<ATDPlayerController>();
+
+    if (controller)
+    {
+        controller->CurrentMouseCursor = _cursor;
     }
 }

@@ -5,6 +5,7 @@
 #include "TDWidgetShopComponent.generated.h"
 
 class UTDCostWidget;
+class UPrimitiveComponent;
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnOpenUISignature, UTDCostWidget*, _widget);
@@ -78,7 +79,15 @@ private:
     UFUNCTION()
         void TDOnCombatPhaseStart(int32 _value);
 
-
     UFUNCTION()
         void TDSetPlayerHUDVisibility(ESlateVisibility _visibility);
+
+    UFUNCTION()
+        void TDOnHoveredActor(AActor* _actor);
+
+    UFUNCTION()
+        void TDOnUnhoveredActor(AActor* _actor);
+
+    UFUNCTION()
+        void TDChangeCursor(EMouseCursor::Type _cursor);
 };

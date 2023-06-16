@@ -2,7 +2,6 @@
 
 CAMBIAR CURSOR CUANDO PASAS MOUSE POR ENCIMA DE ESTRUCTURAS
 
-
 -------------------------------------------------------------------------------------------------
 --BUILD/CHECK WARNINGS--
 
