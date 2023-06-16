@@ -28,7 +28,7 @@ UTDWeightManager::UTDWeightManager()
 
 
 
-int32 UTDWeightManager::TDSetActualRound(int32& _atualRound, TArray<EElements> _roundElement)
+TArray<ATDEnemy*>  UTDWeightManager::TDSetActualRound(int32& _atualRound, TArray<EElements> _roundElement)
 {
     actualRoundElements.Empty();
     actualRoundElements = _roundElement;
@@ -36,7 +36,7 @@ int32 UTDWeightManager::TDSetActualRound(int32& _atualRound, TArray<EElements> _
     WeightPerRound = ActualRound * 10;
     actualWegith = 0;
     enemiesPerClass.Empty();
-
+    TArray<ATDEnemy*> preparedEnemies;
 
     ATDObjectPooler* objectRef = UTDGameData::TDGetObjectPooler();
     ensure(objectRef);
@@ -53,7 +53,7 @@ int32 UTDWeightManager::TDSetActualRound(int32& _atualRound, TArray<EElements> _
         }
     }
 
-    return preparedEnemies.Num();
+    return preparedEnemies;
 }
 
 
@@ -69,24 +69,6 @@ void UTDWeightManager::TDGetRowFromDataTable(FName _RowName, FTDEnemiesDataTable
     }
 }
 
-void UTDWeightManager::TDSpawnEnemy()
-{
-
-    ATDEnemy* actualEnemy = nullptr;
-    if (!preparedEnemies.IsEmpty())
-    {
-        actualEnemy = preparedEnemies[0];
-        preparedEnemies.Remove(actualEnemy);
-    }
-
-    if (actualEnemy)
-    {
-        ATDSpawner* spawnerRef = UTDGameData::TDGetSpanwerActor();
-        spawnerRef->TDPlaceEnemy(actualEnemy);
-        actualEnemy->TDSetActive();
-    }
-
-}
 
 void UTDWeightManager::TDSetDataTable(UDataTable* _ref)
 {
@@ -241,6 +223,12 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable
 
     //AI
     ATDEnemyController* enemyController = _enemyRef->GetController<ATDEnemyController>();
+
+    enemyController->GetBlackboardComponent()->ClearValue("BaseBuild");
+    enemyController->GetBlackboardComponent()->ClearValue("WaypointPosition");
+    enemyController->GetBlackboardComponent()->ClearValue("WaypointActor");
+    enemyController->GetBlackboardComponent()->ClearValue("RealBasePosition");
+
     enemyController->RunBehaviorTree(Row.behaviorTree.LoadSynchronous());
 
     //UI

@@ -46,17 +46,10 @@ private:
 	UPROPERTY()
 	TArray<EElements> actualRoundElements;
 
-	UPROPERTY(Transient)
-	TArray<ATDEnemy*> preparedEnemies;
 
 
 public:
 
-	/// <summary>
-	/// Take an enemy from the prepared enemies to spawn it on the map
-	/// </summary>
-	UFUNCTION()
-	void TDSpawnEnemy();
 
 	UFUNCTION()
 	void TDSetDataTable(UDataTable* _ref);
@@ -69,7 +62,7 @@ public:
 	/// <param name="_roundElement">Set randomly an element fot every enemy</param>
 	/// <returns>It returns the amount of enemies the player will face to</returns>
 	UFUNCTION()
-	int32 TDSetActualRound(int32& _atualRound, TArray<EElements> _roundElement);
+	TArray<ATDEnemy*> TDSetActualRound(int32& _atualRound, TArray<EElements> _roundElement);
 
 	//Get a Row from the DataTable with the name of the Row.
 	UFUNCTION()

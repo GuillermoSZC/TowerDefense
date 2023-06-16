@@ -43,7 +43,7 @@ public:
         int32 timeBuyPhase = 20.f;
 
     UPROPERTY(EditDefaultsOnly)
-    float MaxGameRound = 99;
+        float MaxGameRound = 99;
 
     //Delegates
     FOnBuyPhaseStartSignature FOnBuyPhaseStartDelegate;
@@ -72,6 +72,13 @@ private:
 
     bool timePaused = false;
 
+    UPROPERTY(Transient)
+        TArray<ATDEnemy*> heapEnemies;
+
+    UPROPERTY(Transient)
+        TArray<ATDEnemy*> enemiesAlive;
+
+
 public:
 
     //Prepare the elements for the actual round and prepare all the enemies for the actual round selected with the weightManager
@@ -84,11 +91,12 @@ public:
     virtual void Tick(float DeltaSeconds) override;
 
     //Reduce the amount of the actuals enemies of this round by one. If the amount is <= 0 end combatPhase and start buyPhase
-    void TDMinusEnemyKillCounter();
+    void TDMinusEnemyKillCounter(ATDEnemy* _enemyDeath);
 
-    //Increase the amount of the actuals enemies of this round by one
+
+   //Increase the amount of the actuals enemies of this round by one
     UFUNCTION(BlueprintCallable)
-        void TDAddEnemyKilCounter();
+        void TDAddEnemyKilCounter(ATDEnemy* _newEnemy);
 
 
     UFUNCTION(BlueprintCallable)
@@ -120,7 +128,7 @@ public:
 
     UFUNCTION(BlueprintCallable)
         void TDSetIsInfinite(bool _value);
-        
+
     UFUNCTION(BlueprintImplementableEvent)
         void TDEndGameAction();
 
@@ -128,13 +136,21 @@ protected:
 
     virtual void BeginPlay() override;
 
-        //Change to BuyPhase and activate the delegate for all the objects listening
+    //Change to BuyPhase and activate the delegate for all the objects listening
     UFUNCTION(BlueprintNativeEvent)
-    void TDStartBuyPhase();
+        void TDStartBuyPhase();
 
     //Change to CombatPhase and activate the delegate for all the objects listening
-        UFUNCTION(BlueprintNativeEvent)
-    void TDStartCombatPhase();
+    UFUNCTION(BlueprintNativeEvent)
+        void TDStartCombatPhase();
+
+
+
+    /// <summary>
+    /// Take an enemy from the prepared enemies to spawn it on the map
+    /// </summary>
+    UFUNCTION()
+    void TDSpawnEnemy();
 
 private:
 

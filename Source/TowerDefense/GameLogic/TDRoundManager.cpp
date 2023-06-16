@@ -10,6 +10,7 @@
 #include "Character/TDEnemy.h"
 #include <AIModule/Classes/BehaviorTree/BlackboardComponent.h>
 #include "TDPathPoint.h"
+#include "Map/TDSpawner.h"
 
 
 
@@ -53,6 +54,24 @@ void ATDRoundManager::TDStartCombatPhase_Implementation()
 }
 
 
+void ATDRoundManager::TDSpawnEnemy()
+{
+    ATDEnemy* actualEnemy = nullptr;
+    if (!heapEnemies.IsEmpty())
+    {
+        actualEnemy = heapEnemies[0];
+        heapEnemies.Remove(actualEnemy);
+    }
+
+    if (actualEnemy)
+    {
+        ATDSpawner* spawnerRef = UTDGameData::TDGetSpanwerActor();
+        spawnerRef->TDPlaceEnemy(actualEnemy);
+        actualEnemy->TDSetActive();
+    }
+
+}
+
 void ATDRoundManager::TDPrepareCombatRound()
 {
     ++actualRound;
@@ -81,8 +100,9 @@ void ATDRoundManager::TDPrepareCombatRound()
     RoundElements[x]->TDGetRoundElements(actualRoundElements);
     FOnElementSelectionDelegate.Broadcast(actualRoundElements);
 
-    EnemiesToKill = UTDGameData::TDGetWeightManager()->TDSetActualRound(actualRound, actualRoundElements);
-    FOnEnemyKillDelegate.Broadcast(EnemiesToKill);
+    heapEnemies = UTDGameData::TDGetWeightManager()->TDSetActualRound(actualRound, actualRoundElements);
+    enemiesAlive = heapEnemies;
+    FOnEnemyKillDelegate.Broadcast(heapEnemies.Num());
 }
 
 
@@ -96,7 +116,7 @@ void ATDRoundManager::Tick(float DeltaSeconds)
         if (timeRound >= timeperSpawn)
         {
 
-            UTDGameData::TDGetWeightManager()->TDSpawnEnemy();
+            TDSpawnEnemy();
             timeRound -= timeperSpawn;
         }
         timeRound += DeltaSeconds;
@@ -116,21 +136,26 @@ void ATDRoundManager::Tick(float DeltaSeconds)
     }
 }
 
-void ATDRoundManager::TDMinusEnemyKillCounter()
+void ATDRoundManager::TDMinusEnemyKillCounter(ATDEnemy* _enemyDeath)
 {
-    --EnemiesToKill;
+    enemiesAlive.Remove(_enemyDeath);
 
-    FOnEnemyKillDelegate.Broadcast(EnemiesToKill);
+    FOnEnemyKillDelegate.Broadcast(enemiesAlive.Num());
 
-    if (EnemiesToKill <= 0)
+    if (enemiesAlive.IsEmpty())
     {
         TDStartBuyPhase();
     }
 }
 
-void ATDRoundManager::TDAddEnemyKilCounter()
+
+
+void ATDRoundManager::TDAddEnemyKilCounter(ATDEnemy* _newEnemy)
 {
-    EnemiesToKill += 1;
+    if (!enemiesAlive.Contains(_newEnemy))
+    {
+        enemiesAlive.Add(_newEnemy);
+    }
 }
 
 float ATDRoundManager::TDGetTimeRound()

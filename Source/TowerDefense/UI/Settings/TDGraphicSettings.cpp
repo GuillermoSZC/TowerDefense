@@ -9,6 +9,9 @@ bool UTDGraphicSettings::Initialize()
 
     gameUserSettings = GEngine->GetGameUserSettings();
 
+    gameUserSettings->SetVSyncEnabled(true);
+    gameUserSettings->ApplySettings(true);
+
     if (screenMode)
     {
         screenMode->stringList->OnSelectionChanged.AddDynamic(this, &UTDGraphicSettings::TDOnScreenModeChanged);

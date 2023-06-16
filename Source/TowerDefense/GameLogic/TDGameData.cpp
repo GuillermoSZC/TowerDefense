@@ -68,6 +68,7 @@ void UTDGameData::TDAddEnmemyToArray(ATDEnemy* _ActualEnemy)
     if (!enemiesArray.Contains(_ActualEnemy))
     {
         enemiesArray.Add(_ActualEnemy);
+        RoundManagerRef->TDAddEnemyKilCounter(_ActualEnemy);
     }
 }
 
@@ -81,7 +82,7 @@ void UTDGameData::TDRemoveEnmemyToArray(ATDEnemy* _ActualEnemy)
     {
         enemiesArray.Remove(_ActualEnemy);
 
-        UTDGameData::TDGetRoundManager()->TDMinusEnemyKillCounter();
+        UTDGameData::TDGetRoundManager()->TDMinusEnemyKillCounter(_ActualEnemy);
     }
 }
 
@@ -260,7 +261,7 @@ FText UTDGameData::TDConvertIntToFText(int32 _num)
 
 void UTDGameData::TDSpawnEnemyDebug()
 {
-    weightManagerRef->TDSpawnEnemy();
+    //RoundManagerRef->TDSpawnEnemy();
 }
 
 void UTDGameData::TDCreateAndApplyGE(UAbilitySystemComponent* _ASC, FGameplayAttribute _attribute, EGameplayModOp::Type _modType, float _value)
