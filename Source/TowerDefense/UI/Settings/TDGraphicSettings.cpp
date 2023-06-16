@@ -55,7 +55,7 @@ void UTDGraphicSettings::TDOnScreenModeChanged(FString _string, ESelectInfo::Typ
     }
 
     gameUserSettings->ApplyResolutionSettings(false);
-
+    gameUserSettings->ConfirmVideoMode();
 }
 
 void UTDGraphicSettings::TDOnResolutionChanged(FString _string, ESelectInfo::Type _select)
@@ -110,5 +110,5 @@ void UTDGraphicSettings::TDOnFrameCapChanged(FString _string, ESelectInfo::Type 
     }
 
     gameUserSettings->ApplySettings(false);
-
+    gameUserSettings->ConfirmVideoMode();
 }

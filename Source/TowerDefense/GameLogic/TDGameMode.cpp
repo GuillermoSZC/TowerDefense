@@ -1,6 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "TDGameMode.h"
 #include "TDGameData.h"
 #include "TDObjectPooler.h"
@@ -16,6 +13,7 @@
 #include "UI/TDGameOver.h"
 #include <UMG/Public/Animation/WidgetAnimationEvents.h>
 #include <UMG/Public/Animation/WidgetAnimation.h>
+
 
 
 ATDGameMode::ATDGameMode()
@@ -108,10 +106,6 @@ void ATDGameMode::TDGameOver()
 {
     if (gameOverRef)
     {
-        FWidgetAnimationDynamicEvent tempBindAnim;
-        tempBindAnim.BindDynamic(this, &ATDGameMode::TDOnEndFadeIn);
-
-        gameOverRef->fadeIn->BindToAnimationFinished(gameOverRef, tempBindAnim);
         gameOverRef->SetVisibility(ESlateVisibility::Visible);
     }
 }
