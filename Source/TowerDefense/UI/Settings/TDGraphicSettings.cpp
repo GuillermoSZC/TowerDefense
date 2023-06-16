@@ -91,32 +91,24 @@ void UTDGraphicSettings::TDOnResolutionChanged(FString _string, ESelectInfo::Typ
 
 void UTDGraphicSettings::TDOnFrameCapChanged(FString _string, ESelectInfo::Type _select)
 {
-//     switch (_string)
-//     {
-//     case "30":
-//     {
-// 
-//     }
-//     break;
-//     case "60":
-//     {
-// 
-//     }
-//     break;
-//     case "120":
-//     {
-// 
-//     }
-//     break;
-//     case "Unlimited":
-//     {
-// 
-//     }
-//     break;
-//     default:
-//     {
-// 
-//     }
-//     break;
-//     }
+    if (_string == "30")
+    {
+        gameUserSettings->SetFrameRateLimit(30.f);
+
+    }
+    else if (_string == "60")
+    {
+        gameUserSettings->SetFrameRateLimit(60.f);
+    }
+    else if (_string == "120")
+    {
+        gameUserSettings->SetFrameRateLimit(120.f);
+    }
+    else if (_string == "Unlimited")
+    {
+        gameUserSettings->SetFrameRateLimit(0.f);
+    }
+
+    gameUserSettings->ApplySettings(false);
+
 }
