@@ -98,7 +98,8 @@ public:
         void TDVisibilityToShopUIs(ESlateVisibility _visibility);
 
 
-
+    UFUNCTION()
+    void TDPlayerGameOver();
 
 
 protected:

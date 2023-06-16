@@ -106,10 +106,12 @@ void ATDGameMode::TDGameOver()
 {
     if (gameOverRef)
     {
+        FOndGameOverDelegate.Broadcast();
+        gameOverRef->FOndEndAnimationDelegate.AddDynamic(this, &ATDGameMode::TDOnEndFadeIn);
         gameOverRef->SetVisibility(ESlateVisibility::Visible);
     }
 }
-ODO
+
 void ATDGameMode::StartPlay()
 {
     Super::StartPlay();

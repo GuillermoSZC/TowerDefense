@@ -18,6 +18,9 @@ bool UTDPlayerHUD::Initialize()
 {
     Super::Initialize();
 
+    UTDGameData::TDGetGameMode()->FOndGameOverDelegate.AddDynamic(this, &UTDPlayerHUD::TDPlayerGameOver);
+
+
     return true;
 }
 
@@ -149,5 +152,10 @@ void UTDPlayerHUD::TDVisibilityToShopUIs(ESlateVisibility _visibility)
     enemyText->SetVisibility(_visibility);
     roundText->SetVisibility(_visibility);
     roundNum->SetVisibility(_visibility);
+}
+
+void UTDPlayerHUD::TDPlayerGameOver()
+{
+    SetVisibility(ESlateVisibility::Collapsed);
 }
 

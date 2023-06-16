@@ -13,7 +13,7 @@
 #include "TDGameMode.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FLootDropSignature, ELootItems, _item, FGameplayTag, _category, int32, _amount);
-
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOndGameOverSignature);
 
 
 class ATDEnemy;
@@ -81,6 +81,9 @@ public:
 
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, BlueprintCallable)
         FLootDropSignature FLootDropDelegate;
+
+    UPROPERTY()
+    FOndGameOverSignature FOndGameOverDelegate;
 
 protected:
     UPROPERTY()

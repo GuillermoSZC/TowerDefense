@@ -7,6 +7,11 @@
 class UTDRichTextBlock;
 class UWidgetAnimation;
 
+
+
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOndEndAnimationSignature);
+
 /**
  *
  */
@@ -25,6 +30,10 @@ public:
 
     UPROPERTY(BlueprintReadWrite, Transient, meta = (BindWidgetAnim))
         UWidgetAnimation* fadeIn;
+
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite)
+    FOndEndAnimationSignature FOndEndAnimationDelegate;
+
 
 protected:
 

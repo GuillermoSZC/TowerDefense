@@ -18,7 +18,7 @@ void UTDGameOver::NativePreConstruct()
 void UTDGameOver::NativeConstruct()
 {
     Super::NativeConstruct();
-
+    
 }
 
 void UTDGameOver::TDVisibilityGameOver(ESlateVisibility _visibility)
