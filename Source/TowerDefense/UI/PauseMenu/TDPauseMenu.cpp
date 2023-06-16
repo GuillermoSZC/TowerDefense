@@ -4,6 +4,8 @@
 #include "TDResourceCard.h"
 #include "UI/Utilities/TDButton.h"
 #include <UMG/Public/Components/WidgetSwitcher.h>
+#include <Kismet/KismetSystemLibrary.h>
+#include <Kismet/GameplayStatics.h>
 
 UTDPauseMenu* UTDPauseMenu::owner = nullptr;
 
@@ -12,6 +14,37 @@ bool UTDPauseMenu::Initialize()
     Super::Initialize();
 
     owner = this;
+
+    // OnClicked Events
+    if (inventoryButton)
+    {
+        inventoryButton->ownerButton->OnClicked.AddDynamic(this, &UTDPauseMenu::TDOnInventory);
+    }
+
+    if (graphicsButton)
+    {
+        graphicsButton->ownerButton->OnClicked.AddDynamic(this, &UTDPauseMenu::TDOnGraphics);
+    }
+
+    if (soundButton)
+    {
+        soundButton->ownerButton->OnClicked.AddDynamic(this, &UTDPauseMenu::TDOnSound);
+    }
+
+    if (inputButton)
+    {
+        inputButton->ownerButton->OnClicked.AddDynamic(this, &UTDPauseMenu::TDOnInput);
+    }
+
+    if (mainMenu)
+    {
+        mainMenu->ownerButton->OnClicked.AddDynamic(this, &UTDPauseMenu::TDGoToMainMenu);
+    }
+
+    if (exit)
+    {
+        exit->ownerButton->OnClicked.AddDynamic(this, &UTDPauseMenu::TDExitGame);
+    }
 
     return true;
 }
@@ -30,11 +63,7 @@ void UTDPauseMenu::NativeConstruct()
     OnVisibilityChanged.AddDynamic(this, &UTDPauseMenu::TDOnVisibilityChange);
     OnVisibilityChanged.AddDynamic(inventory, &UTDInventory::TDUpdateScrap);
 
-    // OnClicked Events
-    inventoryButton->ownerButton->OnClicked.AddDynamic(this, &UTDPauseMenu::TDOnInventory);
-    graphicsButton->ownerButton->OnClicked.AddDynamic(this, &UTDPauseMenu::TDOnGraphics);
-    soundButton->ownerButton->OnClicked.AddDynamic(this, &UTDPauseMenu::TDOnSound);
-    inputButton->ownerButton->OnClicked.AddDynamic(this, &UTDPauseMenu::TDOnInput);
+
 }
 
 UTDPauseMenu* UTDPauseMenu::TDGetPauseMenuRef()
@@ -85,4 +114,9 @@ void UTDPauseMenu::TDSetWidgetSwitcherIndex(int _value)
     {
         MainSwitcher->SetActiveWidgetIndex(_value);
     }
+}
+
+void UTDPauseMenu::TDExitGame()
+{
+    UKismetSystemLibrary::QuitGame(this, nullptr, EQuitPreference::Quit, false);
 }
