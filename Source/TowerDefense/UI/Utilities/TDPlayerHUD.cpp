@@ -11,6 +11,7 @@
 #include "TDHealthBar.h"
 #include "Character/TDPlayerCharacter.h"
 #include "TDLogCard.h"
+#include "GameLogic/TDGameMode.h"
 
 
 
@@ -139,7 +140,8 @@ void UTDPlayerHUD::TDSetEnemyCounter(int32 _counter)
 
 void UTDPlayerHUD::TDUpdateHealthNumber(float _percentage, float _actualHp)
 {
-    healthNumber->TDSetCustomText(FText::FromString(FString::SanitizeFloat(_actualHp)));
+    int32 actualHp = FMath::RoundToInt(_actualHp);
+    healthNumber->TDSetCustomText(FText::FromString(FString::FromInt(actualHp)));
 }
 
 
@@ -158,4 +160,3 @@ void UTDPlayerHUD::TDPlayerGameOver()
 {
     SetVisibility(ESlateVisibility::Collapsed);
 }
-

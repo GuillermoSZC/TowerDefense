@@ -22,7 +22,7 @@ struct FTDLevelSelectorButtons : public FTableRowBase
         FText buttonName;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ToolTip = "Edits text style data."))
-        UDataTable* fonts;
+        UDataTable* fonts = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (EditCondition = "bCanModify"))
         FButtonStyle buttonStyle;
