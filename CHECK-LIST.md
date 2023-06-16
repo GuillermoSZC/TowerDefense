@@ -1,6 +1,4 @@
---UI GENERAL--
-
-CAMBIAR CURSOR CUANDO PASAS MOUSE POR ENCIMA DE ESTRUCTURAS
+DECORAR MAPA
 
 -------------------------------------------------------------------------------------------------
 --BUILD/CHECK WARNINGS--
@@ -9,12 +7,7 @@ CAMBIAR CURSOR CUANDO PASAS MOUSE POR ENCIMA DE ESTRUCTURAS
 --SONIDOS--
 
 GOLPES ESPADA
-MUERTE ENEMIGOS
 ATAQUE ENEMIGO
-MUSICA (MAPA) Implementar
-SONIDO CONSTRUCCIÓN
-SONIDO MEJORA Implementar
-SONIDO EN BOTONES Implementar
 
 ---------------------------------------------------------------------------------------------------
 --ITCH.IO--
