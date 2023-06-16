@@ -13,6 +13,9 @@
 #include "UI/TDBaseUpgrade.h"
 #include "TDGameInstance.h"
 #include "TDCostManager.h"
+#include "UI/TDGameOver.h"
+#include <UMG/Public/Animation/WidgetAnimationEvents.h>
+#include <UMG/Public/Animation/WidgetAnimation.h>
 
 
 ATDGameMode::ATDGameMode()
@@ -72,6 +75,17 @@ void ATDGameMode::InitGame(const FString& MapName, const FString& Options, FStri
     widgetMap.Add(towerShopClass, uiTowerShop);
     widgetMap.Add(towerUpgradeClass, uiTowerUpgrade);
     widgetMap.Add(baseUpgradeClass, uiBaseUpgrade);
+
+    if (gameOverClass)
+    {
+        gameOverRef = CreateWidget<UTDGameOver>(GetWorld(), gameOverClass);
+
+        if (gameOverRef)
+        {
+            gameOverRef->AddToViewport();
+            gameOverRef->SetVisibility(ESlateVisibility::Collapsed);
+        }
+    }
 }
 
 
@@ -88,6 +102,18 @@ UDataTable* ATDGameMode::TDGetDataLootFromElement(EElements _keyElement)
 UTDCostWidget* ATDGameMode::TDGetWidgetFromClass(TSubclassOf<UTDCostWidget> _class)
 {
     return widgetMap[_class];
+}
+
+void ATDGameMode::TDGameOver()
+{
+    if (gameOverRef)
+    {
+        FWidgetAnimationDynamicEvent tempBindAnim;
+        tempBindAnim.BindDynamic(this, &ATDGameMode::TDOnEndFadeIn);
+
+        gameOverRef->fadeIn->BindToAnimationFinished(gameOverRef, tempBindAnim);
+        gameOverRef->SetVisibility(ESlateVisibility::Visible);
+    }
 }
 
 void ATDGameMode::StartPlay()
