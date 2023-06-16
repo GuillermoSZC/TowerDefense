@@ -35,7 +35,7 @@ void ATDRoundManager::TDPostBeginPlay()
     TDStartBuyPhase();
 }
 
-void ATDRoundManager::TDStartBuyPhase()
+void ATDRoundManager::TDStartBuyPhase_Implementation()
 {
     timeRound = timeBuyPhase;
     actualPhase = GamePhase::BuyPhase;
@@ -44,7 +44,7 @@ void ATDRoundManager::TDStartBuyPhase()
     FOnBuyPhaseStartDelegate.Broadcast(actualRound);
 }
 
-void ATDRoundManager::TDStartCombatPhase()
+void ATDRoundManager::TDStartCombatPhase_Implementation()
 {
     actualPhase = GamePhase::CombatPhase;
     timeRound = timeperSpawn;

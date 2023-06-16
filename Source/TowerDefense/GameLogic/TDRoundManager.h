@@ -128,11 +128,15 @@ protected:
 
     virtual void BeginPlay() override;
 
-private:
-
-    //Change to BuyPhase and activate the delegate for all the objects listening
+        //Change to BuyPhase and activate the delegate for all the objects listening
+    UFUNCTION(BlueprintNativeEvent)
     void TDStartBuyPhase();
 
     //Change to CombatPhase and activate the delegate for all the objects listening
+        UFUNCTION(BlueprintNativeEvent)
     void TDStartCombatPhase();
+
+private:
+
+
 };
