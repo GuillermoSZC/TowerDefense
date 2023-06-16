@@ -15,12 +15,6 @@ void UTDRow::NativePreConstruct()
 {
     Super::NativePreConstruct();
 
-    if (rowBox)
-    {
-        rowBox->bOverride_MinDesiredWidth = true;
-        rowBox->SetMinDesiredWidth(useOverridenWidth ? overridenWidth : 500);
-    }
-
     TDSetText(rowText);
 }
 

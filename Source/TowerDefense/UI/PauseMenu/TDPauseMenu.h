@@ -52,6 +52,12 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDInputSettings* input;
 
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDButton* mainMenu;
+
+    UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+        UTDButton* exit;
+
 protected:
 
 private:
@@ -64,6 +70,9 @@ public:
 
     UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
         void TDFadeIn();
+
+    UFUNCTION(BlueprintImplementableEvent)
+        void TDGoToMainMenu();
 
 protected:
     UFUNCTION()
@@ -85,5 +94,9 @@ private:
 
     UFUNCTION()
         void TDSetWidgetSwitcherIndex(int _value);
+
+    UFUNCTION()
+        void TDExitGame();
+
 
 };
