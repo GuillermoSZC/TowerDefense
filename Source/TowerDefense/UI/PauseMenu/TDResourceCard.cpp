@@ -83,7 +83,7 @@ FText UTDResourceCard::TDGetTextFromItem(ELootItems _item)
     ATDPlayerCharacter* playerRef = UTDGameData::TDGetPlayerRef();
     int32 intTemp = playerRef->TDGetAmountItemByItem(_item);
     FString StringTemp = FString::FromInt(intTemp);
-    FText textTemp = FText::FromString("<Black>" + StringTemp + "</>");
+    FText textTemp = FText::FromString(StringTemp);
 
     return textTemp;
 }
