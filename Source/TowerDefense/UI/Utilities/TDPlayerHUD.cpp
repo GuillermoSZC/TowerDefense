@@ -13,8 +13,6 @@
 #include "TDLogCard.h"
 #include "GameLogic/TDGameMode.h"
 
-
-
 bool UTDPlayerHUD::Initialize()
 {
     Super::Initialize();
@@ -28,7 +26,6 @@ bool UTDPlayerHUD::Initialize()
 void UTDPlayerHUD::NativePreConstruct()
 {
     Super::NativePreConstruct();
-
 
 }
 
