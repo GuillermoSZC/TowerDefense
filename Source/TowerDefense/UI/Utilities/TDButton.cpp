@@ -8,6 +8,12 @@ bool UTDButton::Initialize()
 {
     Super::Initialize();
 
+    if (ownerButton)
+    {
+        ownerButton->OnClicked.AddDynamic(this, &UTDButton::TDPlayButtonSound);
+    }
+
+
     return true;
 }
 void UTDButton::NativePreConstruct()

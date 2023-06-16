@@ -44,6 +44,13 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Appearance|Button Settings|Data", meta = (ToolTip = "Edits button text.", EditCondition = "useButtonText"))
         FText buttonText;
 
+
+
+    UPROPERTY(EditAnywhere)
+        TObjectPtr<USoundBase> Sound;
+
+
+
 protected:
 
 
@@ -96,7 +103,8 @@ public:
 
 #pragma endregion
 protected:
-
+    UFUNCTION(BlueprintImplementableEvent)
+        void TDPlayButtonSound();
 
 private:
 
