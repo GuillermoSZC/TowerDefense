@@ -12,8 +12,8 @@
 #include "GameplayTagContainer.h"
 #include "TDGameMode.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FLootDropSignature, ELootItems, _item,FGameplayTag, _category, int32, _amount);
-
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FLootDropSignature, ELootItems, _item, FGameplayTag, _category, int32, _amount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOndGameOverSignature);
 
 
 class ATDEnemy;
@@ -26,6 +26,7 @@ class UTDTowerShop;
 class UTDTowerUpgrade;
 class UTDBaseUpgrade;
 class ATDCostManager;
+class UTDGameOver;
 
 /**
  *
@@ -75,12 +76,18 @@ public:
     UPROPERTY(EditDefaultsOnly, Category = "Classes")
         TSubclassOf<ATDCostManager> CostManagerClass;
 
+    UPROPERTY(EditDefaultsOnly, Category = "Classes")
+        TSubclassOf<UTDGameOver> gameOverClass;
 
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite,BlueprintCallable)
-    FLootDropSignature FLootDropDelegate;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, BlueprintCallable)
+        FLootDropSignature FLootDropDelegate;
+
+    UPROPERTY()
+    FOndGameOverSignature FOndGameOverDelegate;
 
 protected:
-
+    UPROPERTY()
+        UTDGameOver* gameOverRef;
 
 private:
 
@@ -112,6 +119,12 @@ public:
     UDataTable* TDGetDataLootFromElement(EElements _keyElement);
 
     UTDCostWidget* TDGetWidgetFromClass(TSubclassOf<UTDCostWidget> _class);
+
+    UFUNCTION(BlueprintCallable)
+        void TDGameOver();
+
+    UFUNCTION(BlueprintImplementableEvent)
+        void TDOnEndFadeIn();
 
 protected:
     void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;

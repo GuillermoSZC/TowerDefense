@@ -33,7 +33,7 @@ public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
         UDataTable* damageDatatable;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite) // @TODO: Pasar a privado?
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
         UTDElementComponent* elementComponent = nullptr;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ability System")

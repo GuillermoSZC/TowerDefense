@@ -51,12 +51,6 @@ public:
     UPROPERTY()
         TArray<UImage*> elementsArray;
 
-
-    // @TODO: MINIMAPA - INVESTIGAR EL ASSET DE LA EPIC
-    /**
-     *
-     */
-
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UTDText* timer;
 
@@ -104,7 +98,8 @@ public:
         void TDVisibilityToShopUIs(ESlateVisibility _visibility);
 
 
-
+    UFUNCTION()
+    void TDPlayerGameOver();
 
 
 protected:
