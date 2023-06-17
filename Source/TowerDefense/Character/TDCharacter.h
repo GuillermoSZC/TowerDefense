@@ -58,7 +58,7 @@ public:
            TArray<FGameplayTag> TagsToAdd;
 
 
-
+           UPROPERTY(BlueprintAssignable)
     FOnHealthChangeSignature FOnHealthChangeDelegate;
     
 protected:
