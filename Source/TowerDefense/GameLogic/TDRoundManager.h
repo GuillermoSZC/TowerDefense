@@ -91,6 +91,8 @@ public:
     virtual void Tick(float DeltaSeconds) override;
 
     //Reduce the amount of the actuals enemies of this round by one. If the amount is <= 0 end combatPhase and start buyPhase
+        UFUNCTION(BlueprintCallable)
+
     void TDMinusEnemyKillCounter(ATDEnemy* _enemyDeath);
 
 

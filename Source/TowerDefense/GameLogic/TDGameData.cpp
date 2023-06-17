@@ -68,7 +68,7 @@ void UTDGameData::TDAddEnmemyToArray(ATDEnemy* _ActualEnemy)
     if (!enemiesArray.Contains(_ActualEnemy))
     {
         enemiesArray.Add(_ActualEnemy);
-        RoundManagerRef->TDAddEnemyKilCounter(_ActualEnemy);
+        //RoundManagerRef->TDAddEnemyKilCounter(_ActualEnemy);
     }
 }
 
@@ -82,7 +82,7 @@ void UTDGameData::TDRemoveEnmemyToArray(ATDEnemy* _ActualEnemy)
     {
         enemiesArray.Remove(_ActualEnemy);
 
-        UTDGameData::TDGetRoundManager()->TDMinusEnemyKillCounter(_ActualEnemy);
+        //UTDGameData::TDGetRoundManager()->TDMinusEnemyKillCounter(_ActualEnemy);
     }
 }
 

@@ -155,6 +155,7 @@ void ATDRoundManager::TDAddEnemyKilCounter(ATDEnemy* _newEnemy)
     if (!enemiesAlive.Contains(_newEnemy))
     {
         enemiesAlive.Add(_newEnemy);
+        FOnEnemyKillDelegate.Broadcast(enemiesAlive.Num());
     }
 }
 
