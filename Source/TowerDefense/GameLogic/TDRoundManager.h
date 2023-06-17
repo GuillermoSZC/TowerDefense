@@ -100,6 +100,9 @@ public:
     UFUNCTION(BlueprintCallable)
         void TDAddEnemyKilCounter(ATDEnemy* _newEnemy);
 
+    UFUNCTION(BlueprintPure)
+    TArray<ATDEnemy*> TDGetEnemiesAlive();
+
 
     UFUNCTION(BlueprintCallable)
         float TDGetTimeRound();

@@ -159,6 +159,11 @@ void ATDRoundManager::TDAddEnemyKilCounter(ATDEnemy* _newEnemy)
     }
 }
 
+TArray<ATDEnemy*> ATDRoundManager::TDGetEnemiesAlive()
+{
+    return enemiesAlive;
+}
+
 float ATDRoundManager::TDGetTimeRound()
 {
     return timeRound;

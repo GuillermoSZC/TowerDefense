@@ -95,7 +95,7 @@ void UTDLogWidget::TDOnEndFadeInAnimation(UTDLogCard* _card)
 void UTDLogWidget::TDOnEndFadeOutAnimation(UTDLogCard* _card)
 {
     _card->FEndWidgetAnimationFadeOutDelegate.Clear();
-
+    _card->StopAllAnimations();
     canvasPanelWidget->RemoveChild(_card);
     cardsArray.Remove(_card);
 

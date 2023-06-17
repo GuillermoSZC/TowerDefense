@@ -43,7 +43,6 @@ void ATDEnemy::TDCharacterDeath_Implementation()
 {
     UTDGameData::TDGetObjectPooler()->TDAddEnemyToPool(this);
     TDSetDisable();
-    UTDGameData::TDRemoveEnmemyToArray(this);
 
 }
 
@@ -156,7 +155,6 @@ void ATDEnemy::TDSetActive_Implementation()
 {
     isActive = true;
     TDInitialize();
-    UTDGameData::TDAddEnmemyToArray(this);
     ATDEnemyController* controllerRef = GetController<ATDEnemyController>();
     controllerRef->GetBrainComponent()->StartLogic();
     GetMesh()->SetVisibility(true, true);

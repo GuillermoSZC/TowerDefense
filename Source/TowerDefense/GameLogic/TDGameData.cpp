@@ -17,7 +17,7 @@
 
 UWorld* UTDGameData::gameWorld = nullptr;
 UTDGameplayEventData* UTDGameData::abilityData = nullptr;
-TArray<ATDEnemy*> UTDGameData::enemiesArray;
+
 TArray<ATDSpawner*> UTDGameData::spawnerArray;
 ATDBase* UTDGameData::baseRef = nullptr;
 UTDWeightManager* UTDGameData::weightManagerRef = nullptr;
@@ -37,8 +37,6 @@ void UTDGameData::TDResetGameData()
 {
     gameWorld = nullptr;
     abilityData = nullptr;
-    enemiesArray.Empty();
-    spawnerArray.Empty();
     baseRef = nullptr;
     weightManagerRef = nullptr;
     GameModeRef = nullptr;
@@ -60,35 +58,18 @@ void UTDGameData::TDSetWorld(UWorld* _ActualMap)
 
 TArray<ATDEnemy*> UTDGameData::TDGetEnemiesArray()
 {
+    TArray<ATDEnemy*> enemiesArray;
+    enemiesArray = RoundManagerRef->TDGetEnemiesAlive();
     return enemiesArray;
 }
 
-void UTDGameData::TDAddEnmemyToArray(ATDEnemy* _ActualEnemy)
-{
-    if (!enemiesArray.Contains(_ActualEnemy))
-    {
-        enemiesArray.Add(_ActualEnemy);
-        //RoundManagerRef->TDAddEnemyKilCounter(_ActualEnemy);
-    }
-}
 
-
-
-
-
-void UTDGameData::TDRemoveEnmemyToArray(ATDEnemy* _ActualEnemy)
-{
-    if (enemiesArray.Contains(_ActualEnemy))
-    {
-        enemiesArray.Remove(_ActualEnemy);
-
-        //UTDGameData::TDGetRoundManager()->TDMinusEnemyKillCounter(_ActualEnemy);
-    }
-}
 
 
 void UTDGameData::TDDisableAllEnemies()
 {
+    TArray<ATDEnemy*> enemiesArray;
+    enemiesArray = TDGetRoundManager()->TDGetEnemiesAlive();
     for (ATDEnemy* iter : enemiesArray)
     {
         iter->TDSetDisable();
@@ -114,6 +95,9 @@ ATDEnemy* UTDGameData::TDGetNearEnemyToBase()
 {
     float minValue = FLT_MAX;
     ATDEnemy* nearEnemy = nullptr;
+
+    TArray<ATDEnemy*> enemiesArray;
+    enemiesArray = TDGetRoundManager()->TDGetEnemiesAlive();
 
 
     for (ATDEnemy* it : enemiesArray)

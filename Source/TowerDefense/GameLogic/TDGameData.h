@@ -37,7 +37,7 @@ public:
 
 
 	static UPROPERTY(Transient) UWorld* gameWorld;
-	static UPROPERTY(Transient) TArray<ATDEnemy*> enemiesArray;
+
 	static UPROPERTY(Transient) TArray<ATDSpawner*> spawnerArray;
 	static UPROPERTY(Transient) UTDGameplayEventData* abilityData;
 	static UPROPERTY(Transient) ATDBase* baseRef;
@@ -66,11 +66,6 @@ public:
 	UFUNCTION(BlueprintPure)
     static TArray<ATDEnemy*> TDGetEnemiesArray();
 
-	UFUNCTION(BlueprintCallable)
-    static void TDAddEnmemyToArray(ATDEnemy* _ActualEnemy);
-
-    UFUNCTION(BlueprintCallable)
-    static void TDRemoveEnmemyToArray(ATDEnemy* _ActualEnemy);
 
 	UFUNCTION(BlueprintCallable)
 	static void TDDisableAllEnemies();

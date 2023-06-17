@@ -36,10 +36,10 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         UTDText* ownerText;
 
-    UPROPERTY(BlueprintReadOnly,VisibleAnywhere)
-    FTDItemStruct itemStruct;
+    UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+        FTDItemStruct itemStruct;
 
-        UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite)
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite)
         FActionWidgetAnimationSignature FStartWidgetAnimationFadeInDelegate;
 
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite)
@@ -53,12 +53,21 @@ public:
         FActionWidgetAnimationSignature FEndWidgetAnimationFadeOutDelegate;
 
 
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta = (BindWidgetAnim))
+        UWidgetAnimation* FadeIn;
+
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta = (BindWidgetAnim))
+        UWidgetAnimation* FadeOut;
+
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta = (BindWidgetAnim))
+        UWidgetAnimation* UpAnimation;
+
 
     UPROPERTY(EditAnywhere)
-    TMap<ELootItems, UTexture2D*> ItemMapImage;
+        TMap<ELootItems, UTexture2D*> ItemMapImage;
 
     UPROPERTY(EditAnywhere)
-    TMap<FGameplayTag, FLinearColor> ColorBackgroundRarity;
+        TMap<FGameplayTag, FLinearColor> ColorBackgroundRarity;
 
 
 protected:
@@ -86,7 +95,7 @@ public:
 
 
     UFUNCTION()
-    void TDPrepareCard(FTDItemStruct _item);
+        void TDPrepareCard(FTDItemStruct _item);
 protected:
 
 private:
