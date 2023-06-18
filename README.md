@@ -1,12 +1,15 @@
 # TowerDefense
 
 MUSIC:
-Sound Effect from Pixabay
+Sound Effects from Pixabay
 
-IMAGENES:
+IMAGES:
 Freepik
 
-Bibliography:
+UI:
+FlatIcon
+
+BIBLIOGRAPHY:
 
 Assets
 1. Dungeon Mason. Wizard for Battle Polyart. Unreal Marketplace. Unreal. Accessed: 17/03/2023. Available online. Link: https://www.unrealengine.com/marketplace/en-US/product/battle-wizard-polyart
