@@ -46,10 +46,7 @@ void UTDComposedButton::NativePreConstruct()
     }
 
     AvalibleBuyColor = FLinearColor(0.55f, 0.2f, 0, 1.f);
-    NotAvalibleBuyColor = FLinearColor(1.f, 0.f, 0.02f, 1.f);
-
-
-
+    NotAvalibleBuyColor = FLinearColor(0.35f, 0.05f, 0.05f, 1.f);
 }
 
 void UTDComposedButton::NativeConstruct()
@@ -111,6 +108,11 @@ void UTDComposedButton::TDSetButtonBackground(FLinearColor _color)
 void UTDComposedButton::TDOnHovered()
 {
 
+}
+
+void UTDComposedButton::TDSetUnavailableColor(FLinearColor _color)
+{
+    NotAvalibleBuyColor = _color;
 }
 
 void UTDComposedButton::TDSetSound(TObjectPtr<USoundBase> _Sound)
