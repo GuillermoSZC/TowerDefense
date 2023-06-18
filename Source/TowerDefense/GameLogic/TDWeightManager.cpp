@@ -224,12 +224,15 @@ void UTDWeightManager::TDSetEnemyValues(ATDEnemy* _enemyRef, FTDEnemiesDataTable
     //AI
     ATDEnemyController* enemyController = _enemyRef->GetController<ATDEnemyController>();
 
-    enemyController->GetBlackboardComponent()->ClearValue("BaseBuild");
-    enemyController->GetBlackboardComponent()->ClearValue("WaypointPosition");
-    enemyController->GetBlackboardComponent()->ClearValue("WaypointActor");
-    enemyController->GetBlackboardComponent()->ClearValue("RealBasePosition");
+    if (enemyController)
+    {
+        enemyController->GetBlackboardComponent()->ClearValue("BaseBuild");
+        enemyController->GetBlackboardComponent()->ClearValue("WaypointPosition");
+        enemyController->GetBlackboardComponent()->ClearValue("WaypointActor");
+        enemyController->GetBlackboardComponent()->ClearValue("RealBasePosition");
+        enemyController->RunBehaviorTree(Row.behaviorTree.LoadSynchronous());
+    }
 
-    enemyController->RunBehaviorTree(Row.behaviorTree.LoadSynchronous());
 
     //UI
     _enemyRef->TDGetHealthBarReference()->TDSetHealthBarSize(Row.HealthBarSize);

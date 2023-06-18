@@ -9,6 +9,7 @@
 #include "AttributesSets/TDHealthAttributeSet.h"
 #include "GameLogic/TDElementComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Gas/TDGameplayEventData.h"
 
 
 
@@ -110,6 +111,9 @@ void ATDCharacter::TDHealthChanged(const FOnAttributeChangeData& Data)
     if (Data.NewValue <= 0.f)
     {
         FGameplayEventData DataEvent;
+        UTDGameplayEventData* data = NewObject<UTDGameplayEventData>(this, TEXT("GAMEDATA"));
+        DataEvent.OptionalObject = data;
+        data->VectorPosition = GetActorLocation();
         UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(this, GET_GAMEPLAY_TAG(DEATH_TRIGGER_TAG), DataEvent);
     }
 

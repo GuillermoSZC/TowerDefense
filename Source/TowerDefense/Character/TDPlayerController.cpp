@@ -248,11 +248,11 @@ void ATDPlayerController::TDTraceFromCameraToOpenUI(const FInputActionValue& _va
     {
         ITDCostInterface* interace = Cast<ITDCostInterface>(hitresult.GetActor());
         interace->TDTriggerOpenUI();
-        UKismetSystemLibrary::DrawDebugLine(GetWorld(), screenPos, endPos, FColor::Green, 2.f, 5.f);
+        //UKismetSystemLibrary::DrawDebugLine(GetWorld(), screenPos, endPos, FColor::Green, 2.f, 5.f);
     }
     else
     {
-        UKismetSystemLibrary::DrawDebugLine(GetWorld(), screenPos, endPos, FColor::Red, 2.f, 5.f);
+        //UKismetSystemLibrary::DrawDebugLine(GetWorld(), screenPos, endPos, FColor::Red, 2.f, 5.f);
     }
 }
 
