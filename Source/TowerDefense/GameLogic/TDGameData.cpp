@@ -18,7 +18,7 @@
 UWorld* UTDGameData::gameWorld = nullptr;
 UTDGameplayEventData* UTDGameData::abilityData = nullptr;
 
-TArray<ATDSpawner*> UTDGameData::spawnerArray;
+TArray<ATDPathPoint*> UTDGameData::spawnerArray;
 ATDBase* UTDGameData::baseRef = nullptr;
 UTDWeightManager* UTDGameData::weightManagerRef = nullptr;
 ATDGameMode* UTDGameData::GameModeRef = nullptr;
@@ -162,12 +162,12 @@ void UTDGameData::TDSetWeightManager(UTDWeightManager* _weightManagerRef)
     weightManagerRef = _weightManagerRef;
 }
 
-void UTDGameData::TDaddSpawnerActor(ATDSpawner* _spawnerRef)
+void UTDGameData::TDaddSpawnerActor(ATDPathPoint* _spawnerRef)
 {
     spawnerArray.Add(_spawnerRef);
 }
 
-ATDSpawner* UTDGameData::TDGetSpanwerActor()
+ATDPathPoint* UTDGameData::TDGetSpanwerActor()
 {
 
     int x = FMath::Rand() % spawnerArray.Num();

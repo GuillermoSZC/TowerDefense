@@ -20,6 +20,12 @@ public:
     UPROPERTY(EditAnywhere, Category = "PathFollow")
         bool isBase;
 
+
+
+        UPROPERTY(EditAnywhere, Category = "PathFollow")
+        bool isSpawner;
+
+
 protected:
 
 
@@ -38,6 +44,12 @@ public:
 
     UFUNCTION()
         ATDPathPoint* TDGetNextPoint();
+
+
+    
+	UFUNCTION(BlueprintCallable)
+	void TDPlaceEnemy(ATDEnemy* _enemyRef);
+
 
 protected:
 

@@ -24,7 +24,7 @@ void ATDSpawner::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UTDGameData::TDaddSpawnerActor(this);
+	//UTDGameData::TDaddSpawnerActor(this);
 	
 }
 
@@ -43,12 +43,30 @@ void ATDSpawner::TDPlaceEnemy(ATDEnemy* _enemyRef)
     UBlackboardComponent* blackboard = enemyController->GetBlackboardComponent();
 
 
-	if (firstWaypoint)
+	if (!firstWaypoint)
 	{
-        blackboard->SetValueAsObject(FName(TEXT("WaypointActor")), firstWaypoint);
-        blackboard->SetValueAsVector(FName(TEXT("WaypointPosition")), firstWaypoint->GetActorLocation());
-        _enemyRef->TDSetPath(firstWaypoint);
+		TArray<AActor*> waypointsArray;
+		UGameplayStatics::GetAllActorsOfClass(UTDGameData::TDGetWorld(), ATDPathPoint::StaticClass(), waypointsArray);
+
+		float minusDistance = MAX_FLT;
+		FVector spawnerLocation = GetActorLocation();
+
+		for (AActor* iter : waypointsArray)
+		{
+			float temp = FVector::Distance(iter->GetActorLocation(), spawnerLocation);
+
+			if (temp < minusDistance)
+			{
+				minusDistance = temp;
+				firstWaypoint = Cast<ATDPathPoint>(iter);
+			}
+		}
 	}
+
+
+	blackboard->SetValueAsObject(FName(TEXT("WaypointActor")), firstWaypoint);
+	blackboard->SetValueAsVector(FName(TEXT("WaypointPosition")), firstWaypoint->GetActorLocation());
+	_enemyRef->TDSetPath(firstWaypoint);
 
 
 	FVector spawnerPos = GetActorLocation();

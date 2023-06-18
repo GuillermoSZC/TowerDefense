@@ -17,6 +17,13 @@ bool UTDLogWidget::Initialize()
     if (UTDGameData::TDGetGameMode())
     {
         UTDGameData::TDGetGameMode()->FLootDropDelegate.AddDynamic(this, &UTDLogWidget::TDAddLogItem);
+
+        for (int i = 0; i <= 20; ++i)
+        {
+            UTDLogCard* cardRef = CreateWidget<UTDLogCard>(canvasPanelWidget, cardClass);
+            disabledCard.Add(cardRef);
+            
+        }
     }
 
     return true;
@@ -52,7 +59,8 @@ void UTDLogWidget::TDAddLogItem(ELootItems _item, FGameplayTag _category, int32 
 
 void UTDLogWidget::TDAddCardToUI()
 {
-    UTDLogCard* cardRef = CreateWidget<UTDLogCard>(canvasPanelWidget, cardClass);
+    UTDLogCard* cardRef = disabledCard[0];
+    disabledCard.RemoveAt(0);
     UCanvasPanelSlot* canvasSlotRef = canvasPanelWidget->AddChildToCanvas(cardRef);
 
     for (UTDLogCard* iter : cardsArray)
@@ -94,12 +102,17 @@ void UTDLogWidget::TDOnEndFadeInAnimation(UTDLogCard* _card)
 
 void UTDLogWidget::TDOnEndFadeOutAnimation(UTDLogCard* _card)
 {
+
+    _card->FEndWidgetAnimationFadeInDelegate.Clear();
     _card->FEndWidgetAnimationFadeOutDelegate.Clear();
+    _card->FStartWidgetAnimationFadeInDelegate.Clear();
+    _card->FStartWidgetAnimationFadeOutDelegate.Clear();
+
+
     _card->StopAllAnimations();
     canvasPanelWidget->RemoveChild(_card);
     cardsArray.Remove(_card);
-
-    _card->ConditionalBeginDestroy();
+    disabledCard.Add(_card);
 }
 
 void UTDLogWidget::TDOnStartFadeInAnimation(UTDLogCard* _card)

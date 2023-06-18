@@ -36,6 +36,9 @@ public:
     UPROPERTY(Transient)
     TArray<UTDLogCard*> cardsArray;
 
+        UPROPERTY(Transient)
+
+    TArray<UTDLogCard*> disabledCard;
 
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
         class UCanvasPanel* canvasPanelWidget;

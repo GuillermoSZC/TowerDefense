@@ -91,17 +91,23 @@ float UTDWidgetShopComponent::TDCheckDistanceWithPlayer()
 
     FVector ownerLocation = GetOwner()->GetActorLocation();
     FVector playerLocation = UTDGameData::TDGetPlayerRef()->GetActorLocation();
-    distanceSquared = FVector::DistSquared2D(ownerLocation, playerLocation);
+    distanceSquared = FVector::Dist2D(ownerLocation, playerLocation);
 
     return distanceSquared;
 }
 
 bool UTDWidgetShopComponent::TDCheckPlayerInRange()
 {
-    if (TDCheckDistanceWithPlayer() > distSquared)
+//     if (TDCheckDistanceWithPlayer() > distSquared)
+//     {
+//         return false;
+//     }
+
+    if (TDCheckDistanceWithPlayer() > distanceToUI)
     {
         return false;
     }
+
 
     return true;
 }

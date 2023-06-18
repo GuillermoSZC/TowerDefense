@@ -38,7 +38,7 @@ public:
 
 	static UPROPERTY(Transient) UWorld* gameWorld;
 
-	static UPROPERTY(Transient) TArray<ATDSpawner*> spawnerArray;
+	static UPROPERTY(Transient) TArray<ATDPathPoint*> spawnerArray;
 	static UPROPERTY(Transient) UTDGameplayEventData* abilityData;
 	static UPROPERTY(Transient) ATDBase* baseRef;
 	static UPROPERTY(Transient) UTDWeightManager* weightManagerRef;
@@ -101,10 +101,10 @@ public:
 
 
 	UFUNCTION()
-	static void TDaddSpawnerActor(ATDSpawner* _spawnerRef);
+	static void TDaddSpawnerActor(ATDPathPoint* _spawnerRef);
 
 	UFUNCTION()
-	static ATDSpawner* TDGetSpanwerActor();
+	static ATDPathPoint* TDGetSpanwerActor();
 
 	UFUNCTION(BlueprintPure)
 	static ATDGameMode* TDGetGameMode();

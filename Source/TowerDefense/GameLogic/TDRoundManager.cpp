@@ -57,19 +57,24 @@ void ATDRoundManager::TDStartCombatPhase_Implementation()
 void ATDRoundManager::TDSpawnEnemy()
 {
     ATDEnemy* actualEnemy = nullptr;
-    if (!heapEnemies.IsEmpty())
+
+    if (heapEnemies.IsEmpty())
     {
-        actualEnemy = heapEnemies[0];
+        return;
+
+    }
+
+    actualEnemy = heapEnemies[0];  
+    ATDPathPoint* spawnerRef = UTDGameData::TDGetSpanwerActor();
+
+    if (actualEnemy && IsValid(actualEnemy) && spawnerRef && IsValid(spawnerRef))
+    {
+        spawnerRef->TDPlaceEnemy(actualEnemy);
+        actualEnemy->TDSetActive();
         heapEnemies.Remove(actualEnemy);
     }
 
-    if (actualEnemy)
-    {
-        ATDSpawner* spawnerRef = UTDGameData::TDGetSpanwerActor();
-        spawnerRef->TDPlaceEnemy(actualEnemy);
-        actualEnemy->TDSetActive();
-    }
-
+ 
 }
 
 void ATDRoundManager::TDPrepareCombatRound()

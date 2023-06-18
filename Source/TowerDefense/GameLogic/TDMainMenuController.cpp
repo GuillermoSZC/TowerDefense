@@ -11,9 +11,8 @@ void ATDMainMenuController::BeginPlay()
 
         if (mainMenuRef)
         {
-            FInputModeGameAndUI inputMode;
             mainMenuRef->AddToViewport(0);
-            SetInputMode(inputMode);
+            UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(this, mainMenuRef);
             bShowMouseCursor = true;
         }
     }
