@@ -65,7 +65,7 @@ ATDPathPoint* ATDPathPoint::TDGetNextPoint()
 
 }
 
-void ATDPathPoint::TDPlaceEnemy(ATDEnemy* _enemyRef)
+bool ATDPathPoint::TDPlaceEnemy(ATDEnemy* _enemyRef)
 {
     ATDEnemyController* enemyController = _enemyRef->GetController<ATDEnemyController>();
     UBlackboardComponent* blackboard = enemyController->GetBlackboardComponent();
@@ -106,4 +106,5 @@ void ATDPathPoint::TDPlaceEnemy(ATDEnemy* _enemyRef)
     FVector spawnerPos = GetActorLocation();
     spawnerPos.Z += _enemyRef->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
     _enemyRef->SetActorLocation(spawnerPos);
+    return true;
 }

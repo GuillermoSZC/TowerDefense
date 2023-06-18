@@ -48,7 +48,7 @@ public:
 
     
 	UFUNCTION(BlueprintCallable)
-	void TDPlaceEnemy(ATDEnemy* _enemyRef);
+	bool TDPlaceEnemy(ATDEnemy* _enemyRef);
 
 
 protected:

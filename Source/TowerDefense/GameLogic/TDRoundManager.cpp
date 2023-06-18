@@ -199,7 +199,8 @@ ATDEnemy* ATDRoundManager::TDCreateEnemy(FName enemyName, AActor* _instigator)
     FTDEnemiesDataTable Row;
     weightManager->TDGetRowFromDataTable(enemyName, Row);
     weightManager->TDSetEnemyValues(actualEnemy, Row);
-    EnemiesToKill += 1;
+
+    TDAddEnemyKilCounter(actualEnemy);
 
     ATDEnemy* enemyInstigator = Cast<ATDEnemy>(_instigator);
     ATDEnemyController* enemyController = actualEnemy->GetController<ATDEnemyController>();

@@ -161,7 +161,8 @@ void ATDEnemy::TDSetActive_Implementation()
     GetCapsuleComponent()->SetCollisionProfileName(FName(TEXT("EnemyPawn")));
     GetCharacterMovement()->GravityScale = 1.f;
     SetActorTickEnabled(true);
-
+    FGameplayEventData abilityData;
+    UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(this, GET_GAMEPLAY_TAG(INMORTAL_TRIGGER_TAG), abilityData);
     if (healthBar)
     {
         healthBar->SetVisibility(ESlateVisibility::Visible);

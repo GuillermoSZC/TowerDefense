@@ -30,6 +30,12 @@ void UTDDamageHeroCalculation::Execute_Implementation(const FGameplayEffectCusto
     if (targetActor && sourceActor)
     {
 
+        if (targetAbilitySystem->HasMatchingGameplayTag(GET_GAMEPLAY_TAG(INMORTAL_STATE_TAG)))
+        {
+            return;
+        }
+
+
         FAggregatorEvaluateParameters evaluationParameters;
 
         float baseDamage = 0.f;
@@ -49,6 +55,7 @@ void UTDDamageHeroCalculation::Execute_Implementation(const FGameplayEffectCusto
 
 
         float TotalDamage = elementMultiplier * baseDamage * (1 + (0.1f * level));
+
 
 
         FGameplayModifierEvaluatedData TargetHealthModification = FGameplayModifierEvaluatedData(structAbilities.healthTargetProperty, EGameplayModOp::Additive, -TotalDamage);

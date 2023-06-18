@@ -43,7 +43,10 @@ void UTDGameData::TDResetGameData()
     RoundManagerRef = nullptr;
     ObjectPoolerRef = nullptr;
     playerRef = nullptr;
-    CostManagerRef = nullptr;    
+    CostManagerRef = nullptr;   
+
+
+    spawnerArray.Empty();
 }
 
 UWorld* UTDGameData::TDGetWorld()

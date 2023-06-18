@@ -8,6 +8,8 @@
 #define DEATH_TRIGGER_TAG "ability.trigger.death"
 #define ABILITY1_TRIGGER_TAG "ability.trigger.ability1"
 #define ENEMYHIT_TRIGGER_TAG "ability.trigger.enemyHit"
+#define INMORTAL_TRIGGER_TAG "ability.trigger.inmortal"
+#define INMORTAL_STATE_TAG "character.state.inmortal"
 
 
 
