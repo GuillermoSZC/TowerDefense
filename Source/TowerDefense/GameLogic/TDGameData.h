@@ -103,7 +103,7 @@ public:
 	UFUNCTION()
 	static void TDaddSpawnerActor(ATDPathPoint* _spawnerRef);
 
-	UFUNCTION()
+	UFUNCTION(BlueprintPure)
 	static ATDPathPoint* TDGetSpanwerActor();
 
 	UFUNCTION(BlueprintPure)
